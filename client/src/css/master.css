@@ -6,3 +6,6 @@
 
 /* components */
 @import url(./components/animatedBtn.css);
+@import url(./components/loading.css);
+@import url(./components/authForm.css);
+@import url(./components/alert.css);

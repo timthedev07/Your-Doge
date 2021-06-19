@@ -1,10 +1,10 @@
-import * as React from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import Background from "../assets/images/404.jpg";
 import { ReactComponent as Earth } from "../assets/images/earth.svg";
 
 export const NotFound: React.FC = () => {
-  // const history = useHistory();
+  const history = useHistory();
 
   return (
     <div id="not-found-page" className="page-content">
@@ -15,7 +15,7 @@ export const NotFound: React.FC = () => {
         <h3>The page you were looking for was not found.</h3>
         <button
           onClick={() => {
-            // history.goBack();
+            history.goBack();
           }}
           className="animated-btn"
         >

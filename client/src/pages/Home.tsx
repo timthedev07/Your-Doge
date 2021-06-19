@@ -1,10 +1,5 @@
-import * as React from "react";
+import React from "react";
 
 export const Home: React.FC = () => {
-  return (
-    <div>
-      this is the Home actalkjdklfj
-      <fieldset></fieldset>
-    </div>
-  );
+  return <div></div>;
 };

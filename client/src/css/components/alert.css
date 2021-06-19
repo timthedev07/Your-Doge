@@ -1,0 +1,47 @@
+.custom-alert {
+  width: 50vw;
+  min-width: 300px;
+  max-width: 600px;
+  background-color: rgba(52, 221, 243, 0.973);
+  padding: 20px;
+  min-height: max-content;
+
+  top: -100vw;
+
+  border-radius: 5px 5px 5px 5px;
+
+  /*centering it*/
+  position: fixed;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  display: block;
+}
+
+.alert-active {
+  top: 0px;
+  transition: 0.5s;
+  z-index: 10000;
+}
+
+.alert-inactive {
+  top: -100vw;
+  transition: 0.5s;
+  z-index: 10000;
+}
+
+.custom-alert .close-icon {
+  width: 45px;
+  height: 45px;
+  float: right;
+  position: relative;
+  display: block;
+  transition: 0.4s;
+  border-radius: 100vw;
+  padding: 5px;
+}
+
+.custom-alert .close-icon:hover {
+  background-color: rgba(255, 255, 255, 0.356);
+}

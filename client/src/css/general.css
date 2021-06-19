@@ -1,4 +1,20 @@
 body {
   margin: 0;
   font-family: "Rubik Regular";
+  background: linear-gradient(to bottom, rgb(36, 36, 36) 0%, #2e3030 100%);
+  color: rgb(40, 43, 44);
+}
+
+a,
+.normal-links.normal-links.normal-links {
+  color: rgb(250, 212, 0);
+  text-decoration: none;
+  transform: scale(1);
+  transition: 0.3s;
+}
+
+a:hover,
+.normal-links:hover.normal-links:hover.normal-links:hover {
+  color: rgb(250, 212, 0);
+  text-decoration: underline;
 }
