@@ -1,0 +1,40 @@
+#not-found-bg {
+  position: sticky;
+  width: 100%;
+  height: calc(100vh);
+  object-fit: cover;
+  z-index: -100;
+  min-height: 500px;
+}
+
+#not-found-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  min-height: 500px;
+}
+
+.not-found-content {
+  z-index: 10;
+  min-height: 500px;
+  position: absolute;
+  color: white;
+  flex-direction: column;
+  font-family: "Rubik Light";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 20px;
+}
+.not-found-content h1 {
+  max-width: 100%;
+  font-size: 17vw;
+  padding: 0;
+}
+.not-found-content h1 svg {
+  height: 20vw;
+  width: 20vw;
+  margin: 0;
+}

@@ -1,0 +1,31 @@
+.animated-btn {
+  display: block;
+  width: 200px;
+  padding: 0px;
+  margin: 20px;
+  color: skyblue;
+  font-size: 20px;
+  text-align: center;
+  text-decoration: none;
+  line-height: 50px;
+  border-radius: 100vw;
+
+  border: 2px solid #171717;
+  background: linear-gradient(
+    to right,
+    #4da8da 50%,
+    rgba(20, 21, 24, 0.836) 50%
+  );
+  background-position: 100% 0%;
+  background-size: 200% 100%;
+  transition: 0.5s;
+}
+
+.animated-btn:hover {
+  color: #f3f3f3;
+  background-position: 0% 50%;
+  box-shadow: 3px 3px 6px rgba(255, 255, 255, 0.3);
+}
+.animated-btn:hover .linkNoDecoration {
+  text-decoration: none;
+}

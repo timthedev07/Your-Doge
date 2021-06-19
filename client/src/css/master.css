@@ -1,0 +1,8 @@
+@import url(./general.css);
+@import url(./var.css);
+
+/* pages */
+@import url(./pages/404.css);
+
+/* components */
+@import url(./components/animatedBtn.css);
