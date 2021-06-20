@@ -2,7 +2,6 @@ import { useRef, useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Alert } from "../Alert";
 import { Redirect, Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
 import { Loading } from "../Loading";
 
 const THRESHOLD = 290;
@@ -16,20 +15,25 @@ export const Login = () => {
   const [alertMessage, setAlertMessage] = useState<string>("");
   const [redirect, setRedirect] = useState<boolean>(false);
   const [location, setLocation] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [pageLoading, setPageLoading] = useState<boolean>(false);
 
   const [windowWidth, setWindowWidth] = useState<number>(() => {
     return window.innerWidth;
   });
 
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+  });
+
   const displayError = (message: string) => {
     setAlertMessage(message);
-    setLoading(false);
+    setPageLoading(false);
     setAlertActive(true);
     setAlertType("danger");
   };
-
-  const auth = useAuth();
 
   function routeToRegister() {
     setLocation("/register");
@@ -40,7 +44,7 @@ export const Login = () => {
     // prevent reload
     event.preventDefault();
 
-    setLoading(true);
+    setPageLoading(true);
     localStorage.setItem("newTask", "true");
 
     if (!emRef.current || !pwRef.current) return;
@@ -65,16 +69,9 @@ export const Login = () => {
     displayError("Invalid email/password");
   }
 
-  useEffect(() => {
-    function handleResize() {
-      setWindowWidth(window.innerWidth);
-    }
-    window.addEventListener("resize", handleResize);
-  });
-
   return !redirect ? (
     <Container className="panels">
-      {loading ? <Loading /> : null}
+      {pageLoading ? <Loading /> : null}
       <h1 className="page-heading">Welcome Back</h1>
 
       <Container className="d-flex">
@@ -106,7 +103,7 @@ export const Login = () => {
               <label>Password</label>
             </div>
             <div className="text-center form-padding-child">
-              {!loading ? (
+              {!pageLoading ? (
                 <Button
                   variant="info"
                   className={"form-submit-button"}

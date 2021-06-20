@@ -1,13 +1,16 @@
 import { useRef, useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Alert } from "../Alert";
-import { Redirect, Link } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
+import { Redirect } from "react-router-dom";
 import { Loading } from "../Loading";
+import { useRegisterMutation } from "../../generated/graphql";
 
 const THRESHOLD = 290;
 
 export const Register = () => {
+  // use that mutation hook, it returns an array, if you then destructure it, you get the function
+  const [register] = useRegisterMutation();
+
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
 
@@ -29,8 +32,6 @@ export const Register = () => {
     setAlertType("danger");
   };
 
-  const auth = useAuth();
-
   function routeToLogin() {
     setLocation("/login");
     setRedirect(true);
@@ -51,18 +52,24 @@ export const Register = () => {
 
     setAlertMessage("");
     setAlertActive(false);
-    // await login(email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     // var user = userCredential.user;
-    //     setLoading(false);
-    //     setLocation("/dashboard");
-    //     setRedirect(true);
-    //   })
-    //   .catch((error) => {
-    //     displayError("Invalid email/password");
-    //   });
-    displayError("Invalid email/password");
+
+    // this is how you pass parameters to the graphql function
+    try {
+      const response = await register({
+        variables: {
+          email,
+          password,
+        },
+      });
+      const data = response.data;
+      if (data?.register) {
+        setLoading(false);
+        setLocation("/dashboard");
+        setRedirect(true);
+      }
+    } catch (err: any) {
+      displayError(err.graphQLErrors[0].message);
+    }
   }
 
   useEffect(() => {
@@ -75,7 +82,7 @@ export const Register = () => {
   return !redirect ? (
     <Container className="panels">
       {loading ? <Loading /> : null}
-      <h1 className="page-heading">Welcome Back</h1>
+      <h1 className="page-heading">Join Us</h1>
 
       <Container className="d-flex">
         <div>

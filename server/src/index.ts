@@ -11,7 +11,7 @@ import cookieParser from "cookie-parser";
 import { router as AuthRouter } from "./routes/AuthRoute";
 
 // specify the routes
-const PORT: number = 8000;
+const PORT: number = 4000;
 
 // use the routes
 

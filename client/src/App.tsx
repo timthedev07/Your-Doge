@@ -19,6 +19,8 @@ const App: React.FC = () => {
           <Route exact path="/register">
             <Register />
           </Route>
+
+          {/* 404 */}
           <Route>
             <NotFound />
           </Route>
