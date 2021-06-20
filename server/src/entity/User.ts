@@ -1,18 +1,31 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import { Field, Int, ObjectType } from "type-graphql";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  Unique,
+} from "typeorm";
 
-@Entity()
-export class User {
+@ObjectType()
+@Unique(["email"]) // here we are forcing an unique constraint on the email
+@Entity("users")
+export class User extends BaseEntity {
+  /**
+   * Here we are basically creating columns for our database
+   */
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Field(() => Int)
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    firstName: string;
+  @Field(() => String)
+  @Column("text")
+  email: string;
 
-    @Column()
-    lastName: string;
+  @Column("text")
+  password: string;
 
-    @Column()
-    age: number;
-
+  @Column("int", { default: 0 })
+  tokenVersion: number;
 }
