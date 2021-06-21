@@ -1,13 +1,13 @@
 import { useRef, useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Alert } from "../Alert";
-import { Redirect } from "react-router-dom";
+import { Redirect, RouteComponentProps } from "react-router-dom";
 import { Loading } from "../Loading";
 import { useRegisterMutation } from "../../generated/graphql";
 
 const THRESHOLD = 290;
 
-export const Register = () => {
+export const Register: React.FC<RouteComponentProps> = ({ history }) => {
   // use that mutation hook, it returns an array, if you then destructure it, you get the function
   const [register] = useRegisterMutation();
 
@@ -17,8 +17,6 @@ export const Register = () => {
   const [alertActive, setAlertActive] = useState<boolean>(false);
   const [alertType, setAlertType] = useState<string>("danger");
   const [alertMessage, setAlertMessage] = useState<string>("");
-  const [redirect, setRedirect] = useState<boolean>(false);
-  const [location, setLocation] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
   const [windowWidth, setWindowWidth] = useState<number>(() => {
@@ -33,8 +31,7 @@ export const Register = () => {
   };
 
   function routeToLogin() {
-    setLocation("/login");
-    setRedirect(true);
+    history.push("/login");
   }
 
   async function handleSubmit(event: any) {
@@ -64,8 +61,7 @@ export const Register = () => {
       const data = response.data;
       if (data?.register) {
         setLoading(false);
-        setLocation("/dashboard");
-        setRedirect(true);
+        history.push("/dashboard");
       }
     } catch (err: any) {
       displayError(err.graphQLErrors[0].message);
@@ -79,7 +75,7 @@ export const Register = () => {
     window.addEventListener("resize", handleResize);
   });
 
-  return !redirect ? (
+  return (
     <Container className="panels">
       {loading ? <Loading /> : null}
       <h1 className="page-heading">Join Us</h1>
@@ -149,7 +145,5 @@ export const Register = () => {
         </div>
       </Container>
     </Container>
-  ) : (
-    <Redirect to={location} />
   );
 };

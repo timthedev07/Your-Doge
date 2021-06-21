@@ -1,20 +1,21 @@
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import { Alert } from "../Alert";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, Link, RouteComponentProps } from "react-router-dom";
 import { Loading } from "../Loading";
+import { useLoginMutation } from "../../generated/graphql";
 
 const THRESHOLD = 290;
 
-export const Login = () => {
+export const Login: React.FC<RouteComponentProps> = ({ history }) => {
+  const [login] = useLoginMutation();
+
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
 
   const [alertActive, setAlertActive] = useState<boolean>(false);
   const [alertType, setAlertType] = useState<string>("danger");
   const [alertMessage, setAlertMessage] = useState<string>("");
-  const [redirect, setRedirect] = useState<boolean>(false);
-  const [location, setLocation] = useState<string>("");
   const [pageLoading, setPageLoading] = useState<boolean>(false);
 
   const [windowWidth, setWindowWidth] = useState<number>(() => {
@@ -36,8 +37,7 @@ export const Login = () => {
   };
 
   function routeToRegister() {
-    setLocation("/register");
-    setRedirect(true);
+    history.push("/register");
   }
 
   async function handleSubmit(event: any) {
@@ -55,21 +55,25 @@ export const Login = () => {
 
     setAlertMessage("");
     setAlertActive(false);
-    // await login(email, password)
-    //   .then((userCredential) => {
-    //     // Signed in
-    //     // var user = userCredential.user;
-    //     setLoading(false);
-    //     setLocation("/dashboard");
-    //     setRedirect(true);
-    //   })
-    //   .catch((error) => {
-    //     displayError("Invalid email/password");
-    //   });
-    displayError("Invalid email/password");
+
+    try {
+      const response = await login({
+        variables: {
+          email,
+          password,
+        },
+      });
+      const data = response.data;
+      if (data?.login) {
+        setPageLoading(false);
+        history.push("/dashboard");
+      }
+    } catch (err: any) {
+      displayError(err.graphQLErrors[0].message);
+    }
   }
 
-  return !redirect ? (
+  return (
     <Container className="panels">
       {pageLoading ? <Loading /> : null}
       <h1 className="page-heading">Welcome Back</h1>
@@ -144,7 +148,5 @@ export const Login = () => {
         </div>
       </Container>
     </Container>
-  ) : (
-    <Redirect to={location} />
   );
 };

@@ -13,12 +13,8 @@ const App: React.FC = () => {
       <Router>
         <Switch>
           {/* auth routes */}
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/register">
-            <Register />
-          </Route>
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
 
           {/* 404 */}
           <Route>
