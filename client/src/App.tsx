@@ -1,29 +1,32 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./css/master.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-// importing the pages
-import { NotFound } from "./pages/NotFound";
-import { Login } from "./components/auth/Login";
-import { Register } from "./components/auth/Register";
+import React, { useEffect, useState } from "react";
+import { BACKEND_AUTH_BASE_URL } from ".";
+import { setAccessToken } from "./accessToken";
+import { Loading } from "./components/Loading";
+import { Routes } from "./Routes";
 
-const App: React.FC = () => {
-  return (
-    <div className="App">
-      <Router>
-        <Switch>
-          {/* auth routes */}
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
+interface Props {}
 
-          {/* 404 */}
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
-  );
+export const App: React.FC<Props> = () => {
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetch(`${BACKEND_AUTH_BASE_URL}/refresh_token`, {
+      credentials: "include",
+      method: "POST",
+    }).then(async (x) => {
+      const { accessToken } = await x.json();
+      setAccessToken(accessToken);
+      setLoading(false);
+    });
+  });
+
+  if (loading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
+
+  return <Routes />;
 };
-
-export default App;

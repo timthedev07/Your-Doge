@@ -1,8 +1,10 @@
-body {
+body#body {
   margin: 0;
   font-family: "Rubik Regular";
   background: linear-gradient(to bottom, rgb(36, 36, 36) 0%, #2e3030 100%);
-  color: rgb(40, 43, 44);
+  color: rgb(255, 255, 255);
+  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 a,

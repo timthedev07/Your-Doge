@@ -23,6 +23,10 @@ export class User extends BaseEntity {
   @Column("text")
   email: string;
 
+  @Field(() => String)
+  @Column({ type: "varchar", length: "8" })
+  username: string;
+
   @Column("text")
   password: string;
 

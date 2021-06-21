@@ -1,14 +1,16 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
-import { Alert } from "../Alert";
-import { Redirect, Link, RouteComponentProps } from "react-router-dom";
-import { Loading } from "../Loading";
+import { Alert } from "../../components/Alert";
+import { Link, RouteComponentProps } from "react-router-dom";
+import { Loading } from "../../components/Loading";
 import { useLoginMutation } from "../../generated/graphql";
+import { client } from "../../index";
+import { setAccessToken } from "../../accessToken";
 
 const THRESHOLD = 290;
 
 export const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  const [login] = useLoginMutation();
+  const [login] = useLoginMutation({ client: client });
 
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
@@ -66,7 +68,8 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
       const data = response.data;
       if (data?.login) {
         setPageLoading(false);
-        history.push("/dashboard");
+        setAccessToken(data.login.accessToken);
+        history.push("/");
       }
     } catch (err: any) {
       displayError(err.graphQLErrors[0].message);
@@ -97,6 +100,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
               />
               <label>Email</label>
             </div>
+
             <div className="input-data form-padding-child">
               <input
                 required

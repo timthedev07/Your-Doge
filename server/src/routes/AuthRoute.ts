@@ -9,10 +9,6 @@ import { User } from "../entity/User";
 
 export const router = express.Router();
 
-router.get("/register", (req, res, next) => {
-  res.send("HELLO HUMAN");
-});
-
 router.post("/refresh_token", async (req, res, next) => {
   const token = req.cookies.jimrayd;
   if (!token) {
@@ -39,5 +35,6 @@ router.post("/refresh_token", async (req, res, next) => {
 
   sendRefreshToken(res, createRefreshToken(user));
 
-  return res.send({ ok: true, accessToken: createAccessToken(user) });
+  const newAccessToken = createAccessToken(user);
+  return res.send({ ok: true, accessToken: newAccessToken });
 });
