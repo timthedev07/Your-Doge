@@ -1,8 +1,8 @@
 import React from "react";
-import { useByeQuery } from "../generated/graphql";
+import { useMeQuery } from "../generated/graphql";
 
 export const Home: React.FC = () => {
-  const { data: gqlData, loading: gqlLoading, error: gqlError } = useByeQuery();
+  const { data: gqlData, loading: gqlLoading, error: gqlError } = useMeQuery();
   if (gqlError) {
     console.log(gqlError);
     return <div>error...</div>;
@@ -13,5 +13,5 @@ export const Home: React.FC = () => {
   if (!gqlData) {
     return <div>No data</div>;
   }
-  return <div>{gqlData.bye}</div>;
+  return <div>{JSON.stringify(gqlData.me)}</div>;
 };

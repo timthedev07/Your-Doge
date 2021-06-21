@@ -2,7 +2,7 @@ import { Response } from "express";
 import { sign } from "jsonwebtoken";
 import { User } from "./entity/User";
 
-const TOKEN_EXPIRATION_DURATION: string = "15s";
+const TOKEN_EXPIRATION_DURATION: string = "40min";
 const COOKIE_EXPIRATION_DURATION: string = "10d";
 
 export const createAccessToken = (user: User) => {
