@@ -4,6 +4,7 @@ import { Alert } from "../../components/Alert";
 import { RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { useRegisterMutation } from "../../generated/graphql";
+import { setAccessToken } from "../../accessToken";
 
 const THRESHOLD = 290;
 
@@ -115,6 +116,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
       const data = response.data;
       if (data?.register) {
         setLoading(false);
+        setAccessToken(data.register.accessToken);
         history.push("/");
       }
     } catch (err: any) {

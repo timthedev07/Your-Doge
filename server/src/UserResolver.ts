@@ -76,12 +76,13 @@ export class UserResolver {
    * In graphql, a mutation is what we create we want to make a change
    * to our database(e.g. create, update)
    */
-  @Mutation(() => Boolean)
+  @Mutation(() => LoginResponse)
   async register(
     @Arg("email") email: string,
     @Arg("password") password: string,
-    @Arg("username") username: string
-  ) {
+    @Arg("username") username: string,
+    @Ctx() { req, res }: MyContext
+  ): Promise<LoginResponse> {
     /* hashing the password using the bcrypt library */
     const hashed = await hash(password, 12);
 
@@ -107,7 +108,19 @@ export class UserResolver {
     } catch (err) {
       throw new Error("Email already registered");
     }
-    return true;
+    // make it so that the user gets automatically logged in after register
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      throw new Error("Registration failed");
+    }
+
+    const token = createRefreshToken(user);
+    sendRefreshToken(res, token);
+
+    return {
+      accessToken: createAccessToken(user),
+    };
   }
 
   @Mutation(() => LoginResponse)
