@@ -13,11 +13,13 @@ export const App: React.FC<Props> = () => {
     fetch(`${BACKEND_AUTH_BASE_URL}/refresh_token`, {
       credentials: "include",
       method: "POST",
-    }).then(async (x) => {
-      const { accessToken } = await x.json();
-      setAccessToken(accessToken);
-      setLoading(false);
-    });
+    })
+      .then(async (x) => {
+        const { accessToken } = await x.json();
+        setAccessToken(accessToken);
+        setLoading(false);
+      })
+      .catch((err) => setLoading(false));
   });
 
   if (loading) {
@@ -28,5 +30,9 @@ export const App: React.FC<Props> = () => {
     );
   }
 
-  return <Routes />;
+  return (
+    <>
+      <Routes />
+    </>
+  );
 };

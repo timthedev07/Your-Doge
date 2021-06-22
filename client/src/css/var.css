@@ -1,5 +1,6 @@
 :root {
   --min-width: 350px;
+  --nav-bar-height: 55px;
 }
 
 /* custom fonts */
@@ -46,5 +47,26 @@
   font-family: "Playfair Italic";
   src: url("../assets/fonts/Playfair_Display/static/PlayfairDisplay-SemiBoldItalic.ttf"); /* IE9 Compat Modes */
   src: /* Modern Browsers */ url("../assets/fonts/Playfair_Display/static/PlayfairDisplay-SemiBoldItalic.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Lato Bold";
+  src: url("../assets/fonts/Lato/Lato-Bold.ttf"); /* IE9 Compat Modes */
+  src: /* Modern Browsers */ url("../assets/fonts/Lato/Lato-Bold.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Lato Regular";
+  src: url("../assets/fonts/Lato/Lato-Regular.ttf"); /* IE9 Compat Modes */
+  src: /* Modern Browsers */ url("../assets/fonts/Lato/Lato-Regular.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Lato Light";
+  src: url("../assets/fonts/Lato/Lato-Light.ttf"); /* IE9 Compat Modes */
+  src: /* Modern Browsers */ url("../assets/fonts/Lato/Lato-Light.ttf")
     format("truetype");
 }

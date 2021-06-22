@@ -1,0 +1,40 @@
+.rounded-btn {
+  border-radius: 100vw;
+  background-color: rgb(30, 175, 233);
+  color: white;
+  height: 35px;
+  font-size: 17px !important;
+  border: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: 0.3s;
+  transform: scale(1);
+  min-width: max-content;
+}
+
+.rounded-btn:hover {
+  transition: 0.3s;
+  transform: scale(1.01);
+}
+
+a.rounded-btn,
+a.rounded-btn:not(.rounded-btn.secondary):hover,
+.rounded-btn:not(.rounded-btn.secondary):hover {
+  border-radius: 100vw;
+  background-color: rgb(30, 175, 233);
+  color: white;
+  height: 35px;
+  font-size: 12px;
+  border: none;
+  padding-top: 4px;
+  text-decoration: none;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.rounded-btn.secondary {
+  border: 1px gray solid;
+  background-color: transparent;
+  color: black;
+}

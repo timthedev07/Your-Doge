@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { Form, Button, Container } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
 import { RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
@@ -138,101 +138,96 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
   });
 
   return (
-    <Container className="panels">
+    <div className="form-container">
       {loading ? <Loading /> : null}
-      <h1 className="page-heading">Join Us</h1>
-
-      <Container className="d-flex">
-        <div>
-          <Form className="from-as-wrapper">
-            <Alert
-              setActive={setAlertActive}
-              active={alertActive}
-              type={alertType}
-              text={alertMessage}
+      <h1 className="form-heading">Join Us</h1>
+      <div>
+        <Form className="from-as-wrapper">
+          <Alert
+            setActive={setAlertActive}
+            active={alertActive}
+            type={alertType}
+            text={alertMessage}
+          />
+          <div className="input-data form-padding-child">
+            <span className="field-hint-icon"></span>
+            <input
+              required
+              className="regular-input"
+              type="email"
+              ref={emRef}
+              onChange={(e) =>
+                toggleWarning(e, (e) => {
+                  return !validateEmail(e.target.value);
+                })
+              }
             />
-            <div className="input-data form-padding-child">
-              <span className="field-hint-icon"></span>
-              <input
-                required
-                className="regular-input"
-                type="email"
-                ref={emRef}
-                onChange={(e) =>
-                  toggleWarning(e, (e) => {
-                    return !validateEmail(e.target.value);
-                  })
-                }
-              />
-              <label>Email*</label>
-            </div>
-            <div className="input-data form-padding-child">
-              <span className="field-hint-icon"></span>
-              <input
-                required
-                className="regular-input"
-                type="email"
-                placeholder="8 characters maximal"
-                ref={unameRef}
-                onChange={(e) =>
-                  toggleWarning(e, (e) => {
-                    return e.target.value.length > 8;
-                  })
-                }
-              />
-              <label>Username*</label>
-            </div>
-            <div className="input-data form-padding-child">
-              <input
-                required
-                className="regular-input"
-                type="password"
-                ref={pwRef}
-                placeholder="At least 8 characters long"
-                onChange={(e) =>
-                  toggleWarning(e, (e) => {
-                    return e.target.value.length < 8;
-                  })
-                }
-              />
-              <label>Password*</label>
-            </div>
-            <div className="text-center form-padding-child">
-              {!loading ? (
-                <Button
-                  variant="info"
-                  className={"form-submit-button"}
-                  type="submit"
-                  onClick={(event) => handleSubmit(event)}
-                >
-                  Sign up
-                </Button>
-              ) : (
-                <Button
-                  variant="info"
-                  disabled
-                  type="submit"
-                  className={"form-submit-button disabled"}
-                  onClick={(event) => handleSubmit(event)}
-                >
-                  Sign up
-                </Button>
-              )}
-            </div>
-            <div className="text-center second-option-container">
+            <label>Email*</label>
+          </div>
+          <div className="input-data form-padding-child">
+            <span className="field-hint-icon"></span>
+            <input
+              required
+              className="regular-input"
+              type="email"
+              placeholder="8 characters maximal"
+              ref={unameRef}
+              onChange={(e) =>
+                toggleWarning(e, (e) => {
+                  return e.target.value.length > 8;
+                })
+              }
+            />
+            <label>Username*</label>
+          </div>
+          <div className="input-data form-padding-child">
+            <input
+              required
+              className="regular-input"
+              type="password"
+              ref={pwRef}
+              placeholder="At least 8 characters long"
+              onChange={(e) =>
+                toggleWarning(e, (e) => {
+                  return e.target.value.length < 8;
+                })
+              }
+            />
+            <label>Password*</label>
+          </div>
+          <div className="text-center form-padding-child">
+            {!loading ? (
               <Button
-                variant="light"
-                className="form-submit-button"
-                onClick={() => routeToLogin()}
+                variant="info"
+                className={"form-submit-button"}
+                type="submit"
+                onClick={(event) => handleSubmit(event)}
               >
-                {windowWidth > THRESHOLD
-                  ? "Already have an account?"
-                  : "Sign in"}
+                Sign up
               </Button>
-            </div>
-          </Form>
-        </div>
-      </Container>
-    </Container>
+            ) : (
+              <Button
+                variant="info"
+                disabled
+                type="submit"
+                className={"form-submit-button disabled"}
+                onClick={(event) => handleSubmit(event)}
+              >
+                Sign up
+              </Button>
+            )}
+          </div>
+          <div className="text-center second-option-container">
+            <Button
+              variant="light"
+              className="form-submit-button"
+              onClick={() => routeToLogin()}
+            >
+              {windowWidth > THRESHOLD ? "Already have an account?" : "Sign in"}
+            </Button>
+          </div>
+        </Form>
+      </div>
+    </div>
   );
 };

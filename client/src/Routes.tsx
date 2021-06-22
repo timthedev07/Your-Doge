@@ -7,11 +7,13 @@ import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/auth/Login";
 import { Register } from "./pages/auth/Register";
 import { Home } from "./pages/Home";
+import { Nav } from "./components/nav/Nav";
 
 export const Routes: React.FC = () => {
   return (
-    <div className="App">
-      <Router>
+    <Router>
+      <Nav transparent={false} />
+      <div className="App">
         <Switch>
           {/* Home */}
           <Route exact path="/" component={Home} />
@@ -23,7 +25,7 @@ export const Routes: React.FC = () => {
           {/* 404 */}
           <Route component={NotFound} />
         </Switch>
-      </Router>
-    </div>
+      </div>
+    </Router>
   );
 };
