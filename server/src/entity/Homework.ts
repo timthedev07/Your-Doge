@@ -32,7 +32,7 @@ export class User extends BaseEntity {
   @Column()
   done: boolean;
 
-  @Field(() => Date)
+  @Field(() => String)
   @Column("date")
   deadline: String;
 }
