@@ -7,7 +7,6 @@ import {
   ObjectType,
   Query,
   Resolver,
-  UseMiddleware,
 } from "type-graphql";
 import { hash, compare } from "bcrypt";
 import { User } from "../entity/User";
@@ -17,7 +16,6 @@ import {
   createRefreshToken,
   sendRefreshToken,
 } from "../AuthHelper";
-import { isAuth } from "../isAuthMiddleWare";
 import { getConnection } from "typeorm";
 import { verify } from "jsonwebtoken";
 
@@ -55,13 +53,6 @@ export class UserResolver {
   @Query(() => String)
   hello() {
     return "hello world";
-  }
-
-  /* this query is protected and only authenticated users can access it */
-  @Query(() => String)
-  @UseMiddleware(isAuth)
-  bye(@Ctx() { payload }: MyContext) {
-    return `your user id is: ${payload!.userId}`;
   }
 
   /**

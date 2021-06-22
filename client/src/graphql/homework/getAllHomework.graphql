@@ -1,0 +1,9 @@
+query AllHomework {
+  getAllHomework {
+    id
+    userId
+    title
+    description
+    deadline
+  }
+}

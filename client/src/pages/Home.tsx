@@ -1,8 +1,12 @@
 import React from "react";
-import { useMeQuery } from "../generated/graphql";
+import { useAllHomeworkQuery } from "../generated/graphql";
 
 export const Home: React.FC = () => {
-  const { data: gqlData, loading: gqlLoading, error: gqlError } = useMeQuery();
+  const {
+    data: gqlData,
+    loading: gqlLoading,
+    error: gqlError,
+  } = useAllHomeworkQuery();
   if (gqlError) {
     console.log(gqlError);
     return <div>error...</div>;
@@ -13,5 +17,11 @@ export const Home: React.FC = () => {
   if (!gqlData) {
     return <div>No data</div>;
   }
-  return <div>{JSON.stringify(gqlData.me)}</div>;
+  return (
+    <div>
+      <a href="/new_homework">Add homework</a>
+      <br />
+      {JSON.stringify(gqlData.getAllHomework)}
+    </div>
+  );
 };

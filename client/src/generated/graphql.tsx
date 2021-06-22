@@ -14,6 +14,25 @@ export type Scalars = {
   Float: number;
 };
 
+export type AllHomeworkResponse = {
+  __typename?: 'AllHomeworkResponse';
+  homeworkList: Array<Homework>;
+  count: Scalars['Float'];
+};
+
+export type Homework = {
+  __typename?: 'Homework';
+  id: Scalars['Int'];
+  userId: Scalars['Int'];
+  subjectId: Scalars['Int'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  done: Scalars['Boolean'];
+  deadline: Scalars['String'];
+  enjoyed: Scalars['Boolean'];
+  onTime: Scalars['Boolean'];
+};
+
 export type LoginResponse = {
   __typename?: 'LoginResponse';
   accessToken: Scalars['String'];
@@ -24,6 +43,7 @@ export type Mutation = {
   register: LoginResponse;
   login: LoginResponse;
   revokeRefreshTokensForUser: Scalars['Boolean'];
+  addHomework: Scalars['Boolean'];
 };
 
 
@@ -44,12 +64,19 @@ export type MutationRevokeRefreshTokensForUserArgs = {
   userId: Scalars['Int'];
 };
 
+
+export type MutationAddHomeworkArgs = {
+  description: Scalars['String'];
+  title: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
-  bye: Scalars['String'];
   users: Array<User>;
   me?: Maybe<User>;
+  getAllHomework: Array<Homework>;
+  allHomework: AllHomeworkResponse;
 };
 
 export type User = {
@@ -58,14 +85,6 @@ export type User = {
   email: Scalars['String'];
   username: Scalars['String'];
 };
-
-export type ByeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ByeQuery = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'bye'>
-);
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -107,39 +126,29 @@ export type RegisterMutation = (
   ) }
 );
 
+export type AddHomeworkMutationVariables = Exact<{
+  title: Scalars['String'];
+  description: Scalars['String'];
+}>;
 
-export const ByeDocument = gql`
-    query Bye {
-  bye
-}
-    `;
 
-/**
- * __useByeQuery__
- *
- * To run a query within a React component, call `useByeQuery` and pass it any options that fit your needs.
- * When your component renders, `useByeQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useByeQuery({
- *   variables: {
- *   },
- * });
- */
-export function useByeQuery(baseOptions?: Apollo.QueryHookOptions<ByeQuery, ByeQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ByeQuery, ByeQueryVariables>(ByeDocument, options);
-      }
-export function useByeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ByeQuery, ByeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ByeQuery, ByeQueryVariables>(ByeDocument, options);
-        }
-export type ByeQueryHookResult = ReturnType<typeof useByeQuery>;
-export type ByeLazyQueryHookResult = ReturnType<typeof useByeLazyQuery>;
-export type ByeQueryResult = Apollo.QueryResult<ByeQuery, ByeQueryVariables>;
+export type AddHomeworkMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'addHomework'>
+);
+
+export type AllHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllHomeworkQuery = (
+  { __typename?: 'Query' }
+  & { getAllHomework: Array<(
+    { __typename?: 'Homework' }
+    & Pick<Homework, 'id' | 'userId' | 'title' | 'description' | 'deadline'>
+  )> }
+);
+
+
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -245,3 +254,73 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const AddHomeworkDocument = gql`
+    mutation AddHomework($title: String!, $description: String!) {
+  addHomework(title: $title, description: $description)
+}
+    `;
+export type AddHomeworkMutationFn = Apollo.MutationFunction<AddHomeworkMutation, AddHomeworkMutationVariables>;
+
+/**
+ * __useAddHomeworkMutation__
+ *
+ * To run a mutation, you first call `useAddHomeworkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddHomeworkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addHomeworkMutation, { data, loading, error }] = useAddHomeworkMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *      description: // value for 'description'
+ *   },
+ * });
+ */
+export function useAddHomeworkMutation(baseOptions?: Apollo.MutationHookOptions<AddHomeworkMutation, AddHomeworkMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddHomeworkMutation, AddHomeworkMutationVariables>(AddHomeworkDocument, options);
+      }
+export type AddHomeworkMutationHookResult = ReturnType<typeof useAddHomeworkMutation>;
+export type AddHomeworkMutationResult = Apollo.MutationResult<AddHomeworkMutation>;
+export type AddHomeworkMutationOptions = Apollo.BaseMutationOptions<AddHomeworkMutation, AddHomeworkMutationVariables>;
+export const AllHomeworkDocument = gql`
+    query AllHomework {
+  getAllHomework {
+    id
+    userId
+    title
+    description
+    deadline
+  }
+}
+    `;
+
+/**
+ * __useAllHomeworkQuery__
+ *
+ * To run a query within a React component, call `useAllHomeworkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllHomeworkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllHomeworkQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllHomeworkQuery(baseOptions?: Apollo.QueryHookOptions<AllHomeworkQuery, AllHomeworkQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllHomeworkQuery, AllHomeworkQueryVariables>(AllHomeworkDocument, options);
+      }
+export function useAllHomeworkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllHomeworkQuery, AllHomeworkQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllHomeworkQuery, AllHomeworkQueryVariables>(AllHomeworkDocument, options);
+        }
+export type AllHomeworkQueryHookResult = ReturnType<typeof useAllHomeworkQuery>;
+export type AllHomeworkLazyQueryHookResult = ReturnType<typeof useAllHomeworkLazyQuery>;
+export type AllHomeworkQueryResult = Apollo.QueryResult<AllHomeworkQuery, AllHomeworkQueryVariables>;

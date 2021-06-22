@@ -2,28 +2,19 @@ import {
   Arg,
   Ctx,
   Field,
-  Int,
   Mutation,
   ObjectType,
   Query,
   Resolver,
   UseMiddleware,
 } from "type-graphql";
-import { hash, compare } from "bcrypt";
 import { Homework } from "../entity/Homework";
 import { MyContext } from "../MyContext";
-import {
-  createAccessToken,
-  createRefreshToken,
-  sendRefreshToken,
-} from "../AuthHelper";
 import { isAuth } from "../isAuthMiddleWare";
-import { getConnection } from "typeorm";
-import { verify } from "jsonwebtoken";
 
 @ObjectType()
 class AllHomeworkResponse {
-  @Field()
+  @Field(() => [Homework])
   homeworkList: [Homework];
 
   @Field()
@@ -32,6 +23,19 @@ class AllHomeworkResponse {
 
 @Resolver()
 export class HomeworkResolver {
+  @Query(() => [Homework])
+  async getAllHomework() {
+    const res = await Homework.findAndCount();
+    return res[0];
+  }
+
+  /**
+   * Adds a new task
+   * @param context
+   * @param title
+   * @param description
+   * @returns true | false
+   */
   @Mutation(() => Boolean)
   @UseMiddleware(isAuth)
   async addHomework(
@@ -45,14 +49,23 @@ export class HomeworkResolver {
 
     const today = new Date();
 
-    const res = await Homework.insert({
-      userId: parseInt(payload.userId),
-      title,
-      description,
-      deadline: `${today.valueOf()}`,
-      done: false,
-      enjoyed: null,
-    });
+    // inserting a new task
+    try {
+      await Homework.insert({
+        userId: parseInt(payload.userId),
+        title,
+        description,
+        deadline: `${today.valueOf()}`,
+        done: false,
+        enjoyed: null,
+        subjectId: null,
+        onTime: null,
+      });
+      return true;
+    } catch (err) {
+      console.log(err);
+      throw new Error("Failed to add task, error: " + JSON.stringify(err));
+    }
   }
 
   /**
@@ -69,6 +82,9 @@ export class HomeworkResolver {
     const res = await Homework.findAndCount({
       where: { userId: payload.userId },
     });
-    return res;
+    return {
+      homeworkList: res[0],
+      count: res[1],
+    };
   }
 }

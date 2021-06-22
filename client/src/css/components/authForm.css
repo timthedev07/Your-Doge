@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 .from-as-wrapper {
@@ -49,13 +49,11 @@
   margin-bottom: 10px;
 }
 
-.regular-input {
-  color: rgb(182, 182, 182);
-}
+
 
 .regular-input:focus,
 .regular-input::placeholder {
-  color: rgb(226, 226, 226);
+  color: rgb(44, 44, 44);
   font-size: 17.5px;
 }
 

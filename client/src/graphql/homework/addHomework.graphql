@@ -1,0 +1,3 @@
+mutation AddHomework($title: String!, $description: String!) {
+  addHomework(title: $title, description: $description)
+}

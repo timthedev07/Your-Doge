@@ -3,7 +3,7 @@ import "reflect-metadata";
 import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { UserResolver } from "./Resolvers/User";
+import { UserResolver } from "./Resolvers/UserResolver";
 import { createConnection } from "typeorm";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -12,6 +12,7 @@ const FRONTEND_URL = "http://localhost:3000";
 
 // Import the routes
 import { router as AuthRouter } from "./routes/AuthRoute";
+import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 
 // specify the routes
 const PORT: number = 4000;
@@ -34,7 +35,7 @@ const PORT: number = 4000;
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver],
+      resolvers: [UserResolver, HomeworkResolver],
     }),
     context: ({ req, res }) => ({ req, res }),
   });
@@ -42,6 +43,6 @@ const PORT: number = 4000;
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(PORT, () => {
-    console.log(`app listening at: ${PORT}`);
+    console.log(`app listening at: http://localhost:${PORT}`);
   });
 })();

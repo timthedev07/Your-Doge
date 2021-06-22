@@ -8,6 +8,7 @@ import { Login } from "./pages/auth/Login";
 import { Register } from "./pages/auth/Register";
 import { Home } from "./pages/Home";
 import { Nav } from "./components/nav/Nav";
+import { NewHomework } from "./pages/NewHomework";
 
 export const Routes: React.FC = () => {
   return (
@@ -21,6 +22,9 @@ export const Routes: React.FC = () => {
           {/* auth routes */}
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+
+					{/* homework routes */}
+					<Route exact path="/new_homework" component={NewHomework} />
 
           {/* 404 */}
           <Route component={NotFound} />

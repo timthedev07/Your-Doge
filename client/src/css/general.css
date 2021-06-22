@@ -9,6 +9,11 @@ body#body {
   margin-top: 0;
 }
 
+div.App {
+	min-height: 100vh;
+	padding-top: var(--nav-bar-height);
+}
+
 a,
 .normal-links.normal-links.normal-links {
   color: rgb(250, 212, 0);
