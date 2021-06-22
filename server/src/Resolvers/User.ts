@@ -10,14 +10,14 @@ import {
   UseMiddleware,
 } from "type-graphql";
 import { hash, compare } from "bcrypt";
-import { User } from "./entity/User";
-import { MyContext } from "./MyContext";
+import { User } from "../entity/User";
+import { MyContext } from "../MyContext";
 import {
   createAccessToken,
   createRefreshToken,
   sendRefreshToken,
-} from "./AuthHelper";
-import { isAuth } from "./isAuthMiddleWare";
+} from "../AuthHelper";
+import { isAuth } from "../isAuthMiddleWare";
 import { getConnection } from "typeorm";
 import { verify } from "jsonwebtoken";
 

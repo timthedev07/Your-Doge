@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 @ObjectType()
 @Entity("homework")
-export class User extends BaseEntity {
+export class Homework extends BaseEntity {
   /**
    * Here we are basically creating columns for our database
    */
@@ -33,6 +33,14 @@ export class User extends BaseEntity {
   done: boolean;
 
   @Field(() => String)
-  @Column("date")
-  deadline: String;
+  @Column("string")
+  deadline: string;
+
+  @Field(() => Boolean, { nullable: true })
+  @Column("boolean")
+  enjoyed: boolean | null;
+
+  @Field(() => Boolean)
+  @Column("boolean")
+  onTime: boolean;
 }
