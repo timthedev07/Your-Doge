@@ -18,7 +18,7 @@ We don't need any sorts of middle man, we can just use a middleman server, that 
 
 ### **_UPDATE(Diagram)_**
 
-![diagram](./diagram.svg)
+![diagram](./diagram.png)
 
 ## Some features and/or functionalities I want to implement
 
