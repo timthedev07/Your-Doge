@@ -21,8 +21,18 @@ export class User extends BaseEntity {
   subjectId: number;
 
   @Field(() => String)
+  @Column("text")
   title: string;
 
   @Field(() => String)
+  @Column("text")
   description: string;
+
+  @Field(() => Boolean)
+  @Column()
+  done: boolean;
+
+  @Field(() => Date)
+  @Column("date")
+  deadline: String;
 }
