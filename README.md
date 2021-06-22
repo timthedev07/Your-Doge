@@ -12,4 +12,10 @@ Because of the damn limit on the heroku database, we have to design in in a diff
 
 Sounds legit, huh? Who knows whether it works or not...
 
+### **_UPDATE(LITERALLY FIVE MINUTES AFTER FIGURED OUT THE PLAN)_**
+
+We don't need any sorts of middle man, we can just use a middleman server, that stores all of the information about the other servers that actually store user/homework data, and once a user visits, we decide which backend API to call based on that middleman.
+
 ## Some features and/or functionalities I want to implement
+
+Discussion forum...
