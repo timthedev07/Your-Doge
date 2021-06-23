@@ -72,7 +72,13 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
         history.push("/");
       }
     } catch (err: any) {
-      displayError(err.graphQLErrors[0].message);
+      try {
+        displayError(err.graphQLErrors[0].message);
+      } catch (err) {
+        displayError(
+          "Sorry, an unknown error occurred, try again later, or contact our support team(bot.rem.autogenerate@gmail.com)"
+        );
+      }
     }
   }
 
@@ -81,7 +87,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
       {pageLoading ? <Loading /> : null}
       <h1 className="form-heading">Welcome Back</h1>
       <div>
-        <Form className="from-as-wrapper">
+        <Form className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}
             active={alertActive}

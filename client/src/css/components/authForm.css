@@ -7,19 +7,19 @@
   padding-top: 20px;
 }
 
-.from-as-wrapper {
+.form-as-wrapper {
   width: 375px;
   position: relative;
-  background-color: transparent;
   display: block;
   min-height: 500px;
   padding-top: 30px;
+  background-color: rgb(248, 248, 248);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   margin-bottom: 50px;
 }
 
 .second-option-container {
-  background-color: #373d41;
+  background-color: #6db2e4;
   margin-top: 10px;
   position: absolute;
   bottom: 0px;
@@ -49,11 +49,8 @@
   margin-bottom: 10px;
 }
 
-
-
 .regular-input:focus,
 .regular-input::placeholder {
-  color: rgb(44, 44, 44);
   font-size: 17.5px;
 }
 
@@ -83,7 +80,7 @@ label {
   margin-left: 30px;
 }
 
-.from-as-wrapper .input-data {
+.form-as-wrapper .input-data {
   height: 40px;
   position: relative;
   margin-top: 20px;
@@ -92,7 +89,7 @@ label {
   margin-left: 30px;
 }
 
-.from-as-wrapper .input-data label {
+.form-as-wrapper .input-data label {
   position: relative;
 }
 
@@ -135,7 +132,7 @@ label {
 }
 
 @media screen and (max-width: 260px) {
-  .from-as-wrapper {
+  .form-as-wrapper {
     min-height: 580px;
   }
   #register-form {
@@ -145,7 +142,7 @@ label {
     margin-right: 5px;
     margin-left: 5px;
   }
-  .from-as-wrapper .input-data {
+  .form-as-wrapper .input-data {
     margin-top: 20px;
     margin-bottom: 30px;
     margin-right: 10px;

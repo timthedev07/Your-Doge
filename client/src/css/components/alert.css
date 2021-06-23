@@ -20,15 +20,15 @@
 }
 
 .alert-active {
-  top: 0px;
+  top: calc(0px);
   transition: 0.5s;
-  z-index: 10000;
+  z-index: 10000000000000;
 }
 
 .alert-inactive {
   top: -100vw;
   transition: 0.5s;
-  z-index: 10000;
+  z-index: 10000000000000;
 }
 
 .custom-alert .close-icon {

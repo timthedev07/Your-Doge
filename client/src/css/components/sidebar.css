@@ -23,10 +23,10 @@
 
 /* if side bar is closed, move it out of the screen */
 .side-bar.side-bar-closed {
-  transform: translateX(-200vw);
+  transform: translateY(-200vw);
 }
 .side-bar.side-bar-opened {
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 .menu-btn-container {
@@ -46,7 +46,6 @@
   width: 70px;
   padding: 10px !important;
   margin: auto;
-  transform: translateX(-30px);
 }
 
 /* style for each individual sidebar item */

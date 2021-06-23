@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MenuButton } from "./MenuButton";
 import { useHistory, useLocation } from "react-router";
+import { useThemeContext } from "../../contexts/ThemeContext";
+import Logo from "../../assets/images/logo.png";
 
 const THRESHOLD = 600;
 
@@ -30,6 +32,7 @@ interface Props {
 export const Nav: React.FC<Props> = ({ transparent }) => {
   const history = useHistory();
   const location = useLocation();
+  const themeContext = useThemeContext()!;
 
   // Responsive Navigation Bar
 
@@ -104,7 +107,8 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
         ref={navBarRef}
       >
         <a className="nav-item nav-item-home" href="/">
-          Home
+          DoYourStuff &nbsp; &nbsp;
+          <img src={Logo} alt="logo" className="nav-logo" />
         </a>
 
         <a
@@ -120,14 +124,6 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
 
         <a
           className={
-            currPath === "pricing" ? "nav-item nav-item-active" : "nav-item"
-          }
-          href="/pricing"
-        >
-          Pricing
-        </a>
-        <a
-          className={
             currPath === "account" ? "nav-item nav-item-active" : "nav-item"
           }
           href="/account"
@@ -135,14 +131,18 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           Account
         </a>
 
-        <div
-          className={
-            currPath === "sports"
-              ? "nav-item nav-item-active nav-item-end"
-              : "nav-item nav-item-end"
-          }
-          id={"auth-links"}
-        >
+        <div className={"nav-item"}>
+          <button
+            className="rounded-btn secondary"
+            onClick={() => {
+              themeContext.toggleTheme();
+            }}
+          >
+            {themeContext.darkTheme ? "Light" : "Dark"}
+          </button>
+        </div>
+
+        <div className={"nav-item nav-item-end"} id={"auth-links"}>
           <a href="/login" className="rounded-btn secondary">
             Sign in
           </a>

@@ -124,7 +124,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
         displayError(err.graphQLErrors[0].message);
       } catch (err) {
         displayError(
-          "Sorry, an unknown error occurred, try again later, or contact our support team(rem.cs90873@gmail.com)"
+          "Sorry, an unknown error occurred, try again later, or contact our support team(bot.rem.autogenerate@gmail.com)"
         );
       }
     }
@@ -142,7 +142,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
       {loading ? <Loading /> : null}
       <h1 className="form-heading">Join Us</h1>
       <div>
-        <Form className="from-as-wrapper">
+        <Form className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}
             active={alertActive}

@@ -1,5 +1,6 @@
 @import url(./general.css);
 @import url(./var.css);
+@import url(./darktheme.css);
 
 /* pages */
 @import url(./pages/404.css);

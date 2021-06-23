@@ -23,8 +23,8 @@ export const Routes: React.FC = () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
 
-					{/* homework routes */}
-					<Route exact path="/new_homework" component={NewHomework} />
+          {/* homework routes */}
+          <Route exact path="/new_homework" component={NewHomework} />
 
           {/* 404 */}
           <Route component={NotFound} />

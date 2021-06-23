@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BACKEND_AUTH_BASE_URL } from ".";
 import { setAccessToken } from "./accessToken";
 import { Loading } from "./components/Loading";
+import { ThemeControl } from "./contexts/ThemeContext";
 import { Routes } from "./Routes";
 
 interface Props {}
@@ -32,7 +33,9 @@ export const App: React.FC<Props> = () => {
 
   return (
     <>
-      <Routes />
+      <ThemeControl>
+        <Routes />
+      </ThemeControl>
     </>
   );
 };
