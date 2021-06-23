@@ -8,6 +8,7 @@ import {
   Query,
   Resolver,
 } from "type-graphql";
+import { getConnection } from "typeorm";
 import { hash, compare } from "bcrypt";
 import { User } from "../entity/User";
 import { MyContext } from "../MyContext";
@@ -16,7 +17,6 @@ import {
   createRefreshToken,
   sendRefreshToken,
 } from "../AuthHelper";
-import { getConnection } from "typeorm";
 import { verify } from "jsonwebtoken";
 
 const EMAIL_VALIDATION_REGEX =
