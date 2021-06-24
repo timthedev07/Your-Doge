@@ -41,13 +41,12 @@ export class HomeworkResolver {
   async addHomework(
     @Ctx() { payload }: MyContext,
     @Arg("title") title: string,
-    @Arg("description") description: string
+    @Arg("description") description: string,
+    @Arg("deadline") deadline: string
   ) {
     if (!payload || !payload?.userId) {
       throw new Error("User not authenticated");
     }
-
-    const today = new Date();
 
     // inserting a new task
     try {
@@ -55,7 +54,7 @@ export class HomeworkResolver {
         userId: parseInt(payload.userId),
         title,
         description,
-        deadline: `${today.valueOf()}`,
+        deadline: deadline,
         done: false,
         enjoyed: null,
         subjectId: null,

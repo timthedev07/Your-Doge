@@ -9,6 +9,7 @@ export const Home: React.FC = () => {
     loading: gqlLoading,
     error: gqlError,
   } = useAllHomeworkQuery();
+
   if (gqlError) {
     console.log(gqlError);
     body = <div>Not logged in or server is down</div>;
@@ -17,7 +18,10 @@ export const Home: React.FC = () => {
   } else if (!gqlData) {
     body = <div>Oops, No data</div>;
   } else {
-    body = JSON.stringify(gqlData.getAllHomework);
+    const processedData = gqlData.getAllHomework.map((each) => (
+      <div key={each.id}>{each.title}</div>
+    ));
+    body = processedData;
   }
 
   return (

@@ -39,6 +39,11 @@ body.dark .nav-bar .nav-item.nav-item-active {
   color: rgb(255, 255, 255);
 }
 
+body#body.dark .nav-item-home.nav-item-home.nav-item-home,
+body#body.dark .nav-item-home.nav-item-home.nav-item-home:hover {
+  color: white;
+}
+
 /* auth forms */
 body.dark
   .second-option-container.second-option-container.second-option-container {

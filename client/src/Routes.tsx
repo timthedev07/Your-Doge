@@ -9,6 +9,8 @@ import { Register } from "./pages/auth/Register";
 import { Home } from "./pages/Home";
 import { Nav } from "./components/nav/Nav";
 import { NewHomework } from "./pages/NewHomework";
+import { Dashdoard } from "./pages/Dashdoard";
+import "react-calendar/dist/Calendar.css";
 
 export const Routes: React.FC = () => {
   return (
@@ -18,6 +20,9 @@ export const Routes: React.FC = () => {
         <Switch>
           {/* Home */}
           <Route exact path="/" component={Home} />
+
+          {/* User specific routes */}
+          <Route exact path="/dashboard" component={Dashdoard} />
 
           {/* auth routes */}
           <Route exact path="/register" component={Register} />

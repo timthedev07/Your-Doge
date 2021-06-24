@@ -46,6 +46,11 @@
   width: 45%;
 }
 
+.nav-item-home.nav-item-home.nav-item-home,
+.nav-item-home.nav-item-home.nav-item-home:hover {
+  color: black;
+}
+
 /* styles for the normal items in nav bar */
 .nav-bar .nav-item,
 .nav-bar .nav-item:hover {

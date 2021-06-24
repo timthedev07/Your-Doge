@@ -113,11 +113,9 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
 
         <a
           className={
-            currPath === "travel-guide"
-              ? "nav-item nav-item-active"
-              : "nav-item"
+            currPath === "dashboard" ? "nav-item nav-item-active" : "nav-item"
           }
-          href="/travel-guide"
+          href="/dashboard"
         >
           Dashboard
         </a>

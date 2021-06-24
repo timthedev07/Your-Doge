@@ -19,13 +19,12 @@ export const NewHomework: React.FC<NewHomeworkProps> = () => {
     const description = descriptionRef.current.value;
     const date = new Date(dueDateRef.current.value);
 
-    console.log(date.valueOf());
-
     try {
       await addHomework({
         variables: {
           title,
           description,
+          deadline: `${date.valueOf()}`,
         },
       });
     } catch (err) {
@@ -35,10 +34,13 @@ export const NewHomework: React.FC<NewHomeworkProps> = () => {
 
   return (
     <div>
+      <a className="normal-links" href="/">
+        All homework
+      </a>
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input ref={titleRef} placeholder="title" />
-        <input ref={descriptionRef} placeholder="description" />
-        <input ref={dueDateRef} type="date" />
+        <input required ref={titleRef} placeholder="title" />
+        <input required ref={descriptionRef} placeholder="description" />
+        <input required ref={dueDateRef} type="date" />
         <button type="submit">Add</button>
       </form>
     </div>

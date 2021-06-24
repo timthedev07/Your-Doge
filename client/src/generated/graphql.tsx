@@ -66,6 +66,7 @@ export type MutationRevokeRefreshTokensForUserArgs = {
 
 
 export type MutationAddHomeworkArgs = {
+  deadline: Scalars['String'];
   description: Scalars['String'];
   title: Scalars['String'];
 };
@@ -129,6 +130,7 @@ export type RegisterMutation = (
 export type AddHomeworkMutationVariables = Exact<{
   title: Scalars['String'];
   description: Scalars['String'];
+  deadline: Scalars['String'];
 }>;
 
 
@@ -255,8 +257,8 @@ export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const AddHomeworkDocument = gql`
-    mutation AddHomework($title: String!, $description: String!) {
-  addHomework(title: $title, description: $description)
+    mutation AddHomework($title: String!, $description: String!, $deadline: String!) {
+  addHomework(title: $title, description: $description, deadline: $deadline)
 }
     `;
 export type AddHomeworkMutationFn = Apollo.MutationFunction<AddHomeworkMutation, AddHomeworkMutationVariables>;
@@ -276,6 +278,7 @@ export type AddHomeworkMutationFn = Apollo.MutationFunction<AddHomeworkMutation,
  *   variables: {
  *      title: // value for 'title'
  *      description: // value for 'description'
+ *      deadline: // value for 'deadline'
  *   },
  * });
  */

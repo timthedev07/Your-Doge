@@ -16,7 +16,13 @@ import jwtDecode, { JwtPayload } from "jwt-decode";
 export const BACKEND_BASE_URL = "http://localhost:4000";
 export const BACKEND_AUTH_BASE_URL = "http://localhost:4000/auth";
 
-const cache = new InMemoryCache({});
+const cache = new InMemoryCache({
+  typePolicies: {
+    Homework: {
+      keyFields: ["id", "title", "description", "deadline"],
+    },
+  },
+});
 
 const requestLink = new ApolloLink(
   (operation, forward) =>
