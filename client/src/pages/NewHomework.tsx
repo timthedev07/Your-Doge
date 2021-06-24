@@ -19,6 +19,8 @@ export const NewHomework: React.FC<NewHomeworkProps> = () => {
     const description = descriptionRef.current.value;
     const date = new Date(dueDateRef.current.value);
 
+    date.setHours(0, 0, 0);
+
     try {
       await addHomework({
         variables: {

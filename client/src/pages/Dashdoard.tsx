@@ -12,6 +12,7 @@ interface Homework {
 
 export const Dashdoard: React.FC<DashdoardProps> = () => {
   const [marks, setMarks] = useState<Record<string, number>>({});
+  // eslint-disable-next-line
   const [homework, setHomework] = useState<Array<Homework>>([]);
 
   const {
@@ -20,7 +21,7 @@ export const Dashdoard: React.FC<DashdoardProps> = () => {
     // error: gqlError,
   } = useAllHomeworkQuery();
 
-  const BUSY_CLASSES = {
+  const BUSY_CLASSES: Record<string, string> = {
     "0": "free",
     "1": "chill",
     "2": "fine",
@@ -55,20 +56,22 @@ export const Dashdoard: React.FC<DashdoardProps> = () => {
     }
   }, [gqlData, marks]);
 
-  console.log(homework);
-  console.log(marks);
-
   return (
-    <Calendar
-      onChange={(dateObj) => {
-        console.log(dateObj.valueOf());
-      }}
-      tileClassName={({ date }) => {
-        if (marks.hasOwnProperty(`${date.valueOf()}`)) {
-          return BUSY_CLASSES[`2`];
-        }
-        return "";
-      }}
-    />
+    <div className="calendar-container">
+      <Calendar
+        onChange={(dateObj) => {
+          console.log(dateObj.valueOf());
+        }}
+        className="big-ass-calendar"
+        tileClassName={({ date }) => {
+          const valueStr = `${date.valueOf()}`;
+          if (marks.hasOwnProperty(valueStr)) {
+            const key: string = JSON.stringify(marks[valueStr]);
+            return BUSY_CLASSES[key];
+          }
+          return "";
+        }}
+      />
+    </div>
   );
 };

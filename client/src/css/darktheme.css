@@ -72,3 +72,29 @@ body.dark.dark .regular-input,
 body.dark.dark .regular-input::placeholder {
   color: rgb(196, 196, 196);
 }
+
+/* calendar */
+body.dark.dark .big-ass-calendar {
+  background: linear-gradient(100deg, #414141 0%, #292929 100%);
+  color: white !important;
+}
+
+body.dark.dark.dark#body.dark.dark.dark#body abbr {
+  color: white;
+}
+
+body.dark.dark.dark .react-calendar__navigation__arrow {
+  color: white;
+}
+
+body.dark.dark.dark .react-calendar__navigation__label {
+  color: white;
+}
+
+body.dark .react-calendar__tile--now {
+  background-color: rgba(24, 151, 224, 0.959);
+}
+
+body.dark .react-calendar__tile--now:hover {
+  background-color: rgba(19, 167, 252, 0.959);
+}

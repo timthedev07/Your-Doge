@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router";
 import { useThemeContext } from "../../contexts/ThemeContext";
 import Logo from "../../assets/images/logo.png";
 
-const THRESHOLD = 600;
+const THRESHOLD = 681;
 
 interface SBItemProps {
   children: JSX.Element | string;
@@ -107,7 +107,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
         ref={navBarRef}
       >
         <a className="nav-item nav-item-home" href="/">
-          DoYourStuff &nbsp; &nbsp;
+          DoYourStuff&nbsp;&nbsp;&nbsp;&nbsp;
           <img src={Logo} alt="logo" className="nav-logo" />
         </a>
 
