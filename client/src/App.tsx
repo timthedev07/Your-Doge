@@ -27,6 +27,7 @@ export const App: React.FC<Props> = () => {
     return (
       <>
         <Loading />
+        <div className="App"></div>
       </>
     );
   }

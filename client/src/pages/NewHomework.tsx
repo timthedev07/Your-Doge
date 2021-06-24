@@ -21,9 +21,6 @@ export const NewHomework: React.FC<NewHomeworkProps> = () => {
 
     console.log(date.valueOf());
 
-    return;
-
-    // eslint-disable-next-line
     try {
       await addHomework({
         variables: {
