@@ -8,14 +8,12 @@ import { createConnection } from "typeorm";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 
-const FRONTEND_URL = "http://localhost:3000";
-
 // Import the routes
 import { router as AuthRouter } from "./routes/AuthRoute";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 
-// specify the routes
 const PORT: string = process.env.PORT || "4000";
+const FRONTEND_URL = "http://localhost:3000";
 
 (async () => {
   const app = express();
@@ -35,7 +33,11 @@ const PORT: string = process.env.PORT || "4000";
 
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
-      resolvers: [UserResolver, HomeworkResolver],
+      resolvers:
+        // decides whether or not a server handles homework data
+        process.env.HANDLE_HOMEWORK! === "true"
+          ? [UserResolver, HomeworkResolver]
+          : [UserResolver],
     }),
     context: ({ req, res }) => ({ req, res }),
   });

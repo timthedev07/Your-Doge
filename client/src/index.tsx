@@ -13,8 +13,12 @@ import { onError } from "apollo-link-error";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
-export const BACKEND_BASE_URL = "http://localhost:4000";
-export const BACKEND_AUTH_BASE_URL = "http://localhost:4000/auth";
+export const BACKEND_BASE_URL = "https://homework-manager-db0.herokuapp.com";
+export const BACKEND_AUTH_BASE_URL = `${BACKEND_BASE_URL}/auth`;
+
+export const USERS_BACKEND_BASE_URL =
+  "https://homework-manager-users.herokuapp.com";
+export const USERS_BACKEND_AUTH_BASE_URL = `${BACKEND_BASE_URL}/auth`;
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -77,7 +81,7 @@ export const client = new ApolloClient({
         }
       },
       fetchAccessToken: () => {
-        return fetch(`${BACKEND_AUTH_BASE_URL}/refresh_token`, {
+        return fetch(`${USERS_BACKEND_AUTH_BASE_URL}/refresh_token`, {
           method: "POST",
           credentials: "include",
         });
@@ -96,7 +100,7 @@ export const client = new ApolloClient({
     }) as any,
     requestLink,
     new HttpLink({
-      uri: `${BACKEND_BASE_URL}/graphql`,
+      uri: `${USERS_BACKEND_BASE_URL}/graphql`,
       credentials: "include",
     }),
   ]),
