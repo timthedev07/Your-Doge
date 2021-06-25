@@ -11,6 +11,7 @@ import { Nav } from "./components/nav/Nav";
 import { NewHomework } from "./pages/NewHomework";
 import { Dashdoard } from "./pages/Dashdoard";
 import "react-calendar/dist/Calendar.css";
+import { Account } from "./pages/auth/Account";
 
 export const Routes: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ export const Routes: React.FC = () => {
           {/* auth routes */}
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/account" component={Account} />
 
           {/* homework routes */}
           <Route exact path="/new_homework" component={NewHomework} />
