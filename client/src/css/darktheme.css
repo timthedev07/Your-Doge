@@ -98,3 +98,28 @@ body.dark .react-calendar__tile--now {
 body.dark .react-calendar__tile--now:hover {
   background-color: rgba(19, 167, 252, 0.959);
 }
+
+body.dark .react-calendar__navigation__label {
+  background-color: transparent !important;
+}
+
+body.dark .react-calendar__navigation__arrow:hover,
+body.dark .react-calendar__navigation__label:hover,
+body.dark.dark
+  .react-calendar__tile.react-calendar__month-view__days__day:hover,
+body.dark .react-calendar__tile.react-calendar__decade-view__years__year:hover,
+body.dark .react-calendar__tile.react-calendar__year-view__months__month:hover,
+body.dark
+  .react-calendar__tile.react-calendar__century-view__decades__decade:hover {
+  background-color: rgb(88, 88, 88) !important;
+}
+
+body.dark .react-calendar__tile.react-calendar__decade-view__years__year,
+body.dark .react-calendar__tile.react-calendar__century-view__decades__decade {
+  color: white !important;
+}
+
+body.dark
+  .react-calendar__tile.react-calendar__tile--hasActive.react-calendar__year-view__months__month {
+  background-color: #977b00;
+}

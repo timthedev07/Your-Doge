@@ -2,7 +2,7 @@
   "name": "server",
   "version": "0.0.1",
   "description": "Homework manager.",
-  "license": "GPLV3",
+  "license": "GPL-3.0-or-later",
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.10",
@@ -32,6 +32,7 @@
   },
   "scripts": {
     "start": "nodemon --exec ts-node src/index.ts",
+    "prod": "yarn build && node dist/index.js",
     "build": "tsc"
   }
 }

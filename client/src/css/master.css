@@ -4,6 +4,7 @@
 
 /* pages */
 @import url(./pages/404.css);
+@import url(./pages/dashboard.css);
 
 /* components */
 @import url(./components/animatedBtn.css);

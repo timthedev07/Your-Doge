@@ -3,7 +3,7 @@ import { useMeQuery } from "../../generated/graphql";
 
 interface AccountProps {}
 
-export const Account: React.FC<AccountProps> = ({}) => {
+export const Account: React.FC<AccountProps> = () => {
   let body;
 
   const { data } = useMeQuery();

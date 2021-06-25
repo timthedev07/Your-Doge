@@ -16,7 +16,7 @@ export class Homework extends BaseEntity {
   @Column("int")
   userId: number;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   @Column("int", { nullable: true })
   subjectId: number | null;
 
@@ -36,11 +36,11 @@ export class Homework extends BaseEntity {
   @Column("text")
   deadline: string;
 
-  @Field(() => Boolean)
+  @Field(() => Boolean, { nullable: true })
   @Column("boolean", { nullable: true })
   enjoyed: boolean | null;
 
-  @Field(() => Boolean)
+  @Field(() => Boolean, { nullable: true })
   @Column("boolean", { nullable: true })
   onTime: boolean | null;
 }

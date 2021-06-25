@@ -2,6 +2,7 @@
   "name": "homework-manager",
   "version": "0.1.0",
   "private": true,
+  "license": "GPL-3.0-or-later",
   "dependencies": {
     "@apollo/client": "^3.3.8",
     "@apollo/react-hooks": "^4.0.0",

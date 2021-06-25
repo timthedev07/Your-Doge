@@ -45,7 +45,6 @@ export const Dashdoard: React.FC<DashdoardProps> = () => {
 
         // pushing/modifying data in the record holding date: homeworkCount
         const dummy = marks;
-        console.log({ each, d: each.deadline });
         if (dummy.hasOwnProperty(each.deadline)) {
           dummy[each.deadline]++;
         } else {
@@ -59,15 +58,12 @@ export const Dashdoard: React.FC<DashdoardProps> = () => {
   return (
     <div className="calendar-container">
       <Calendar
-        onChange={(dateObj) => {
-          console.log(dateObj.valueOf());
-        }}
         className="big-ass-calendar"
         tileClassName={({ date }) => {
           const valueStr = `${date.valueOf()}`;
           if (marks.hasOwnProperty(valueStr)) {
             const key: string = JSON.stringify(marks[valueStr]);
-            return BUSY_CLASSES[key];
+            return parseInt(key) > 5 ? "damn" : BUSY_CLASSES[key];
           }
           return "";
         }}
