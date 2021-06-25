@@ -1,0 +1,14 @@
+query AllUserHomework {
+  getAllUserHomework {
+    homeworkList {
+      id
+      title
+      description
+      deadline
+      subjectId
+      done
+      onTime
+    }
+    count
+  }
+}

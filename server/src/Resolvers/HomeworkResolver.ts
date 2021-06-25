@@ -74,7 +74,7 @@ export class HomeworkResolver {
    */
   @Query(() => AllHomeworkResponse)
   @UseMiddleware(isAuth)
-  async allHomework(@Ctx() { payload }: MyContext) {
+  async getAllUserHomework(@Ctx() { payload }: MyContext) {
     if (!payload || !payload?.userId) {
       throw new Error("User not authenticated");
     }

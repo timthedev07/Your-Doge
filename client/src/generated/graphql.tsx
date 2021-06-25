@@ -77,7 +77,7 @@ export type Query = {
   users: Array<User>;
   me?: Maybe<User>;
   getAllHomework: Array<Homework>;
-  allHomework: AllHomeworkResponse;
+  getAllUserHomework: AllHomeworkResponse;
 };
 
 export type User = {
@@ -137,6 +137,21 @@ export type AddHomeworkMutationVariables = Exact<{
 export type AddHomeworkMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'addHomework'>
+);
+
+export type AllUserHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AllUserHomeworkQuery = (
+  { __typename?: 'Query' }
+  & { getAllUserHomework: (
+    { __typename?: 'AllHomeworkResponse' }
+    & Pick<AllHomeworkResponse, 'count'>
+    & { homeworkList: Array<(
+      { __typename?: 'Homework' }
+      & Pick<Homework, 'id' | 'title' | 'description' | 'deadline' | 'subjectId' | 'done' | 'onTime'>
+    )> }
+  ) }
 );
 
 export type AllHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
@@ -289,6 +304,49 @@ export function useAddHomeworkMutation(baseOptions?: Apollo.MutationHookOptions<
 export type AddHomeworkMutationHookResult = ReturnType<typeof useAddHomeworkMutation>;
 export type AddHomeworkMutationResult = Apollo.MutationResult<AddHomeworkMutation>;
 export type AddHomeworkMutationOptions = Apollo.BaseMutationOptions<AddHomeworkMutation, AddHomeworkMutationVariables>;
+export const AllUserHomeworkDocument = gql`
+    query AllUserHomework {
+  getAllUserHomework {
+    homeworkList {
+      id
+      title
+      description
+      deadline
+      subjectId
+      done
+      onTime
+    }
+    count
+  }
+}
+    `;
+
+/**
+ * __useAllUserHomeworkQuery__
+ *
+ * To run a query within a React component, call `useAllUserHomeworkQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllUserHomeworkQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAllUserHomeworkQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAllUserHomeworkQuery(baseOptions?: Apollo.QueryHookOptions<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>(AllUserHomeworkDocument, options);
+      }
+export function useAllUserHomeworkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>(AllUserHomeworkDocument, options);
+        }
+export type AllUserHomeworkQueryHookResult = ReturnType<typeof useAllUserHomeworkQuery>;
+export type AllUserHomeworkLazyQueryHookResult = ReturnType<typeof useAllUserHomeworkLazyQuery>;
+export type AllUserHomeworkQueryResult = Apollo.QueryResult<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>;
 export const AllHomeworkDocument = gql`
     query AllHomework {
   getAllHomework {

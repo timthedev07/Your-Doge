@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import { useAllHomeworkQuery } from "../generated/graphql";
+import { useAllUserHomeworkQuery } from "../generated/graphql";
 
 interface DashdoardProps {}
 
@@ -19,7 +19,7 @@ export const Dashdoard: React.FC<DashdoardProps> = () => {
     data: gqlData,
     // loading: gqlLoading,
     // error: gqlError,
-  } = useAllHomeworkQuery();
+  } = useAllUserHomeworkQuery();
 
   const BUSY_CLASSES: Record<string, string> = {
     "0": "free",
@@ -32,7 +32,7 @@ export const Dashdoard: React.FC<DashdoardProps> = () => {
 
   useEffect(() => {
     if (gqlData) {
-      gqlData.getAllHomework.forEach((each) => {
+      gqlData.getAllUserHomework.homeworkList.forEach((each) => {
         // pushing data to the homework state
         setHomework((prev) => [
           ...prev,
