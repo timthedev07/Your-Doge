@@ -32,7 +32,7 @@
   },
   "scripts": {
     "start": "nodemon --exec ts-node src/index.ts",
-    "prod": "yarn build && node dist/index.js",
+    "production": "node dist/index.js",
     "build": "tsc"
   }
 }

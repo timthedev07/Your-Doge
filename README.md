@@ -24,6 +24,11 @@ We don't need any sorts of middle man, we can just use a middleman server, that 
 
 First things first, let's host the servers.
 
+### **_Update_**
+
+God, I came up with a largely different plan, here's the diagram:
+![diagram](diagram1.png)
+
 ## Some features and/or functionalities I want to implement
 
 Discussion forum...
