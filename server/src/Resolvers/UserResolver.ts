@@ -48,21 +48,21 @@ export class UserResolver {
       },
     },
 
-		where if we are querying using `hello`, we return `hello world`.
+		where if we are querying using `hello`, it will return `hello world`.
 	 */
   @Query(() => String)
   hello() {
     return "hello world";
   }
 
-  /**
-   * a query that retrieve all the users from the database
-   * @returns all users
-   */
-  @Query(() => [User])
-  users() {
-    return User.find();
-  }
+  // /**
+  //  * a query that retrieve all the users from the database
+  //  * @returns all users
+  //  */
+  // @Query(() => [User])
+  // users() {
+  //   return User.find();
+  // }
 
   /**
    * In graphql, a mutation is what we create we want to make a change

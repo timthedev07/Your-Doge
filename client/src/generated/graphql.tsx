@@ -74,7 +74,6 @@ export type MutationAddHomeworkArgs = {
 export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
-  users: Array<User>;
   me?: Maybe<User>;
   getAllHomework: Array<Homework>;
   getAllUserHomework: AllHomeworkResponse;
