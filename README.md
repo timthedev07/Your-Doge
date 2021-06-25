@@ -28,6 +28,7 @@ First things first, let's host the servers.
 
 God, I came up with a largely different plan, here's the diagram:
 ![diagram](diagram1.png)
+And the limit now will be, 1000 homework per user.
 
 ## Some features and/or functionalities I want to implement
 
