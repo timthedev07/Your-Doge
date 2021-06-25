@@ -24,7 +24,11 @@ module.exports = {
     migrationsDir: `${basedir}/migrations`,
     subscribersDir: `${basedir}/subscriber`,
   },
+  synchronize: true,
+  ssl: true,
   extra: {
-    ssl: production,
+    ssl: {
+      rejectUnauthorized: false,
+    },
   },
 };

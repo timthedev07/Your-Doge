@@ -15,7 +15,7 @@ import { router as AuthRouter } from "./routes/AuthRoute";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 
 // specify the routes
-const PORT: number = 4000;
+const PORT: string = process.env.PORT || "4000";
 
 (async () => {
   const app = express();
