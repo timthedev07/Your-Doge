@@ -13,7 +13,7 @@ import { router as AuthRouter } from "./routes/AuthRoute";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 
 const PORT: number = parseInt(process.env.PORT!) || 4000;
-const HOSTNAME: string = process.env.HOST || "127.0.0.1";
+const HOSTNAME: string = process.env.HOST || "localhost";
 const FRONTEND_URL = "https://doyourstuff.netlify.app";
 const DEV_FRONTEND = "https://localhost:3000";
 

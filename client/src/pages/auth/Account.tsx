@@ -8,6 +8,8 @@ export const Account: React.FC<AccountProps> = () => {
 
   const { data } = useMeQuery();
 
+  console.log(data);
+
   if (data && data.me) {
     body = JSON.stringify(data.me);
   } else {
