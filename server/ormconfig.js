@@ -25,10 +25,12 @@ module.exports = {
     subscribersDir: `${basedir}/subscriber`,
   },
   synchronize: true,
-  ssl: true,
-  extra: {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
+  ssl: production,
+  extra: production
+    ? {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }
+    : undefined,
 };

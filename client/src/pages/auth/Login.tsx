@@ -4,13 +4,13 @@ import { Alert } from "../../components/Alert";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { useLoginMutation } from "../../generated/graphql";
-import { client } from "../../index";
+import { authClient } from "../../index";
 import { setAccessToken } from "../../accessToken";
 
 const THRESHOLD = 290;
 
 export const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  const [login] = useLoginMutation({ client: client });
+  const [login] = useLoginMutation({ client: authClient });
 
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);

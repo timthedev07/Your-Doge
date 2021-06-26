@@ -12,8 +12,10 @@ import cors from "cors";
 import { router as AuthRouter } from "./routes/AuthRoute";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 
-const PORT: string = process.env.PORT || "4000";
-const FRONTEND_URL = "http://localhost:3000";
+const PORT: number = parseInt(process.env.PORT!) || 4000;
+const HOSTNAME: string = process.env.HOST || "127.0.0.1";
+const FRONTEND_URL = "https://doyourstuff.netlify.app";
+const DEV_FRONTEND = "https://localhost:3000";
 
 (async () => {
   const app = express();
@@ -22,7 +24,7 @@ const FRONTEND_URL = "http://localhost:3000";
   app.use(
     cors({
       credentials: true,
-      origin: FRONTEND_URL,
+      origin: [FRONTEND_URL, DEV_FRONTEND],
     })
   );
 
@@ -34,7 +36,6 @@ const FRONTEND_URL = "http://localhost:3000";
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers:
-        // decides whether or not a server handles homework data
         process.env.HANDLE_HOMEWORK! === "true"
           ? [UserResolver, HomeworkResolver]
           : [UserResolver],
@@ -44,7 +45,7 @@ const FRONTEND_URL = "http://localhost:3000";
 
   apolloServer.applyMiddleware({ app, cors: false });
 
-  app.listen(PORT, () => {
-    console.log(`app listening at: http://localhost:${PORT}`);
+  app.listen(PORT, HOSTNAME, () => {
+    console.log(`app listening at: http://${HOSTNAME}:${PORT}`);
   });
 })();
