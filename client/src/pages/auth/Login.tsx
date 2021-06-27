@@ -3,17 +3,16 @@ import { Form, Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
-import { useLoginMutation } from "../../generated/graphql";
-import { authClient } from "../../index";
 import { setAccessToken } from "../../accessToken";
+import { useAuth } from "../../contexts/AuthContext";
+import { unknownErrMsg } from "../..";
 
 const THRESHOLD = 290;
 
 export const Login: React.FC<RouteComponentProps> = ({ history }) => {
-  const [login] = useLoginMutation({ client: authClient });
-
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
+  const { login } = useAuth()!;
 
   const [alertActive, setAlertActive] = useState<boolean>(false);
   const [alertType, setAlertType] = useState<string>("danger");
@@ -59,26 +58,18 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
     setAlertActive(false);
 
     try {
-      const response = await login({
-        variables: {
-          email,
-          password,
-        },
-      });
-      const data = response.data;
+      const data = await login(email, password);
+
       if (data?.login) {
         setPageLoading(false);
         setAccessToken(data.login.accessToken);
         history.push("/");
+        return;
       }
+
+      displayError(unknownErrMsg);
     } catch (err: any) {
-      try {
-        displayError(err.graphQLErrors[0].message);
-      } catch (err) {
-        displayError(
-          "Sorry, an unknown error occurred, try again later, or contact our support team(bot.rem.autogenerate@gmail.com)"
-        );
-      }
+      displayError(err);
     }
   }
 

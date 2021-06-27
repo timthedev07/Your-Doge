@@ -3,8 +3,9 @@ import { Form, Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
 import { RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
-import { useRegisterMutation } from "../../generated/graphql";
 import { setAccessToken } from "../../accessToken";
+import { useAuth } from "../../contexts/AuthContext";
+import { unknownErrMsg } from "../..";
 
 const THRESHOLD = 290;
 
@@ -18,8 +19,7 @@ const validateEmail = (email: string) => {
 };
 
 export const Register: React.FC<RouteComponentProps> = ({ history }) => {
-  // use that mutation hook, it returns an array, if you then destructure it, you get the function
-  const [register] = useRegisterMutation();
+  const { register } = useAuth()!;
 
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
@@ -90,7 +90,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
       return;
     }
 
-    // check for invalid email
+    // check for invalid email formats
     if (!validateEmail(email)) {
       displayError("Invalid email");
       return;
@@ -106,27 +106,18 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
     // this is how you pass parameters to the graphql function
     try {
-      const response = await register({
-        variables: {
-          email,
-          password,
-          username,
-        },
-      });
-      const data = response.data;
+      const data = await register(email, password, username);
+
       if (data?.register) {
         setLoading(false);
         setAccessToken(data.register.accessToken);
         history.push("/");
+        return;
       }
+
+      displayError(unknownErrMsg);
     } catch (err: any) {
-      try {
-        displayError(err.graphQLErrors[0].message);
-      } catch (err) {
-        displayError(
-          "Sorry, an unknown error occurred, try again later, or contact our support team(bot.rem.autogenerate@gmail.com)"
-        );
-      }
+      displayError(err);
     }
   }
 

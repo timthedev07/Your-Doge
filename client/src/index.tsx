@@ -16,6 +16,9 @@ export const authClient = generateApolloClient(
   USERS_BACKEND_AUTH_BASE_URL
 );
 
+export const unknownErrMsg =
+  "Sorry, an unknown error occurred, try again later, or contact our support team(bot.rem.autogenerate@gmail.com)";
+
 ReactDOM.render(
   <ApolloProvider client={authClient}>
     <App />
