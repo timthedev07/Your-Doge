@@ -15,7 +15,7 @@ import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 const PORT: number = parseInt(process.env.PORT!) || 4000;
 const HOSTNAME: string = process.env.HOST || "localhost";
 const FRONTEND_URL = "https://doyourstuff.netlify.app";
-const DEV_FRONTEND = "https://localhost:3000";
+const DEV_FRONTEND = ["http://localhost:3000", "http://127.0.0.1:3000"];
 
 (async () => {
   const app = express();
@@ -24,7 +24,7 @@ const DEV_FRONTEND = "https://localhost:3000";
   app.use(
     cors({
       credentials: true,
-      origin: [FRONTEND_URL, DEV_FRONTEND],
+      origin: [FRONTEND_URL, ...DEV_FRONTEND],
     })
   );
 

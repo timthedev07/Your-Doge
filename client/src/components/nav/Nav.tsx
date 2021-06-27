@@ -3,6 +3,24 @@ import { MenuButton } from "./MenuButton";
 import { useHistory, useLocation } from "react-router";
 import { useThemeContext } from "../../contexts/ThemeContext";
 import Logo from "../../assets/images/logo.png";
+import { useAuth } from "../../contexts/AuthContext";
+
+const ThemeButton = () => {
+  const themeContext = useThemeContext()!;
+
+  return (
+    <div className={"nav-item"}>
+      <button
+        className="rounded-btn secondary"
+        onClick={() => {
+          themeContext.toggleTheme();
+        }}
+      >
+        {themeContext.darkTheme ? "Light" : "Dark"}
+      </button>
+    </div>
+  );
+};
 
 const THRESHOLD = 681;
 
@@ -30,9 +48,9 @@ interface Props {
 }
 
 export const Nav: React.FC<Props> = ({ transparent }) => {
+  const { currUser: userData } = useAuth()!;
   const history = useHistory();
   const location = useLocation();
-  const themeContext = useThemeContext()!;
 
   // Responsive Navigation Bar
 
@@ -117,37 +135,34 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           }
           href="/dashboard"
         >
-          Dashboard
+          {userData?.username || "Not logged in"}
         </a>
 
-        <a
-          className={
-            currPath === "account" ? "nav-item nav-item-active" : "nav-item"
-          }
-          href="/account"
-        >
-          Account
-        </a>
-
-        <div className={"nav-item"}>
-          <button
-            className="rounded-btn secondary"
-            onClick={() => {
-              themeContext.toggleTheme();
-            }}
-          >
-            {themeContext.darkTheme ? "Light" : "Dark"}
-          </button>
-        </div>
-
-        <div className={"nav-item nav-item-end"} id={"auth-links"}>
-          <a href="/login" className="rounded-btn secondary">
-            Sign in
-          </a>
-          <a href="/register" className="rounded-btn">
-            Sign Up
-          </a>
-        </div>
+        {userData ? (
+          <>
+            <a
+              className={
+                currPath === "account" ? "nav-item nav-item-active" : "nav-item"
+              }
+              href="/account"
+            >
+              Account
+            </a>
+            <ThemeButton />
+          </>
+        ) : (
+          <>
+            <ThemeButton />
+            <div className={"nav-item nav-item-end"} id={"auth-links"}>
+              <a href="/login" className="rounded-btn secondary">
+                Sign in
+              </a>
+              <a href="/register" className="rounded-btn">
+                Sign Up
+              </a>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

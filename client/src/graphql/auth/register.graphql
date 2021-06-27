@@ -1,5 +1,10 @@
 mutation Register($email: String!, $password: String!, $username: String!) {
   register(email: $email, password: $password, username: $username) {
     accessToken
+    user {
+      id
+      username
+      email
+    }
   }
 }

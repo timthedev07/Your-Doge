@@ -18,17 +18,25 @@
 }
 
 a.rounded-btn,
-a.rounded-btn:not(.rounded-btn.secondary):hover,
-.rounded-btn:not(.rounded-btn.secondary):hover {
+.rounded-btn:hover {
   font-size: 12px;
   border: none;
   padding-top: 4px;
   text-decoration: none;
   cursor: pointer;
 }
+.rounded-btn:not(a):hover {
+  padding-top: 0 !important;
+}
 
 .rounded-btn.secondary {
   border: 1px gray solid;
   background-color: transparent;
   color: black;
+}
+
+.rounded-btn.emphasized {
+  border: none;
+  background-color: rgb(119, 9, 209);
+  color: white;
 }

@@ -62,7 +62,6 @@ export class HomeworkResolver {
       });
       return true;
     } catch (err) {
-      console.log(err);
       throw new Error("Failed to add task, error: " + JSON.stringify(err));
     }
   }
@@ -81,6 +80,7 @@ export class HomeworkResolver {
     const res = await Homework.findAndCount({
       where: { userId: payload.userId },
     });
+    console.log(res[0]);
     return {
       homeworkList: res[0],
       count: res[1],

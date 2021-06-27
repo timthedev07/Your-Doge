@@ -31,6 +31,9 @@ const validateEmail = (email: string) => {
 class LoginResponse {
   @Field()
   accessToken: string;
+
+  @Field(() => User)
+  user: User;
 }
 
 @Resolver()
@@ -112,6 +115,7 @@ export class UserResolver {
 
     return {
       accessToken: createAccessToken(user),
+      user,
     };
   }
 
@@ -144,6 +148,7 @@ export class UserResolver {
 
     return {
       accessToken: createAccessToken(user),
+      user,
     };
   }
 
@@ -177,5 +182,14 @@ export class UserResolver {
       console.error(err);
       return null;
     }
+  }
+
+  /**
+   * Logout resolver
+   */
+  @Mutation(() => Boolean)
+  async logout(@Ctx() { res }: MyContext) {
+    sendRefreshToken(res, "");
+    return true;
   }
 }
