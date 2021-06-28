@@ -32,7 +32,7 @@
     "typeorm": "0.2.34"
   },
   "scripts": {
-    "devstart": "ts-node-dev src/index.ts",
+    "devstart": "ts-node-dev --respawn src/index.ts",
     "start": "node dist/index.js",
     "build": "tsc"
   }
