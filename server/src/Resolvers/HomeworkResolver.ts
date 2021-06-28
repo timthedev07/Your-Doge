@@ -77,10 +77,11 @@ export class HomeworkResolver {
     if (!payload || !payload?.userId) {
       throw new Error("User not authenticated");
     }
+
     const res = await Homework.findAndCount({
       where: { userId: payload.userId },
     });
-    console.log(res[0]);
+
     return {
       homeworkList: res[0],
       count: res[1],

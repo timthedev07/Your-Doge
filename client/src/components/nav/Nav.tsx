@@ -3,7 +3,7 @@ import { MenuButton } from "./MenuButton";
 import { useHistory, useLocation } from "react-router";
 import { useThemeContext } from "../../contexts/ThemeContext";
 import Logo from "../../assets/images/logo.png";
-import { useAuth } from "../../contexts/AuthContext";
+import { useMeQuery } from "../../generated/graphql";
 
 const ThemeButton = () => {
   const themeContext = useThemeContext()!;
@@ -47,12 +47,11 @@ interface Props {
   transparent: boolean;
 }
 
+// Responsive Navigation Bar
 export const Nav: React.FC<Props> = ({ transparent }) => {
-  const { currUser: userData } = useAuth()!;
+  const { data: userData } = useMeQuery();
   const history = useHistory();
   const location = useLocation();
-
-  // Responsive Navigation Bar
 
   // create a ref for the navigation bars and some of their components
   const navBarRef = useRef<HTMLDivElement>(null);
@@ -135,10 +134,10 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           }
           href="/dashboard"
         >
-          {userData?.username || "Not logged in"}
+          {userData?.me?.username || "Not logged in"}
         </a>
 
-        {userData ? (
+        {userData?.me ? (
           <>
             <a
               className={

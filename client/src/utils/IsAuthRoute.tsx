@@ -5,7 +5,7 @@ import {
   RouteComponentProps,
   StaticContext,
 } from "react-router";
-import { useAuth } from "../contexts/AuthContext";
+import { useMeQuery } from "../generated/graphql";
 
 interface AuthRouteProps {
   path: string;
@@ -21,12 +21,12 @@ export const AuthRoute: React.FC<AuthRouteProps> = ({
   exact,
   component,
 }) => {
-  const { currUser } = useAuth()!;
+  const { data } = useMeQuery();
 
   return (
     <Route
       render={() => {
-        return currUser ? component : <Redirect to="/login" />;
+        return data?.me ? component : <Redirect to="/login" />;
       }}
       exact={exact}
       path={path}

@@ -13,11 +13,11 @@ interface AccountProps {}
 export const Account: React.FC<AccountProps> = () => {
   let body;
 
-  const { currUser, setCurrUser } = useAuth()!;
   const [logout, { client }] = useLogoutMutation();
+  const { data } = useMeQuery();
 
-  if (currUser) {
-    body = JSON.stringify(currUser);
+  if (data?.me) {
+    body = JSON.stringify(data.me);
   } else {
     body = "Not Logged In";
   }
@@ -31,8 +31,6 @@ export const Account: React.FC<AccountProps> = () => {
         me: null,
       },
     });
-
-    setCurrUser(null);
 
     client!.clearStore();
   };

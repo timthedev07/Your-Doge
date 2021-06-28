@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
-import { unknownErrMsg } from "..";
+import React, { useContext } from "react";
+import { unknownErrMsg } from "../index";
 import {
   LoginMutation,
   MeDocument,
   MeQuery,
   RegisterMutation,
   useLoginMutation,
-  useMeQuery,
   User,
   useRegisterMutation,
 } from "../generated/graphql";
@@ -25,8 +24,6 @@ interface AuthContextType {
     password: string,
     username: string
   ) => Promise<RegisterMutation | null | undefined>;
-  currUser: UserType | null;
-  setCurrUser: React.Dispatch<React.SetStateAction<UserType | null>>;
 }
 
 const AuthContext = React.createContext<AuthContextType | null>(null);
@@ -35,22 +32,9 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-type UserType = {
-  __typename?: "User" | undefined;
-} & Pick<User, "email" | "id" | "username">;
-
 export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
-  const { data } = useMeQuery({ fetchPolicy: "network-only" });
-  const [currUser, setCurrUser] = useState<UserType | null>(() => null);
-
-  useEffect(() => {
-    if (data && data.me) {
-      console.log("Heeeah is the data: ", data.me);
-      setCurrUser(data.me);
-    }
-  }, [data]);
 
   /**
    * Tries to sign a user in, returns the data on success and throws an error otherwise
@@ -74,7 +58,6 @@ export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
               me: data.login.user,
             },
           });
-          setCurrUser(data.login.user);
         },
       });
 
@@ -115,7 +98,6 @@ export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
               me: data.register.user,
             },
           });
-          setCurrUser(data.register.user);
         },
       });
       return res.data;
@@ -131,8 +113,7 @@ export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
   const value = {
     login,
     register,
-    currUser,
-    setCurrUser,
   };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
