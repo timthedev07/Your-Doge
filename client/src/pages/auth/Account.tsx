@@ -1,6 +1,6 @@
 import React from "react";
 import { setAccessToken } from "../../accessToken";
-import { useAuth } from "../../contexts/AuthContext";
+import { TabSwitcher } from "../../components/TabSwitcher";
 import {
   MeDocument,
   MeQuery,
@@ -35,9 +35,20 @@ export const Account: React.FC<AccountProps> = () => {
     client!.clearStore();
   };
 
+  const TABS = [
+    {
+      content:
+        "Your information is exposed because your are so dumb to take that zucchini instead of the burrito right on the desk",
+      title: "Information",
+    },
+    { content: "You did nothing", title: "Statistics" },
+    { content: "Settings....... coming soon", title: "Settings" },
+  ];
+
   return (
     <div id="account-page">
       <div id="account-page-content-container">
+        <TabSwitcher tabs={TABS} />
         {/* <button
           className="rounded-btn emphasized"
           onClick={() => handleLogout()}
