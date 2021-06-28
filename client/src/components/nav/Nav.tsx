@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router";
 import Logo from "../../assets/images/logo.png";
 import { useMeQuery } from "../../generated/graphql";
 
-const THRESHOLD = 681;
+const THRESHOLD = 481;
 
 interface SBItemProps {
   children: JSX.Element | string;

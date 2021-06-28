@@ -38,12 +38,12 @@ export const Account: React.FC<AccountProps> = () => {
   return (
     <div id="account-page">
       <div id="account-page-content-container">
-        <button
+        {/* <button
           className="rounded-btn emphasized"
           onClick={() => handleLogout()}
         >
           Logout
-        </button>
+        </button> */}
       </div>
     </div>
   );

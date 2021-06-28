@@ -1,6 +1,7 @@
 #account-page #account-page-content-container {
   border-radius: 5px;
-  border: black solid 1px;
+  background-color: rgb(41, 42, 44);
+  box-shadow: 0 0 10px rgb(26, 26, 26);
   width: 80%;
   height: 80%;
   max-height: 500px;
