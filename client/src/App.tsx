@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { USERS_BACKEND_AUTH_BASE_URL } from "./index";
 import { setAccessToken } from "./accessToken";
-import { ThemeControl } from "./contexts/ThemeContext";
 import { Routes } from "./Routes";
 import { Loading } from "./components/Loading";
 
@@ -36,9 +35,7 @@ export const App: React.FC<Props> = () => {
 
   return (
     <>
-      <ThemeControl>
-        <Routes />
-      </ThemeControl>
+      <Routes />
     </>
   );
 };

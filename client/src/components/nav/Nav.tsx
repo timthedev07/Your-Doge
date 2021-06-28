@@ -1,26 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MenuButton } from "./MenuButton";
 import { useHistory, useLocation } from "react-router";
-import { useThemeContext } from "../../contexts/ThemeContext";
 import Logo from "../../assets/images/logo.png";
 import { useMeQuery } from "../../generated/graphql";
-
-const ThemeButton = () => {
-  const themeContext = useThemeContext()!;
-
-  return (
-    <div className={"nav-item"}>
-      <button
-        className="rounded-btn secondary"
-        onClick={() => {
-          themeContext.toggleTheme();
-        }}
-      >
-        {themeContext.darkTheme ? "Light" : "Dark"}
-      </button>
-    </div>
-  );
-};
 
 const THRESHOLD = 681;
 
@@ -147,11 +129,9 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
             >
               Account
             </a>
-            <ThemeButton />
           </>
         ) : (
           <>
-            <ThemeButton />
             <div className={"nav-item nav-item-end"} id={"auth-links"}>
               <a href="/login" className="rounded-btn secondary">
                 Sign in

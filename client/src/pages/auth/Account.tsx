@@ -36,11 +36,15 @@ export const Account: React.FC<AccountProps> = () => {
   };
 
   return (
-    <div>
-      <div>{body}</div>
-      <button className="rounded-btn emphasized" onClick={() => handleLogout()}>
-        Logout
-      </button>
+    <div id="account-page">
+      <div id="account-page-content-container">
+        <button
+          className="rounded-btn emphasized"
+          onClick={() => handleLogout()}
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
