@@ -69,7 +69,6 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
     event.preventDefault();
 
     setLoading(true);
-    localStorage.setItem("newTask", "true");
 
     if (!emRef.current || !pwRef.current || !unameRef.current) return;
 
@@ -117,7 +116,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
       displayError(unknownErrMsg);
     } catch (err: any) {
-      displayError(err);
+      displayError(err.message);
     }
   }
 

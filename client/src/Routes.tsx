@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/master.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,7 +12,7 @@ import { NewHomework } from "./pages/NewHomework";
 import { Dashboard } from "./pages/Dashboard";
 import "react-calendar/dist/Calendar.css";
 import { Account } from "./pages/auth/Account";
-import { AuthRoute } from "./utils/IsAuthRoute";
+// import { AuthRoute } from "./utils/IsAuthRoute";
 import { AuthControl } from "./contexts/AuthContext";
 
 export const Routes: React.FC = () => {

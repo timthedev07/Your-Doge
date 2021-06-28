@@ -46,7 +46,6 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
     event.preventDefault();
 
     setPageLoading(true);
-    localStorage.setItem("newTask", "true");
 
     if (!emRef.current || !pwRef.current) return;
 
@@ -69,7 +68,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
       displayError(unknownErrMsg);
     } catch (err: any) {
-      displayError(err);
+      displayError(err.message);
     }
   }
 

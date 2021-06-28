@@ -6,7 +6,6 @@ import {
   MeQuery,
   RegisterMutation,
   useLoginMutation,
-  User,
   useRegisterMutation,
 } from "../generated/graphql";
 

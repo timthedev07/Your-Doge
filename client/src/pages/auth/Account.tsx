@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useState } from "react";
 import { setAccessToken } from "../../accessToken";
-import { TabSwitcher } from "../../components/TabSwitcher";
+import { TabData, TabSwitcher } from "../../components/TabSwitcher";
 import {
   MeDocument,
   MeQuery,
@@ -15,6 +16,7 @@ export const Account: React.FC<AccountProps> = () => {
 
   const [logout, { client }] = useLogoutMutation();
   const { data } = useMeQuery();
+  const [avatarSrc, setAvatarSrc] = useState<string>("");
 
   if (data?.me) {
     body = JSON.stringify(data.me);
@@ -31,30 +33,43 @@ export const Account: React.FC<AccountProps> = () => {
         me: null,
       },
     });
-
-    client!.clearStore();
   };
 
-  const TABS = [
+  useEffect(() => {
+    const getAvatar = async () => {
+      const { default: res } = await import(
+        "../../assets/images/avatars/batman.svg"
+      );
+      setAvatarSrc(res);
+    };
+    getAvatar();
+  }, []);
+
+  let TABS: Array<TabData> = [
     {
-      content:
-        "Your information is exposed because your are so dumb to take that zucchini instead of the burrito right on the desk",
+      content: <img src={avatarSrc} />,
       title: "Information",
     },
     { content: "You did nothing", title: "Statistics" },
-    { content: "Settings....... coming soon", title: "Settings" },
+    {
+      content: (
+        <>
+          <button
+            className="rounded-btn emphasized"
+            onClick={() => handleLogout()}
+          >
+            Logout
+          </button>
+        </>
+      ),
+      title: "Settings",
+    },
   ];
 
   return (
     <div id="account-page">
       <div id="account-page-content-container">
         <TabSwitcher tabs={TABS} />
-        {/* <button
-          className="rounded-btn emphasized"
-          onClick={() => handleLogout()}
-        >
-          Logout
-        </button> */}
       </div>
     </div>
   );

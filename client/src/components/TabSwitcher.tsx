@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useState } from "react";
 
-interface TabData {
+export interface TabData {
   title: string;
   content: React.ReactNode;
 }
