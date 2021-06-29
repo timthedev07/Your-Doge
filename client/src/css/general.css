@@ -6,11 +6,13 @@ body#body {
   background-repeat: no-repeat;
   min-height: 100vh;
   margin-top: 0;
+  min-width: var(--min-width);
 }
 
 div.App {
   min-height: 100vh;
   padding-top: var(--nav-bar-height);
+  min-width: var(--min-width);
 }
 
 a,

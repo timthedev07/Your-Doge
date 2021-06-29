@@ -6,6 +6,7 @@ body#body#body.dark {
     rgb(50, 50, 50) 50%,
     rgb(35, 35, 35) 100%
   );
+  background-size: var(--min-width) 100vh;
   color: rgb(255, 255, 255);
   transition: 0.3s;
 }
