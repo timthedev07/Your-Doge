@@ -37,10 +37,8 @@ img.avatar {
 .close-button {
   width: 25px;
   height: 25px;
-}
-
-.close-button {
   fill: white;
+  cursor: pointer;
 }
 
 .avatar-option {
