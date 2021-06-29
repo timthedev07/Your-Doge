@@ -5,6 +5,9 @@ mutation Register($email: String!, $password: String!, $username: String!) {
       id
       username
       email
+      bio
+      serverId
+      avatarId
     }
   }
 }

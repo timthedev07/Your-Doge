@@ -1,7 +1,10 @@
 query Me {
   me {
     id
-    email
     username
+    email
+    bio
+    serverId
+    avatarId
   }
 }

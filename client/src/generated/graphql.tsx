@@ -86,6 +86,9 @@ export type User = {
   id: Scalars['Int'];
   email: Scalars['String'];
   username: Scalars['String'];
+  serverId: Scalars['Int'];
+  avatarId: Scalars['Int'];
+  bio: Scalars['String'];
 };
 
 export type LoginMutationVariables = Exact<{
@@ -101,7 +104,7 @@ export type LoginMutation = (
     & Pick<LoginResponse, 'accessToken'>
     & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email'>
+      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId'>
     ) }
   ) }
 );
@@ -121,7 +124,7 @@ export type MeQuery = (
   { __typename?: 'Query' }
   & { me?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'username'>
+    & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId'>
   )> }
 );
 
@@ -139,7 +142,7 @@ export type RegisterMutation = (
     & Pick<LoginResponse, 'accessToken'>
     & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email'>
+      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId'>
     ) }
   ) }
 );
@@ -191,6 +194,9 @@ export const LoginDocument = gql`
       id
       username
       email
+      bio
+      serverId
+      avatarId
     }
   }
 }
@@ -256,8 +262,11 @@ export const MeDocument = gql`
     query Me {
   me {
     id
-    email
     username
+    email
+    bio
+    serverId
+    avatarId
   }
 }
     `;
@@ -296,6 +305,9 @@ export const RegisterDocument = gql`
       id
       username
       email
+      bio
+      serverId
+      avatarId
     }
   }
 }

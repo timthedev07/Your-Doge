@@ -192,4 +192,32 @@ export class UserResolver {
     sendRefreshToken(res, "");
     return true;
   }
+
+  @Mutation(() => Boolean)
+  async updateAvatarId(
+    @Ctx() { req, payload }: MyContext,
+    @Arg("newAvatarId") newAvatarId: number
+  ) {
+    const authorization = req.headers["authorization"];
+
+    if (!authorization) {
+      return false;
+    }
+
+    const token = authorization.split(" ")[1];
+    const newPayload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!);
+    payload = newPayload as any;
+
+    try {
+      await getConnection()
+        .createQueryBuilder()
+        .update(User)
+        .set({ avatarId: newAvatarId })
+        .where("id = :id", { id: newPayload.userId })
+        .execute();
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
 }

@@ -26,3 +26,7 @@ a:hover,
   color: rgb(250, 212, 0);
   text-decoration: underline;
 }
+
+.margin-top-nav {
+  margin-top: var(--nav-bar-height);
+}

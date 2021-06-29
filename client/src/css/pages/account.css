@@ -15,3 +15,36 @@
   align-items: center;
   min-height: 80vh;
 }
+
+/* information tab */
+img.avatar {
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+}
+
+.modal-content.modal-content.modal-content {
+  background-color: black;
+}
+
+.modal-content.modal-content.modal-content .modal-footer {
+  border-top: 1px rgb(78, 78, 78) solid;
+}
+.modal-content.modal-content.modal-content .modal-header {
+  border-bottom: 1px rgb(78, 78, 78) solid;
+}
+
+.close-button {
+  width: 25px;
+  height: 25px;
+}
+
+.close-button {
+  fill: white;
+}
+
+.avatar-option {
+  width: 75px;
+  height: 75px;
+  cursor: pointer;
+}

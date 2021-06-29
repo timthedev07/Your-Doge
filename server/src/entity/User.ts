@@ -33,6 +33,15 @@ export class User extends BaseEntity {
   @Column("int", { default: 0 })
   tokenVersion: number;
 
+  @Field(() => Int)
   @Column("int", { default: 0 })
   serverId: number;
+
+  @Field(() => Int)
+  @Column("int", { default: 0 })
+  avatarId: number;
+
+  @Field(() => String)
+  @Column("text", { default: "" })
+  bio: string;
 }

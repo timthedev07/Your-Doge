@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router";
 import { setAccessToken } from "../../accessToken";
+import { Information } from "../../components/accountPage/Information";
+import { Loading } from "../../components/Loading";
 import { TabData, TabSwitcher } from "../../components/TabSwitcher";
 import {
   MeDocument,
@@ -9,19 +11,42 @@ import {
   useMeQuery,
 } from "../../generated/graphql";
 
+export type AvatarKeyType =
+  | "0"
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9"
+  | "10"
+  | "11"
+  | "12"
+  | "13";
+
 interface AccountProps {}
 
 export const Account: React.FC<AccountProps> = () => {
-  let body;
-
   const [logout, { client }] = useLogoutMutation();
-  const { data } = useMeQuery();
-  const [avatarSrc, setAvatarSrc] = useState<string>("");
+  const { data, loading } = useMeQuery();
+  const [currAvatarId, setCurrAvatarId] = useState<number>(
+    data?.me?.avatarId || 0
+  );
+  useEffect(() => {
+    if (data && data.me) {
+      setCurrAvatarId(data.me.avatarId);
+    }
+  }, [data]);
 
-  if (data?.me) {
-    body = JSON.stringify(data.me);
-  } else {
-    body = "Not Logged In";
+  if ((!data || !data.me) && !loading) {
+    return <Redirect to="/login" />;
+  }
+
+  if (!data || !data.me) {
+    return <Loading />;
   }
 
   const handleLogout = async () => {
@@ -35,19 +60,17 @@ export const Account: React.FC<AccountProps> = () => {
     });
   };
 
-  useEffect(() => {
-    const getAvatar = async () => {
-      const { default: res } = await import(
-        "../../assets/images/avatars/batman.svg"
-      );
-      setAvatarSrc(res);
-    };
-    getAvatar();
-  }, []);
-
   let TABS: Array<TabData> = [
     {
-      content: <img src={avatarSrc} />,
+      content: (
+        <Information
+          avatarId={`${currAvatarId < 8 ? currAvatarId : 0}` as any}
+          bio={data.me.bio}
+          email={data.me.email}
+          username={data.me.username}
+          avatarIdSetter={setCurrAvatarId}
+        />
+      ),
       title: "Information",
     },
     { content: "You did nothing", title: "Statistics" },
