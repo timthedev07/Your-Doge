@@ -45,6 +45,7 @@ export type Mutation = {
   login: LoginResponse;
   revokeRefreshTokensForUser: Scalars['Boolean'];
   logout: Scalars['Boolean'];
+  updateAvatarId: Scalars['Boolean'];
   addHomework: Scalars['Boolean'];
 };
 
@@ -64,6 +65,11 @@ export type MutationLoginArgs = {
 
 export type MutationRevokeRefreshTokensForUserArgs = {
   userId: Scalars['Int'];
+};
+
+
+export type MutationUpdateAvatarIdArgs = {
+  newAvatarId: Scalars['Float'];
 };
 
 
@@ -89,6 +95,7 @@ export type User = {
   serverId: Scalars['Int'];
   avatarId: Scalars['Int'];
   bio: Scalars['String'];
+  age: Scalars['Int'];
 };
 
 export type LoginMutationVariables = Exact<{
@@ -104,7 +111,7 @@ export type LoginMutation = (
     & Pick<LoginResponse, 'accessToken'>
     & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId'>
+      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
     ) }
   ) }
 );
@@ -115,17 +122,6 @@ export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 export type LogoutMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'logout'>
-);
-
-export type MeQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MeQuery = (
-  { __typename?: 'Query' }
-  & { me?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId'>
-  )> }
 );
 
 export type RegisterMutationVariables = Exact<{
@@ -142,7 +138,7 @@ export type RegisterMutation = (
     & Pick<LoginResponse, 'accessToken'>
     & { user: (
       { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId'>
+      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
     ) }
   ) }
 );
@@ -185,6 +181,27 @@ export type AllHomeworkQuery = (
   )> }
 );
 
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = (
+  { __typename?: 'Query' }
+  & { me?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
+  )> }
+);
+
+export type UpdateAvatarMutationVariables = Exact<{
+  newId: Scalars['Float'];
+}>;
+
+
+export type UpdateAvatarMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'updateAvatarId'>
+);
+
 
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
@@ -197,6 +214,7 @@ export const LoginDocument = gql`
       bio
       serverId
       avatarId
+      age
     }
   }
 }
@@ -258,45 +276,6 @@ export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<Logou
 export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
 export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
-export const MeDocument = gql`
-    query Me {
-  me {
-    id
-    username
-    email
-    bio
-    serverId
-    avatarId
-  }
-}
-    `;
-
-/**
- * __useMeQuery__
- *
- * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
- * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMeQuery({
- *   variables: {
- *   },
- * });
- */
-export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
-      }
-export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
-        }
-export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
-export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
-export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
 export const RegisterDocument = gql`
     mutation Register($email: String!, $password: String!, $username: String!) {
   register(email: $email, password: $password, username: $username) {
@@ -308,6 +287,7 @@ export const RegisterDocument = gql`
       bio
       serverId
       avatarId
+      age
     }
   }
 }
@@ -456,3 +436,74 @@ export function useAllHomeworkLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllHomeworkQueryHookResult = ReturnType<typeof useAllHomeworkQuery>;
 export type AllHomeworkLazyQueryHookResult = ReturnType<typeof useAllHomeworkLazyQuery>;
 export type AllHomeworkQueryResult = Apollo.QueryResult<AllHomeworkQuery, AllHomeworkQueryVariables>;
+export const MeDocument = gql`
+    query Me {
+  me {
+    id
+    username
+    email
+    bio
+    serverId
+    avatarId
+    age
+  }
+}
+    `;
+
+/**
+ * __useMeQuery__
+ *
+ * To run a query within a React component, call `useMeQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMeQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMeQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+      }
+export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
+        }
+export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
+export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
+export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const UpdateAvatarDocument = gql`
+    mutation UpdateAvatar($newId: Float!) {
+  updateAvatarId(newAvatarId: $newId)
+}
+    `;
+export type UpdateAvatarMutationFn = Apollo.MutationFunction<UpdateAvatarMutation, UpdateAvatarMutationVariables>;
+
+/**
+ * __useUpdateAvatarMutation__
+ *
+ * To run a mutation, you first call `useUpdateAvatarMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAvatarMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateAvatarMutation, { data, loading, error }] = useUpdateAvatarMutation({
+ *   variables: {
+ *      newId: // value for 'newId'
+ *   },
+ * });
+ */
+export function useUpdateAvatarMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAvatarMutation, UpdateAvatarMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateAvatarMutation, UpdateAvatarMutationVariables>(UpdateAvatarDocument, options);
+      }
+export type UpdateAvatarMutationHookResult = ReturnType<typeof useUpdateAvatarMutation>;
+export type UpdateAvatarMutationResult = Apollo.MutationResult<UpdateAvatarMutation>;
+export type UpdateAvatarMutationOptions = Apollo.BaseMutationOptions<UpdateAvatarMutation, UpdateAvatarMutationVariables>;

@@ -8,6 +8,7 @@ mutation Register($email: String!, $password: String!, $username: String!) {
       bio
       serverId
       avatarId
+      age
     }
   }
 }

@@ -12,9 +12,9 @@ body#body.dark {
   transition: 0.3s;
 }
 
-@media screen and (max-width: var(--min-width)) {
+@media screen and (max-width: 350px) {
   body {
-    background-size: var(--min-width) 100vh !important;
+    background-size: var(--min-width) 100vh;
   }
 }
 

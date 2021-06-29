@@ -44,4 +44,8 @@ export class User extends BaseEntity {
   @Field(() => String)
   @Column("text", { default: "" })
   bio: string;
+
+  @Field(() => Int)
+  @Column("smallint", { default: 0 })
+  age: number;
 }

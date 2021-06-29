@@ -2,18 +2,20 @@
   border-radius: var(--account-content-container-border-radius);
   box-shadow: 0 0 10px rgb(26, 26, 26);
   width: 80%;
-  height: 80%;
+  height: auto;
   max-height: 500px;
-  min-width: 300px;
+  min-width: var(--min-width);
 }
 
 #account-page {
   width: 100%;
+  min-width: var(--min-width);
   display: flex;
-  height: 90vh;
+  min-height: 1200vh;
+  height: auto;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
+  background: transparent;
 }
 
 /* information tab */
@@ -24,7 +26,7 @@ img.avatar {
 }
 
 .modal-content.modal-content.modal-content {
-  background-color: black;
+  background-color: rgb(31, 31, 31);
 }
 
 .modal-content.modal-content.modal-content .modal-footer {
@@ -44,5 +46,42 @@ img.avatar {
 .avatar-option {
   width: 75px;
   height: 75px;
+  margin: 6px;
   cursor: pointer;
+}
+
+.avatar-option.avatar-option-active {
+  background-color: rgb(43, 226, 226);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+/* profile(information tab) layout and stuff */
+.profile-top-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-top-section__headings {
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.profile-bio-container .profile-bio {
+  resize: none;
+  color: white;
+  background-color: rgba(128, 128, 128, 0.171);
+  border: none;
+  width: 90%;
+  height: 100%;
+  padding: 5px;
+}
+
+.profile-bio-container {
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
 }

@@ -64,11 +64,12 @@ export const Account: React.FC<AccountProps> = () => {
     {
       content: (
         <Information
-          avatarId={`${currAvatarId < 8 ? currAvatarId : 0}` as any}
+          avatarId={`${currAvatarId < 14 ? currAvatarId : 0}` as any}
           bio={data.me.bio}
           email={data.me.email}
           username={data.me.username}
           avatarIdSetter={setCurrAvatarId}
+          age={data.me.age}
         />
       ),
       title: "Information",

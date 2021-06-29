@@ -6,5 +6,6 @@ query Me {
     bio
     serverId
     avatarId
+    age
   }
 }

@@ -1,8 +1,6 @@
-body#body {
+body {
   margin: 0;
   font-family: "Roboto Regular";
-  background: linear-gradient(135deg, rgb(250, 250, 250) 0%, #f6fafa 100%);
-  color: rgb(0, 0, 0);
   background-repeat: no-repeat;
   min-height: 100vh;
   margin-top: 0;
@@ -13,6 +11,10 @@ div.App {
   min-height: 100vh;
   padding-top: var(--nav-bar-height);
   min-width: var(--min-width);
+  background-color: inherit;
+}
+div#root {
+  background-color: inherit;
 }
 
 a,
