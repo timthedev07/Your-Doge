@@ -2,7 +2,6 @@
 .nav-bar {
   height: var(--nav-bar-height);
   padding-left: 20px;
-
   position: relative;
   width: 100vw;
   color: black;

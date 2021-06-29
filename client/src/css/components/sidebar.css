@@ -23,7 +23,7 @@
 
 /* if side bar is closed, move it out of the screen */
 .side-bar.side-bar-closed {
-  transform: translateY(-200vw);
+  transform: translateY(-200vh);
 }
 .side-bar.side-bar-opened {
   transform: translateY(0);

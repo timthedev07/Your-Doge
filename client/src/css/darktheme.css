@@ -1,14 +1,21 @@
 /* general stuff */
-body#body#body.dark {
+body#body.dark {
   background: linear-gradient(
     135deg,
     rgb(65, 65, 65) 0%,
     rgb(50, 50, 50) 50%,
     rgb(35, 35, 35) 100%
   );
-  background-size: var(--min-width) 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: rgb(255, 255, 255);
   transition: 0.3s;
+}
+
+@media screen and (max-width: var(--min-width)) {
+  body {
+    background-size: var(--min-width) 100vh !important;
+  }
 }
 
 body#body.dark .nav-bar-background {
