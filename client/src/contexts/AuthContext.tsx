@@ -62,11 +62,10 @@ export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
 
       return res.data;
     } catch (err: any) {
-      try {
+      if (err?.graphQLErrors[0]?.message) {
         throw new Error(err.graphQLErrors[0].message);
-      } catch (err) {
-        throw new Error(unknownErrMsg);
       }
+      throw new Error(unknownErrMsg);
     }
   };
 
@@ -101,11 +100,10 @@ export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
       });
       return res.data;
     } catch (err: any) {
-      try {
+      if (err?.graphQLErrors[0]?.message) {
         throw new Error(err.graphQLErrors[0].message);
-      } catch (err) {
-        throw new Error(unknownErrMsg);
       }
+      throw new Error(unknownErrMsg);
     }
   };
 
