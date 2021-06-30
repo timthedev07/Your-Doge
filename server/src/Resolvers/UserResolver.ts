@@ -18,6 +18,9 @@ import {
   sendRefreshToken,
 } from "../utils/AuthHelper";
 import { verify } from "jsonwebtoken";
+import { sendEmail } from "../utils/sendEmail";
+import { createConfirmationUrl } from "../utils/createConfirmationUrl";
+import { redis } from "../redis";
 
 const EMAIL_VALIDATION_REGEX =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
@@ -71,13 +74,12 @@ export class UserResolver {
    * In graphql, a mutation is what we create we want to make a change
    * to our database(e.g. create, update)
    */
-  @Mutation(() => LoginResponse)
+  @Mutation(() => Boolean)
   async register(
     @Arg("email") email: string,
     @Arg("password") password: string,
-    @Arg("username") username: string,
-    @Ctx() { req, res }: MyContext
-  ): Promise<LoginResponse> {
+    @Arg("username") username: string
+  ): Promise<boolean> {
     /* hashing the password using the bcrypt library */
     const hashed = await hash(password, 12);
 
@@ -89,7 +91,7 @@ export class UserResolver {
       throw new Error("Password too short");
     }
 
-    if (username.length > 8) {
+    if (username.length > 14) {
       throw new Error("Username exceeds the maximal length");
     }
 
@@ -110,13 +112,9 @@ export class UserResolver {
       throw new Error("Registration failed");
     }
 
-    const token = createRefreshToken(user);
-    sendRefreshToken(res, token);
+    await sendEmail(email, await createConfirmationUrl(user.id));
 
-    return {
-      accessToken: createAccessToken(user),
-      user,
-    };
+    return true;
   }
 
   @Mutation(() => LoginResponse)
@@ -140,6 +138,11 @@ export class UserResolver {
 
     if (!valid) {
       throw new Error("Invalid username/password");
+    }
+
+    // if not confirmed
+    if (!user.confirmed) {
+      throw new Error("Please verify your email before logging in");
     }
 
     // successfully logged in
@@ -219,5 +222,28 @@ export class UserResolver {
     } catch (err) {
       return false;
     }
+  }
+
+  @Mutation(() => LoginResponse)
+  async confirmUser(
+    @Arg("token") token: string,
+    @Ctx() { req, res }: MyContext
+  ): Promise<LoginResponse> {
+    const userId = await redis.get(token);
+    if (!userId) throw new Error("Invalid token");
+
+    await User.update({ id: parseInt(userId, 10) }, { confirmed: true });
+
+    redis.del(token);
+
+    const user = await User.findOne({ where: { id: userId } })!;
+
+    const refreshToken = createRefreshToken(user!);
+    sendRefreshToken(res, refreshToken);
+
+    return {
+      accessToken: createAccessToken(user!),
+      user: user!,
+    };
   }
 }
