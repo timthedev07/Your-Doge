@@ -28,7 +28,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
       setWindowWidth(window.innerWidth);
     }
     window.addEventListener("resize", handleResize);
-  });
+  }, []);
 
   const displayError = (message: string) => {
     setAlertMessage(message);

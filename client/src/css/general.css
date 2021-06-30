@@ -11,10 +11,12 @@ div.App {
   min-height: 100vh;
   padding-top: var(--nav-bar-height);
   min-width: var(--min-width);
-  background-color: inherit;
+  background: inherit;
+  background-size: cover;
 }
 div#root {
-  background-color: inherit;
+  background: inherit;
+  background-size: cover;
 }
 
 a,
