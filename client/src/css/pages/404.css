@@ -3,7 +3,7 @@
   width: 100%;
   height: calc(100vh);
   object-fit: cover;
-  z-index: -100;
+  z-index: 1;
   min-height: 500px;
 }
 
