@@ -77,10 +77,7 @@ export const generateApolloClient = (
           console.error(err);
         },
       }),
-      onError(({ graphQLErrors, networkError }) => {
-        console.log(graphQLErrors);
-        console.log(networkError);
-      }) as any,
+      onError(({ graphQLErrors, networkError }) => {}) as any,
       requestLink,
       new HttpLink({
         uri: `${baseUrl}/graphql`,

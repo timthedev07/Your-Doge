@@ -25,7 +25,8 @@ export type AvatarKeyType =
   | "10"
   | "11"
   | "12"
-  | "13";
+  | "13"
+  | "14";
 
 interface AccountProps {}
 

@@ -83,8 +83,6 @@ export const Information: React.FC<InformationProps> = ({
     getAllAvatars();
   }, []);
 
-  console.log("selected avatar id: ", selectedAvatarId);
-
   return (
     <>
       <div className="profile-top-section">

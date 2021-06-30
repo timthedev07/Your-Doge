@@ -11,7 +11,7 @@
   width: 100%;
   min-width: var(--min-width);
   display: flex;
-  min-height: 1200vh;
+  min-height: 700px;
   height: auto;
   justify-content: center;
   align-items: center;

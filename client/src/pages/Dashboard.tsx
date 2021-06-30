@@ -55,8 +55,6 @@ export const Dashboard: React.FC<DashdoardProps> = () => {
     }
   }, [gqlData, marks]);
 
-  console.log(marks);
-
   return (
     <div className="calendar-container">
       <h1 className="dashboard-heading">Dashboard</h1>
@@ -65,7 +63,6 @@ export const Dashboard: React.FC<DashdoardProps> = () => {
         tileClassName={({ date }) => {
           const valueStr = `${date.valueOf()}`;
           if (marks.hasOwnProperty(valueStr)) {
-            console.log("here we go boys");
             const key: string = JSON.stringify(marks[valueStr].count);
             return parseInt(key) > 5 ? "damn" : BUSY_CLASSES[key];
           }
