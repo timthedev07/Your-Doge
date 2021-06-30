@@ -7,6 +7,9 @@ import { UserResolver } from "./Resolvers/UserResolver";
 import { createConnection } from "typeorm";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import connectRedis from "connect-redis";
+import session from "express-session";
+import { redis } from "./redis";
 
 // Import the routes
 import { router as AuthRouter } from "./routes/AuthRoute";
@@ -14,8 +17,8 @@ import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 
 const PORT: number = parseInt(process.env.PORT!) || 4000;
 const HOSTNAME: string = process.env.HOST || "localhost";
-const FRONTEND_URL = "https://doyourstuff.netlify.app";
-const DEV_FRONTEND = ["http://localhost:3000", "http://127.0.0.1:3000"];
+export const FRONTEND_URL = "https://yourdoge.netlify.app";
+export const DEV_FRONTEND = "http://localhost:3000";
 
 (async () => {
   const app = express();
@@ -24,7 +27,24 @@ const DEV_FRONTEND = ["http://localhost:3000", "http://127.0.0.1:3000"];
   app.use(
     cors({
       credentials: true,
-      origin: [FRONTEND_URL, ...DEV_FRONTEND],
+      origin: [FRONTEND_URL, DEV_FRONTEND],
+    })
+  );
+  const RedisStore = connectRedis(session);
+  app.use(
+    session({
+      store: new RedisStore({
+        client: redis as any,
+      }),
+      name: "angularsucks",
+      secret: process.env.SESSION_SECRET!,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+      },
     })
   );
 
