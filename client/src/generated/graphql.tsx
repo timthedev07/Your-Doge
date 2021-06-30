@@ -41,11 +41,12 @@ export type LoginResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  register: LoginResponse;
+  register: Scalars['Boolean'];
   login: LoginResponse;
   revokeRefreshTokensForUser: Scalars['Boolean'];
   logout: Scalars['Boolean'];
   updateAvatarId: Scalars['Boolean'];
+  confirmUser: LoginResponse;
   addHomework: Scalars['Boolean'];
 };
 
@@ -73,6 +74,11 @@ export type MutationUpdateAvatarIdArgs = {
 };
 
 
+export type MutationConfirmUserArgs = {
+  token: Scalars['String'];
+};
+
+
 export type MutationAddHomeworkArgs = {
   deadline: Scalars['String'];
   description: Scalars['String'];
@@ -97,6 +103,23 @@ export type User = {
   bio: Scalars['String'];
   age: Scalars['Int'];
 };
+
+export type ConfirmEmailMutationVariables = Exact<{
+  token: Scalars['String'];
+}>;
+
+
+export type ConfirmEmailMutation = (
+  { __typename?: 'Mutation' }
+  & { confirmUser: (
+    { __typename?: 'LoginResponse' }
+    & Pick<LoginResponse, 'accessToken'>
+    & { user: (
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
+    ) }
+  ) }
+);
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -133,14 +156,7 @@ export type RegisterMutationVariables = Exact<{
 
 export type RegisterMutation = (
   { __typename?: 'Mutation' }
-  & { register: (
-    { __typename?: 'LoginResponse' }
-    & Pick<LoginResponse, 'accessToken'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
-    ) }
-  ) }
+  & Pick<Mutation, 'register'>
 );
 
 export type AddHomeworkMutationVariables = Exact<{
@@ -203,6 +219,48 @@ export type UpdateAvatarMutation = (
 );
 
 
+export const ConfirmEmailDocument = gql`
+    mutation ConfirmEmail($token: String!) {
+  confirmUser(token: $token) {
+    accessToken
+    user {
+      id
+      username
+      email
+      bio
+      serverId
+      avatarId
+      age
+    }
+  }
+}
+    `;
+export type ConfirmEmailMutationFn = Apollo.MutationFunction<ConfirmEmailMutation, ConfirmEmailMutationVariables>;
+
+/**
+ * __useConfirmEmailMutation__
+ *
+ * To run a mutation, you first call `useConfirmEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useConfirmEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [confirmEmailMutation, { data, loading, error }] = useConfirmEmailMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *   },
+ * });
+ */
+export function useConfirmEmailMutation(baseOptions?: Apollo.MutationHookOptions<ConfirmEmailMutation, ConfirmEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ConfirmEmailMutation, ConfirmEmailMutationVariables>(ConfirmEmailDocument, options);
+      }
+export type ConfirmEmailMutationHookResult = ReturnType<typeof useConfirmEmailMutation>;
+export type ConfirmEmailMutationResult = Apollo.MutationResult<ConfirmEmailMutation>;
+export type ConfirmEmailMutationOptions = Apollo.BaseMutationOptions<ConfirmEmailMutation, ConfirmEmailMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
@@ -278,18 +336,7 @@ export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
 export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
 export const RegisterDocument = gql`
     mutation Register($email: String!, $password: String!, $username: String!) {
-  register(email: $email, password: $password, username: $username) {
-    accessToken
-    user {
-      id
-      username
-      email
-      bio
-      serverId
-      avatarId
-      age
-    }
-  }
+  register(email: $email, password: $password, username: $username)
 }
     `;
 export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;

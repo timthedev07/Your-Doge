@@ -24,7 +24,7 @@ export class User extends BaseEntity {
   email: string;
 
   @Field(() => String)
-  @Column({ type: "varchar", length: "8" })
+  @Column({ type: "varchar", length: "14" })
   username: string;
 
   @Column("text")
@@ -48,4 +48,7 @@ export class User extends BaseEntity {
   @Field(() => Int)
   @Column("smallint", { default: 0 })
   age: number;
+
+  @Column("boolean", { default: false })
+  confirmed: boolean;
 }

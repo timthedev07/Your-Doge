@@ -14,6 +14,7 @@ import "react-calendar/dist/Calendar.css";
 import { Account } from "./pages/auth/Account";
 // import { AuthRoute } from "./utils/IsAuthRoute";
 import { AuthControl } from "./contexts/AuthContext";
+import { Confirm } from "./pages/auth/Confirm";
 
 export const Routes: React.FC = () => {
   return (
@@ -32,6 +33,8 @@ export const Routes: React.FC = () => {
             {/* auth routes */}
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route path="/confirm/:token" component={Confirm} />
+            <Route exact path="/confirm" component={Confirm} />
 
             {/* homework routes */}
             <Route exact path="/new_homework" component={NewHomework} />
