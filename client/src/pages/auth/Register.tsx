@@ -3,7 +3,6 @@ import { Form, Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
 import { RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
-import { setAccessToken } from "../../accessToken";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../..";
 
@@ -84,7 +83,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
     }
 
     // if the username exceeds the length
-    if (username.length > 8) {
+    if (username.length > 14) {
       displayError("Username exceeds the maximal length");
       return;
     }
@@ -107,10 +106,11 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
     try {
       const data = await register(email, password, username);
 
+      console.log(data);
+
       if (data?.register) {
         setLoading(false);
-        setAccessToken(data.register.accessToken);
-        history.push("/");
+        history.push("/confirm");
         return;
       }
 
@@ -160,11 +160,11 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
               required
               className="regular-input"
               type="email"
-              placeholder="8 characters maximal"
+              placeholder="14 characters maximal"
               ref={unameRef}
               onChange={(e) =>
                 toggleWarning(e, (e) => {
-                  return e.target.value.length > 8;
+                  return e.target.value.length > 14;
                 })
               }
             />
