@@ -11,12 +11,12 @@ import {
 import { getConnection } from "typeorm";
 import { hash, compare } from "bcrypt";
 import { User } from "../entity/User";
-import { MyContext } from "../MyContext";
+import { MyContext } from "../types/MyContext";
 import {
   createAccessToken,
   createRefreshToken,
   sendRefreshToken,
-} from "../AuthHelper";
+} from "../utils/AuthHelper";
 import { verify } from "jsonwebtoken";
 
 const EMAIL_VALIDATION_REGEX =

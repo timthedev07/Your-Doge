@@ -4,7 +4,7 @@ import {
   createAccessToken,
   createRefreshToken,
   sendRefreshToken,
-} from "../AuthHelper";
+} from "../utils/AuthHelper";
 import { User } from "../entity/User";
 
 export const router = express.Router();
