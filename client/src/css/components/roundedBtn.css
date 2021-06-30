@@ -1,7 +1,7 @@
 .rounded-btn {
   border-radius: 100vw;
-  background-color: rgb(30, 175, 233);
-  color: white;
+  background-color: rgb(192, 163, 0);
+  color: rgb(255, 255, 255);
   height: 35px;
   font-size: 17px !important;
   border: none;
@@ -29,6 +29,7 @@ a.rounded-btn,
   padding-top: 0 !important;
 }
 
+/* variants */
 .rounded-btn.secondary {
   border: 1px gray solid;
   background-color: transparent;

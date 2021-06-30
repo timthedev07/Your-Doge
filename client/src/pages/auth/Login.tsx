@@ -107,7 +107,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
           <div className="text-center form-padding-child">
             {!pageLoading ? (
               <Button
-                variant="info"
+                variant="warning"
                 className={"form-submit-button"}
                 type="submit"
                 onClick={(event) => handleSubmit(event)}
@@ -116,7 +116,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
               </Button>
             ) : (
               <Button
-                variant="info"
+                variant="warning"
                 disabled
                 type="submit"
                 className={"form-submit-button disabled"}
