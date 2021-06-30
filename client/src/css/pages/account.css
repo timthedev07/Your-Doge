@@ -3,19 +3,21 @@
   box-shadow: 0 0 10px rgb(26, 26, 26);
   width: 80%;
   height: auto;
-  max-height: 500px;
   min-width: var(--min-width);
+  margin-bottom: 20px;
 }
 
 #account-page {
   width: 100%;
   min-width: var(--min-width);
   display: flex;
-  min-height: 700px;
-  height: auto;
+  /* min-height: 900px; */
+  height: max-content;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   background: transparent;
+  height: fit-content;
+  padding-top: 40px;
 }
 
 /* information tab */
