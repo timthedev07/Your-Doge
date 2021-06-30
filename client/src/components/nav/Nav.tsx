@@ -106,7 +106,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
         ref={navBarRef}
       >
         <a className="nav-item nav-item-home" href="/">
-          DoYourStuff&nbsp;&nbsp;&nbsp;&nbsp;
+          Your Doge&nbsp;&nbsp;&nbsp;&nbsp;
           <img src={Logo} alt="logo" className="nav-logo" />
         </a>
 
