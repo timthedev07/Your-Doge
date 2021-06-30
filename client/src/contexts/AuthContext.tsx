@@ -87,16 +87,6 @@ export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
           password,
           username,
         },
-        update: (store, { data }) => {
-          if (!data) return null;
-          store.writeQuery<MeQuery>({
-            query: MeDocument,
-            data: {
-              __typename: "Query",
-              me: data.register.user,
-            },
-          });
-        },
       });
       return res.data;
     } catch (err: any) {
