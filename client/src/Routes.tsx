@@ -15,6 +15,7 @@ import { Account } from "./pages/auth/Account";
 // import { AuthRoute } from "./utils/IsAuthRoute";
 import { AuthControl } from "./contexts/AuthContext";
 import { Confirm } from "./pages/auth/Confirm";
+import { Me } from "./pages/auth/account/Me";
 
 export const Routes: React.FC = () => {
   return (
@@ -28,7 +29,8 @@ export const Routes: React.FC = () => {
 
             {/* User specific routes */}
             <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/account" component={Account} />
+            <Route path="/u/:username" component={Account} />
+            <Route exact path="/account" component={Me} />
 
             {/* auth routes */}
             <Route exact path="/register" component={Register} />
