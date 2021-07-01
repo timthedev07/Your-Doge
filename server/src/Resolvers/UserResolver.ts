@@ -169,7 +169,7 @@ export class UserResolver {
    * @returns
    */
   @Query(() => User, { nullable: true })
-  me(@Ctx() context: MyContext) {
+  async me(@Ctx() context: MyContext) {
     const authorization = context.req.headers["authorization"];
 
     if (!authorization) {
@@ -180,7 +180,12 @@ export class UserResolver {
       const token = authorization.split(" ")[1];
       const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!);
       context.payload = payload as any;
-      return User.findOne(payload.userId);
+      const res = await User.findOne(payload.userId);
+      if (res && res.confirmed) {
+        // only confirmed users are considered to be valid
+        return res;
+      }
+      return null;
     } catch (err) {
       console.error(err);
       return null;
@@ -245,5 +250,15 @@ export class UserResolver {
       accessToken: createAccessToken(user!),
       user: user!,
     };
+  }
+
+  @Query(() => User, { nullable: true })
+  async getProfile(@Arg("username") username: string): Promise<User | null> {
+    const res = await User.findOne({ where: { username: username } });
+    if (res && res.confirmed) {
+      // only verified users are considered to be valid
+      return res;
+    }
+    return null;
   }
 }

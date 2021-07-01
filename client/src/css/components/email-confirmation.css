@@ -1,0 +1,14 @@
+.email-confirmation {
+  width: 100%;
+  min-height: 95vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+.email-confirmation-card {
+  width: 80%;
+  height: 500px;
+  background-color: rgba(71, 71, 71, 0.507);
+  border-radius: 5px;
+}

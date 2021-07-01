@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router";
 import { useConfirmEmailMutation } from "../generated/graphql";
 
 interface ConfirmEmailProps {
@@ -7,18 +8,22 @@ interface ConfirmEmailProps {
 
 export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
   const [confirmEmail] = useConfirmEmailMutation();
+  const history = useHistory();
 
   return (
     <div className="email-confirmation">
       <div className="email-confirmation-card">
         <h1>One step away.</h1>
         <button
+          className="rounded-btn emphasized"
           onClick={async () => {
-            const res = await confirmEmail({ variables: { token } });
-            console.log(res);
+            const { data } = await confirmEmail({ variables: { token } });
+            if (data && data.confirmUser) {
+              history.push("/dashboard");
+            }
           }}
         >
-          {token}
+          Confirm Your Email
         </button>
       </div>
     </div>
