@@ -28,15 +28,15 @@ export const sendEmail = async (recipient: string, url: string) => {
 				"
 			>
 				<img style="width: 100%" src="https://drive.google.com/uc?export=view&id=1_vAyaRaZuSo3pki-PzaCFFEdiNiPbXI5" />
-				<h1 style="text-align: center;">Click the link below to verify your email.</h1>
-				<a style="color: goldenrod; text-align: center;" href="${url}">Verify email</a>
+				<h3 style="text-align: center;">Click the link below to verify your email.</h3>
+				<a style="color: goldenrod; text-align: center; width: 100%;" href="${url}">Verify email</a>
 			</body>
 		</html>
     `;
 
   // send mail with defined transport object
   const mailOptions = {
-    from: `"Your Doge - No Reply" <${process.env.USERNAME}>`,
+    from: `"Your Doge Team" <${process.env.USERNAME}>`,
     to: recipient,
     subject: `Confirm your email: Your Doge`,
     html,
