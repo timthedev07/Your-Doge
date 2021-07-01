@@ -47,6 +47,7 @@ export type Mutation = {
   logout: Scalars['Boolean'];
   updateAvatarId: Scalars['Boolean'];
   confirmUser: LoginResponse;
+  resendConfirmationUrl: Scalars['Boolean'];
   addHomework: Scalars['Boolean'];
 };
 
@@ -76,6 +77,11 @@ export type MutationUpdateAvatarIdArgs = {
 
 export type MutationConfirmUserArgs = {
   token: Scalars['String'];
+};
+
+
+export type MutationResendConfirmationUrlArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -163,6 +169,16 @@ export type RegisterMutationVariables = Exact<{
 export type RegisterMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'register'>
+);
+
+export type ResendConfEmailMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type ResendConfEmailMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'resendConfirmationUrl'>
 );
 
 export type AddHomeworkMutationVariables = Exact<{
@@ -386,6 +402,37 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const ResendConfEmailDocument = gql`
+    mutation ResendConfEmail($email: String!) {
+  resendConfirmationUrl(email: $email)
+}
+    `;
+export type ResendConfEmailMutationFn = Apollo.MutationFunction<ResendConfEmailMutation, ResendConfEmailMutationVariables>;
+
+/**
+ * __useResendConfEmailMutation__
+ *
+ * To run a mutation, you first call `useResendConfEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResendConfEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resendConfEmailMutation, { data, loading, error }] = useResendConfEmailMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useResendConfEmailMutation(baseOptions?: Apollo.MutationHookOptions<ResendConfEmailMutation, ResendConfEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ResendConfEmailMutation, ResendConfEmailMutationVariables>(ResendConfEmailDocument, options);
+      }
+export type ResendConfEmailMutationHookResult = ReturnType<typeof useResendConfEmailMutation>;
+export type ResendConfEmailMutationResult = Apollo.MutationResult<ResendConfEmailMutation>;
+export type ResendConfEmailMutationOptions = Apollo.BaseMutationOptions<ResendConfEmailMutation, ResendConfEmailMutationVariables>;
 export const AddHomeworkDocument = gql`
     mutation AddHomework($title: String!, $description: String!, $deadline: String!) {
   addHomework(title: $title, description: $description, deadline: $deadline)
