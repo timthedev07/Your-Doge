@@ -89,8 +89,14 @@ export type Query = {
   __typename?: 'Query';
   hello: Scalars['String'];
   me?: Maybe<User>;
+  getProfile?: Maybe<User>;
   getAllHomework: Array<Homework>;
   getAllUserHomework: AllHomeworkResponse;
+};
+
+
+export type QueryGetProfileArgs = {
+  username: Scalars['String'];
 };
 
 export type User = {
@@ -194,6 +200,19 @@ export type AllHomeworkQuery = (
   & { getAllHomework: Array<(
     { __typename?: 'Homework' }
     & Pick<Homework, 'id' | 'userId' | 'title' | 'description' | 'deadline' | 'enjoyed'>
+  )> }
+);
+
+export type GetProfileQueryVariables = Exact<{
+  username: Scalars['String'];
+}>;
+
+
+export type GetProfileQuery = (
+  { __typename?: 'Query' }
+  & { getProfile?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'username' | 'bio' | 'email' | 'age' | 'avatarId'>
   )> }
 );
 
@@ -483,6 +502,45 @@ export function useAllHomeworkLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type AllHomeworkQueryHookResult = ReturnType<typeof useAllHomeworkQuery>;
 export type AllHomeworkLazyQueryHookResult = ReturnType<typeof useAllHomeworkLazyQuery>;
 export type AllHomeworkQueryResult = Apollo.QueryResult<AllHomeworkQuery, AllHomeworkQueryVariables>;
+export const GetProfileDocument = gql`
+    query GetProfile($username: String!) {
+  getProfile(username: $username) {
+    username
+    bio
+    email
+    age
+    avatarId
+  }
+}
+    `;
+
+/**
+ * __useGetProfileQuery__
+ *
+ * To run a query within a React component, call `useGetProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProfileQuery({
+ *   variables: {
+ *      username: // value for 'username'
+ *   },
+ * });
+ */
+export function useGetProfileQuery(baseOptions: Apollo.QueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, options);
+      }
+export function useGetProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProfileQuery, GetProfileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProfileQuery, GetProfileQueryVariables>(GetProfileDocument, options);
+        }
+export type GetProfileQueryHookResult = ReturnType<typeof useGetProfileQuery>;
+export type GetProfileLazyQueryHookResult = ReturnType<typeof useGetProfileLazyQuery>;
+export type GetProfileQueryResult = Apollo.QueryResult<GetProfileQuery, GetProfileQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {
