@@ -261,4 +261,18 @@ export class UserResolver {
     }
     return null;
   }
+
+  @Mutation(() => Boolean)
+  async resendConfirmationUrl(@Arg("email") email: string) {
+    try {
+      const user = await User.findOne({ where: { email } });
+      if (user && !user.confirmed) {
+        await sendEmail(email, await createConfirmationUrl(user.id));
+        return true;
+      }
+      return false;
+    } catch (err) {
+      return false;
+    }
+  }
 }
