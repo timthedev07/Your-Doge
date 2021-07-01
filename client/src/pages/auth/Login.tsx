@@ -132,6 +132,11 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
                   : "Reset Password"}
               </Button>
             </Link>
+            <Link to="/confirm/resend">
+              <Button className="normal-links" variant="link">
+                Confirm your email
+              </Button>
+            </Link>
           </div>
           <div className="text-center second-option-container">
             <Button
