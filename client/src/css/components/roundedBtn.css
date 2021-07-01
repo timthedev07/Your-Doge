@@ -37,7 +37,9 @@ a.rounded-btn,
 }
 
 .rounded-btn.emphasized {
-  border: none;
-  background-color: rgb(119, 9, 209);
-  color: white;
+  background-color: rgb(207, 83, 0);
+}
+
+.rounded-btn.sorrowful {
+  background-color: rgb(0, 129, 204);
 }
