@@ -42,20 +42,20 @@ class LoginResponse {
 @Resolver()
 export class UserResolver {
   /**
-	 * The code below is basically the same as:
-	 * typeDefs: `
-			type Query {
-				hello: String
-			}
-		`,
+   * The code below is basically the same as:
+   * typeDefs: `
+      type Query {
+        hello: String
+      }
+    `,
     resolvers: {
       Query: {
         hello: () => "hello world",
       },
     },
 
-		where if we are querying using `hello`, it will return `hello world`.
-	 */
+    where if we are querying using `hello`, it will return `hello world`.
+   */
   @Query(() => String)
   hello() {
     return "hello world";
@@ -132,8 +132,8 @@ export class UserResolver {
     }
 
     /* comparing the password stored in the database
-			with the password the user typed in
-		*/
+      with the password the user typed in
+    */
     const valid = await compare(password, user.password);
 
     if (!valid) {
