@@ -1,14 +1,22 @@
+.resend-conf-wrapper,
 .email-confirmation {
-  width: 100%;
-  min-height: 95vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: auto;
 }
+
+.resend-conf-container,
 .email-confirmation-card {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
   width: 80%;
+  box-shadow: 0 0 8px black;
+  border-radius: 7px;
+  margin-top: 20px;
   height: 500px;
-  background-color: rgba(71, 71, 71, 0.507);
-  border-radius: 5px;
+  background-color: rgba(49, 49, 49, 0.822);
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
 }

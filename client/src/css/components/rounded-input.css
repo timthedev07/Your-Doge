@@ -1,0 +1,31 @@
+.rounded-input,
+.rounded-input:focus {
+  color: white;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+  padding: 7px;
+  border-radius: 10px;
+  min-width: 250px;
+  padding-left: 9px;
+}
+
+.rounded-input {
+  box-shadow: 0 0 1.5px rgba(26, 26, 26, 0.479);
+  background-color: rgb(5, 27, 85);
+}
+
+.rounded-input:focus {
+  background-color: rgb(7, 47, 107);
+  box-shadow: 0 0 7.5px rgb(26, 26, 26);
+}
+
+/* variants */
+
+/* emphasized */
+.rounded-input.emphasized {
+  background-color: rgb(85, 52, 3);
+}
+.rounded-input.emphasized:focus {
+  background-color: rgb(95, 65, 0);
+}

@@ -1,6 +1,8 @@
 import React from "react";
-import { useParams } from "react-router";
-import { ConfirmEmail } from "../../components/ConfirmEmail";
+import { Redirect, useParams } from "react-router";
+import { ConfirmEmail } from "../../components/confirmation/ConfirmEmail";
+import { ResendConfEmail } from "../../components/confirmation/ResendConfEmail";
+import { useMeQuery } from "../../generated/graphql";
 
 export interface ConfirmationRouteParams {
   token?: string;
@@ -12,6 +14,12 @@ export const Confirm: React.FC = () => {
   // } = props;
 
   const params = useParams<ConfirmationRouteParams>();
+  const { data } = useMeQuery();
+
+  // hide this page from authenticated users
+  if (data && data?.me) {
+    return <Redirect to="/account" />;
+  }
 
   const token = params.token;
 
@@ -21,6 +29,10 @@ export const Confirm: React.FC = () => {
         <div>Confirm your email!!!</div>
       </div>
     );
+  }
+
+  if (token === "resend") {
+    return <ResendConfEmail />;
   }
 
   return <ConfirmEmail token={token!} />;
