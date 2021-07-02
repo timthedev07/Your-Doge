@@ -1,6 +1,10 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { useConfirmEmailMutation } from "../../generated/graphql";
+import {
+  MeDocument,
+  MeQuery,
+  useConfirmEmailMutation,
+} from "../../generated/graphql";
 
 interface ConfirmEmailProps {
   token: string;
@@ -20,7 +24,19 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
             className="rounded-btn emphasized"
             onClick={async () => {
               try {
-                const { data } = await confirmEmail({ variables: { token } });
+                const { data } = await confirmEmail({
+                  variables: { token },
+                  update: (store, { data }) => {
+                    if (!data) return null;
+                    store.writeQuery<MeQuery>({
+                      query: MeDocument,
+                      data: {
+                        __typename: "Query",
+                        me: data.confirmUser.user,
+                      },
+                    });
+                  },
+                });
                 if (data && data.confirmUser) {
                   history.push("/dashboard");
                 }
