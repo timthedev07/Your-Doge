@@ -13,7 +13,7 @@ import {
 
 interface MeProps {}
 
-export const Me: React.FC<MeProps> = ({}) => {
+export const Me: React.FC<MeProps> = () => {
   const [logout, { client }] = useLogoutMutation();
   const { data, loading } = useMeQuery();
   const [currAvatarId, setCurrAvatarId] = useState<number>(
@@ -48,7 +48,7 @@ export const Me: React.FC<MeProps> = ({}) => {
     {
       content: (
         <Information
-          avatarId={`${currAvatarId < 14 ? currAvatarId : 0}` as any}
+          avatarId={`${currAvatarId <= 15 ? currAvatarId : 0}` as any}
           bio={data.me.bio}
           email={data.me.email}
           username={data.me.username}
