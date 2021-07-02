@@ -35,8 +35,10 @@ export const Routes: React.FC = () => {
             {/* auth routes */}
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route path="/confirm/:token" component={Confirm} />
-            <Route exact path="/confirm" component={Confirm} />
+            <Route path="/auth/confirm/:token" component={Confirm} />
+            <Route exact path="/auth/confirm" component={Confirm} />
+            <Route path="/auth/forgot-password/:token" component={Confirm} />
+            <Route exact path="/auth/forgot-password" component={Confirm} />
 
             {/* homework routes */}
             <Route exact path="/new_homework" component={NewHomework} />
