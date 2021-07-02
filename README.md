@@ -21,7 +21,7 @@
 
 ## About Your Doge
 
-Your Doge is a doge themed online homework manager built for the ones who are struggling with organizing their homework, although it also fits other sorts of tasks.
+Your Doge is a doge themed online homework manager built for the ones who are struggling with organizing their homework, although it also fits other sorts of tasks. Your Doge provides personalized statistics on how well you are doing based on your activities and gives suggestions based on that.
 
 ## Contributing
 
