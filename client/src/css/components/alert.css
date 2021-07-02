@@ -2,7 +2,7 @@
   width: 50vw;
   min-width: 300px;
   max-width: 600px;
-  background-color: rgba(211, 179, 0, 0.973);
+  background: linear-gradient(135deg, rgb(65, 65, 65) 0%, rgb(44, 44, 44) 100%);
   padding: 20px;
   min-height: max-content;
 
@@ -40,6 +40,7 @@
   transition: 0.4s;
   border-radius: 100vw;
   padding: 5px;
+  fill: white;
 }
 
 .custom-alert .close-icon:hover {
