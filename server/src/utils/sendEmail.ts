@@ -37,7 +37,7 @@ export const sendEmail = async (recipient: string, url: string) => {
         ">
           <img style="width: 100%;" src="https://drive.google.com/uc?export=view&id=1_vAyaRaZuSo3pki-PzaCFFEdiNiPbXI5" />
           <h3 style="text-align: center; color: white;">Click the link below to verify your email.</h3>
-          <h6 style="color: white;"><em>Please that the url would automatically expire in 8 hours.</em></h6>
+          <h6 style="color: white;"><em>Please note that the url would automatically expire in 8 hours.</em></h6>
           <a style="color: goldenrod; text-align: center; width: 100%;" href="${url}">Verify email</a>
 
         </div>
