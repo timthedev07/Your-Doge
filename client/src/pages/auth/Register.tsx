@@ -110,7 +110,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
       if (data?.register) {
         setLoading(false);
-        history.push("/confirm");
+        history.push("/auth/confirm");
         return;
       }
 
