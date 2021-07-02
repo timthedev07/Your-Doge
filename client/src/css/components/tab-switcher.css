@@ -52,8 +52,8 @@
   width: 100%;
   padding: 10px;
   background-color: rgb(41, 42, 44);
+  min-height: 500px;
   height: auto;
-  min-height: 300px;
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
 }
