@@ -92,7 +92,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
               type="email"
               ref={emRef}
             />
-            <label>Email</label>
+            <label>Email/Username</label>
           </div>
 
           <div className="input-data form-padding-child">

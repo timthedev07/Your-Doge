@@ -42,7 +42,7 @@ class LoginResponse {
 @Resolver()
 export class UserResolver {
   /**
-   * The code below is basically the same as:
+   * This code-first approach below is basically the same as:(schema first)
    * typeDefs: `
       type Query {
         hello: String
@@ -53,8 +53,6 @@ export class UserResolver {
         hello: () => "hello world",
       },
     },
-
-    where if we are querying using `hello`, it will return `hello world`.
    */
   @Query(() => String)
   hello() {
@@ -62,7 +60,7 @@ export class UserResolver {
   }
 
   // /**
-  //  * a query that retrieve all the users from the database
+  //  * a query that retrieves all the users from the database
   //  * @returns all users
   //  */
   // @Query(() => [User])
@@ -71,8 +69,8 @@ export class UserResolver {
   // }
 
   /**
-   * In graphql, a mutation is what we create we want to make a change
-   * to our database(e.g. create, update)
+   * In graphql, a mutation is what we create when we want to make a change
+   * to our database(e.g. create, update, delete)
    */
   @Mutation(() => Boolean)
   async register(
@@ -123,8 +121,8 @@ export class UserResolver {
     @Arg("password") password: string,
     @Ctx() { req, res }: MyContext
   ): Promise<LoginResponse> {
-    // here we are searching for a user that has the same email
-    const user = await User.findOne({ where: { email } });
+    // here we are searching for a user that has the same email OR username
+    let user = await User.findOne({ where: [{ email }, { username: email }] });
 
     // if user does not exist
     if (!user) {
