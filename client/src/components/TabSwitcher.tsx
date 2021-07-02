@@ -65,11 +65,9 @@ export const TabSwitcher: React.FC<TabSwitcherProps> & {
           />
         ))}
       </div>
-      <div className="tab-content-container">
-        <TabSwitcher.Tab title={tabs[activeTab].title}>
-          {tabs[activeTab].content}
-        </TabSwitcher.Tab>
-      </div>
+      <TabSwitcher.Tab title={tabs[activeTab].title}>
+        {tabs[activeTab].content}
+      </TabSwitcher.Tab>
     </div>
   );
 };
