@@ -23,21 +23,21 @@ export const sendEmail = async (recipient: string, url: string) => {
           background-color: #3e3e3e;
           color: white;
           font-family: 'Trebuchet MS', sans-serif;
-          padding: 10px;
+          
           margin: 0;
         "
       >
         <div style="
           background-color: #3e3e3e;
-          color: white;
-          padding: 0;
+          padding: 10px;
           margin: 0;
           width: 100%;
           height: 100%;
+          
         ">
-          <img style="width: 100%" src="https://drive.google.com/uc?export=view&id=1_vAyaRaZuSo3pki-PzaCFFEdiNiPbXI5" />
-          <h3 style="text-align: center;">Click the link below to verify your email.</h3>
-          <h5><em>Please that the url would automatically expire in 8 hours.</em></h5>
+          <img style="width: 100%;" src="https://drive.google.com/uc?export=view&id=1_vAyaRaZuSo3pki-PzaCFFEdiNiPbXI5" />
+          <h3 style="text-align: center; color: white;">Click the link below to verify your email.</h3>
+          <h6 style="color: white;"><em>Please that the url would automatically expire in 8 hours.</em></h6>
           <a style="color: goldenrod; text-align: center; width: 100%;" href="${url}">Verify email</a>
 
         </div>
