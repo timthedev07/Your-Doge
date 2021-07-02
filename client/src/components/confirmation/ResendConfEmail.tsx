@@ -27,7 +27,7 @@ export const ResendConfEmail: React.FC<ResendConfEmailProps> = () => {
           <Alert
             active={active}
             setActive={setActive}
-            text={"Check your inbox for further instruction."}
+            text={"Check your inbox for further instructions."}
             type={"success"}
           />
           <h2>Didn't receive the confirmation email?</h2>
