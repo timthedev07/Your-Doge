@@ -101,7 +101,7 @@ export class UserResolver {
         username: username,
       });
     } catch (err) {
-      throw new Error("Email already registered");
+      throw new Error("Email/username already registered");
     }
     // make it so that the user gets automatically logged in after register
     const user = await User.findOne({ where: { email } });
@@ -270,6 +270,54 @@ export class UserResolver {
       }
       return false;
     } catch (err) {
+      return false;
+    }
+  }
+
+  @Mutation(() => Boolean, { nullable: true })
+  async updateProfile(
+    @Ctx() context: MyContext,
+    @Arg("bio", { nullable: true }) bio?: string,
+    @Arg("age", { nullable: true }) age?: number
+  ) {
+    const authorization = context.req.headers["authorization"];
+
+    if (!authorization) {
+      return null;
+    }
+
+    const token = authorization.split(" ")[1];
+    const payload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!);
+    context.payload = payload as any;
+
+    const id = context.payload?.userId;
+
+    if (!id) {
+      return null;
+    }
+
+    let buffer = { bio, age };
+
+    if (!buffer.bio) {
+      delete buffer.bio;
+    }
+    if (!buffer.age) {
+      delete buffer.age;
+    }
+    if (!Object.keys(buffer).length) {
+      return true;
+    }
+
+    try {
+      await getConnection()
+        .createQueryBuilder()
+        .update(User)
+        .set(buffer)
+        .where("id = :id", { id: id })
+        .execute();
+      return true;
+    } catch (err) {
+      console.log(err);
       return false;
     }
   }
