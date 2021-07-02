@@ -12,7 +12,7 @@
 </p>
 
 <h3 align="center">
-  <a href="CONTRIBUTE.md">Contribute</a>
+  <a href="CONTRIBUTING.md">Contribute</a>
   <span> · </span>
   <a href="https://yourdoge.netlify.app">Production</a>
 </h3>
