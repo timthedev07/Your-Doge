@@ -1,9 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import AvatarData from "../../avatarData.json";
 import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "../CloseButton";
 import { AvatarKeyType } from "../../pages/auth/Account";
-import { useUpdateAvatarMutation } from "../../generated/graphql";
+import {
+  useUpdateAvatarMutation,
+  useUpdateProfileMutation,
+} from "../../generated/graphql";
 
 interface InformationProps {
   avatarId: AvatarKeyType;
@@ -29,7 +32,14 @@ export const Information: React.FC<InformationProps> = ({
   const [avatars, setAvatars] = useState<Array<string>>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
 
-  const bioRef = useRef<HTMLTextAreaElement>(null);
+  /* profile update */
+  const [bioValue, setBioValue] = useState<string>(bio);
+  const [currAge, setCurrAge] = useState<number>(age);
+  const [updateProfile] = useUpdateProfileMutation();
+
+  const madeChanges = () => {
+    return bioValue !== bio || currAge !== age;
+  };
 
   const handleClose = (action?: string) => {
     if (action === "save" && selectedAvatarId !== null) {
@@ -46,6 +56,16 @@ export const Information: React.FC<InformationProps> = ({
   };
   const handleShow = () => setShow(true);
 
+  const saveEdit = async () => {
+    const res = await updateProfile({
+      variables: {
+        bio: bioValue,
+        age: currAge,
+      },
+    });
+    console.log(res);
+  };
+
   const getSrcById = async (
     id: AvatarKeyType,
     setter: (arg: string) => any
@@ -56,6 +76,14 @@ export const Information: React.FC<InformationProps> = ({
     );
     setter(res as string);
   };
+
+  const ages = useMemo(() => {
+    let res = [];
+    for (let i = 1; i <= 150; ++i) {
+      res.push(i);
+    }
+    return res;
+  }, []);
 
   /* this part gets the right avatar based on activeAvatar */
   useEffect(() => {
@@ -83,6 +111,14 @@ export const Information: React.FC<InformationProps> = ({
     getAllAvatars();
   }, []);
 
+  useEffect(() => {
+    window.addEventListener("beforeunload", () => {
+      if (madeChanges()) {
+        alert("You have unsaved changes, are you sure to leave the page?");
+      }
+    });
+  });
+
   return (
     <>
       <div className="profile-top-section">
@@ -91,7 +127,22 @@ export const Information: React.FC<InformationProps> = ({
           <h2>{username}</h2>
           <h5>{email}</h5>
           <h6>
-            {age} year{age > 1 ? "s" : ""} old
+            <select
+              onChange={(e) => {
+                setCurrAge(parseInt(e.target.value));
+              }}
+              className="select"
+              defaultValue={age}
+            >
+              {ages.map((each, ind) => {
+                return (
+                  <option key={each} value={each}>
+                    {each}
+                  </option>
+                );
+              })}
+            </select>
+            &nbsp; year{age > 1 ? "s" : ""} old{" "}
           </h6>
         </div>
       </div>
@@ -99,10 +150,28 @@ export const Information: React.FC<InformationProps> = ({
       <div className="profile-bio-container">
         <textarea
           className="profile-bio"
-          defaultValue={bio}
-          ref={bioRef}
+          value={bioValue}
+          onChange={(e) => setBioValue(e.target.value)}
         ></textarea>
       </div>
+
+      {madeChanges() && (
+        <button
+          style={{
+            float: "right",
+            marginTop: "20px",
+            marginBottom: "10px",
+            marginRight: "10%",
+            transform: "scale(1.1)",
+          }}
+          className="rounded-btn"
+          onClick={async () => {
+            await saveEdit();
+          }}
+        >
+          Save
+        </button>
+      )}
 
       <Modal
         className="bootstrap-modal margin-top-nav"
@@ -135,7 +204,6 @@ export const Information: React.FC<InformationProps> = ({
                 }`}
                 onClick={() => {
                   setSelectedAvatarId(ind);
-                  // getSrcById(`${ind}` as AvatarKeyType, setAvatarSrc);
                 }}
               />
             );

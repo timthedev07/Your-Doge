@@ -1,0 +1,3 @@
+mutation UpdateProfile($bio: String, $age: Float) {
+  updateProfile(age: $age, bio: $bio)
+}
