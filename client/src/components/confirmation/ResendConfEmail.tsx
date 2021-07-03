@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useHistory } from "react-router";
 import { useResendConfEmailMutation } from "../../generated/graphql";
 import { Alert } from "../Alert";
 
@@ -7,6 +8,7 @@ interface ResendConfEmailProps {}
 export const ResendConfEmail: React.FC<ResendConfEmailProps> = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const [resend] = useResendConfEmailMutation();
+  const history = useHistory();
   const [active, setActive] = useState<boolean>(false);
 
   return (
@@ -21,6 +23,7 @@ export const ResendConfEmail: React.FC<ResendConfEmailProps> = () => {
             await resend({
               variables: { email: emailRef.current.value },
             });
+
             setActive(true);
           }}
         >
@@ -29,6 +32,9 @@ export const ResendConfEmail: React.FC<ResendConfEmailProps> = () => {
             setActive={setActive}
             text={"Check your inbox for further instructions."}
             type={"success"}
+            onClose={() => {
+              history.push("/");
+            }}
           />
           <h2>Didn't receive the confirmation email?</h2>
           <h4>Give it another shot!</h4>
