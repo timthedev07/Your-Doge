@@ -8,6 +8,15 @@
 </a>
 
 <p align="center">
+  <a href="https://yourdoge.netlify.app">
+    <img src="https://img.shields.io/badge/status-development-green" alt="dogehouse - users online" />
+  </a>
+  <a href="https://yourdoge.netlify.app">
+    <img src="https://img.shields.io/badge/license-GPL-3.0-or-later-yellow" />
+  </a>
+</p>
+
+<p align="center">
   <strong>Doge Themed Homework Manager 💻</strong>
 </p>
 
