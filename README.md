@@ -28,6 +28,51 @@
 
 ---
 
+## Run the project
+
+Visit [here](https://yourdoge.netlify.app) for live production or you can clone the repo and run it locally on your machine as follows.
+
+### Requirements for running locally
+
+- at least 1GB ram for running the tasks simultaneously
+- [node](https://nodejs.org/en/download/)
+- [yarn](https://classic.yarnpkg.com/en/docs/install/)
+- [redis](https://redis.io/topics/quickstart)
+- [postgresql](https://www.postgresql.org/download/) installed and set up, which then must contain an empty database named exactly `homework-manager`.
+
+```bash
+# Note that you need at least 3 terminals or tabs to run it
+
+$ git clone https://github.com/RelentlessExploration/Your-Doge.git
+$ cd Your-Doge/client && yarn # install dependencies in the client directory
+yarn install v1.22.10
+[1/4] 🔍  Resolving packages...
+
+       ...
+
+$ cd ../server && yarn # the same for the server
+yarn install v1.22.10
+[1/4] 🔍  Resolving packages...
+
+       ...
+
+$ yarn devstart # start our api first
+```
+
+Open up another terminal in the root directory of the project and:
+
+```bash
+$ cd client && yarn start # then start our client side server
+
+```
+
+Afterward, in wherever your want, open up another terminal and:
+
+```bash
+$ redis-server # start the redis server
+
+```
+
 ## About Your Doge
 
 Your Doge is a doge themed online homework manager built for the ones who are struggling with organizing their homework, although it also fits other sorts of tasks. Your Doge provides personalized statistics on how well you are doing based on your activities and gives suggestions based on that.
