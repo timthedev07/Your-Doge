@@ -8,11 +8,11 @@ export interface ConfirmationRouteParams {
   token?: string;
 }
 
+/**
+ * This component routes returns different component in different scenarios to prevent conditionally calling hooks
+ * @returns react node
+ */
 export const Confirm: React.FC = () => {
-  // const {
-  //   match: { params },
-  // } = props;
-
   const params = useParams<ConfirmationRouteParams>();
   const { data } = useMeQuery();
 
