@@ -20,23 +20,21 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
 
   const [verifyToken] = useValidTmpTokenMutation();
 
-  const isTokenValid = async () => {
-    setLoading(true);
-    const res = await verifyToken({ variables: { token } });
-
-    console.log(res);
-
-    if (res.data && res.data.validTmpToken) {
-      setValidToken(true);
-      return;
-    }
-    setValidToken(false);
-  };
-
   useEffect(() => {
+    const isTokenValid = async () => {
+      setLoading(true);
+      const res = await verifyToken({ variables: { token } });
+
+      if (res.data && res.data.validTmpToken) {
+        setValidToken(true);
+        return;
+      }
+      setValidToken(false);
+    };
+
     isTokenValid();
     setLoading(false);
-  }, []);
+  }, [token, verifyToken]);
 
   return !loading ? (
     <div className="email-confirmation">
