@@ -25,8 +25,21 @@ export const Confirm: React.FC = () => {
 
   if (!token) {
     return (
-      <div>
-        <div>Confirm your email!!!</div>
+      <div className="email-confirmation">
+        <div className="email-confirmation-card">
+          <div>
+            <h2 style={{ width: "100%" }}>Next Up, confirm your email...</h2>
+            <p>
+              Check your inbox for further instructions, this step is mandatory
+              for the purpose of your security and privacy. If you didn't
+              receive the email, give it another shot{" "}
+              <a className="normal-links" href="/auth/confirm/resend">
+                here
+              </a>
+              .
+            </p>
+          </div>
+        </div>
       </div>
     );
   }
