@@ -38,7 +38,6 @@ export const sendEmail = async (
           margin: 0;
           width: 100%;
           height: 100%;
-          
         ">
           <img style="width: 100%;" src="https://drive.google.com/uc?export=view&id=1_vAyaRaZuSo3pki-PzaCFFEdiNiPbXI5" />
           <h3 style="text-align: center; color: white;">Click the link below to ${verb} your ${noun}.</h3>
@@ -56,7 +55,9 @@ export const sendEmail = async (
   const mailOptions = {
     from: `"Your Doge Team" <${process.env.USERNAME}>`,
     to: recipient,
-    subject: `Confirm your email: Your Doge`,
+    subject: `${
+      verb.charAt(0).toUpperCase() + verb.slice(1)
+    } your ${noun}: Your Doge`,
     html,
   };
 
