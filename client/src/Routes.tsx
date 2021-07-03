@@ -2,6 +2,7 @@ import * as React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/master.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-calendar/dist/Calendar.css";
 // importing the pages
 import { NotFound } from "./pages/NotFound";
 import { Login } from "./pages/auth/Login";
@@ -10,12 +11,11 @@ import { Home } from "./pages/Home";
 import { Nav } from "./components/nav/Nav";
 import { NewHomework } from "./pages/NewHomework";
 import { Dashboard } from "./pages/Dashboard";
-import "react-calendar/dist/Calendar.css";
 import { Account } from "./pages/account/Account";
-// import { AuthRoute } from "./utils/IsAuthRoute";
 import { AuthControl } from "./contexts/AuthContext";
 import { Confirm } from "./pages/auth/Confirm";
 import { Me } from "./pages/account/Me";
+import { Forgot } from "./pages/auth/Forgot";
 
 export const Routes: React.FC = () => {
   return (
@@ -37,7 +37,8 @@ export const Routes: React.FC = () => {
             <Route exact path="/login" component={Login} />
             <Route path="/auth/confirm/:token" component={Confirm} />
             <Route exact path="/auth/confirm" component={Confirm} />
-            <Route path="/auth/forgot-password/:token" component={Confirm} />
+            <Route path="/auth/forgot-password/:token" component={Forgot} />
+            <Route path="/auth/forgot-password" component={Forgot} />
 
             {/* homework routes */}
             <Route exact path="/new_homework" component={NewHomework} />
