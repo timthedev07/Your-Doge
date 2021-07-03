@@ -128,8 +128,6 @@ export const Information: React.FC<InformationProps> = ({
     });
   });
 
-  console.log(showSaveButton);
-
   return (
     <>
       <div className="profile-top-section">
@@ -169,7 +167,6 @@ export const Information: React.FC<InformationProps> = ({
           onChange={(e) => {
             const newBio = e.target.value;
             setBioValue(newBio);
-            console.log({ newBio, bio });
             if (newBio !== bio) {
               setShowSaveButton(true);
             }

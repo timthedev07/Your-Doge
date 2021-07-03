@@ -106,8 +106,6 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
     try {
       const data = await register(email, password, username);
 
-      console.log(data);
-
       if (data?.register) {
         setLoading(false);
         history.push("/auth/confirm");
