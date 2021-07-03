@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/badge/status-development-green" alt="status" />
   </a>
   <a href="https://yourdoge.netlify.app">
-    <img src="https://img.shields.io/badge/license-GPL-3.0-or-later-yellow" />
+    <img src="https://img.shields.io/badge/license--GPL--3.0--or--later-yellow" />
   </a>
 </p>
 
