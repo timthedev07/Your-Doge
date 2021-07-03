@@ -6,11 +6,15 @@ interface Props {
   active: boolean;
   text: string;
   type: string;
+  onClose?: () => void;
 }
 
 export const Alert: React.FC<Props> = (props) => {
   function handleClick() {
     props.setActive(false);
+    if (props.onClose) {
+      props.onClose();
+    }
   }
 
   return (
