@@ -284,12 +284,12 @@ export class UserResolver {
     }
   }
 
-  @Mutation(() => Boolean, { nullable: true })
+  @Mutation(() => User, { nullable: true })
   async updateProfile(
     @Ctx() context: MyContext,
     @Arg("bio", { nullable: true }) bio?: string,
     @Arg("age", { nullable: true }) age?: number
-  ) {
+  ): Promise<User | null> {
     const authorization = context.req.headers["authorization"];
 
     if (!authorization) {
@@ -314,21 +314,24 @@ export class UserResolver {
     if (!buffer.age) {
       delete buffer.age;
     }
+
+    // if there are no new changes
     if (!Object.keys(buffer).length) {
-      return true;
+      return null;
     }
 
     try {
-      await getConnection()
+      const result = await getConnection()
         .createQueryBuilder()
         .update(User)
         .set(buffer)
         .where("id = :id", { id: id })
+        .returning("*")
         .execute();
-      return true;
+
+      return result.raw[0] || null;
     } catch (err) {
-      console.log(err);
-      return false;
+      return null;
     }
   }
 

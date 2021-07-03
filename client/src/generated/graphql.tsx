@@ -48,7 +48,7 @@ export type Mutation = {
   updateAvatarId: Scalars['Boolean'];
   confirmUser: LoginResponse;
   resendConfirmationUrl: Scalars['Boolean'];
-  updateProfile?: Maybe<Scalars['Boolean']>;
+  updateProfile?: Maybe<User>;
   forgotPassword: Scalars['Boolean'];
   validTmpToken: Scalars['Boolean'];
   resetPassword: Scalars['Boolean'];
@@ -310,7 +310,10 @@ export type UpdateProfileMutationVariables = Exact<{
 
 export type UpdateProfileMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'updateProfile'>
+  & { updateProfile?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
+  )> }
 );
 
 export type ValidTmpTokenMutationVariables = Exact<{
@@ -799,7 +802,15 @@ export type UpdateAvatarMutationResult = Apollo.MutationResult<UpdateAvatarMutat
 export type UpdateAvatarMutationOptions = Apollo.BaseMutationOptions<UpdateAvatarMutation, UpdateAvatarMutationVariables>;
 export const UpdateProfileDocument = gql`
     mutation UpdateProfile($bio: String, $age: Float) {
-  updateProfile(age: $age, bio: $bio)
+  updateProfile(age: $age, bio: $bio) {
+    id
+    username
+    email
+    bio
+    serverId
+    avatarId
+    age
+  }
 }
     `;
 export type UpdateProfileMutationFn = Apollo.MutationFunction<UpdateProfileMutation, UpdateProfileMutationVariables>;
