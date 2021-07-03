@@ -355,4 +355,48 @@ export class UserResolver {
     const res = await redis.get(token);
     return !!res;
   }
+
+  @Mutation(() => Boolean)
+  async resetPassword(
+    @Arg("token") token: string,
+    @Arg("newPassword") newPassword: string,
+    @Arg("confirmation") confirmation: string
+  ) {
+    // check for empty string
+    if (!newPassword.length || !confirmation.length) {
+      return false;
+    }
+
+    // check for equality
+    if (newPassword !== confirmation) {
+      return false;
+    }
+
+    // check for length
+    if (newPassword.length < 8) {
+      return false;
+    }
+
+    const userId = await redis.get(token);
+
+    // invalid token
+    if (!userId) {
+      return false;
+    }
+
+    try {
+      await getConnection()
+        .createQueryBuilder()
+        .update(User)
+        .set({ password: await hash(newPassword, 12) })
+        .where("id = :id", { id: parseInt(userId) })
+        .execute();
+
+      await redis.del(token);
+
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
 }
