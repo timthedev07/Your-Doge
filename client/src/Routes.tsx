@@ -11,11 +11,11 @@ import { Nav } from "./components/nav/Nav";
 import { NewHomework } from "./pages/NewHomework";
 import { Dashboard } from "./pages/Dashboard";
 import "react-calendar/dist/Calendar.css";
-import { Account } from "./pages/auth/Account";
+import { Account } from "./pages/account/Account";
 // import { AuthRoute } from "./utils/IsAuthRoute";
 import { AuthControl } from "./contexts/AuthContext";
 import { Confirm } from "./pages/auth/Confirm";
-import { Me } from "./pages/auth/account/Me";
+import { Me } from "./pages/account/Me";
 
 export const Routes: React.FC = () => {
   return (
@@ -38,7 +38,6 @@ export const Routes: React.FC = () => {
             <Route path="/auth/confirm/:token" component={Confirm} />
             <Route exact path="/auth/confirm" component={Confirm} />
             <Route path="/auth/forgot-password/:token" component={Confirm} />
-            <Route exact path="/auth/forgot-password" component={Confirm} />
 
             {/* homework routes */}
             <Route exact path="/new_homework" component={NewHomework} />

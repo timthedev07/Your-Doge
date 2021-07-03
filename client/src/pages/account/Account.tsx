@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router";
-import { Me } from "./account/Me";
-import { OtherUsers } from "./account/OtherUsers";
+import { Me } from "./Me";
+import { OtherUsers } from "./OtherUsers";
 
 export type AvatarKeyType =
   | "0"

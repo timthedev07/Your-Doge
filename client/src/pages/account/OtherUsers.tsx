@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { ReadOnlyProfile } from "../../../components/accountPage/ReadOnlyProfile";
-import { Loading } from "../../../components/Loading";
-import { TabData, TabSwitcher } from "../../../components/TabSwitcher";
-import { useGetProfileQuery } from "../../../generated/graphql";
+import { ReadOnlyProfile } from "../../components/accountPage/ReadOnlyProfile";
+import { Loading } from "../../components/Loading";
+import { TabData, TabSwitcher } from "../../components/TabSwitcher";
+import { useGetProfileQuery } from "../../generated/graphql";
 
 interface OtherUsersProps {
   username: string;

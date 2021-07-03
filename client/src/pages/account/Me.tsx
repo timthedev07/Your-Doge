@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router";
-import { setAccessToken } from "../../../accessToken";
-import { Information } from "../../../components/accountPage/Information";
-import { Loading } from "../../../components/Loading";
-import { TabData, TabSwitcher } from "../../../components/TabSwitcher";
+import { setAccessToken } from "../../accessToken";
+import { Information } from "../../components/accountPage/Information";
+import { Loading } from "../../components/Loading";
+import { TabData, TabSwitcher } from "../../components/TabSwitcher";
 import {
   useLogoutMutation,
   useMeQuery,
   MeQuery,
   MeDocument,
-} from "../../../generated/graphql";
+} from "../../generated/graphql";
 
 interface MeProps {}
 

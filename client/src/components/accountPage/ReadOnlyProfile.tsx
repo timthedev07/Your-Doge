@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AvatarKeyType } from "../../pages/auth/Account";
+import { AvatarKeyType } from "../../pages/account/Account";
 import AvatarData from "../../avatarData.json";
 
 interface ReadOnlyProfileProps {

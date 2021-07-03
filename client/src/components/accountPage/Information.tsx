@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import AvatarData from "../../avatarData.json";
 import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "../CloseButton";
-import { AvatarKeyType } from "../../pages/auth/Account";
+import { AvatarKeyType } from "../../pages/account/Account";
 import {
   useUpdateAvatarMutation,
   useUpdateProfileMutation,
