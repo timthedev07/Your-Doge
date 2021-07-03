@@ -125,14 +125,14 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
                 Sign in
               </Button>
             )}
-            <Link to="/forgot-password">
+            <Link to="/auth/forgot-password">
               <Button className="normal-links" variant="link">
                 {windowWidth > THRESHOLD
                   ? "Forgot your password?"
                   : "Reset Password"}
               </Button>
             </Link>
-            <Link to="/confirm/resend">
+            <Link to="/auth/confirm/resend">
               <Button className="normal-links" variant="link">
                 Confirm your email
               </Button>
