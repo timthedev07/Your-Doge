@@ -41,6 +41,10 @@ We are open to any issues, pull requests, and comments on how we can make Your D
 - production -> don't make any changes here
 - staging -> open to pull requests
 
+## License
+
+Your Doge is [GPLv3 Licensed](LICENSE)
+
 ## Attributions
 
 Avatars(excluding doge): [Laura Reen](https://www.iconfinder.com/laurareen)
