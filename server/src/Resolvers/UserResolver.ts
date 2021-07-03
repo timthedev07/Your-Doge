@@ -349,4 +349,10 @@ export class UserResolver {
 
     return true;
   }
+
+  @Mutation(() => Boolean)
+  async validTmpToken(@Arg("token") token: string) {
+    const res = await redis.get(token);
+    return !!res;
+  }
 }

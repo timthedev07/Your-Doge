@@ -8,6 +8,7 @@ body {
   min-height: 100vh;
   margin-top: 0;
   min-width: var(--min-width);
+  width: 100%;
 }
 
 div.App {

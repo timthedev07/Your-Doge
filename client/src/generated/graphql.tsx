@@ -50,6 +50,7 @@ export type Mutation = {
   resendConfirmationUrl: Scalars['Boolean'];
   updateProfile?: Maybe<Scalars['Boolean']>;
   forgotPassword: Scalars['Boolean'];
+  validTmpToken: Scalars['Boolean'];
   addHomework: Scalars['Boolean'];
 };
 
@@ -95,6 +96,11 @@ export type MutationUpdateProfileArgs = {
 
 export type MutationForgotPasswordArgs = {
   email: Scalars['String'];
+};
+
+
+export type MutationValidTmpTokenArgs = {
+  token: Scalars['String'];
 };
 
 
@@ -285,6 +291,16 @@ export type UpdateProfileMutationVariables = Exact<{
 export type UpdateProfileMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'updateProfile'>
+);
+
+export type ValidTmpTokenMutationVariables = Exact<{
+  token: Scalars['String'];
+}>;
+
+
+export type ValidTmpTokenMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'validTmpToken'>
 );
 
 
@@ -756,3 +772,34 @@ export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
 export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
 export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;
+export const ValidTmpTokenDocument = gql`
+    mutation ValidTmpToken($token: String!) {
+  validTmpToken(token: $token)
+}
+    `;
+export type ValidTmpTokenMutationFn = Apollo.MutationFunction<ValidTmpTokenMutation, ValidTmpTokenMutationVariables>;
+
+/**
+ * __useValidTmpTokenMutation__
+ *
+ * To run a mutation, you first call `useValidTmpTokenMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useValidTmpTokenMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [validTmpTokenMutation, { data, loading, error }] = useValidTmpTokenMutation({
+ *   variables: {
+ *      token: // value for 'token'
+ *   },
+ * });
+ */
+export function useValidTmpTokenMutation(baseOptions?: Apollo.MutationHookOptions<ValidTmpTokenMutation, ValidTmpTokenMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<ValidTmpTokenMutation, ValidTmpTokenMutationVariables>(ValidTmpTokenDocument, options);
+      }
+export type ValidTmpTokenMutationHookResult = ReturnType<typeof useValidTmpTokenMutation>;
+export type ValidTmpTokenMutationResult = Apollo.MutationResult<ValidTmpTokenMutation>;
+export type ValidTmpTokenMutationOptions = Apollo.BaseMutationOptions<ValidTmpTokenMutation, ValidTmpTokenMutationVariables>;
