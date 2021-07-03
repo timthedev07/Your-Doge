@@ -40,3 +40,7 @@ a:hover,
 .margin-top-nav {
   margin-top: var(--nav-bar-height);
 }
+
+.margin-20 {
+  margin: 20px;
+}
