@@ -19,7 +19,7 @@ import {
 } from "../utils/AuthHelper";
 import { verify } from "jsonwebtoken";
 import { sendEmail } from "../utils/sendEmail";
-import { createConfirmationUrl } from "../utils/createConfirmationUrl";
+import { createActionUrl } from "../utils/createActionUrl";
 import { redis } from "../redis";
 
 const EMAIL_VALIDATION_REGEX =
@@ -110,7 +110,12 @@ export class UserResolver {
       throw new Error("Registration failed");
     }
 
-    await sendEmail(email, await createConfirmationUrl(user.id));
+    await sendEmail(
+      email,
+      await createActionUrl(user.id, "confirm"),
+      "verify",
+      "email"
+    );
 
     return true;
   }
@@ -265,7 +270,12 @@ export class UserResolver {
     try {
       const user = await User.findOne({ where: { email } });
       if (user && !user.confirmed) {
-        await sendEmail(email, await createConfirmationUrl(user.id));
+        await sendEmail(
+          email,
+          await createActionUrl(user.id, "confirm"),
+          "verify",
+          "email"
+        );
         return true;
       }
       return false;
@@ -320,5 +330,23 @@ export class UserResolver {
       console.log(err);
       return false;
     }
+  }
+
+  @Mutation(() => Boolean)
+  async forgotPassword(@Arg("email") email: string) {
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      return true;
+    }
+
+    await sendEmail(
+      email,
+      await createActionUrl(user.id, "forgot-password"),
+      "reset",
+      "password"
+    );
+
+    return true;
   }
 }
