@@ -4,6 +4,8 @@ import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "../CloseButton";
 import { AvatarKeyType } from "../../pages/account/Account";
 import {
+  MeDocument,
+  MeQuery,
   useUpdateAvatarMutation,
   useUpdateProfileMutation,
 } from "../../generated/graphql";
@@ -28,6 +30,7 @@ export const Information: React.FC<InformationProps> = ({
   const [avatarSrc, setAvatarSrc] = useState<string>("");
   const [updateAvatar] = useUpdateAvatarMutation();
   const [show, setShow] = useState<boolean>(false);
+  const [showSaveButton, setShowSaveButton] = useState<boolean>(false);
   /* for the avatar modification modal */
   const [avatars, setAvatars] = useState<Array<string>>([]);
   const [selectedAvatarId, setSelectedAvatarId] = useState<number | null>(null);
@@ -36,10 +39,6 @@ export const Information: React.FC<InformationProps> = ({
   const [bioValue, setBioValue] = useState<string>(bio);
   const [currAge, setCurrAge] = useState<number>(age);
   const [updateProfile] = useUpdateProfileMutation();
-
-  const madeChanges = () => {
-    return bioValue !== bio || currAge !== age;
-  };
 
   const handleClose = (action?: string) => {
     if (action === "save" && selectedAvatarId !== null) {
@@ -57,13 +56,23 @@ export const Information: React.FC<InformationProps> = ({
   const handleShow = () => setShow(true);
 
   const saveEdit = async () => {
-    const res = await updateProfile({
+    await updateProfile({
       variables: {
         bio: bioValue,
         age: currAge,
       },
+      update: (store, { data }) => {
+        if (!data) return null;
+        store.writeQuery<MeQuery>({
+          query: MeDocument,
+          data: {
+            __typename: "Query",
+            me: data.updateProfile,
+          },
+        });
+      },
     });
-    console.log(res);
+    setShowSaveButton(false);
   };
 
   const getSrcById = async (
@@ -113,11 +122,13 @@ export const Information: React.FC<InformationProps> = ({
 
   useEffect(() => {
     window.addEventListener("beforeunload", () => {
-      if (madeChanges()) {
+      if (showSaveButton) {
         alert("You have unsaved changes, are you sure to leave the page?");
       }
     });
   });
+
+  console.log(showSaveButton);
 
   return (
     <>
@@ -129,7 +140,11 @@ export const Information: React.FC<InformationProps> = ({
           <h6>
             <select
               onChange={(e) => {
-                setCurrAge(parseInt(e.target.value));
+                const newAge = parseInt(e.target.value);
+                setCurrAge(newAge);
+                if (newAge !== age) {
+                  setShowSaveButton(true);
+                }
               }}
               className="select"
               defaultValue={age}
@@ -151,11 +166,18 @@ export const Information: React.FC<InformationProps> = ({
         <textarea
           className="profile-bio"
           value={bioValue}
-          onChange={(e) => setBioValue(e.target.value)}
+          onChange={(e) => {
+            const newBio = e.target.value;
+            setBioValue(newBio);
+            console.log({ newBio, bio });
+            if (newBio !== bio) {
+              setShowSaveButton(true);
+            }
+          }}
         ></textarea>
       </div>
 
-      {madeChanges() && (
+      {showSaveButton && (
         <button
           style={{
             float: "right",
