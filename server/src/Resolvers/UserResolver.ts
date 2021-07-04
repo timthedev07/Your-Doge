@@ -20,7 +20,7 @@ import {
 import { verify } from "jsonwebtoken";
 import { sendEmail } from "../utils/sendEmail";
 import { createActionUrl } from "../utils/createActionUrl";
-import { redis } from "../redis";
+import { redisClient } from "../redis";
 
 const EMAIL_VALIDATION_REGEX =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
@@ -94,7 +94,6 @@ export class UserResolver {
     }
 
     try {
-
       /* now it's the clean up part, delete all unverified users registered more than 3 days ago */
       const threeDaysAgo = new Date().valueOf() - 1000 * 60 * 60 * 24 * 3;
 
@@ -114,8 +113,7 @@ export class UserResolver {
         email: email,
         password: hashed,
         username: username,
-      });      
-      
+      });
     } catch (err) {
       throw new Error("Email/username already registered");
     }
@@ -253,12 +251,12 @@ export class UserResolver {
     @Arg("token") token: string,
     @Ctx() { req, res }: MyContext
   ): Promise<LoginResponse> {
-    const userId = await redis.get(token);
+    const userId = await redisClient.get(token);
     if (!userId) throw new Error("Invalid token");
 
     await User.update({ id: parseInt(userId, 10) }, { confirmed: true });
 
-    redis.del(token);
+    redisClient.del(token);
 
     const user = await User.findOne({ where: { id: userId } })!;
 
@@ -371,7 +369,7 @@ export class UserResolver {
 
   @Mutation(() => Boolean)
   async validTmpToken(@Arg("token") token: string) {
-    const res = await redis.get(token);
+    const res = await redisClient.get(token);
     return !!res;
   }
 
@@ -396,7 +394,7 @@ export class UserResolver {
       return false;
     }
 
-    const userId = await redis.get(token);
+    const userId = await redisClient.get(token);
 
     // invalid token
     if (!userId) {
@@ -411,7 +409,7 @@ export class UserResolver {
         .where("id = :id", { id: parseInt(userId) })
         .execute();
 
-      await redis.del(token);
+      await redisClient.del(token);
 
       return true;
     } catch (err) {

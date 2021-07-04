@@ -7,16 +7,16 @@ import { UserResolver } from "./Resolvers/UserResolver";
 import { createConnection } from "typeorm";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-import connectRedis from "connect-redis";
 import session from "express-session";
-import { redis } from "./redis";
 
 // Import the routes
 import { router as AuthRouter } from "./routes/AuthRoute";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
+import connectRedis from "connect-redis";
+import { redisClient } from "./redis";
 
 const PORT: number = parseInt(process.env.PORT!) || 4000;
-const HOSTNAME: string = process.env.HOST || "localhost";
+const HOSTNAME: string = process.env.HOST || "0.0.0.0";
 export const FRONTEND_URL = "https://yourdoge.netlify.app";
 export const DEV_FRONTEND = "http://localhost:3000";
 
@@ -38,7 +38,7 @@ export const DEV_FRONTEND = "http://localhost:3000";
   app.use(
     session({
       store: new RedisStore({
-        client: redis as any,
+        client: redisClient,
       }),
       name: "angularsucks",
       secret: process.env.SESSION_SECRET!,
