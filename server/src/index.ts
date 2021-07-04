@@ -28,7 +28,9 @@ export const DEV_FRONTEND = "http://localhost:3000";
     cors({
       credentials: true,
       origin: [
-        process.env.NODE_ENV === "production" ? FRONTEND_URL : DEV_FRONTEND,
+        // process.env.NODE_ENV === "production" ? FRONTEND_URL : DEV_FRONTEND,
+        FRONTEND_URL,
+        DEV_FRONTEND,
       ],
     })
   );
