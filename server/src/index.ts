@@ -27,10 +27,14 @@ export const DEV_FRONTEND = "http://localhost:3000";
   app.use(
     cors({
       credentials: true,
-      origin: [FRONTEND_URL, DEV_FRONTEND],
+      origin: [
+        process.env.NODE_ENV === "production" ? FRONTEND_URL : DEV_FRONTEND,
+      ],
     })
   );
+
   const RedisStore = connectRedis(session);
+
   app.use(
     session({
       store: new RedisStore({
