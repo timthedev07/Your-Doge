@@ -51,4 +51,7 @@ export class User extends BaseEntity {
 
   @Column("boolean", { default: false })
   confirmed: boolean;
+
+  @Column("bigint", { default: new Date().valueOf() })
+  memberSince: number;
 }
