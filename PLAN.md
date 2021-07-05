@@ -28,3 +28,7 @@ God, I came up with a largely different plan, here's the diagram:
 ## Some features and/or functionalities I want to implement
 
 Discussion forum...
+
+# NOTE
+
+Make sure that you set the correct environment variables in production!!!!

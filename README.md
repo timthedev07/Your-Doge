@@ -81,6 +81,8 @@ Your Doge is a doge themed online homework manager built for the ones who are st
 
 We are open to any issues, pull requests, and comments on how we can make Your Doge better.
 
+## [Code of Conduct](/CODE_OF_CONDUCT.md)
+
 ## Branches
 
 - production -> don't make any changes here
