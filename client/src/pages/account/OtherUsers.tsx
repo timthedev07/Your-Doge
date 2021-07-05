@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ReadOnlyProfile } from "../../components/accountPage/ReadOnlyProfile";
 import { Loading } from "../../components/Loading";
 import { TabData, TabSwitcher } from "../../components/TabSwitcher";
@@ -10,7 +10,6 @@ interface OtherUsersProps {
 
 export const OtherUsers: React.FC<OtherUsersProps> = ({ username }) => {
   const { data, loading } = useGetProfileQuery({ variables: { username } });
-  const [currAvatarId] = useState<number>(data?.getProfile?.avatarId || 0);
 
   if (!data || !data.getProfile) {
     if (loading) return <Loading />;
@@ -21,7 +20,11 @@ export const OtherUsers: React.FC<OtherUsersProps> = ({ username }) => {
     {
       content: (
         <ReadOnlyProfile
-          avatarId={`${currAvatarId < 14 ? currAvatarId : 0}` as any}
+          avatarId={
+            `${
+              data?.getProfile?.avatarId <= 15 ? data?.getProfile?.avatarId : 0
+            }` as any
+          }
           bio={data.getProfile.bio}
           email={data.getProfile.email}
           username={data.getProfile.username}
