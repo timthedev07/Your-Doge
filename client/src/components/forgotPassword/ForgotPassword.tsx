@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { Alert } from "../Alert";
 import { useForgotPasswordMutation } from "../../generated/graphql";
+import { ReactComponent as SecurityImg } from "../../assets/images/security.svg";
 
 export const ForgotPassword: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -24,8 +25,8 @@ export const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <div className="resend-conf-wrapper">
-      <div className="resend-conf-container">
+    <div className="email-confirmation">
+      <div className="email-confirmation-card">
         <form onSubmit={(e) => handleSubmit(e)}>
           <Alert
             active={active}
@@ -38,6 +39,8 @@ export const ForgotPassword: React.FC = () => {
           />
           <h2>Forgot Your Password?</h2>
           <h4>We are here to help.</h4>
+          <SecurityImg style={{ width: "200px" }} />
+
           <input
             placeholder="Email"
             className="rounded-input emphasized"

@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { useResendConfEmailMutation } from "../../generated/graphql";
 import { Alert } from "../Alert";
+import { ReactComponent as Restart } from "../../assets/images/restart.svg";
 
 interface ResendConfEmailProps {}
 
@@ -38,15 +39,19 @@ export const ResendConfEmail: React.FC<ResendConfEmailProps> = () => {
           />
           <h2>Didn't receive the confirmation email?</h2>
           <h4>Give it another shot!</h4>
-          <input
-            placeholder="Your Email"
-            className="rounded-input emphasized"
-            ref={emailRef}
-            style={{ margin: "40px" }}
-          />
-          <button className="rounded-btn emphasized" type="submit">
-            Resend
-          </button>
+          <Restart style={{ width: "200px" }} />
+
+          <div style={{ width: "100%" }}>
+            <input
+              placeholder="Your Email"
+              className="rounded-input emphasized"
+              ref={emailRef}
+              style={{ margin: "40px" }}
+            />
+            <button className="rounded-btn emphasized" type="submit">
+              Resend
+            </button>
+          </div>
         </form>
       </div>
     </div>
