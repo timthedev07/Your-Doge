@@ -101,21 +101,20 @@ export const Information: React.FC<InformationProps> = ({
 
   /* set up an event listener of cmd+s */
   useEffect(() => {
-    // window.addEventListener("keydown", (e) => {
-    //   console.log(e.key);
-    //   if (
-    //     (window.navigator.userAgent.indexOf("Mac") !== -1
-    //       ? e.metaKey
-    //       : e.ctrlKey) &&
-    //     e.key === "s"
-    //   ) {
-    //     e.preventDefault();
-    //     console.log("ok");
-    //     if (showSaveButton) {
-    //       saveEdit();
-    //     }
-    //   }
-    // });
+    window.addEventListener("keydown", (e) => {
+      console.log(e.key);
+      if (
+        (window.navigator.userAgent.indexOf("Mac") !== -1
+          ? e.metaKey
+          : e.ctrlKey) &&
+        e.key === "s"
+      ) {
+        e.preventDefault();
+        if (showSaveButton) {
+          saveEdit();
+        }
+      }
+    });
   });
 
   /* dynamically importing all avatars to display on the modal */
