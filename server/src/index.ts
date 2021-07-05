@@ -64,7 +64,7 @@ export const DEV_FRONTEND = "http://localhost:3000";
   const apolloServer = new ApolloServer({
     schema: await buildSchema({
       resolvers:
-        process.env.HANDLE_HOMEWORK! === "true"
+        process.env.HANDLE_HOMEWORK === "true"
           ? [UserResolver, HomeworkResolver]
           : [UserResolver],
     }),
@@ -74,6 +74,6 @@ export const DEV_FRONTEND = "http://localhost:3000";
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(PORT, HOSTNAME, () => {
-    console.log(`app listening at: http://${HOSTNAME}:${PORT}`);
+    console.log(`server up and running at http://${HOSTNAME}:${PORT}`);
   });
 })();
