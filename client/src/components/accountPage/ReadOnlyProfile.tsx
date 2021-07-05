@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { AvatarKeyType } from "../../pages/account/Account";
 import AvatarData from "../../avatarData.json";
+import ReactMarkdown from "react-markdown";
 
 interface ReadOnlyProfileProps {
   avatarId: AvatarKeyType;
@@ -18,6 +19,8 @@ export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
   age,
 }) => {
   const [avatarSrc, setAvatarSrc] = useState<string>("");
+
+  console.log(avatarId);
 
   const getSrcById = async (
     id: AvatarKeyType,
@@ -49,11 +52,12 @@ export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
       </div>
 
       <div className="profile-bio-container">
-        <textarea
-          className="profile-bio"
-          defaultValue={bio}
-          disabled
-        ></textarea>
+        <div style={{ width: "100%" }}>
+          <br />
+          <br />
+          <br />
+          <ReactMarkdown>{bio}</ReactMarkdown>
+        </div>
       </div>
     </>
   );
