@@ -35,24 +35,26 @@ export const DEV_FRONTEND = "http://localhost:3000";
     })
   );
 
-  const RedisStore = connectRedis(session);
+  if (process.env.HANDLE_HOMEWORK === "false") {
+    const RedisStore = connectRedis(session);
 
-  app.use(
-    session({
-      store: new RedisStore({
-        client: redisClient,
-      }),
-      name: "angularsucks",
-      secret: process.env.SESSION_SECRET!,
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
-      },
-    })
-  );
+    app.use(
+      session({
+        store: new RedisStore({
+          client: redisClient,
+        }),
+        name: "angularsucks",
+        secret: process.env.SESSION_SECRET!,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production",
+          maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+        },
+      })
+    );
+  }
 
   // use the routes
   app.use("/auth", AuthRouter);
