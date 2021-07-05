@@ -31,7 +31,7 @@ interface Props {
 
 // Responsive Navigation Bar
 export const Nav: React.FC<Props> = ({ transparent }) => {
-  const { data: userData } = useMeQuery();
+  const { data: userData, loading } = useMeQuery();
   const history = useHistory();
   const location = useLocation();
 
@@ -116,32 +116,17 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           }
           href="/dashboard"
         >
-          {userData?.me?.username || "Not logged in"}
+          Dashboard
         </a>
 
-        {userData?.me ? (
-          <>
-            <a
-              className={
-                currPath === "account" ? "nav-item nav-item-active" : "nav-item"
-              }
-              href="/account"
-            >
-              Account
-            </a>
-          </>
-        ) : (
-          <>
-            <div className={"nav-item nav-item-end"} id={"auth-links"}>
-              <a href="/login" className="rounded-btn secondary">
-                Sign in
-              </a>
-              <a href="/register" className="rounded-btn">
-                Sign Up
-              </a>
-            </div>
-          </>
-        )}
+        <a
+          className={
+            currPath === "account" ? "nav-item nav-item-active" : "nav-item"
+          }
+          href="/account"
+        >
+          {loading ? "..." : userData?.me ? "Account" : "Sign In"}
+        </a>
       </div>
     </div>
   );
