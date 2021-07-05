@@ -99,6 +99,25 @@ export const Information: React.FC<InformationProps> = ({
     getSrcById(avatarId, setAvatarSrc);
   }, [avatarId]);
 
+  /* set up an event listener of cmd+s */
+  useEffect(() => {
+    // window.addEventListener("keydown", (e) => {
+    //   console.log(e.key);
+    //   if (
+    //     (window.navigator.userAgent.indexOf("Mac") !== -1
+    //       ? e.metaKey
+    //       : e.ctrlKey) &&
+    //     e.key === "s"
+    //   ) {
+    //     e.preventDefault();
+    //     console.log("ok");
+    //     if (showSaveButton) {
+    //       saveEdit();
+    //     }
+    //   }
+    // });
+  });
+
   /* dynamically importing all avatars to display on the modal */
   useEffect(() => {
     const getAllAvatars = async () => {
@@ -140,9 +159,8 @@ export const Information: React.FC<InformationProps> = ({
               onChange={(e) => {
                 const newAge = parseInt(e.target.value);
                 setCurrAge(newAge);
-                if (newAge !== age) {
-                  setShowSaveButton(true);
-                }
+
+                setShowSaveButton(newAge !== age);
               }}
               className="select"
               defaultValue={age}
@@ -167,9 +185,7 @@ export const Information: React.FC<InformationProps> = ({
           onChange={(e) => {
             const newBio = e.target.value;
             setBioValue(newBio);
-            if (newBio !== bio) {
-              setShowSaveButton(true);
-            }
+            setShowSaveButton(newBio !== bio);
           }}
         ></textarea>
       </div>
