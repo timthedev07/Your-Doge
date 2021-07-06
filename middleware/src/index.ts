@@ -1,17 +1,17 @@
 import "reflect-metadata";
 import "dotenv/config";
-import "reflect-metadata";
-import express from "express";
 import { createConnection } from "typeorm";
+import express from "express";
+import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { ServerResolver } from "./ServerResolver";
-import cors from "cors";
+import { ServerResolver } from "./resolvers/ServerResolver";
 
-const FRONTEND_URL = "http://localhost:3000";
+const FRONTEND = "https://your-doge.netlify.app";
+const DEV_FRONTEND = "http://localhost:3000";
 
-// specify the routes
-const PORT: number = 5000;
+const PORT = parseInt(process.env.PORT || "5000");
+const HOSTNAME = process.env.HOST || "localhost";
 
 (async () => {
   const app = express();
@@ -19,7 +19,11 @@ const PORT: number = 5000;
   app.use(
     cors({
       credentials: true,
-      origin: FRONTEND_URL,
+      origin: [
+        // process.env.NODE_ENV === "production" ? FRONTEND_URL : DEV_FRONTEND,
+        FRONTEND,
+        DEV_FRONTEND,
+      ],
     })
   );
 
@@ -34,25 +38,7 @@ const PORT: number = 5000;
 
   apolloServer.applyMiddleware({ app, cors: false });
 
-  app.listen(PORT, () => {
-    console.log(`app listening at: http://localhost:${PORT}`);
+  app.listen(PORT, HOSTNAME, () => {
+    console.log(`server up and running at http://${HOSTNAME}:${PORT}`);
   });
 })();
-
-// createConnection()
-//   .then(async (connection) => {
-//     console.log("Inserting a new user into the database...");
-//     const user = new Server();
-//     user.full = "Timber";
-//     user.lastName = "Saw";
-//     user.age = 25;
-//     await connection.manager.save(user);
-//     console.log("Saved a new user with id: " + user.id);
-
-//     console.log("Loading users from the database...");
-//     const users = await connection.manager.find(User);
-//     console.log("Loaded users: ", users);
-
-//     console.log("Here you can setup and run express/koa/any other framework.");
-//   })
-//   .catch((error) => console.log(error));
