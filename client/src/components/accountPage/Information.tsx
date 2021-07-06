@@ -102,7 +102,6 @@ export const Information: React.FC<InformationProps> = ({
   /* set up an event listener of cmd+s */
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
-      console.log(e.key);
       if (
         (window.navigator.userAgent.indexOf("Mac") !== -1
           ? e.metaKey
