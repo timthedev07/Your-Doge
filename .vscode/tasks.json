@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "frontend",
+      "type": "shell",
+      "command": "cd client && yarn start",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "redis",
+      "type": "shell",
+      "command": "cd server && killall redis-server && redis-server",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "backend",
+      "type": "shell",
+      "command": "cd server && yarn devstart",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}
