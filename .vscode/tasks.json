@@ -1,45 +1,45 @@
-{
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "frontend",
-      "type": "shell",
-      "command": "cd client && yarn start",
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    },
-    {
-      "label": "redis",
-      "type": "shell",
-      "command": "cd server && killall redis-server && redis-server",
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    },
-    {
-      "label": "backend",
-      "type": "shell",
-      "command": "cd server && yarn devstart",
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    },
-    {
-      "label": "backend2",
-      "type": "shell",
-      "command": "PORT=5000 cd server && yarn devstart",
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    },
-    {
-      "label": "middleware",
-      "type": "shell",
-      "command": "cd middleware && yarn start",
-      "runOptions": {
-        "runOn": "folderOpen"
-      }
-    }
-  ]
-}
+// {
+//   "version": "2.0.0",
+//   "tasks": [
+//     {
+//       "label": "frontend",
+//       "type": "shell",
+//       "command": "cd client && yarn start",
+//       "runOptions": {
+//         "runOn": "folderOpen"
+//       }
+//     },
+//     // {
+//     //   "label": "redis",
+//     //   "type": "shell",
+//     //   "command": "cd server && killall redis-server && redis-server",
+//     //   "runOptions": {
+//     //     "runOn": "folderOpen"
+//     //   }
+//     // },
+//     {
+//       "label": "backend",
+//       "type": "shell",
+//       "command": "cd server && yarn devstart",
+//       "runOptions": {
+//         "runOn": "folderOpen"
+//       }
+//     },
+//     {
+//       "label": "backend2",
+//       "type": "shell",
+//       "command": "PORT=5000 cd server && yarn devstart",
+//       "runOptions": {
+//         "runOn": "folderOpen"
+//       }
+//     },
+//     {
+//       "label": "middleware",
+//       "type": "shell",
+//       "command": "cd middleware && yarn start",
+//       "runOptions": {
+//         "runOn": "folderOpen"
+//       }
+//     }
+//   ]
+// }
