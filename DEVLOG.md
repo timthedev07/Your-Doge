@@ -1,6 +1,6 @@
 # July 5, 2021
 
-Got all 5 servers(1 user + 4 db servers)
+Got all 5 servers(1 user + 4 db servers) hosted on heroku ready for testing.
 
 # July 4, 2021
 
