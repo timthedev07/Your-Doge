@@ -27,7 +27,8 @@ God, I came up with a largely different plan, here's the diagram:
 
 ### **_Update_**
 
-We are using apollo federation now! And the infrastructure is shown in the diagram.
+We are using apollo federation now! And the infrastructure is shown in the diagram:
+![diagram](diagram2.png)
 
 ## Some features and/or functionalities I want to implement
 
