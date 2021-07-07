@@ -25,10 +25,14 @@ First things first, let's host the servers.
 God, I came up with a largely different plan, here's the diagram:
 ![diagram](diagram1.png)
 
+### **_Update_**
+
+We are using apollo federation now! And the infrastructure is shown in the diagram.
+
 ## Some features and/or functionalities I want to implement
 
 Discussion forum...
 
-# NOTE
+# NOTE to devs
 
 Make sure that you set the correct environment variables in production!!!!
