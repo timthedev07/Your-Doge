@@ -1,8 +1,8 @@
 import "dotenv/config";
 import "reflect-metadata";
 import express from "express";
-import { ApolloServer } from "apollo-server-express";
-import { buildSchema } from "type-graphql";
+import { ApolloServer } from "apollo-server";
+import { buildFederatedSchema } from "./utils/buildFederatedSchema";
 import { UserResolver } from "./Resolvers/UserResolver";
 import { createConnection } from "typeorm";
 import cookieParser from "cookie-parser";
@@ -14,6 +14,8 @@ import { router as AuthRouter } from "./routes/AuthRoute";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 import connectRedis from "connect-redis";
 import { redisClient } from "./redis";
+import { Homework } from "./entity/Homework";
+import { User } from "./entity/User";
 
 const PORT: number = parseInt(process.env.PORT!) || 4000;
 const HOSTNAME: string = process.env.HOST || "0.0.0.0";
@@ -62,18 +64,20 @@ export const DEV_FRONTEND = "http://localhost:3000";
   await createConnection();
 
   const apolloServer = new ApolloServer({
-    schema: await buildSchema({
+    schema: await buildFederatedSchema({
       resolvers:
         process.env.HANDLE_HOMEWORK === "true"
           ? [UserResolver, HomeworkResolver]
           : [UserResolver],
+      orphanedTypes:
+        process.env.HANDLE_HOMEWORK === "true" ? [User, Homework] : [User],
     }),
     context: ({ req, res }) => ({ req, res }),
   });
 
-  apolloServer.applyMiddleware({ app, cors: false });
+  // apolloServer.applyMiddleware({ app, cors: false });
 
-  app.listen(PORT, HOSTNAME, () => {
+  apolloServer.listen(PORT, HOSTNAME, () => {
     console.log(`server up and running at http://${HOSTNAME}:${PORT}`);
   });
 })();

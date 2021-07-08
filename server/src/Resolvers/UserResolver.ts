@@ -39,7 +39,7 @@ class LoginResponse {
   user: User;
 }
 
-@Resolver()
+@Resolver((of) => User)
 export class UserResolver {
   /**
    * This code-first approach below is basically the same as:(schema first)

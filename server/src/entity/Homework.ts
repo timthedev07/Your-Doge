@@ -1,6 +1,7 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Directive, Field, Int, ObjectType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
+@Directive(`@key(fields: "id")`)
 @ObjectType()
 @Entity("homework")
 export class Homework extends BaseEntity {

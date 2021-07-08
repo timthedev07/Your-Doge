@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from "type-graphql";
+import { Directive, Field, Int, ObjectType } from "type-graphql";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -7,6 +7,7 @@ import {
   Unique,
 } from "typeorm";
 
+@Directive(`@key(fields: "id")`)
 @ObjectType()
 @Unique(["email"]) // here we are forcing an unique constraint on the email
 @Entity("users")

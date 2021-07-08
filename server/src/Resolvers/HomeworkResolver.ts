@@ -21,7 +21,7 @@ class AllHomeworkResponse {
   count: number;
 }
 
-@Resolver()
+@Resolver((of) => Homework)
 export class HomeworkResolver {
   @Query(() => [Homework])
   async getAllHomework() {
