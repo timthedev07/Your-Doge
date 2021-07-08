@@ -14,6 +14,11 @@
   <a href="https://yourdoge.netlify.app">
     <img src="https://img.shields.io/badge/license-GPL--3.0--or--later-yellow" />
   </a>
+  
+  <a href="https://open.vscode.dev/RelentlessExploration/Your-Doge">
+    <img src="https://open.vscode.dev/badges/open-in-vscode.svg">
+  </a>
+  
 </p>
 
 <p align="center">
