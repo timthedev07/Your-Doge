@@ -1,0 +1,21 @@
+{
+  "name": "your-doge",
+  "version": "1.0.0",
+  "description": "<a href=\"https://yourdoge.netlify.app\">   <p align=\"center\">     <img height=150 src=\"assets/yourdogeAppleIcon.svg\"/>   </p>   <p align=\"center\">     <img height=70 src=\"assets/textLogo.svg\">   </p> </a>",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "concurrently \"cd client && yarn start\" \"cd server && redis-server\" \"cd gateway && yarn start\" \"cd server && yarn devstart\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RelentlessExploration/Your-Doge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/RelentlessExploration/Your-Doge/issues"
+  },
+  "homepage": "https://github.com/RelentlessExploration/Your-Doge#readme"
+}
