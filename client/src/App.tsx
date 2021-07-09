@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { DEV_BACKEND_BASE_URL } from "./index";
+import { DEV_GATEWAY_BACKEND } from "./index";
 import { setAccessToken } from "./accessToken";
 import { Routes } from "./Routes";
 import { Loading } from "./components/Loading";
@@ -10,7 +10,7 @@ export const App: React.FC<Props> = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch(`${DEV_BACKEND_BASE_URL}/auth/refresh_token`, {
+    fetch(`${DEV_GATEWAY_BACKEND}/auth/refresh_token`, {
       credentials: "include",
       method: "POST",
     })

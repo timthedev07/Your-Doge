@@ -30,6 +30,7 @@ export const DEV_FRONTEND = "http://localhost:3000";
     cors({
       credentials: true,
       origin: [
+        // TODO: USE THE LINE BELOW IN PRODUCTION
         // process.env.NODE_ENV === "production" ? FRONTEND_URL : DEV_FRONTEND,
         FRONTEND_URL,
         DEV_FRONTEND,
@@ -37,6 +38,7 @@ export const DEV_FRONTEND = "http://localhost:3000";
     })
   );
 
+  // if this server only handles user data
   if (process.env.HANDLE_HOMEWORK === "false") {
     const RedisStore = connectRedis(session);
 
@@ -64,14 +66,27 @@ export const DEV_FRONTEND = "http://localhost:3000";
   await createConnection();
 
   const apolloServer = new ApolloServer({
-    schema: await buildFederatedSchema({
-      resolvers:
-        process.env.HANDLE_HOMEWORK === "true"
-          ? [UserResolver, HomeworkResolver]
-          : [UserResolver],
-      orphanedTypes:
-        process.env.HANDLE_HOMEWORK === "true" ? [User, Homework] : [User],
-    }),
+    schema: await buildFederatedSchema(
+      process.env.NODE_ENV === "production"
+        ? {
+            resolvers:
+              process.env.HANDLE_HOMEWORK === "true"
+                ? [HomeworkResolver]
+                : [UserResolver],
+            orphanedTypes:
+              process.env.HANDLE_HOMEWORK === "true" ? [Homework] : [User],
+          }
+        : {
+            resolvers:
+              process.env.HANDLE_HOMEWORK === "true"
+                ? [UserResolver, HomeworkResolver]
+                : [UserResolver],
+            orphanedTypes:
+              process.env.HANDLE_HOMEWORK === "true"
+                ? [User, Homework]
+                : [User],
+          }
+    ),
     context: ({ req, res }) => ({ req, res }),
   });
 

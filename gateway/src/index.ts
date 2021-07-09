@@ -8,7 +8,7 @@ import { ApolloGateway } from "@apollo/gateway";
 const FRONTEND = "https://your-doge.netlify.app";
 const DEV_FRONTEND = "http://localhost:3000";
 
-const PORT = parseInt(process.env.PORT || "5000");
+const PORT = parseInt(process.env.PORT || "9000");
 const HOSTNAME = process.env.HOST || "localhost";
 
 (async () => {
@@ -32,6 +32,8 @@ const HOSTNAME = process.env.HOST || "localhost";
   });
 
   const { schema, executor } = await gateway.load();
+
+  console.log(schema);
 
   const apolloServer = new ApolloServer({
     schema,
