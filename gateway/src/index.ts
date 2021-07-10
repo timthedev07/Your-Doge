@@ -18,6 +18,7 @@ const HOSTNAME = process.env.HOST || "localhost";
     cors({
       credentials: true,
       origin: [
+        // TODO: USE THE LINE BELOW IN PRODUCTION
         // process.env.NODE_ENV === "production" ? FRONTEND_URL : DEV_FRONTEND,
         FRONTEND,
         DEV_FRONTEND,
@@ -25,15 +26,16 @@ const HOSTNAME = process.env.HOST || "localhost";
     })
   );
 
-  const serviceList = [{ name: "users", url: "http://localhost:4000/" }];
+  const serviceList = [
+    { name: "users", url: "http://localhost:4000/" },
+    { name: "homework", url: "http://localhost:5000/" },
+  ];
 
   const gateway = new ApolloGateway({
     serviceList,
   });
 
   const { schema, executor } = await gateway.load();
-
-  console.log(schema);
 
   const apolloServer = new ApolloServer({
     schema,
