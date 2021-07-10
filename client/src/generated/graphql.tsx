@@ -16,21 +16,21 @@ export type Scalars = {
 
 export type AllHomeworkResponse = {
   __typename?: 'AllHomeworkResponse';
-  homeworkList: Array<Homework>;
   count: Scalars['Float'];
+  homeworkList: Array<Homework>;
 };
 
 export type Homework = {
   __typename?: 'Homework';
-  id: Scalars['Int'];
-  userId: Scalars['Int'];
-  subjectId?: Maybe<Scalars['Int']>;
-  title: Scalars['String'];
+  deadline: Scalars['String'];
   description: Scalars['String'];
   done: Scalars['Boolean'];
-  deadline: Scalars['String'];
   enjoyed?: Maybe<Scalars['Boolean']>;
+  id: Scalars['Int'];
   onTime?: Maybe<Scalars['Boolean']>;
+  subjectId?: Maybe<Scalars['Int']>;
+  title: Scalars['String'];
+  userId: Scalars['Int'];
 };
 
 export type LoginResponse = {
@@ -41,31 +41,60 @@ export type LoginResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  register: Scalars['Boolean'];
-  login: LoginResponse;
-  revokeRefreshTokensForUser: Scalars['Boolean'];
-  logout: Scalars['Boolean'];
-  updateAvatarId: Scalars['Boolean'];
-  confirmUser: LoginResponse;
-  resendConfirmationUrl: Scalars['Boolean'];
-  updateProfile?: Maybe<User>;
-  forgotPassword: Scalars['Boolean'];
-  validTmpToken: Scalars['Boolean'];
-  resetPassword: Scalars['Boolean'];
   addHomework: Scalars['Boolean'];
+  confirmUser: LoginResponse;
+  forgotPassword: Scalars['Boolean'];
+  login: LoginResponse;
+  logout: Scalars['Boolean'];
+  register: Scalars['Boolean'];
+  resendConfirmationUrl: Scalars['Boolean'];
+  resetPassword: Scalars['Boolean'];
+  revokeRefreshTokensForUser: Scalars['Boolean'];
+  updateAvatarId: Scalars['Boolean'];
+  updateProfile?: Maybe<User>;
+  validTmpToken: Scalars['Boolean'];
 };
 
 
-export type MutationRegisterArgs = {
-  username: Scalars['String'];
-  password: Scalars['String'];
+export type MutationAddHomeworkArgs = {
+  deadline: Scalars['String'];
+  description: Scalars['String'];
+  title: Scalars['String'];
+};
+
+
+export type MutationConfirmUserArgs = {
+  token: Scalars['String'];
+};
+
+
+export type MutationForgotPasswordArgs = {
   email: Scalars['String'];
 };
 
 
 export type MutationLoginArgs = {
-  password: Scalars['String'];
   email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type MutationRegisterArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
+};
+
+
+export type MutationResendConfirmationUrlArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationResetPasswordArgs = {
+  confirmation: Scalars['String'];
+  newPassword: Scalars['String'];
+  token: Scalars['String'];
 };
 
 
@@ -79,24 +108,9 @@ export type MutationUpdateAvatarIdArgs = {
 };
 
 
-export type MutationConfirmUserArgs = {
-  token: Scalars['String'];
-};
-
-
-export type MutationResendConfirmationUrlArgs = {
-  email: Scalars['String'];
-};
-
-
 export type MutationUpdateProfileArgs = {
   age?: Maybe<Scalars['Float']>;
   bio?: Maybe<Scalars['String']>;
-};
-
-
-export type MutationForgotPasswordArgs = {
-  email: Scalars['String'];
 };
 
 
@@ -104,27 +118,13 @@ export type MutationValidTmpTokenArgs = {
   token: Scalars['String'];
 };
 
-
-export type MutationResetPasswordArgs = {
-  confirmation: Scalars['String'];
-  newPassword: Scalars['String'];
-  token: Scalars['String'];
-};
-
-
-export type MutationAddHomeworkArgs = {
-  deadline: Scalars['String'];
-  description: Scalars['String'];
-  title: Scalars['String'];
-};
-
 export type Query = {
   __typename?: 'Query';
+  getAllHomework?: Maybe<Array<Homework>>;
+  getAllUserHomework: AllHomeworkResponse;
+  getProfile?: Maybe<User>;
   hello: Scalars['String'];
   me?: Maybe<User>;
-  getProfile?: Maybe<User>;
-  getAllHomework: Array<Homework>;
-  getAllUserHomework: AllHomeworkResponse;
 };
 
 
@@ -134,13 +134,13 @@ export type QueryGetProfileArgs = {
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['Int'];
-  email: Scalars['String'];
-  username: Scalars['String'];
-  serverId: Scalars['Int'];
+  age: Scalars['Int'];
   avatarId: Scalars['Int'];
   bio: Scalars['String'];
-  age: Scalars['Int'];
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  serverId: Scalars['Int'];
+  username: Scalars['String'];
 };
 
 export type ConfirmEmailMutationVariables = Exact<{
@@ -250,10 +250,10 @@ export type AllHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AllHomeworkQuery = (
   { __typename?: 'Query' }
-  & { getAllHomework: Array<(
+  & { getAllHomework?: Maybe<Array<(
     { __typename?: 'Homework' }
     & Pick<Homework, 'id' | 'userId' | 'title' | 'description' | 'deadline' | 'enjoyed'>
-  )> }
+  )>> }
 );
 
 export type GetProfileQueryVariables = Exact<{
