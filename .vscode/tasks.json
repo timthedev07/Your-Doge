@@ -2,9 +2,17 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "concurrent tasks",
+      "label": "client",
       "type": "shell",
       "command": "cd client && yarn start",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    },
+    {
+      "label": "concurrently tasks",
+      "type": "shell",
+      "command": "yarn start",
       "runOptions": {
         "runOn": "folderOpen"
       }
