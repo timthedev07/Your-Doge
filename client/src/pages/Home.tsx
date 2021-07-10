@@ -18,11 +18,13 @@ export const Home: React.FC = () => {
   } else if (!gqlData) {
     body = <div>Oops, No data</div>;
   } else {
-    const processedData = gqlData.getAllHomework.map((each) => (
-      <div key={each.id}>
-        {each.title}, {each.userId}
-      </div>
-    ));
+    const processedData = gqlData.getAllHomework
+      ? gqlData.getAllHomework.map((each) => (
+          <div key={each.id}>
+            {each.title}, {each.userId}
+          </div>
+        ))
+      : "No data";
     body = processedData;
   }
 
