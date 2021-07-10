@@ -1,7 +1,7 @@
 import "dotenv/config";
 import "reflect-metadata";
 import express from "express";
-import { ApolloServer } from "apollo-server";
+import { ApolloServer } from "apollo-server-express";
 import { buildFederatedSchema } from "./utils/buildFederatedSchema";
 import { UserResolver } from "./Resolvers/UserResolver";
 import { createConnection } from "typeorm";
@@ -10,12 +10,12 @@ import cors from "cors";
 import session from "express-session";
 
 // Import the routes
-import { router as AuthRouter } from "./routes/AuthRoute";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 import connectRedis from "connect-redis";
 import { redisClient } from "./redis";
 import { Homework } from "./entity/Homework";
 import { User } from "./entity/User";
+import { router as AuthRouter } from "./routes/AuthRoute";
 
 const PORT: number = parseInt(process.env.PORT!) || 4000;
 const HOSTNAME: string = process.env.HOST || "0.0.0.0";
@@ -60,7 +60,7 @@ export const DEV_FRONTEND = "http://localhost:3000";
     );
   }
 
-  // use the routes
+  // use the route
   app.use("/auth", AuthRouter);
 
   await createConnection();
@@ -79,20 +79,18 @@ export const DEV_FRONTEND = "http://localhost:3000";
         : {
             resolvers:
               process.env.HANDLE_HOMEWORK === "true"
-                ? [UserResolver, HomeworkResolver]
+                ? [HomeworkResolver]
                 : [UserResolver],
             orphanedTypes:
-              process.env.HANDLE_HOMEWORK === "true"
-                ? [User, Homework]
-                : [User],
+              process.env.HANDLE_HOMEWORK === "true" ? [Homework] : [User],
           }
     ),
     context: ({ req, res }) => ({ req, res }),
   });
 
-  // apolloServer.applyMiddleware({ app, cors: false });
+  apolloServer.applyMiddleware({ app, cors: false, path: "/" });
 
-  apolloServer.listen(PORT, HOSTNAME, () => {
+  app.listen(PORT, HOSTNAME, () => {
     console.log(`server up and running at http://${HOSTNAME}:${PORT}`);
   });
 })();
