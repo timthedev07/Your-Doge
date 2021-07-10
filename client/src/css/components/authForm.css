@@ -8,7 +8,8 @@
 }
 
 .form-as-wrapper {
-  width: 375px;
+  max-width: 375px;
+  width: 95vw;
   position: relative;
   display: block;
   min-height: 500px;

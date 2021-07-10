@@ -6,7 +6,7 @@ import { Loading } from "../../components/Loading";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../..";
 
-const THRESHOLD = 290;
+const THRESHOLD = 360;
 
 // eslint-disable-next-line
 const EMAIL_VALIDATION_REGEX =
@@ -101,13 +101,13 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
 
     setAlertMessage("");
     setAlertActive(false);
+    setLoading(false);
 
     // this is how you pass parameters to the graphql function
     try {
       const data = await register(email, password, username);
 
       if (data?.register) {
-        setLoading(false);
         history.push("/auth/confirm");
         return;
       }
@@ -123,11 +123,16 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
       setWindowWidth(window.innerWidth);
     }
     window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   });
 
   return (
     <div className="form-container">
       {loading ? <Loading /> : null}
+
       <h1 className="form-heading">Join Us</h1>
       <div>
         <Form className="form-as-wrapper">
@@ -137,6 +142,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
             type={alertType}
             text={alertMessage}
           />
+
           <div className="input-data form-padding-child">
             <span className="field-hint-icon"></span>
             <input
@@ -152,6 +158,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
             />
             <label>Email*</label>
           </div>
+
           <div className="input-data form-padding-child">
             <span className="field-hint-icon"></span>
             <input
@@ -168,6 +175,7 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
             />
             <label>Username*</label>
           </div>
+
           <div className="input-data form-padding-child">
             <input
               required
@@ -183,28 +191,19 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
             />
             <label>Password*</label>
           </div>
+
           <div className="text-center form-padding-child">
-            {!loading ? (
-              <Button
-                variant="warning"
-                className={"form-submit-button"}
-                type="submit"
-                onClick={(event) => handleSubmit(event)}
-              >
-                Sign up
-              </Button>
-            ) : (
-              <Button
-                variant="warning"
-                disabled
-                type="submit"
-                className={"form-submit-button disabled"}
-                onClick={(event) => handleSubmit(event)}
-              >
-                Sign up
-              </Button>
-            )}
+            <Button
+              variant="warning"
+              className={"form-submit-button"}
+              type="submit"
+              disabled={loading}
+              onClick={(event) => handleSubmit(event)}
+            >
+              Sign up
+            </Button>
           </div>
+
           <div className="text-center second-option-container">
             <Button
               variant="light"

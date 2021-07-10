@@ -7,7 +7,7 @@ import { setAccessToken } from "../../accessToken";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../..";
 
-const THRESHOLD = 290;
+const THRESHOLD = 360;
 
 export const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const emRef = useRef<HTMLInputElement>(null);
@@ -28,6 +28,10 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
       setWindowWidth(window.innerWidth);
     }
     window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   const displayError = (message: string) => {
@@ -55,12 +59,12 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
 
     setAlertMessage("");
     setAlertActive(false);
+    setPageLoading(false);
 
     try {
       const data = await login(email, password);
 
       if (data?.login) {
-        setPageLoading(false);
         setAccessToken(data.login.accessToken);
         history.push("/");
         return;
@@ -75,6 +79,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
   return (
     <div className="form-container">
       {pageLoading ? <Loading /> : null}
+
       <h1 className="form-heading">Welcome Back</h1>
       <div>
         <Form className="form-as-wrapper">
@@ -84,6 +89,7 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
             type={alertType}
             text={alertMessage}
           />
+
           <div className="input-data form-padding-child">
             <span className="field-hint-icon"></span>
             <input
