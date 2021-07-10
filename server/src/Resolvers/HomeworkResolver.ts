@@ -23,7 +23,7 @@ class AllHomeworkResponse {
 
 @Resolver((of) => Homework)
 export class HomeworkResolver {
-  @Query(() => [Homework])
+  @Query(() => [Homework], { nullable: true })
   async getAllHomework() {
     const res = await Homework.findAndCount();
     return res[0];
