@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { unknownErrMsg } from "../index";
+import { unknownErrMsg } from "../constants/general";
 import {
   LoginMutation,
   MeDocument,

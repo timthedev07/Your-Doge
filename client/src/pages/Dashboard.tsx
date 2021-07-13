@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import { authClient } from "..";
+import { authClient } from "../apolloApp";
 import { useGetProfileQuery as useAllUserHomeworkQuery } from "../generated/graphql";
 
 interface DashdoardProps {}

@@ -5,7 +5,7 @@ import { Link, RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { setAccessToken } from "../../accessToken";
 import { useAuth } from "../../contexts/AuthContext";
-import { unknownErrMsg } from "../..";
+import { unknownErrMsg } from "../../constants/general";
 
 const THRESHOLD = 360;
 

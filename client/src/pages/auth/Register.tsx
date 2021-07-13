@@ -4,7 +4,7 @@ import { Alert } from "../../components/Alert";
 import { RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { useAuth } from "../../contexts/AuthContext";
-import { unknownErrMsg } from "../..";
+import { unknownErrMsg } from "../../constants/general";
 
 const THRESHOLD = 360;
 
