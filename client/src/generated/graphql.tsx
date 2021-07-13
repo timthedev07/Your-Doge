@@ -14,25 +14,6 @@ export type Scalars = {
   Float: number;
 };
 
-export type AllHomeworkResponse = {
-  __typename?: 'AllHomeworkResponse';
-  count: Scalars['Float'];
-  homeworkList: Array<Homework>;
-};
-
-export type Homework = {
-  __typename?: 'Homework';
-  deadline: Scalars['String'];
-  description: Scalars['String'];
-  done: Scalars['Boolean'];
-  enjoyed?: Maybe<Scalars['Boolean']>;
-  id: Scalars['Int'];
-  onTime?: Maybe<Scalars['Boolean']>;
-  subjectId?: Maybe<Scalars['Int']>;
-  title: Scalars['String'];
-  userId: Scalars['Int'];
-};
-
 export type LoginResponse = {
   __typename?: 'LoginResponse';
   accessToken: Scalars['String'];
@@ -41,60 +22,30 @@ export type LoginResponse = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addHomework: Scalars['Boolean'];
-  confirmUser: LoginResponse;
-  forgotPassword: Scalars['Boolean'];
-  login: LoginResponse;
-  logout: Scalars['Boolean'];
   register: Scalars['Boolean'];
-  resendConfirmationUrl: Scalars['Boolean'];
-  resetPassword: Scalars['Boolean'];
+  login: LoginResponse;
   revokeRefreshTokensForUser: Scalars['Boolean'];
+  logout: Scalars['Boolean'];
   updateAvatarId: Scalars['Boolean'];
+  confirmUser: LoginResponse;
+  resendConfirmationUrl: Scalars['Boolean'];
   updateProfile?: Maybe<User>;
+  forgotPassword: Scalars['Boolean'];
   validTmpToken: Scalars['Boolean'];
+  resetPassword: Scalars['Boolean'];
 };
 
 
-export type MutationAddHomeworkArgs = {
-  deadline: Scalars['String'];
-  description: Scalars['String'];
-  title: Scalars['String'];
-};
-
-
-export type MutationConfirmUserArgs = {
-  token: Scalars['String'];
-};
-
-
-export type MutationForgotPasswordArgs = {
+export type MutationRegisterArgs = {
+  username: Scalars['String'];
+  password: Scalars['String'];
   email: Scalars['String'];
 };
 
 
 export type MutationLoginArgs = {
-  email: Scalars['String'];
   password: Scalars['String'];
-};
-
-
-export type MutationRegisterArgs = {
   email: Scalars['String'];
-  password: Scalars['String'];
-  username: Scalars['String'];
-};
-
-
-export type MutationResendConfirmationUrlArgs = {
-  email: Scalars['String'];
-};
-
-
-export type MutationResetPasswordArgs = {
-  confirmation: Scalars['String'];
-  newPassword: Scalars['String'];
-  token: Scalars['String'];
 };
 
 
@@ -108,9 +59,24 @@ export type MutationUpdateAvatarIdArgs = {
 };
 
 
+export type MutationConfirmUserArgs = {
+  token: Scalars['String'];
+};
+
+
+export type MutationResendConfirmationUrlArgs = {
+  email: Scalars['String'];
+};
+
+
 export type MutationUpdateProfileArgs = {
   age?: Maybe<Scalars['Float']>;
   bio?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationForgotPasswordArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -118,13 +84,18 @@ export type MutationValidTmpTokenArgs = {
   token: Scalars['String'];
 };
 
+
+export type MutationResetPasswordArgs = {
+  confirmation: Scalars['String'];
+  newPassword: Scalars['String'];
+  token: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  getAllHomework?: Maybe<Array<Homework>>;
-  getAllUserHomework: AllHomeworkResponse;
-  getProfile?: Maybe<User>;
   hello: Scalars['String'];
   me?: Maybe<User>;
+  getProfile?: Maybe<User>;
 };
 
 
@@ -134,13 +105,13 @@ export type QueryGetProfileArgs = {
 
 export type User = {
   __typename?: 'User';
-  age: Scalars['Int'];
+  id: Scalars['Int'];
+  email: Scalars['String'];
+  username: Scalars['String'];
+  serverId: Scalars['Int'];
   avatarId: Scalars['Int'];
   bio: Scalars['String'];
-  email: Scalars['String'];
-  id: Scalars['Int'];
-  serverId: Scalars['Int'];
-  username: Scalars['String'];
+  age: Scalars['Int'];
 };
 
 export type ConfirmEmailMutationVariables = Exact<{
@@ -216,44 +187,6 @@ export type ResendConfEmailMutationVariables = Exact<{
 export type ResendConfEmailMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'resendConfirmationUrl'>
-);
-
-export type AddHomeworkMutationVariables = Exact<{
-  title: Scalars['String'];
-  description: Scalars['String'];
-  deadline: Scalars['String'];
-}>;
-
-
-export type AddHomeworkMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'addHomework'>
-);
-
-export type AllUserHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllUserHomeworkQuery = (
-  { __typename?: 'Query' }
-  & { getAllUserHomework: (
-    { __typename?: 'AllHomeworkResponse' }
-    & Pick<AllHomeworkResponse, 'count'>
-    & { homeworkList: Array<(
-      { __typename?: 'Homework' }
-      & Pick<Homework, 'id' | 'title' | 'description' | 'deadline' | 'subjectId' | 'done' | 'onTime' | 'enjoyed'>
-    )> }
-  ) }
-);
-
-export type AllHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllHomeworkQuery = (
-  { __typename?: 'Query' }
-  & { getAllHomework?: Maybe<Array<(
-    { __typename?: 'Homework' }
-    & Pick<Homework, 'id' | 'userId' | 'title' | 'description' | 'deadline' | 'enjoyed'>
-  )>> }
 );
 
 export type GetProfileQueryVariables = Exact<{
@@ -537,122 +470,6 @@ export function useResendConfEmailMutation(baseOptions?: Apollo.MutationHookOpti
 export type ResendConfEmailMutationHookResult = ReturnType<typeof useResendConfEmailMutation>;
 export type ResendConfEmailMutationResult = Apollo.MutationResult<ResendConfEmailMutation>;
 export type ResendConfEmailMutationOptions = Apollo.BaseMutationOptions<ResendConfEmailMutation, ResendConfEmailMutationVariables>;
-export const AddHomeworkDocument = gql`
-    mutation AddHomework($title: String!, $description: String!, $deadline: String!) {
-  addHomework(title: $title, description: $description, deadline: $deadline)
-}
-    `;
-export type AddHomeworkMutationFn = Apollo.MutationFunction<AddHomeworkMutation, AddHomeworkMutationVariables>;
-
-/**
- * __useAddHomeworkMutation__
- *
- * To run a mutation, you first call `useAddHomeworkMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAddHomeworkMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [addHomeworkMutation, { data, loading, error }] = useAddHomeworkMutation({
- *   variables: {
- *      title: // value for 'title'
- *      description: // value for 'description'
- *      deadline: // value for 'deadline'
- *   },
- * });
- */
-export function useAddHomeworkMutation(baseOptions?: Apollo.MutationHookOptions<AddHomeworkMutation, AddHomeworkMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AddHomeworkMutation, AddHomeworkMutationVariables>(AddHomeworkDocument, options);
-      }
-export type AddHomeworkMutationHookResult = ReturnType<typeof useAddHomeworkMutation>;
-export type AddHomeworkMutationResult = Apollo.MutationResult<AddHomeworkMutation>;
-export type AddHomeworkMutationOptions = Apollo.BaseMutationOptions<AddHomeworkMutation, AddHomeworkMutationVariables>;
-export const AllUserHomeworkDocument = gql`
-    query AllUserHomework {
-  getAllUserHomework {
-    homeworkList {
-      id
-      title
-      description
-      deadline
-      subjectId
-      done
-      onTime
-      enjoyed
-    }
-    count
-  }
-}
-    `;
-
-/**
- * __useAllUserHomeworkQuery__
- *
- * To run a query within a React component, call `useAllUserHomeworkQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllUserHomeworkQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAllUserHomeworkQuery({
- *   variables: {
- *   },
- * });
- */
-export function useAllUserHomeworkQuery(baseOptions?: Apollo.QueryHookOptions<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>(AllUserHomeworkDocument, options);
-      }
-export function useAllUserHomeworkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>(AllUserHomeworkDocument, options);
-        }
-export type AllUserHomeworkQueryHookResult = ReturnType<typeof useAllUserHomeworkQuery>;
-export type AllUserHomeworkLazyQueryHookResult = ReturnType<typeof useAllUserHomeworkLazyQuery>;
-export type AllUserHomeworkQueryResult = Apollo.QueryResult<AllUserHomeworkQuery, AllUserHomeworkQueryVariables>;
-export const AllHomeworkDocument = gql`
-    query AllHomework {
-  getAllHomework {
-    id
-    userId
-    title
-    description
-    deadline
-    enjoyed
-  }
-}
-    `;
-
-/**
- * __useAllHomeworkQuery__
- *
- * To run a query within a React component, call `useAllHomeworkQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllHomeworkQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAllHomeworkQuery({
- *   variables: {
- *   },
- * });
- */
-export function useAllHomeworkQuery(baseOptions?: Apollo.QueryHookOptions<AllHomeworkQuery, AllHomeworkQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AllHomeworkQuery, AllHomeworkQueryVariables>(AllHomeworkDocument, options);
-      }
-export function useAllHomeworkLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllHomeworkQuery, AllHomeworkQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AllHomeworkQuery, AllHomeworkQueryVariables>(AllHomeworkDocument, options);
-        }
-export type AllHomeworkQueryHookResult = ReturnType<typeof useAllHomeworkQuery>;
-export type AllHomeworkLazyQueryHookResult = ReturnType<typeof useAllHomeworkLazyQuery>;
-export type AllHomeworkQueryResult = Apollo.QueryResult<AllHomeworkQuery, AllHomeworkQueryVariables>;
 export const GetProfileDocument = gql`
     query GetProfile($username: String!) {
   getProfile(username: $username) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import { useAllUserHomeworkQuery } from "../generated/graphql";
+import { authClient } from "..";
+import { useGetProfileQuery as useAllUserHomeworkQuery } from "../generated/graphql";
 
 interface DashdoardProps {}
 
@@ -16,13 +17,13 @@ interface MarkRecordValue {
 }
 
 export const Dashboard: React.FC<DashdoardProps> = () => {
-  const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
+  const [marks /*setMarks*/] = useState<Record<string, MarkRecordValue>>({});
 
   const {
     data: gqlData,
     // loading: gqlLoading,
     // error: gqlError,
-  } = useAllUserHomeworkQuery();
+  } = useAllUserHomeworkQuery({ client: authClient });
 
   const BUSY_CLASSES: Record<string, string> = {
     "0": "free",
@@ -35,23 +36,22 @@ export const Dashboard: React.FC<DashdoardProps> = () => {
 
   useEffect(() => {
     if (gqlData) {
-      gqlData.getAllUserHomework.homeworkList.forEach((each) => {
-        // pushing data to the homework state
-
-        // pushing/modifying data in the record holding date: homeworkCount
-        const dummy = marks;
-        if (dummy.hasOwnProperty(each.deadline)) {
-          dummy[each.deadline].count++;
-        } else {
-          dummy[each.deadline] = { count: 1, homeworkList: [] };
-        }
-        dummy[each.deadline].homeworkList.push({
-          deadline: each.deadline,
-          description: each.description,
-          title: each.title,
-        });
-        setMarks(dummy);
-      });
+      // gqlData.getAllUserHomework.homeworkList.forEach((each) => {
+      //   // pushing data to the homework state
+      //   // pushing/modifying data in the record holding date: homeworkCount
+      //   const dummy = marks;
+      //   if (dummy.hasOwnProperty(each.deadline)) {
+      //     dummy[each.deadline].count++;
+      //   } else {
+      //     dummy[each.deadline] = { count: 1, homeworkList: [] };
+      //   }
+      //   dummy[each.deadline].homeworkList.push({
+      //     deadline: each.deadline,
+      //     description: each.description,
+      //     title: each.title,
+      //   });
+      //   setMarks(dummy);
+      // });
     }
   }, [gqlData, marks]);
 

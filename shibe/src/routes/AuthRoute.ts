@@ -9,10 +9,8 @@ import { User } from "../entity/User";
 
 export const router = express.Router();
 
-router.post("/refresh_token", async (req, res, next) => {
+router.post("/refresh_token", async (req, res) => {
   const token = req.cookies.jimrayd;
-
-  console.log("request received");
 
   if (!token) {
     return res.send({ ok: false, accessToken: "" });

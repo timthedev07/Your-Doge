@@ -164,7 +164,6 @@ export class UserResolver {
 
     // successfully logged in
     const token = createRefreshToken(user);
-    console.log("All worked, and this is the token: ", token);
     sendRefreshToken(res, token);
 
     return {
@@ -189,8 +188,6 @@ export class UserResolver {
   @Query(() => User, { nullable: true })
   async me(@Ctx() context: MyContext) {
     const authorization = context.req.headers["authorization"];
-
-    console.log(authorization);
 
     if (!authorization) {
       return null;

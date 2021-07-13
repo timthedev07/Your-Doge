@@ -9,8 +9,8 @@ import { Login } from "./pages/auth/Login";
 import { Register } from "./pages/auth/Register";
 import { Home } from "./pages/Home";
 import { Nav } from "./components/nav/Nav";
-import { NewHomework } from "./pages/NewHomework";
-import { Dashboard } from "./pages/Dashboard";
+// import { NewHomework } from "./pages/NewHomework";
+// import { Dashboard } from "./pages/Dashboard";
 import { Account } from "./pages/account/Account";
 import { AuthControl } from "./contexts/AuthContext";
 import { Confirm } from "./pages/auth/Confirm";
@@ -28,7 +28,7 @@ export const Routes: React.FC = () => {
             <Route exact path="/" component={Home} />
 
             {/* User specific routes */}
-            <Route exact path="/dashboard" component={Dashboard} />
+            {/* <Route exact path="/dashboard" component={Dashboard} /> */}
             <Route path="/u/:username" component={Account} />
             <Route exact path="/account" component={Me} />
 
@@ -41,7 +41,7 @@ export const Routes: React.FC = () => {
             <Route path="/auth/forgot-password" component={Forgot} />
 
             {/* homework routes */}
-            <Route exact path="/new_homework" component={NewHomework} />
+            {/* <Route exact path="/new_homework" component={NewHomework} /> */}
 
             {/* 404 */}
             <Route component={NotFound} />

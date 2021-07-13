@@ -7,10 +7,7 @@ import { InMemoryCache } from "@apollo/client";
 
 const cache = new InMemoryCache({});
 
-export const generateApolloClient = (
-  baseUrl: string,
-  usersServerBaseUrl: string
-) => {
+export const generateApolloClient = (baseUrl: string) => {
   const requestLink = new ApolloLink(
     (operation, forward) =>
       new Observable((observer) => {
@@ -64,7 +61,7 @@ export const generateApolloClient = (
           }
         },
         fetchAccessToken: () => {
-          return fetch(`${usersServerBaseUrl}/auth/refresh_token`, {
+          return fetch(`${baseUrl}/auth/refresh_token`, {
             method: "POST",
             credentials: "include",
           });

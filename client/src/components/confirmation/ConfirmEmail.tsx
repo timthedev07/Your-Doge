@@ -61,10 +61,13 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
                         });
                       },
                     });
+                    console.log(data);
                     if (data && data.confirmUser) {
                       history.push("/dashboard");
                     }
-                  } catch (err) {}
+                  } catch (err) {
+                    console.log(err);
+                  }
                 }}
                 style={{ margin: "40px" }}
               >

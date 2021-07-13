@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useAddHomeworkMutation } from "../generated/graphql";
+// import { useAddHomeworkMutation } from "../generated/graphql";
 
 interface NewHomeworkProps {}
 
@@ -7,7 +7,9 @@ export const NewHomework: React.FC<NewHomeworkProps> = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLInputElement>(null);
   const dueDateRef = useRef<HTMLInputElement>(null);
-  const [addHomework] = useAddHomeworkMutation();
+  const [addHomework] = [
+    (variables: any) => null,
+  ]; /* useAddHomeworkMutation() */
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
