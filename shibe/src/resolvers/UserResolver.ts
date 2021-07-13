@@ -39,7 +39,7 @@ class LoginResponse {
   user: User;
 }
 
-@Resolver((of) => User)
+@Resolver()
 export class UserResolver {
   /**
    * This code-first approach below is basically the same as:(schema first)
@@ -138,7 +138,7 @@ export class UserResolver {
   async login(
     @Arg("email") email: string,
     @Arg("password") password: string,
-    @Ctx() { req, res }: MyContext
+    @Ctx() { res }: MyContext
   ): Promise<LoginResponse> {
     // here we are searching for a user that has the same email OR username
     let user = await User.findOne({ where: [{ email }, { username: email }] });
@@ -164,6 +164,7 @@ export class UserResolver {
 
     // successfully logged in
     const token = createRefreshToken(user);
+    console.log("All worked, and this is the token: ", token);
     sendRefreshToken(res, token);
 
     return {
@@ -188,6 +189,8 @@ export class UserResolver {
   @Query(() => User, { nullable: true })
   async me(@Ctx() context: MyContext) {
     const authorization = context.req.headers["authorization"];
+
+    console.log(authorization);
 
     if (!authorization) {
       return null;
@@ -220,10 +223,10 @@ export class UserResolver {
 
   @Mutation(() => Boolean)
   async updateAvatarId(
-    @Ctx() { req, payload }: MyContext,
+    @Ctx() context: MyContext,
     @Arg("newAvatarId") newAvatarId: number
   ) {
-    const authorization = req.headers["authorization"];
+    const authorization = context.req.headers["authorization"];
 
     if (!authorization) {
       return false;
@@ -231,7 +234,7 @@ export class UserResolver {
 
     const token = authorization.split(" ")[1];
     const newPayload: any = verify(token, process.env.ACCESS_TOKEN_SECRET!);
-    payload = newPayload as any;
+    context.payload = newPayload as any;
 
     try {
       await getConnection()
@@ -249,7 +252,7 @@ export class UserResolver {
   @Mutation(() => LoginResponse)
   async confirmUser(
     @Arg("token") token: string,
-    @Ctx() { req, res }: MyContext
+    @Ctx() { res }: MyContext
   ): Promise<LoginResponse> {
     const userId = await redisClient.get(token);
     if (!userId) throw new Error("Invalid token");

@@ -11,7 +11,10 @@ export const DEV_GATEWAY_BACKEND = "http://localhost:9000";
 export const USERS_BACKEND = "https://homework-manager-users.herokuapp.com";
 export const GATEWAY_BACKEND = "https://homework-manager-gateway.herokuapp.com";
 
-export const authClient = generateApolloClient(DEV_GATEWAY_BACKEND);
+export const authClient = generateApolloClient(
+  DEV_GATEWAY_BACKEND,
+  DEV_USERS_BACKEND
+);
 
 export const unknownErrMsg =
   "Sorry, an unknown error occurred, try again later, or contact our support team(bot.rem.autogenerate@gmail.com)";

@@ -11,10 +11,15 @@ export const router = express.Router();
 
 router.post("/refresh_token", async (req, res, next) => {
   const token = req.cookies.jimrayd;
+
+  console.log("request received");
+
   if (!token) {
     return res.send({ ok: false, accessToken: "" });
   }
+
   let payload: any = null;
+
   try {
     payload = verify(token, process.env.REFRESH_TOKEN_SECRET!);
   } catch (err) {

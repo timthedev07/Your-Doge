@@ -61,7 +61,7 @@ export const sendEmail = async (
     html,
   };
 
-  transporter.sendMail(mailOptions, (err, info) => {
+  transporter.sendMail(mailOptions, (err) => {
     if (err) {
       return false;
     } else {
