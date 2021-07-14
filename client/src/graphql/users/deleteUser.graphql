@@ -1,9 +1,3 @@
-mutation DeleteAccount(
-  $deleteAccountPassword: String!
-  $deleteAccountUsername: String!
-) {
-  deleteAccount(
-    password: $deleteAccountPassword
-    username: $deleteAccountUsername
-  )
+mutation DeleteAccount($password: String!, $username: String!) {
+  deleteAccount(password: $password, username: $username)
 }
