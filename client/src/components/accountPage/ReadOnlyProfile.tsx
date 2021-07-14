@@ -20,8 +20,6 @@ export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
 }) => {
   const [avatarSrc, setAvatarSrc] = useState<string>("");
 
-  console.log(avatarId);
-
   const getSrcById = async (
     id: AvatarKeyType,
     setter: (arg: string) => any

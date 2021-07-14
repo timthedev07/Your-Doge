@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import { authClient } from "../apolloApp";
+import { shibe } from "../ApolloApp";
 import { useGetProfileQuery as useAllUserHomeworkQuery } from "../generated/graphql";
 
 interface DashdoardProps {}
@@ -23,7 +23,7 @@ export const Dashboard: React.FC<DashdoardProps> = () => {
     data: gqlData,
     // loading: gqlLoading,
     // error: gqlError,
-  } = useAllUserHomeworkQuery({ client: authClient });
+  } = useAllUserHomeworkQuery({ client: shibe });
 
   const BUSY_CLASSES: Record<string, string> = {
     "0": "free",
