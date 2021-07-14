@@ -42,6 +42,7 @@ export const Me: React.FC<MeProps> = () => {
         me: null,
       },
     });
+    localStorage.removeItem("serverId");
   };
 
   let TABS: Array<TabData> = [
