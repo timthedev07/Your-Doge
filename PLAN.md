@@ -30,6 +30,10 @@ God, I came up with a largely different plan, here's the diagram:
 We are using apollo federation now! And the infrastructure is shown in the diagram:
 ![diagram](diagram2.png)
 
+### **_Update_**
+
+Future logs are moved into [DEVLOG.md](./DEVLOG.md)
+
 ## Some features and/or functionalities I want to implement
 
 Discussion forum...

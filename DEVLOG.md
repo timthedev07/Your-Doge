@@ -1,3 +1,12 @@
+# July 14
+
+New diagram
+![diagram](./diagram3.png)
+
+# July 13
+
+Stopped using apollo federation as it doesn't fit this project well, decided to connect to multiple apollo endpoints instead.
+
 # July 7
 
 Transform the middleware into an apollo gateway.
