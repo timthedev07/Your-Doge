@@ -43,7 +43,7 @@ export const Me: React.FC<MeProps> = () => {
     },
     { content: "You did nothing", title: "Statistics" },
     {
-      content: <SettingsTab />,
+      content: <SettingsTab username={data.me.username} />,
       title: "Settings",
     },
   ];
