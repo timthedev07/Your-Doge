@@ -15,7 +15,7 @@ module.exports = {
   password: production
     ? process.env.HP_PASSWORD
     : process.env.POSTGRES_PASSWORD,
-  database: production ? process.env.HP_DATABASE : "homework-manager",
+  database: production ? process.env.HP_DATABASE : "your-doge-burrito",
   entities: [`${basedir}/entity/**/*.${fileType}`],
   migrations: [`${basedir}/migrations/**/*.${fileType}`],
   subscribers: [`${basedir}/subscriber/**/*.${fileType}`],
