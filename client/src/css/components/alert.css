@@ -20,7 +20,7 @@
 }
 
 .alert-active {
-  top: calc(0px);
+  top: calc(var(--nav-bar-height));
   transition: 0.5s;
   z-index: 10000000000000;
 }
