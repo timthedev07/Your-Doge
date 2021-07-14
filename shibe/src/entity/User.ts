@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 
 @ObjectType()
-@Unique(["email"]) // here we are forcing an unique constraint on the email
+@Unique(["email", "username"]) // here we are forcing an unique constraint on the email
 @Entity("users")
 export class User extends BaseEntity {
   /**
