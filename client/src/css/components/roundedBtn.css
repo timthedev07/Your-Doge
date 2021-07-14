@@ -43,3 +43,7 @@ a.rounded-btn,
 .rounded-btn.sorrowful {
   background-color: rgb(0, 129, 204);
 }
+
+.rounded-btn.danger {
+  background-color: rgb(224, 0, 0);
+}
