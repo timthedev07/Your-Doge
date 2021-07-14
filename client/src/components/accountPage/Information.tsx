@@ -151,7 +151,9 @@ export const Information: React.FC<InformationProps> = ({
         <img onClick={handleShow} alt="" className="avatar" src={avatarSrc} />
         <div className="profile-top-section__headings">
           <h2>{username}</h2>
+
           <h5>{email}</h5>
+
           <h6>
             <select
               onChange={(e) => {
