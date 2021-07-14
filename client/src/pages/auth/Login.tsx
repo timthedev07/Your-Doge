@@ -6,6 +6,7 @@ import { Loading } from "../../components/Loading";
 import { setAccessToken } from "../../accessToken";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../../constants/general";
+import { setWithExpiry } from "../../utils/localStorageExpiration";
 
 const THRESHOLD = 360;
 
@@ -65,6 +66,11 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
       const data = await login(email, password);
 
       if (data?.login) {
+        setWithExpiry(
+          "serverId",
+          data.login.user.serverId,
+          new Date().valueOf() + 864000000
+        ); // 10 days
         setAccessToken(data.login.accessToken);
         history.push("/");
         return;

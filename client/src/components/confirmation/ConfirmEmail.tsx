@@ -6,6 +6,7 @@ import {
   useConfirmEmailMutation,
 } from "../../generated/graphql";
 import { useValidTmpTokenMutation } from "../../generated/graphql";
+import { setWithExpiry } from "../../utils/localStorageExpiration";
 import { Loading } from "../Loading";
 
 interface ConfirmEmailProps {
@@ -61,13 +62,15 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
                         });
                       },
                     });
-                    console.log(data);
                     if (data && data.confirmUser) {
+                      setWithExpiry(
+                        "serverId",
+                        data.confirmUser.user.serverId,
+                        new Date().valueOf() + 864000000
+                      ); // 10 days
                       history.push("/dashboard");
                     }
-                  } catch (err) {
-                    console.log(err);
-                  }
+                  } catch (err) {}
                 }}
                 style={{ margin: "40px" }}
               >
