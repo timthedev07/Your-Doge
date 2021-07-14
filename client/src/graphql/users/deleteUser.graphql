@@ -1,0 +1,9 @@
+mutation DeleteAccount(
+  $deleteAccountPassword: String!
+  $deleteAccountUsername: String!
+) {
+  deleteAccount(
+    password: $deleteAccountPassword
+    username: $deleteAccountUsername
+  )
+}
