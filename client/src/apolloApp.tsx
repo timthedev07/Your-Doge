@@ -2,15 +2,35 @@ import { ApolloProvider } from "@apollo/client";
 import { App } from "./App";
 import { BACKEND } from "./constants/apollo";
 import { generateApolloClient } from "./utils/clientGenerator";
+import { getWithExpiry } from "./utils/localStorageExpiration";
 
-export const authClient = generateApolloClient(BACKEND);
+const SERVER_ID = getWithExpiry("serverId") - 1;
+
+export const shibe = generateApolloClient(BACKEND);
+export const burrito = generateApolloClient(
+  `${
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:500${SERVER_ID}`
+      : `http://homework-manager-db${SERVER_ID}.herokuapp.com`
+  }`
+);
 
 export const unknownErrMsg =
   "Sorry, an unknown error occurred, try again later, or contact our support team(yourdoge.team@gmail.com)";
 
 export const ApolloApp: React.FC = () => {
+  if (getWithExpiry("serverId")) {
+    return (
+      <ApolloProvider client={burrito}>
+        <ApolloProvider client={shibe}>
+          <App />
+        </ApolloProvider>
+      </ApolloProvider>
+    );
+  }
+
   return (
-    <ApolloProvider client={authClient}>
+    <ApolloProvider client={shibe}>
       <App />
     </ApolloProvider>
   );

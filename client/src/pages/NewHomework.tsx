@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-// import { useAddHomeworkMutation } from "../generated/graphql";
+import { burrito } from "../ApolloApp";
+import { useAddHomeworkMutation } from "../generated/sub-graphql";
 
 interface NewHomeworkProps {}
 
@@ -7,9 +8,7 @@ export const NewHomework: React.FC<NewHomeworkProps> = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLInputElement>(null);
   const dueDateRef = useRef<HTMLInputElement>(null);
-  const [addHomework] = [
-    (variables: any) => null,
-  ]; /* useAddHomeworkMutation() */
+  const [addHomework] = useAddHomeworkMutation({ client: burrito });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
