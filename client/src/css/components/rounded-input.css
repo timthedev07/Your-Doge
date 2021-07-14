@@ -29,3 +29,10 @@
 .rounded-input.emphasized:focus {
   background-color: rgb(95, 65, 0);
 }
+
+.rounded-input.danger {
+  background-color: rgb(100, 15, 3);
+}
+.rounded-input.danger:focus {
+  background-color: rgb(129, 5, 1);
+}
