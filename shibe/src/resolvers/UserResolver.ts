@@ -428,11 +428,11 @@ export class UserResolver {
 
   @Mutation(() => Boolean)
   async deleteAccount(
-    @Arg("email") email: string,
+    @Arg("username") username: string,
     @Arg("password") password: string,
     @Ctx() context: MyContext
   ) {
-    const user = await User.findOne({ where: { email: email } });
+    const user = await User.findOne({ where: { username } });
 
     if (!user) {
       return false;
@@ -447,7 +447,7 @@ export class UserResolver {
         .createQueryBuilder()
         .delete()
         .from(User)
-        .where("email = :email", { email })
+        .where("username = :username", { username })
         .execute();
 
       sendRefreshToken(context.res, "");
