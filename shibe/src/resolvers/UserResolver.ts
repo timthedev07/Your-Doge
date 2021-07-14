@@ -94,33 +94,34 @@ export class UserResolver {
       throw new Error("Username exceeds the maximal length");
     }
 
+    /* now it's the clean up part, delete all unverified users registered more than 3 days ago */
+    const threeDaysAgo = new Date().valueOf() - 1000 * 60 * 60 * 24 * 3;
+
+    await getConnection()
+      .createQueryBuilder()
+      .delete()
+      .from(User)
+      .where("confirmed = :confirmed AND memberSince <= :threeDaysAgo", {
+        confirmed: false,
+        threeDaysAgo,
+      })
+      .returning("*")
+      .execute();
+
+    // try to update the server record
+    // if it returns -1, all servers are full
+    const res = await registerUser();
+    if (res < 0) {
+      throw new Error("Sorry, registration is temporarily closed.");
+    }
+
     try {
-      /* now it's the clean up part, delete all unverified users registered more than 3 days ago */
-      const threeDaysAgo = new Date().valueOf() - 1000 * 60 * 60 * 24 * 3;
-
-      await getConnection()
-        .createQueryBuilder()
-        .delete()
-        .from(User)
-        .where("confirmed = :confirmed AND memberSince <= :threeDaysAgo", {
-          confirmed: false,
-          threeDaysAgo,
-        })
-        .returning("*")
-        .execute();
-
-      // try to update the server record
-      // if it returns -1, all servers are full
-      if ((await registerUser()) < 0) {
-        throw new Error("Sorry, registration is temporarily closed.");
-      }
-
       /* registering the user by inserting into the database */
       await User.insert({
         email: email,
         password: hashed,
         username: username,
-        serverId: 0,
+        serverId: res,
       });
     } catch (err) {
       throw new Error("Email/username already registered");
