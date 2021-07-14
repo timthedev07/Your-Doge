@@ -197,8 +197,8 @@ export type ResendConfEmailMutation = (
 );
 
 export type DeleteAccountMutationVariables = Exact<{
-  deleteAccountPassword: Scalars['String'];
-  deleteAccountUsername: Scalars['String'];
+  password: Scalars['String'];
+  username: Scalars['String'];
 }>;
 
 
@@ -489,11 +489,8 @@ export type ResendConfEmailMutationHookResult = ReturnType<typeof useResendConfE
 export type ResendConfEmailMutationResult = Apollo.MutationResult<ResendConfEmailMutation>;
 export type ResendConfEmailMutationOptions = Apollo.BaseMutationOptions<ResendConfEmailMutation, ResendConfEmailMutationVariables>;
 export const DeleteAccountDocument = gql`
-    mutation DeleteAccount($deleteAccountPassword: String!, $deleteAccountUsername: String!) {
-  deleteAccount(
-    password: $deleteAccountPassword
-    username: $deleteAccountUsername
-  )
+    mutation DeleteAccount($password: String!, $username: String!) {
+  deleteAccount(password: $password, username: $username)
 }
     `;
 export type DeleteAccountMutationFn = Apollo.MutationFunction<DeleteAccountMutation, DeleteAccountMutationVariables>;
@@ -511,8 +508,8 @@ export type DeleteAccountMutationFn = Apollo.MutationFunction<DeleteAccountMutat
  * @example
  * const [deleteAccountMutation, { data, loading, error }] = useDeleteAccountMutation({
  *   variables: {
- *      deleteAccountPassword: // value for 'deleteAccountPassword'
- *      deleteAccountUsername: // value for 'deleteAccountUsername'
+ *      password: // value for 'password'
+ *      username: // value for 'username'
  *   },
  * });
  */
