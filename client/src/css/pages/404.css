@@ -30,11 +30,11 @@
 }
 .not-found-content h1 {
   max-width: 100%;
-  font-size: 17vw;
+  font-size: calc(38px + 14vw);
   padding: 0;
 }
-.not-found-content h1 svg {
-  height: 20vw;
-  width: 20vw;
+.not-found-content h1 img {
+  height: 17vw;
+  width: 17vw;
   margin: 0;
 }

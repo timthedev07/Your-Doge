@@ -17,8 +17,8 @@
     rgba(20, 21, 24, 0.836) 50%
   );
   background-position: 100% 0%;
-  background-size: 200% 100%;
   transition: 0.5s;
+  background-size: 200% 100%;
 }
 
 .animated-btn:hover {
