@@ -425,4 +425,36 @@ export class UserResolver {
       return false;
     }
   }
+
+  @Mutation(() => Boolean)
+  async deleteAccount(
+    @Arg("email") email: string,
+    @Arg("password") password: string,
+    @Ctx() context: MyContext
+  ) {
+    const user = await User.findOne({ where: { email: email } });
+
+    if (!user) {
+      return false;
+    }
+
+    if (!(await compare(password, user.password))) {
+      return false;
+    }
+
+    try {
+      await getConnection()
+        .createQueryBuilder()
+        .delete()
+        .from(User)
+        .where("email = :email", { email })
+        .execute();
+
+      sendRefreshToken(context.res, "");
+
+      return true;
+    } catch (err) {
+      return false;
+    }
+  }
 }
