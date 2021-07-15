@@ -15,7 +15,7 @@
     <img src="https://img.shields.io/badge/license-GPL--3.0--or--later-yellow" />
   </a>
   
-  <a href="https://open.vscode.dev/RelentlessExploration/Your-Doge">
+  <a href="https://open.vscode.dev/timthedev07/Your-Doge">
     <img src="https://open.vscode.dev/badges/open-in-vscode.svg">
   </a>
   
@@ -48,7 +48,7 @@ Visit [here](https://yourdoge.netlify.app) for live production or you can clone 
 ```bash
 # Note that you need at least 3 terminals or tabs to run it
 
-$ git clone https://github.com/RelentlessExploration/Your-Doge.git
+$ git clone https://github.com/timthedev07/Your-Doge.git
 $ cd Your-Doge/client && yarn # install dependencies in the client directory
 yarn install v1.22.10
 [1/4] 🔍  Resolving packages...

@@ -9,13 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RelentlessExploration/Your-Doge.git"
+    "url": "git+https://github.com/timthedev07/Your-Doge.git"
   },
   "keywords": [],
   "author": "",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/RelentlessExploration/Your-Doge/issues"
+    "url": "https://github.com/timthedev07/Your-Doge/issues"
   },
-  "homepage": "https://github.com/RelentlessExploration/Your-Doge#readme"
+  "homepage": "https://github.com/timthedev07/Your-Doge#readme"
 }
