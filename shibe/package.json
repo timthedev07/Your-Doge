@@ -37,6 +37,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "graphql": "^15.5.1",
+    "handlebars": "^4.7.7",
     "ioredis": "^4.27.6",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.6.2",
