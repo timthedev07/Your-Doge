@@ -49,8 +49,9 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "devstart": "ts-node-dev --respawn src/index.ts",
+    "start:development": "killall redis-server; redis-server; ts-node-dev --respawn src/index.ts",
     "start": "node dist/index.js",
-    "build": "tsc"
+    "build": "tsc && cp src/email.html dist",
+    "tsc": "tsc"
   }
 }
