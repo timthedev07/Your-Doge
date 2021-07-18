@@ -44,7 +44,11 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "devstart": "ts-node-dev --respawn src/index.ts",
+    "start:dev0": "ts-node-dev --respawn src/index.ts",
+    "start:dev1": "PORT=5001 ts-node-dev --respawn src/index.ts",
+    "start:dev2": "PORT=5002 ts-node-dev --respawn src/index.ts",
+    "start:devDouble": "npx concurrently \"yarn start:dev0\" \"yarn start:dev1\"",
+    "start:devall": "npx concurrently \"yarn start:dev0\" \"yarn start:dev1\" \"yarn start:dev2\"",
     "start": "node dist/index.js",
     "build": "tsc"
   }
