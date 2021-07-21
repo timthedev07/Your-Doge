@@ -19,6 +19,7 @@
     "bootstrap": "^5.0.2",
     "graphql": "^15.5.1",
     "jwt-decode": "^3.1.2",
+    "next": "^11.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-calendar": "^3.4.0",
