@@ -12,7 +12,6 @@
   min-width: var(--min-width);
   display: flex;
   /* min-height: 900px; */
-  height: max-content;
   justify-content: center;
   align-items: flex-start;
   background: transparent;

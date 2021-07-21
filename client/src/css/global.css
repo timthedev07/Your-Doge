@@ -1,14 +1,23 @@
 html {
   height: auto;
+  background: linear-gradient(
+    135deg,
+    rgb(65, 65, 65) 0%,
+    rgb(50, 50, 50) 50%,
+    rgb(35, 35, 35) 100%
+  );
 }
 body {
   margin: 0;
   font-family: "Roboto Regular";
-  background-repeat: no-repeat;
   min-height: 100vh;
-  margin-top: 0;
   min-width: var(--min-width);
   width: 100%;
+  background: inherit;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
 }
 
 div.App {

@@ -29,7 +29,6 @@
   justify-content: center;
   background-color: rgb(252, 252, 252);
   height: var(--nav-bar-height) !important;
-  position: relative;
 }
 
 /* styles for the nav bar that's displayed on the home page */
@@ -71,6 +70,7 @@
 }
 
 /* nav item different styling on hover and for active items */
+
 .nav-bar .nav-item:hover {
   color: black;
 }
