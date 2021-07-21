@@ -3,7 +3,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
-import { UserResolver } from "./resolvers/UserResolver";
+import { UserResolver } from "./resolvers/UserResolvers";
 import { buildSchema } from "type-graphql";
 import { router as AuthRouter } from "./routes/AuthRoute";
 import cookieParser from "cookie-parser";
