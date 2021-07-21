@@ -1,3 +1,7 @@
+# July 21
+
+Hey guys, I'm back!!!!!!!!!
+
 # July 14
 
 New diagram
