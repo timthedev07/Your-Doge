@@ -60,6 +60,7 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
                             me: data.confirmUser.user,
                           },
                         });
+                        return null;
                       },
                     });
                     if (data && data.confirmUser) {

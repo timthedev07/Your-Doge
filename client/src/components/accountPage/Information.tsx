@@ -70,6 +70,7 @@ export const Information: React.FC<InformationProps> = ({
             me: data.updateProfile,
           },
         });
+        return null;
       },
     });
     setShowSaveButton(false);

@@ -57,6 +57,7 @@ export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
               me: data.login.user,
             },
           });
+          return null;
         },
       });
 
