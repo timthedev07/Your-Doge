@@ -1,10 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2017",
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
     "sourceMap": true,
-    "allowJs": true,
     "outDir": "./dist",
     "moduleResolution": "node",
     "removeComments": true,
@@ -13,7 +12,7 @@
     "strictFunctionTypes": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
@@ -23,5 +22,5 @@
     "resolveJsonModule": true
   },
   "exclude": ["node_modules"],
-  "include": ["src"]
+  "include": ["./src/**/*.ts"]
 }
