@@ -1,10 +1,15 @@
 import nodemailer from "nodemailer";
+import { HTMLFileToString } from "./html";
+import path from "path";
+import Mail from "nodemailer/lib/mailer";
+import { compile } from "handlebars";
 
 export const sendEmail = async (
   recipient: string,
   url: string,
   verb: string,
-  noun: string
+  noun: string,
+  text?: string
 ) => {
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -19,51 +24,31 @@ export const sendEmail = async (
     },
   });
 
-  const html = `
-    <!DOCTYPE html>
-    <html>
-      <head></head>
-      <body
-        style="
-          background-color: #3e3e3e;
-          color: white;
-          font-family: 'Trebuchet MS', sans-serif;
-          
-          margin: 0;
-        "
-      >
-        <div style="
-          background-color: #3e3e3e;
-          padding: 10px;
-          margin: 0;
-          width: 100%;
-          height: 100%;
-        ">
-          <img style="width: 100%;" src="https://drive.google.com/uc?export=view&id=1_vAyaRaZuSo3pki-PzaCFFEdiNiPbXI5" />
-          <h3 style="text-align: center; color: white;">Click the link below to ${verb} your ${noun}.</h3>
-          <h6 style="color: white;"><em>Please note that the url would automatically expire in 8 hours.</em></h6>
-          <a style="color: goldenrod; text-align: center; width: 100%;" href="${url}">${
-    verb.charAt(0).toUpperCase() + verb.slice(1)
-  } ${noun}</a>
+  let html;
 
-        </div>
-      </body>
-    </html>
-    `;
+  try {
+    const rawHtml = HTMLFileToString(path.resolve(__dirname, "../email.html"));
+    const template = compile(rawHtml);
 
-  // send mail with defined transport object
-  const mailOptions = {
-    from: `"Your Doge Team" <${process.env.USERNAME}>`,
+    const data = {
+      url,
+      buttonText: verb.charAt(0).toUpperCase() + verb.slice(1),
+      text,
+    };
+    html = template(data);
+  } catch (err) {
+    console.log("err: ", err);
+  }
+
+  const mailOptions: Mail.Options = {
+    from: `"Your Doge - No Reply" <${process.env.USERNAME}>`,
     to: recipient,
-    subject: `${
-      verb.charAt(0).toUpperCase() + verb.slice(1)
-    } your ${noun}: Your Doge`,
+    subject: `${verb.charAt(0).toUpperCase() + verb.slice(1)} your ${noun}`,
     html,
   };
 
   transporter.sendMail(mailOptions, (err) => {
     if (err) {
-      console.log(err);
       return false;
     } else {
       return true;
