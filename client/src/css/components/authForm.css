@@ -55,6 +55,11 @@
   font-size: 17.5px;
 }
 
+.regular-input,
+.regular-input::placeholder {
+  color: rgb(196, 196, 196);
+}
+
 .regular-input:focus,
 .regular-input {
   background-color: transparent;
