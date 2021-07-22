@@ -1,6 +1,7 @@
 :root {
   --min-width: 350px;
   --nav-bar-height: 55px;
+  --account-content-container-border-radius: 6px;
 }
 
 /* custom fonts */

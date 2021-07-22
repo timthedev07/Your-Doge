@@ -1,8 +1,3 @@
-/* some variables */
-:root {
-  --account-content-container-border-radius: 6px;
-}
-
 /* style for the overall container */
 .tab-switcher-container {
   width: 100%;

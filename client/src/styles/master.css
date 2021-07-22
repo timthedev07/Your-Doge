@@ -13,6 +13,6 @@
 @import url(./components/sidebar.module.css);
 @import url(./components/roundedBtn.module.css);
 @import url(./components/calendar.module.css);
-/* @import url(./components/tab-switcher.module.css); */
+@import url(./components/tab-switcher.module.css);
 @import url(./components/email-confirmation.module.css);
 @import url(./components/rounded-input.module.css);

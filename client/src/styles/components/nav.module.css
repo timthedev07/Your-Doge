@@ -24,10 +24,10 @@
   position: fixed !important;
   width: 100%;
   z-index: 6000000;
-  border-bottom: 1px rgb(231, 231, 231) solid;
   display: flex;
+  background-color: rgb(87, 87, 87);
+  border-bottom: #222222 solid 1px;
   justify-content: center;
-  background-color: rgb(252, 252, 252);
   height: var(--nav-bar-height) !important;
 }
 
@@ -42,11 +42,7 @@
 .nav-bar .nav-item.nav-item-home,
 .nav-bar .nav-item.nav-item-home:hover {
   width: 45%;
-}
-
-.nav-item-home.nav-item-home.nav-item-home,
-.nav-item-home.nav-item-home.nav-item-home:hover {
-  color: black;
+  color: white;
 }
 
 /* styles for the normal items in nav bar */
@@ -59,6 +55,7 @@
   text-decoration: none;
   transition: 0.4s;
   height: 100%;
+
   font-size: 18px !important;
 }
 
@@ -72,20 +69,20 @@
 /* nav item different styling on hover and for active items */
 
 .nav-bar .nav-item:hover {
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 .nav-bar .nav-item {
-  color: rgb(134, 134, 134);
+  color: rgb(177, 177, 177);
 }
 
 .nav-bar .nav-item.nav-item-active {
-  color: black;
+  color: rgb(255, 255, 255);
 }
 
 .nav-logo {
   width: auto;
-  height: 70%;
+  height: 70% !important;
 }
 
 /* Adjust the spacing on screens of different sizes */
