@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import Logo from "../../../public/images/logo.png";
 import { useMeQuery } from "../../generated/graphql";
 import Image from "next/image";
-import { isClient } from "../../lib/isClient";
 
 const THRESHOLD = 481;
 
