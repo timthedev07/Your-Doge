@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-calendar/dist/Calendar.css";
 import { Nav } from "../components/nav/Nav";
 import { isClient } from "../lib/isClient";
+import { useEffect, useState } from "react";
 
 export const shibe = generateApolloClient(BACKEND);
 export const SERVER_ID = isClient
@@ -30,21 +31,27 @@ export const burrito: ApolloClient<NormalizedCacheObject> =
   );
 
 const App = ({ Component, pageProps }: AppProps) => {
-  if (!isClient) {
-    return null;
-  }
-  return (
-    <div className="App">
-      <Head>
-        <title>Your Doge</title>
-      </Head>
-      <nav>
-        <Nav transparent={false} />
-      </nav>
-      <main>
-        <Component {...pageProps} />
-      </main>
-    </div>
+  const [b, setB] = useState<boolean>(false);
+
+  useEffect(() => {
+    setB(isClient);
+  }, []);
+
+  return b ? (
+    <>
+      <Nav transparent={false} />
+      <div className="App">
+        <Head>
+          <title>Your Doge</title>
+        </Head>
+
+        <main>
+          <Component {...pageProps} />
+        </main>
+      </div>
+    </>
+  ) : (
+    <></>
   );
 };
 
