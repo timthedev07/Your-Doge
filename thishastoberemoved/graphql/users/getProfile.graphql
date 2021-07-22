@@ -1,9 +1,0 @@
-query GetProfile($username: String!) {
-  getProfile(username: $username) {
-    username
-    bio
-    email
-    age
-    avatarId
-  }
-}
