@@ -1,0 +1,72 @@
+@import url(./var.css);
+@import url(./darktheme.css);
+@import url(./components/select.css);
+
+html {
+  height: auto;
+  background: linear-gradient(
+    135deg,
+    rgb(65, 65, 65) 0%,
+    rgb(50, 50, 50) 50%,
+    rgb(35, 35, 35) 100%
+  );
+}
+body {
+  margin: 0;
+  font-family: "Roboto Regular";
+  min-height: 100vh;
+  min-width: var(--min-width);
+  width: 100%;
+  background: inherit;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+}
+
+div.App {
+  min-height: 100vh;
+  padding-top: var(--nav-bar-height);
+  min-width: var(--min-width);
+  background: inherit;
+  background-size: cover;
+}
+div#root {
+  background: inherit;
+  background-size: cover;
+}
+
+a,
+.normal-links.normal-links.normal-links {
+  color: rgb(250, 212, 0);
+  text-decoration: none;
+  transform: scale(1);
+  transition: 0.3s;
+}
+
+a:hover,
+.normal-links:hover.normal-links:hover.normal-links:hover {
+  color: rgb(250, 212, 0);
+  text-decoration: underline;
+}
+
+.margin-top-nav {
+  margin-top: var(--nav-bar-height);
+}
+
+.margin-20 {
+  margin: 20px;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+label {
+  color: rgb(27, 27, 29);
+  font-size: 16px;
+}

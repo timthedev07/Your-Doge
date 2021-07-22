@@ -1,0 +1,11 @@
+query Me {
+  me {
+    id
+    username
+    email
+    bio
+    serverId
+    avatarId
+    age
+  }
+}

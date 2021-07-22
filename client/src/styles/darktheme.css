@@ -1,0 +1,77 @@
+/* general stuff */
+body#body.dark {
+  background: linear-gradient(
+    135deg,
+    rgb(65, 65, 65) 0%,
+    rgb(50, 50, 50) 50%,
+    rgb(35, 35, 35) 100%
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+  transition: 0.3s;
+}
+
+@media screen and (max-width: 350px) {
+  body {
+    background-size: var(--min-width) 100vh;
+  }
+}
+
+body#body.dark .nav-bar-background {
+  background-color: rgb(87, 87, 87);
+  border-bottom: #222222 solid 1px;
+}
+
+/* rounded buttons */
+body.dark .rounded-btn,
+body.dark .rounded-btn.secondary {
+  color: white;
+}
+
+body.dark .rounded-btn:hover {
+  transition: 0.3s;
+  box-shadow: 0 0 9px white;
+}
+
+/* nav item different styling on hover and for active items */
+body.dark .nav-bar .nav-item:hover {
+  color: rgb(255, 255, 255);
+}
+
+body.dark .nav-bar .nav-item {
+  color: rgb(177, 177, 177);
+}
+
+body.dark .nav-bar .nav-item.nav-item-active {
+  color: rgb(255, 255, 255);
+}
+
+body#body.dark .nav-item-home.nav-item-home.nav-item-home,
+body#body.dark .nav-item-home.nav-item-home.nav-item-home:hover {
+  color: white;
+}
+
+/* auth forms */
+body.dark
+  .second-option-container.second-option-container.second-option-container {
+  background-color: #373d41;
+  color: white;
+}
+
+body.dark .form-heading.form-heading.form-heading {
+  color: rgb(242, 243, 243);
+}
+
+body.dark .form-as-wrapper {
+  background-color: #2c2f33;
+}
+
+body.dark label {
+  color: rgb(243, 243, 247);
+  font-size: 16px;
+}
+
+body.dark.dark .regular-input:focus {
+  color: rgb(255, 255, 255);
+}

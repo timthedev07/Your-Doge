@@ -1,0 +1,90 @@
+#account-page #account-page-content-container {
+  border-radius: var(--account-content-container-border-radius);
+  box-shadow: 0 0 10px rgb(26, 26, 26);
+  width: 80%;
+  height: auto;
+  min-width: var(--min-width);
+  margin-bottom: 20px;
+}
+
+#account-page {
+  width: 100%;
+  min-width: var(--min-width);
+  display: flex;
+  /* min-height: 900px; */
+  justify-content: center;
+  align-items: flex-start;
+  background: transparent;
+  height: fit-content;
+  padding-top: 40px;
+}
+
+/* information tab */
+img.avatar {
+  width: 150px;
+  height: 150px;
+  cursor: pointer;
+}
+
+.modal-content.modal-content.modal-content {
+  background-color: rgb(31, 31, 31);
+}
+
+.modal-content.modal-content.modal-content .modal-footer {
+  border-top: 1px rgb(78, 78, 78) solid;
+}
+.modal-content.modal-content.modal-content .modal-header {
+  border-bottom: 1px rgb(78, 78, 78) solid;
+}
+
+.close-button {
+  width: 25px;
+  height: 25px;
+  fill: white;
+  cursor: pointer;
+}
+
+.avatar-option {
+  width: 75px;
+  height: 75px;
+  margin: 6px;
+  cursor: pointer;
+}
+
+.avatar-option.avatar-option-active {
+  background-color: rgb(43, 226, 226);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+/* profile(information tab) layout and stuff */
+.profile-top-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile-top-section__headings {
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.profile-bio-container .profile-bio {
+  resize: none;
+  color: white;
+  background-color: rgba(128, 128, 128, 0.171);
+  border: none;
+  width: 90%;
+  height: 100%;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+.profile-bio-container {
+  display: flex;
+  width: 100%;
+  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 200px;
+}

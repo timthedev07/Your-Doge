@@ -1,0 +1,26 @@
+select {
+  padding-left: 10px;
+  background-color: rgb(78, 78, 78);
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  width: 70px;
+  font-size: 14px;
+  background-position: right 6px center;
+  background-size: 20px;
+}
+@-moz-document url-prefix() {
+  select {
+    background-image: url(/images/icons/downArrow.svg);
+  }
+}
+select:not(*:root) {
+  background-image: url(/images/icons/downArrow.svg);
+}

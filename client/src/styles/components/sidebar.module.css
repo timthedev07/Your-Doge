@@ -1,0 +1,68 @@
+.side-bar {
+  /* these three lines stick the bar to the left of the screen */
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding-top: 70px;
+  z-index: 5000;
+
+  /* Font */
+  font-family: "Rubik Light";
+
+  /* size */
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(48, 48, 48);
+  transition: 0.5s;
+  min-height: 600px;
+}
+
+/* if side bar is closed, move it out of the screen */
+.side-bar.side-bar-closed {
+  transform: translateY(-200vh);
+}
+.side-bar.side-bar-opened {
+  transform: translateY(0);
+}
+
+.menu-btn-container {
+  background-color: rgb(37, 37, 37);
+  height: 60px;
+  width: 100vw;
+  position: sticky;
+  z-index: 80000000;
+  top: 0;
+}
+
+.side-bar-item-home {
+  border-radius: 100vw;
+  height: 70px;
+  width: 70px;
+  padding: 10px !important;
+  margin: auto;
+}
+
+/* style for each individual sidebar item */
+.side-bar .side-bar-item {
+  padding: 10px 10px;
+  padding-left: 30px;
+  cursor: pointer;
+}
+.side-bar .side-bar-item,
+.side-bar .side-bar-item:hover {
+  color: white;
+  text-decoration: none;
+}
+.side-bar .side-bar-item {
+  transition: 0.3s;
+  background: transparent;
+}
+.side-bar .side-bar-item:hover {
+  transition: 0.3s;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.menu-btn-container.sticky ~ .page-content {
+  padding-top: 60px;
+}
