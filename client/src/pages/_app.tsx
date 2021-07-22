@@ -2,22 +2,29 @@ import "../styles/master.css";
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  NormalizedCacheObject,
+} from "@apollo/client";
 import { BACKEND } from "../constants/apollo";
 import { generateApolloClient } from "../lib/clientGenerator";
 import { getWithExpiry } from "../lib/localStorageExpiration";
-import { useEffect, useState } from "react";
-
-let SERVER_ID = null;
 
 export const shibe = generateApolloClient(BACKEND);
-export const burrito = generateApolloClient(
-  `${
-    process.env.NODE_ENV === "development"
-      ? `http://localhost:500${SERVER_ID}`
-      : `http://homework-manager-db${SERVER_ID}.herokuapp.com`
-  }`
-);
+export const SERVER_ID =
+  typeof window !== "undefined"
+    ? getWithExpiry(window.localStorage, "serverId")
+    : -1;
+
+export const burrito: ApolloClient<NormalizedCacheObject> =
+  generateApolloClient(
+    `${
+      process.env.NODE_ENV === "development"
+        ? `http://localhost:500${SERVER_ID}`
+        : `http://homework-manager-db${SERVER_ID}.herokuapp.com`
+    }`
+  );
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -34,13 +41,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 };
 
 const ApolloWrapper: React.FC<AppProps> = (props) => {
-  const [serverId, setServerId] = useState(0);
-
-  useEffect(() => {
-    setServerId(getWithExpiry(window.localStorage, "serverId") - 1);
-  }, []);
-
-  if (serverId) {
+  if (SERVER_ID) {
     return (
       <ApolloProvider client={burrito}>
         <ApolloProvider client={shibe}>
