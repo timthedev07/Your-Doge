@@ -10,12 +10,15 @@ import {
 import { BACKEND } from "../constants/apollo";
 import { generateApolloClient } from "../lib/clientGenerator";
 import { getWithExpiry } from "../lib/localStorageExpiration";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "react-calendar/dist/Calendar.css";
+import { Nav } from "../components/nav/Nav";
+import { isClient } from "../lib/isClient";
 
 export const shibe = generateApolloClient(BACKEND);
-export const SERVER_ID =
-  typeof window !== "undefined"
-    ? getWithExpiry(window.localStorage, "serverId")
-    : -1;
+export const SERVER_ID = isClient
+  ? getWithExpiry(window.localStorage, "serverId")
+  : -1;
 
 export const burrito: ApolloClient<NormalizedCacheObject> =
   generateApolloClient(
@@ -27,12 +30,17 @@ export const burrito: ApolloClient<NormalizedCacheObject> =
   );
 
 const App = ({ Component, pageProps }: AppProps) => {
+  if (!isClient) {
+    return null;
+  }
   return (
     <div className="App">
       <Head>
         <title>Your Doge</title>
       </Head>
-      <nav></nav>
+      <nav>
+        <Nav transparent={false} />
+      </nav>
       <main>
         <Component {...pageProps} />
       </main>

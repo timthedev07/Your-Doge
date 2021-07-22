@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MenuButton } from "./MenuButton";
-import { useHistory, useLocation } from "react-router";
-import Logo from "../../assets/images/logo.png";
+import { useRouter } from "next/router";
+import Logo from "../../../public/images/logo.png";
 import { useMeQuery } from "../../generated/graphql";
+import Image from "next/image";
+import { isClient } from "../../lib/isClient";
 
 const THRESHOLD = 481;
 
@@ -13,12 +15,10 @@ interface SBItemProps {
 }
 
 const SidebarItem: React.FC<SBItemProps> = ({ children, url, home }) => {
-  const history = useHistory();
-
   return (
     <div
       className={home ? "side-bar-item side-bar-item-home" : "side-bar-item"}
-      onClick={() => history.push(url)}
+      onClick={() => window.location.replace(url)}
     >
       {children}
     </div>
@@ -32,8 +32,7 @@ interface Props {
 // Responsive Navigation Bar
 export const Nav: React.FC<Props> = ({ transparent }) => {
   const { data: userData, loading } = useMeQuery();
-  const history = useHistory();
-  const location = useLocation();
+  const { pathname, push } = useRouter();
 
   // create a ref for the navigation bars and some of their components
   const navBarRef = useRef<HTMLDivElement>(null);
@@ -49,9 +48,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
   const [scrollY, setScrollY] = useState(() => window.scrollY);
 
   // holding the location
-  const [currPath, setCurrPath] = useState<string>(() =>
-    location.pathname.slice(1)
-  );
+  const [currPath, setCurrPath] = useState<string>(() => pathname.slice(1));
 
   // adds a sticky class to nav bar according to the window scroll
   function classManipulator() {
@@ -86,7 +83,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
 
   useEffect(() => {
     setCurrPath(location.pathname.slice(1));
-  }, [location]);
+  }, []);
 
   // a function that decides whether or not a screen width is small
   const isSmallScreen = () => {
@@ -107,7 +104,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
       >
         <a className="nav-item nav-item-home" href="/">
           Your Doge&nbsp;&nbsp;&nbsp;&nbsp;
-          <img src={Logo} alt="logo" className="nav-logo" />
+          <Image src={Logo} alt="logo" className="nav-logo" />
         </a>
 
         <a
@@ -143,7 +140,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
       >
         <div
           className="side-bar-item side-bar-item-home"
-          onClick={() => history.push("/")}
+          onClick={() => push("/")}
         ></div>
         <SidebarItem home url="/">
           Home
