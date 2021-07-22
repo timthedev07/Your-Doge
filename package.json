@@ -2,8 +2,6 @@
   "name": "your-doge",
   "version": "1.0.0",
   "description": "<a href=\"https://yourdoge.netlify.app\">   <p align=\"center\">     <img height=150 src=\"assets/yourdogeAppleIcon.svg\"/>   </p>   <p align=\"center\">     <img height=70 src=\"assets/textLogo.svg\">   </p> </a>",
-  "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "start": "killall redis-server || echo \"Killed all dangling redis servers.\" && concurrently \"cd server && redis-server\" \"cd server && HANDLE_HOMEWORK=false yarn devstart\" \"cd server && PORT=5000 yarn devstart\" \"cd gateway && yarn start\""
   },
