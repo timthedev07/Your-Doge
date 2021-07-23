@@ -10,8 +10,9 @@ html {
     rgb(50, 50, 50) 50%,
     rgb(35, 35, 35) 100%
   );
+  color: rgb(255, 255, 255);
 }
-body {
+html body {
   margin: 0;
   font-family: "Roboto Regular";
   min-height: 100vh;
