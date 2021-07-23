@@ -15,6 +15,7 @@ import "react-calendar/dist/Calendar.css";
 import { Nav } from "../components/nav/Nav";
 import { isClient } from "../lib/isClient";
 import { useEffect, useState } from "react";
+import { AuthProvider } from "../contexts/AuthContext";
 
 export const shibe = generateApolloClient(BACKEND);
 export const SERVER_ID = isClient
@@ -68,7 +69,9 @@ const App = ({ Component, pageProps }: AppProps) => {
 const ApolloWrapper: React.FC<AppProps> = (props) => {
   const baseClient = (
     <ApolloProvider client={shibe}>
-      <App {...props} />
+      <AuthProvider>
+        <App {...props} />
+      </AuthProvider>
     </ApolloProvider>
   );
 
