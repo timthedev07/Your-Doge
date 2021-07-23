@@ -1,9 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MenuButton } from "./MenuButton";
 import { useRouter } from "next/router";
-import Logo from "../../../public/images/logo.png";
 import { useMeQuery } from "../../generated/graphql";
-import Image from "next/image";
 
 const THRESHOLD = 481;
 
@@ -103,7 +101,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
       >
         <a className="nav-item nav-item-home" href="/">
           Your Doge&nbsp;&nbsp;&nbsp;&nbsp;
-          <Image src={Logo} alt="logo" className="nav-logo" />
+          <img src={"/images/logo.png"} alt="logo" className="nav-logo" />
         </a>
 
         <a
