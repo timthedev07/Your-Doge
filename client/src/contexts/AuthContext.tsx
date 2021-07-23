@@ -1,17 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { unknownErrMsg } from "../constants/general";
 import {
   LoginMutation,
+  Maybe,
   MeDocument,
   MeQuery,
   RegisterMutation,
   useLoginMutation,
+  useMeQuery,
+  User,
   useRegisterMutation,
 } from "../generated/graphql";
 
 interface AuthControlProps {
   children: JSX.Element;
 }
+
+type UserType =
+  | Maybe<
+      {
+        __typename?: "User" | undefined;
+      } & Pick<
+        User,
+        "id" | "username" | "email" | "bio" | "serverId" | "avatarId" | "age"
+      >
+    >
+  | undefined;
 
 interface AuthContextType {
   login: (
@@ -23,6 +37,7 @@ interface AuthContextType {
     password: string,
     username: string
   ) => Promise<RegisterMutation | null | undefined>;
+  currentUser: UserType;
 }
 
 const AuthContext = React.createContext<AuthContextType | null>(null);
@@ -34,6 +49,24 @@ export const useAuth = () => {
 export const AuthProvider: React.FC<AuthControlProps> = ({ children }) => {
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
+  const [currentUser, setCurrentUser] = useState<
+    | Maybe<
+        {
+          __typename?: "User" | undefined;
+        } & Pick<
+          User,
+          "id" | "username" | "email" | "bio" | "serverId" | "avatarId" | "age"
+        >
+      >
+    | undefined
+    | null
+  >(() => null);
+
+  const { data } = useMeQuery();
+
+  useEffect(() => {
+    setCurrentUser(data?.me || null);
+  }, [data]);
 
   /**
    * Tries to sign a user in, returns the data on success and throws an error otherwise
@@ -101,6 +134,7 @@ export const AuthProvider: React.FC<AuthControlProps> = ({ children }) => {
   const value = {
     login,
     register,
+    currentUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

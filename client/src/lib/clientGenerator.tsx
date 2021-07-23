@@ -1,5 +1,5 @@
 import { ApolloClient, Observable, ApolloLink, HttpLink } from "@apollo/client";
-import { getAccessToken, setAccessToken } from "../../accessToken";
+import { getAccessToken, setAccessToken } from "../accessToken";
 import { onError } from "apollo-link-error";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode, { JwtPayload } from "jwt-decode";
@@ -15,7 +15,9 @@ export const generateApolloClient = (baseUrl: string) => {
         Promise.resolve(operation)
           .then((operation) => {
             const accessToken = getAccessToken();
+            console.log(accessToken);
             if (accessToken) {
+              console.log("THERE WE GO");
               operation.setContext({
                 headers: {
                   authorization: `bearer ${accessToken}`,
@@ -48,6 +50,8 @@ export const generateApolloClient = (baseUrl: string) => {
           if (!token) {
             return true;
           }
+
+          console.log("THERE YOU GO");
 
           try {
             const { exp } = jwtDecode<JwtPayload>(token);

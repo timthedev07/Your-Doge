@@ -4,11 +4,11 @@ import {
   MeQuery,
   MeDocument,
   useDeleteAccountMutation,
-} from "../../generated/graphql";
-import { setAccessToken } from "../../accessToken";
+} from "../generated/graphql";
+import { setAccessToken } from "../accessToken";
 import { Modal, Button } from "react-bootstrap";
-import { CloseButton } from "../CloseButton";
-import { Alert } from "../Alert";
+import { CloseButton } from "./CloseButton";
+import { Alert } from "./Alert";
 
 interface SettingsTabProps {
   username: string;
@@ -98,7 +98,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
           </label>
           <input ref={unRef} className="rounded-input emphasized" />
           <label style={{ margin: "5px" }}>
-            Please type in your password to make sure it's really you.
+            Please type in your password to make sure it&#39;s really you.
           </label>
           <input type="password" ref={pwRef} className="rounded-input danger" />
         </Modal.Body>

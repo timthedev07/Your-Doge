@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
 import Link from "next/link";
 import { Loading } from "../../components/Loading";
-import { setAccessToken } from "../../../accessToken";
+import { setAccessToken } from "../../accessToken";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../../constants/general";
 import { setWithExpiry } from "../../lib/localStorageExpiration";

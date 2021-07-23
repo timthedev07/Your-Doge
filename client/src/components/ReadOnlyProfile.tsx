@@ -1,7 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { AvatarKeyType } from "../../pages/account/Account";
 import AvatarData from "../../avatarData.json";
 import ReactMarkdown from "react-markdown";
+
+export type AvatarKeyType =
+  | "0"
+  | "1"
+  | "2"
+  | "3"
+  | "4"
+  | "5"
+  | "6"
+  | "7"
+  | "8"
+  | "9"
+  | "10"
+  | "11"
+  | "12"
+  | "13"
+  | "14";
 
 interface ReadOnlyProfileProps {
   avatarId: AvatarKeyType;
@@ -25,10 +41,10 @@ export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
     setter: (arg: string) => any
   ) => {
     const { default: res } = await import(
-      `../../assets/images/avatars/${AvatarData[id]}.svg` // use different avatars based on the avatarId
+      `../../public/images/avatars/${AvatarData[id]}.svg` // use different avatars based on the avatarId
       // binded to the user and stored in the database
     );
-    setter(res as string);
+    setter(res.src as string);
   };
 
   /* this part gets the right avatar based on activeAvatar */

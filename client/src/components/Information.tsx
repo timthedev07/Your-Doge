@@ -1,14 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
+
 import AvatarData from "../../avatarData.json";
 import { Button, Modal } from "react-bootstrap";
-import { CloseButton } from "../CloseButton";
-import { AvatarKeyType } from "../../pages/account/Account";
+import { CloseButton } from "./CloseButton";
+import { AvatarKeyType } from "./ReadOnlyProfile";
 import {
   MeDocument,
   MeQuery,
   useUpdateAvatarMutation,
   useUpdateProfileMutation,
-} from "../../generated/graphql";
+} from "../generated/graphql";
 
 interface InformationProps {
   avatarId: AvatarKeyType;
@@ -81,10 +82,10 @@ export const Information: React.FC<InformationProps> = ({
     setter: (arg: string) => any
   ) => {
     const { default: res } = await import(
-      `../../assets/images/avatars/${AvatarData[id]}.svg` // use different avatars based on the avatarId
+      `../../public/images/avatars/${AvatarData[id]}.svg` // use different avatars based on the avatarId
       // binded to the user and stored in the database
     );
-    setter(res as string);
+    setter(res.src as string);
   };
 
   const ages = useMemo(() => {
@@ -92,7 +93,13 @@ export const Information: React.FC<InformationProps> = ({
     for (let i = 1; i <= 150; ++i) {
       res.push(i);
     }
-    return res;
+    return res.map((each) => {
+      return (
+        <option key={each} value={each}>
+          {each}
+        </option>
+      );
+    });
   }, []);
 
   /* this part gets the right avatar based on activeAvatar */
@@ -126,12 +133,16 @@ export const Information: React.FC<InformationProps> = ({
         parseInt(i) < Object.keys(AvatarData).length;
         i = `${parseInt(i) + 1}` as any
       ) {
-        const tmp = await import(
-          `../../assets/images/avatars/${AvatarData[i]}.svg`
-        );
-        setAvatars((prev) => {
-          return [...prev, tmp.default];
-        });
+        try {
+          const { default: res } = await import(
+            `../../public/images/avatars/${AvatarData[i]}.svg`
+          );
+          setAvatars((prev) => {
+            return [...prev, res.src as string];
+          });
+        } catch (err) {
+          console.log(err);
+        }
       }
     };
 
@@ -166,13 +177,7 @@ export const Information: React.FC<InformationProps> = ({
               className="select"
               defaultValue={age}
             >
-              {ages.map((each, ind) => {
-                return (
-                  <option key={each} value={each}>
-                    {each}
-                  </option>
-                );
-              })}
+              {ages}
             </select>
             &nbsp; year{age > 1 ? "s" : ""} old{" "}
           </h6>

@@ -1,30 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router";
-import { Information } from "../../components/accountPage/Information";
-import { SettingsTab } from "../../components/accountPage/SettingsTab";
-import { Loading } from "../../components/Loading";
-import { TabData, TabSwitcher } from "../../components/TabSwitcher";
-import { useMeQuery } from "../../generated/graphql";
+import { Information } from "../components/Information";
+import { SettingsTab } from "../components/SettingsTab";
+import { Loading } from "../components/Loading";
+import { TabData, TabSwitcher } from "../components/TabSwitcher";
+import { useMeQuery } from "../generated/graphql";
+import { useRouter } from "next/router";
+import { useAuth } from "../contexts/AuthContext";
 
-interface MeProps {}
-
-export const Me: React.FC<MeProps> = () => {
+const Account: React.FC = () => {
   const { data, loading } = useMeQuery();
   const [currAvatarId, setCurrAvatarId] = useState<number>(
     data?.me?.avatarId || 0
   );
+
+  const auth = useAuth()!;
+
+  console.log(data, auth);
+
+  const { push } = useRouter();
+
   useEffect(() => {
     if (data && data.me) {
       setCurrAvatarId(data.me.avatarId);
     }
   }, [data]);
 
-  if ((!data || !data.me) && !loading) {
-    return <Redirect to="/login" />;
+  if (loading) {
+    return <Loading />;
   }
 
   if (!data || !data.me) {
-    return <Loading />;
+    push("/auth/login");
+    return <></>;
   }
 
   let TABS: Array<TabData> = [
@@ -56,3 +63,5 @@ export const Me: React.FC<MeProps> = () => {
     </div>
   );
 };
+
+export default Account;
