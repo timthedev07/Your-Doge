@@ -1,5 +1,4 @@
 import React from "react";
-import { ReactComponent as CloseIcon } from "../assets/images/icons/close.svg";
 
 interface Props {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,7 +23,12 @@ export const Alert: React.FC<Props> = (props) => {
       }`}
     >
       <p>{props.text}</p>
-      <CloseIcon onClick={() => handleClick()} className="close-icon" />
+      <img
+        src="/images/icons/close.svg"
+        onClick={() => handleClick()}
+        className="close-icon"
+        alt="button"
+      />
     </div>
   );
 };
