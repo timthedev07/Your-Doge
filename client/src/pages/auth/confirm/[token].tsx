@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router";
 import {
   MeDocument,
   MeQuery,
   useConfirmEmailMutation,
-} from "../../generated/graphql";
-import { useValidTmpTokenMutation } from "../../generated/graphql";
-import { setWithExpiry } from "../../utils/localStorageExpiration";
-import { Loading } from "../Loading";
+  useValidTmpTokenMutation,
+} from "../../../generated/graphql";
+import { setWithExpiry } from "../../../lib/localStorageExpiration";
+import { Loading } from "../../../components/Loading";
+import { useRouter } from "next/router";
 
-interface ConfirmEmailProps {
-  token: string;
-}
-
-export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
+const ConfirmEmail: React.FC = () => {
   const [confirmEmail] = useConfirmEmailMutation();
-  const history = useHistory();
   const [loading, setLoading] = useState<boolean>(true);
   const [validToken, setValidToken] = useState<boolean>(false);
+  const {
+    push,
+    query: { token },
+  } = useRouter();
 
   const [verifyToken] = useValidTmpTokenMutation();
 
   useEffect(() => {
     const isTokenValid = async () => {
       setLoading(true);
-      const res = await verifyToken({ variables: { token } });
+      const res = await verifyToken({
+        variables: { token: token ? (token as string) : "" },
+      });
 
       if (res.data && res.data.validTmpToken) {
         setValidToken(true);
@@ -50,7 +51,7 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
                 onClick={async () => {
                   try {
                     const { data } = await confirmEmail({
-                      variables: { token },
+                      variables: { token: token as string },
                       update: (store, { data }) => {
                         if (!data) return null;
                         store.writeQuery<MeQuery>({
@@ -65,11 +66,12 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
                     });
                     if (data && data.confirmUser) {
                       setWithExpiry(
+                        window.localStorage,
                         "serverId",
                         data.confirmUser.user.serverId,
                         new Date().valueOf() + 864000000
                       ); // 10 days
-                      history.push("/dashboard");
+                      push("/dashboard");
                     }
                   } catch (err) {}
                 }}
@@ -90,3 +92,5 @@ export const ConfirmEmail: React.FC<ConfirmEmailProps> = ({ token }) => {
     <Loading />
   );
 };
+
+export default ConfirmEmail;
