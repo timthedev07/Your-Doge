@@ -1,15 +1,18 @@
+import { useRouter } from "next/router";
 import React from "react";
-import { ReadOnlyProfile } from "../../../components/accountPage/ReadOnlyProfile";
-import { Loading } from "../../../components/Loading";
-import { TabData, TabSwitcher } from "../../../components/TabSwitcher";
-import { useGetProfileQuery } from "../../../generated/graphql";
+import { ReadOnlyProfile } from "../../components/ReadOnlyProfile";
+import { Loading } from "../../components/Loading";
+import { TabData, TabSwitcher } from "../../components/TabSwitcher";
+import { useGetProfileQuery } from "../../generated/graphql";
 
-interface OtherUsersProps {
-  username: string;
-}
+const OtherUsers: React.FC = () => {
+  const {
+    query: { username },
+  } = useRouter();
 
-export const OtherUsers: React.FC<OtherUsersProps> = ({ username }) => {
-  const { data, loading } = useGetProfileQuery({ variables: { username } });
+  const { data, loading } = useGetProfileQuery({
+    variables: { username: username ? (username as string) : "" },
+  });
 
   if (!data || !data.getProfile) {
     if (loading) return <Loading />;
@@ -43,3 +46,5 @@ export const OtherUsers: React.FC<OtherUsersProps> = ({ username }) => {
     </div>
   );
 };
+
+export default OtherUsers;
