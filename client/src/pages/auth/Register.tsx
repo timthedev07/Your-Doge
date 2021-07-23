@@ -17,7 +17,7 @@ const validateEmail = (email: string) => {
   return EMAIL_VALIDATION_REGEX.test(email);
 };
 
-export const Register: React.FC<RouteComponentProps> = ({ history }) => {
+const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const { register } = useAuth()!;
 
   const emRef = useRef<HTMLInputElement>(null);
@@ -218,3 +218,5 @@ export const Register: React.FC<RouteComponentProps> = ({ history }) => {
     </div>
   );
 };
+
+export default Register;

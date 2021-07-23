@@ -10,7 +10,7 @@ import { setWithExpiry } from "../../lib/localStorageExpiration";
 
 const THRESHOLD = 360;
 
-export const Login: React.FC<RouteComponentProps> = ({ history }) => {
+const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
   const { login } = useAuth()!;
@@ -165,3 +165,5 @@ export const Login: React.FC<RouteComponentProps> = ({ history }) => {
     </div>
   );
 };
+
+export default Login;
