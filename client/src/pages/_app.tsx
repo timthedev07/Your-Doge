@@ -14,8 +14,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-calendar/dist/Calendar.css";
 import { Nav } from "../components/nav/Nav";
 import { isClient } from "../lib/isClient";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AuthProvider } from "../contexts/AuthContext";
+import { setAccessToken } from "../accessToken";
+import { Loading } from "../components/Loading";
 
 export const shibe = generateApolloClient(BACKEND);
 export const SERVER_ID = isClient
@@ -33,10 +35,35 @@ export const burrito: ApolloClient<NormalizedCacheObject> =
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [b, setB] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetch(`${BACKEND}/auth/refresh_token`, {
+      credentials: "include",
+      method: "POST",
+    })
+      .then(async (x) => {
+        const { accessToken } = await x.json();
+        setAccessToken(accessToken);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  });
 
   useEffect(() => {
     setB(isClient);
   }, []);
+
+  if (loading) {
+    return (
+      <>
+        <Loading />
+        <div className="App"></div>
+      </>
+    );
+  }
 
   return b ? (
     <>
