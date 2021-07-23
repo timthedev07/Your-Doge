@@ -43,8 +43,18 @@ const App = ({ Component, pageProps }: AppProps) => {
       <div className="App">
         <Head>
           <title>Your Doge</title>
+          <meta
+            name="description"
+            content="An awesome doge themed homework manager."
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:title" content="Your Doge Home" />
+          <meta
+            property="og:description"
+            content="An awesome doge themed homework manager."
+          />
+          <meta property="og:site_name" content="Your Doge" />
         </Head>
-
         <main>
           <Component {...pageProps} />
         </main>
@@ -56,17 +66,17 @@ const App = ({ Component, pageProps }: AppProps) => {
 };
 
 const ApolloWrapper: React.FC<AppProps> = (props) => {
-  const baseApp = (
+  const baseClient = (
     <ApolloProvider client={shibe}>
       <App {...props} />
     </ApolloProvider>
   );
 
   if (SERVER_ID) {
-    return <ApolloProvider client={burrito}>{baseApp}</ApolloProvider>;
+    return <ApolloProvider client={burrito}>{baseClient}</ApolloProvider>;
   }
 
-  return baseApp;
+  return baseClient;
 };
 
 export default ApolloWrapper;
