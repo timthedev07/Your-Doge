@@ -20,8 +20,8 @@ body {
   background: inherit;
   background-repeat: no-repeat;
   background-size: cover;
-  color: rgb(255, 255, 255);
   transition: 0.3s;
+  color: rgb(255, 255, 255);
 }
 
 div.App {
@@ -66,7 +66,8 @@ a:hover,
   -ms-user-select: none;
   user-select: none;
 }
+
 label {
-  color: rgb(27, 27, 29);
+  color: rgb(243, 243, 247);
   font-size: 16px;
 }
