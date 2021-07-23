@@ -1,10 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
-import { RouteComponentProps } from "react-router-dom";
 import { Loading } from "../../components/Loading";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../../constants/general";
+import { useRouter } from "next/router";
 
 const THRESHOLD = 360;
 
@@ -17,8 +17,9 @@ const validateEmail = (email: string) => {
   return EMAIL_VALIDATION_REGEX.test(email);
 };
 
-const Register: React.FC<RouteComponentProps> = ({ history }) => {
+const Register: React.FC = () => {
   const { register } = useAuth()!;
+  const { push } = useRouter();
 
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
@@ -41,7 +42,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   function routeToLogin() {
-    history.push("/login");
+    push("/auth/login");
   }
 
   /**
@@ -108,7 +109,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
       const data = await register(email, password, username);
 
       if (data?.register) {
-        history.push("/auth/confirm");
+        push("/auth/confirm");
         return;
       }
 

@@ -1,19 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
-import { Link, RouteComponentProps } from "react-router-dom";
+import Link from "next/link";
 import { Loading } from "../../components/Loading";
 import { setAccessToken } from "../../../accessToken";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../../constants/general";
 import { setWithExpiry } from "../../lib/localStorageExpiration";
+import { useRouter } from "next/router";
 
 const THRESHOLD = 360;
 
-const Login: React.FC<RouteComponentProps> = ({ history }) => {
+const Login: React.FC = () => {
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
   const { login } = useAuth()!;
+  const { push } = useRouter();
 
   const [alertActive, setAlertActive] = useState<boolean>(false);
   const [alertType, setAlertType] = useState<string>("danger");
@@ -43,7 +45,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   function routeToRegister() {
-    history.push("/register");
+    push("/auth/register");
   }
 
   async function handleSubmit(event: any) {
@@ -73,7 +75,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
           new Date().valueOf() + 864000000
         ); // 10 days
         setAccessToken(data.login.accessToken);
-        history.push("/");
+        push("/");
         return;
       }
 
@@ -138,14 +140,14 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
                 Sign in
               </Button>
             )}
-            <Link to="/auth/forgot-password">
+            <Link href="/auth/forgot-password" passHref>
               <Button className="normal-links" variant="link">
                 {windowWidth > THRESHOLD
                   ? "Forgot your password?"
                   : "Reset Password"}
               </Button>
             </Link>
-            <Link to="/auth/confirm/resend">
+            <Link href="/auth/confirm/resend" passHref>
               <Button className="normal-links" variant="link">
                 Confirm your email
               </Button>
