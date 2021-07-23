@@ -31,7 +31,7 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-export const AuthControl: React.FC<AuthControlProps> = ({ children }) => {
+export const AuthProvider: React.FC<AuthControlProps> = ({ children }) => {
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
 
