@@ -1,8 +1,7 @@
 import * as React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./css/master.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "react-calendar/dist/Calendar.css";
+
 // importing the pages
 import { NotFound } from "../pages/NotFound";
 import { Login } from "../pages/auth/Login";

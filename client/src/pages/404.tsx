@@ -1,8 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Bg from "../../public/images/404.jpeg";
 
 const NotFound: React.FC = () => {
   const { back } = useRouter();
@@ -15,14 +13,7 @@ const NotFound: React.FC = () => {
       <div className="not-found-content">
         <h1>
           4
-          <Image
-            src="/images/yellingDoge0.png"
-            alt=""
-            height={400}
-            width={400}
-            priority
-          />
-          4
+          <img src="/images/yellingDoge0.png" alt="" />4
         </h1>
         <h3>The page you were looking for was not found.</h3>
         <button
@@ -34,7 +25,7 @@ const NotFound: React.FC = () => {
           Go Back
         </button>
       </div>
-      <Image id="not-found-bg" alt="404bg" src={Bg} priority />
+      <img id="not-found-bg" alt="404" src="/images/404.jpeg" />
     </div>
   );
 };
