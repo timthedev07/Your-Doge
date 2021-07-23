@@ -56,21 +56,17 @@ const App = ({ Component, pageProps }: AppProps) => {
 };
 
 const ApolloWrapper: React.FC<AppProps> = (props) => {
-  if (SERVER_ID) {
-    return (
-      <ApolloProvider client={burrito}>
-        <ApolloProvider client={shibe}>
-          <App {...props} />
-        </ApolloProvider>
-      </ApolloProvider>
-    );
-  }
-
-  return (
+  const baseApp = (
     <ApolloProvider client={shibe}>
       <App {...props} />
     </ApolloProvider>
   );
+
+  if (SERVER_ID) {
+    return <ApolloProvider client={burrito}>{baseApp}</ApolloProvider>;
+  }
+
+  return baseApp;
 };
 
 export default ApolloWrapper;
