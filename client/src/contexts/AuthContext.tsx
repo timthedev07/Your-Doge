@@ -144,7 +144,6 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
       }
       throw new Error(unknownErrMsg);
     }
-    return false;
   };
 
   const value = {
