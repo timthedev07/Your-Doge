@@ -37,7 +37,7 @@ interface AuthContextType {
     username: string
   ) => Promise<boolean>;
   currentUser: UserType;
-  isAuth: () => boolean | undefined;
+  authState: () => "auth" | "loading" | "none";
 }
 
 const AuthContext = React.createContext<AuthContextType | null>(null);
@@ -142,14 +142,14 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
    *
    * We have to take an user object because it just doesn't work when we don't
    */
-  const isAuth = () => {
+  const authState = () => {
     if (currentUser !== null) {
       if (currentUser !== undefined) {
-        return true;
+        return "auth";
       }
-      return undefined;
+      return "loading";
     } else {
-      return false;
+      return "none";
     }
   };
 
@@ -157,7 +157,7 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
     login,
     register,
     currentUser,
-    isAuth,
+    authState,
   };
 
   if (loading) {

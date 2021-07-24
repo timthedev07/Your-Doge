@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "../contexts/AuthContext";
 
 const Account: React.FC = () => {
-  const { isAuth, currentUser } = useAuth()!;
+  const { authState, currentUser } = useAuth()!;
   const [currAvatarId, setCurrAvatarId] = useState<number>(
     currentUser?.avatarId || 0
   );
@@ -14,28 +14,19 @@ const Account: React.FC = () => {
   const { push } = useRouter();
 
   useEffect(() => {
-    const res = isAuth();
-    if (res !== undefined) {
-      if (res === true) {
-        setCurrAvatarId(currentUser!.avatarId);
-        return;
-      }
-      console.log("BOYS");
+    const res = authState();
+    if (res === "auth") {
+      setCurrAvatarId(currentUser!.avatarId);
+    } else if (res === "none") {
+      push("/auth/login");
     }
-    // if (currentUser !== null) {
-    //   if (currentUser) {
-    //     setCurrAvatarId(currentUser!.avatarId);
-    //   }
-    // } else {
-    //   return console.log("HEY");
-    // }
-  }, [currentUser, push, isAuth]);
+  }, [currentUser, push, authState]);
 
   if (!currentUser) {
     return <></>;
   }
 
-  let TABS: Array<TabData> = [
+  const TABS: Array<TabData> = [
     {
       content: (
         <Information
