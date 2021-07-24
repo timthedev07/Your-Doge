@@ -1,4 +1,4 @@
-<a href="https://yourdoge.netlify.app">
+<a href="https://yourdoge.vercel.app">
   <p align="center">
     <img height=150 src="assets/yourdogeAppleIcon.svg"/>
   </p>
@@ -8,10 +8,10 @@
 </a>
 
 <p align="center">
-  <a href="https://yourdoge.netlify.app">
+  <a href="https://yourdoge.vercel.app">
     <img src="https://img.shields.io/badge/status-development-green" alt="status" />
   </a>
-  <a href="https://yourdoge.netlify.app">
+  <a href="https://yourdoge.vercel.app">
     <img src="https://img.shields.io/badge/license-GPL--3.0--or--later-yellow" />
   </a>
 
@@ -28,7 +28,7 @@
 <h3 align="center">
   <a href="CONTRIBUTING.md">Contribute</a>
   <span> · </span>
-  <a href="https://yourdoge.netlify.app">Production</a>
+  <a href="https://yourdoge.vercel.app">Production</a>
 </h3>
 
 ---
