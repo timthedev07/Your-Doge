@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Loading } from "../components/Loading";
 import { unknownErrMsg } from "../constants/general";
 import {
   Maybe,
@@ -47,7 +48,7 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
   // graphql stuff
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
-  const { data } = useMeQuery();
+  const { data, loading } = useMeQuery();
   const { setAccessToken } = useApollo()!;
 
   // current user state
@@ -151,6 +152,8 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
     register,
     currentUser,
   };
+
+  if (loading) return <Loading />;
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
