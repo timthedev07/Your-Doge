@@ -20,8 +20,8 @@ export const SERVER_ID = isClient
   : -1;
 
 interface ApolloContextType {
-  getAccessToken: () => string;
-  setAccessToken: React.Dispatch<React.SetStateAction<string>>;
+  accessToken: string | null;
+  setAccessToken: React.Dispatch<React.SetStateAction<string | null>>;
   shibe: ApolloClient<NormalizedCacheObject>;
   burrito: ApolloClient<NormalizedCacheObject>;
 }
@@ -34,7 +34,7 @@ export const useApollo = () => {
 
 export const CustomApolloProvider: React.FC<ContextProps> = ({ children }) => {
   // global states
-  const [accessToken, setAccessToken] = useState<string>("");
+  const [accessToken, setAccessToken] = useState<string | null>(() => null);
   const [loading, setLoading] = useState<boolean>(true);
 
   // use effect hooks
@@ -61,8 +61,11 @@ export const CustomApolloProvider: React.FC<ContextProps> = ({ children }) => {
           let handle: any;
           Promise.resolve(operation)
             .then((operation) => {
+              console.log(
+                "AN OPERATION WAS PERFORMED, and the token is:",
+                accessToken
+              );
               if (accessToken) {
-                console.log("THERE IS A TOKEN");
                 operation.setContext({
                   headers: {
                     authorization: `bearer ${accessToken}`,
@@ -132,9 +135,6 @@ export const CustomApolloProvider: React.FC<ContextProps> = ({ children }) => {
     return client;
   };
 
-  // static functions and client instances
-  const getAccessToken = () => accessToken;
-
   const shibe = generateApolloClient(BACKEND);
   const burrito = generateApolloClient(
     `${
@@ -145,11 +145,15 @@ export const CustomApolloProvider: React.FC<ContextProps> = ({ children }) => {
   );
 
   const value = {
-    getAccessToken,
+    accessToken,
     setAccessToken,
     shibe,
     burrito,
   };
+
+  if (accessToken === null) {
+    return <Loading />;
+  }
 
   return (
     <>
