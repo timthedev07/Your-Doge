@@ -11,7 +11,7 @@ import { createConnection } from "typeorm";
 
 export const FRONTEND =
   process.env.NODE_ENV === "production"
-    ? "https://your-doge.netlify.app"
+    ? "https://yourdoge.vercel.app"
     : "http://localhost:3000";
 const PLAYGROUND = "https://studio.apollographql.com";
 const PORT = parseInt(process.env.PORT || "9000");

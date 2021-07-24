@@ -13,7 +13,7 @@ const HOSTNAME: string = process.env.HOST || "0.0.0.0";
 
 export const FRONTEND =
   process.env.NODE_ENV === "production"
-    ? "https://yourdoge.netlify.app"
+    ? "https://yourdoge.vercel.app"
     : "http://localhost:3000";
 
 (async () => {
