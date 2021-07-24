@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Loading } from "../components/Loading";
 import { unknownErrMsg } from "../constants/general";
 import {
   Maybe,
@@ -35,6 +36,7 @@ interface AuthContextType {
     username: string
   ) => Promise<boolean>;
   currentUser: UserType;
+  isAuth: () => boolean;
 }
 
 const AuthContext = React.createContext<AuthContextType | null>(null);
@@ -47,7 +49,7 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
   // graphql stuff
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
-  const { data } = useMeQuery();
+  const { data, loading } = useMeQuery();
   const { setAccessToken } = useApollo()!;
 
   // current user state
@@ -62,11 +64,11 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
       >
     | undefined
     | null
-  >(data?.me);
+  >(null);
 
   useEffect(() => {
     setCurrentUser(data?.me);
-  }, [data]);
+  }, [data, loading]);
 
   /**
    * Tries to sign a user in, returns the data on success and throws an error otherwise
@@ -146,11 +148,24 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
     }
   };
 
+  const isAuth: () => boolean = () => {
+    if (currentUser !== null) {
+      return !!currentUser;
+    } else {
+      return false;
+    }
+  };
+
   const value = {
     login,
     register,
     currentUser,
+    isAuth,
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
