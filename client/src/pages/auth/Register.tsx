@@ -108,7 +108,7 @@ const Register: React.FC = () => {
     try {
       const data = await register(email, password, username);
 
-      if (data?.register) {
+      if (data) {
         push("/auth/confirm");
         return;
       }
