@@ -46,24 +46,6 @@ class LoginResponse {
 
 @Resolver()
 export class UserResolver {
-  /**
-   * This code-first approach below is basically the same as:(schema first)
-   * typeDefs: `
-      type Query {
-        hello: String
-      }
-    `,
-    resolvers: {
-      Query: {
-        hello: () => "hello world",
-      },
-    },
-   */
-  @Query(() => String)
-  hello() {
-    return "hello world";
-  }
-
   // /**
   //  * a query that retrieves all the users from the database
   //  * @returns all users
@@ -204,6 +186,7 @@ export class UserResolver {
     const authorization = context.req.headers["authorization"];
 
     if (!authorization) {
+      console.log("NO AUTH");
       return null;
     }
 
