@@ -61,10 +61,6 @@ export const CustomApolloProvider: React.FC<ContextProps> = ({ children }) => {
           let handle: any;
           Promise.resolve(operation)
             .then((operation) => {
-              console.log(
-                "AN OPERATION WAS PERFORMED, and the token is:",
-                accessToken
-              );
               if (accessToken) {
                 operation.setContext({
                   headers: {
