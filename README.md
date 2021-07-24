@@ -9,14 +9,14 @@
 
 <p align="center">
   <a href="https://yourdoge.vercel.app">
-    <img src="https://img.shields.io/badge/status-development-green" alt="status" />
+    <img src="https://img.shields.io/badge/status-development-green?style=for-the-badge" alt="status" />
   </a>
   <a href="https://yourdoge.vercel.app">
-    <img src="https://img.shields.io/badge/license-GPL--3.0--or--later-yellow" />
+    <img src="https://img.shields.io/badge/license-GPL--3.0--or--later-yellow?style=for-the-badge" />
   </a>
 
   <a href="https://open.vscode.dev/timthedev07/Your-Doge">
-    <img src="https://open.vscode.dev/badges/open-in-vscode.svg">
+    <img src="https://img.shields.io/badge/ -open in vscode-blue?style=for-the-badge&logo=visualstudiocode">
   </a>
 
 </p>
