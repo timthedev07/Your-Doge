@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MenuButton } from "./MenuButton";
 import { useRouter } from "next/router";
-import { useMeQuery } from "../../generated/graphql";
+import { useAuth } from "../../contexts/AuthContext";
 
 const THRESHOLD = 481;
 
@@ -28,8 +28,8 @@ interface Props {
 
 // Responsive Navigation Bar
 export const Nav: React.FC<Props> = ({ transparent }) => {
-  const { data: userData, loading } = useMeQuery();
   const { pathname, push } = useRouter();
+  const { currentUser } = useAuth()!;
 
   // create a ref for the navigation bars and some of their components
   const navBarRef = useRef<HTMLDivElement>(null);
@@ -119,7 +119,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           }
           href="/account"
         >
-          {loading ? "..." : userData?.me ? "Account" : "Sign In"}
+          {currentUser ? "Account" : "Sign In"}
         </a>
       </div>
     </div>
