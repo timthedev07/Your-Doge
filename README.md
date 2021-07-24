@@ -45,7 +45,7 @@ We are open to any issues, pull requests, and comments on how we can make Your D
 
 ## Branches
 
-- production -> don't make any changes here
+- release -> production branch, don't make any changes here
 - staging -> open to pull requests
 
 ## License
