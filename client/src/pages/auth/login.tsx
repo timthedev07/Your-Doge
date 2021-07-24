@@ -14,6 +14,7 @@ const Login: React.FC = () => {
   const pwRef = useRef<HTMLInputElement>(null);
   const { login } = useAuth()!;
   const { push } = useRouter();
+  const { authState } = useAuth()!;
 
   const [alertActive, setAlertActive] = useState<boolean>(false);
   const [alertType, setAlertType] = useState<string>("danger");
@@ -34,6 +35,11 @@ const Login: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  if (authState() === "auth") {
+    push("/account");
+    return <></>;
+  }
 
   const displayError = (message: string) => {
     setAlertMessage(message);
