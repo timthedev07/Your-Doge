@@ -26,7 +26,8 @@ type UserType =
         "id" | "username" | "email" | "bio" | "serverId" | "avatarId" | "age"
       >
     >
-  | undefined;
+  | undefined
+  | null;
 
 interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
@@ -36,7 +37,7 @@ interface AuthContextType {
     username: string
   ) => Promise<boolean>;
   currentUser: UserType;
-  isAuth: () => boolean;
+  isAuth: () => boolean | undefined;
 }
 
 const AuthContext = React.createContext<AuthContextType | null>(null);
@@ -53,18 +54,7 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
   const { setAccessToken } = useApollo()!;
 
   // current user state
-  const [currentUser, setCurrentUser] = useState<
-    | Maybe<
-        {
-          __typename?: "User" | undefined;
-        } & Pick<
-          User,
-          "id" | "username" | "email" | "bio" | "serverId" | "avatarId" | "age"
-        >
-      >
-    | undefined
-    | null
-  >(null);
+  const [currentUser, setCurrentUser] = useState<UserType>(null);
 
   useEffect(() => {
     setCurrentUser(data?.me);
@@ -148,9 +138,16 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
     }
   };
 
-  const isAuth: () => boolean = () => {
+  /**
+   *
+   * We have to take an user object because it just doesn't work when we don't
+   */
+  const isAuth = () => {
     if (currentUser !== null) {
-      return !!currentUser;
+      if (currentUser !== undefined) {
+        return true;
+      }
+      return undefined;
     } else {
       return false;
     }
