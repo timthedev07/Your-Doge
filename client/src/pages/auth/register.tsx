@@ -135,6 +135,7 @@ const Register: React.FC = () => {
       {loading ? <Loading /> : null}
 
       <h1 className="form-heading">Join Us</h1>
+
       <div>
         <Form className="form-as-wrapper">
           <Alert
