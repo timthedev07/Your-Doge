@@ -1,18 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { unknownErrMsg } from "../constants/general";
 import {
-  LoginMutation,
   Maybe,
   MeDocument,
   MeQuery,
-  RegisterMutation,
   useLoginMutation,
   useMeQuery,
   User,
   useRegisterMutation,
 } from "../generated/graphql";
+import { setWithExpiry } from "../lib/localStorageExpiration";
+import { useApollo } from "./ApolloContext";
 
-interface AuthControlProps {
+export interface ContextProps {
   children: JSX.Element;
 }
 
@@ -28,15 +28,12 @@ type UserType =
   | undefined;
 
 interface AuthContextType {
-  login: (
-    email: string,
-    password: string
-  ) => Promise<LoginMutation | null | undefined>;
+  login: (email: string, password: string) => Promise<boolean>;
   register: (
     email: string,
     password: string,
     username: string
-  ) => Promise<RegisterMutation | null | undefined>;
+  ) => Promise<boolean>;
   currentUser: UserType;
 }
 
@@ -46,9 +43,14 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-export const AuthProvider: React.FC<AuthControlProps> = ({ children }) => {
+export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
+  // graphql stuff
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
+  const { data } = useMeQuery();
+  const { setAccessToken } = useApollo()!;
+
+  // current user state
   const [currentUser, setCurrentUser] = useState<
     | Maybe<
         {
@@ -61,8 +63,6 @@ export const AuthProvider: React.FC<AuthControlProps> = ({ children }) => {
     | undefined
     | null
   >(() => null);
-
-  const { data } = useMeQuery();
 
   useEffect(() => {
     setCurrentUser(data?.me || null);
@@ -94,7 +94,19 @@ export const AuthProvider: React.FC<AuthControlProps> = ({ children }) => {
         },
       });
 
-      return res.data;
+      const data = res.data;
+
+      if (data?.login) {
+        setWithExpiry(
+          window.localStorage,
+          "serverId",
+          data.login.user.serverId,
+          new Date().valueOf() + 864000000
+        ); // 10 days
+        setAccessToken(data.login.accessToken);
+        return true;
+      }
+      throw new Error(unknownErrMsg);
     } catch (err: any) {
       if (err?.graphQLErrors[0]?.message) {
         throw new Error(err.graphQLErrors[0].message);
@@ -122,13 +134,17 @@ export const AuthProvider: React.FC<AuthControlProps> = ({ children }) => {
           username,
         },
       });
-      return res.data;
+      if (res.data?.register) {
+        return true;
+      }
+      throw new Error(unknownErrMsg);
     } catch (err: any) {
       if (err?.graphQLErrors[0]?.message) {
         throw new Error(err.graphQLErrors[0].message);
       }
       throw new Error(unknownErrMsg);
     }
+    return false;
   };
 
   const value = {

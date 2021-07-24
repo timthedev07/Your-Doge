@@ -5,10 +5,10 @@ import {
   MeDocument,
   useDeleteAccountMutation,
 } from "../generated/graphql";
-import { setAccessToken } from "../accessToken";
 import { Modal, Button } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
 import { Alert } from "./Alert";
+import { useApollo } from "../contexts/ApolloContext";
 
 interface SettingsTabProps {
   username: string;
@@ -21,6 +21,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const [show, setShow] = useState<boolean>(false);
   const unRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
+  const { setAccessToken } = useApollo()!;
 
   const handleSubmit = async () => {
     const { data } = await deleteAccount({

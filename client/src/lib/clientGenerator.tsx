@@ -1,5 +1,4 @@
 import { ApolloClient, Observable, ApolloLink, HttpLink } from "@apollo/client";
-import { getAccessToken, setAccessToken } from "../accessToken";
 import { onError } from "apollo-link-error";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode, { JwtPayload } from "jwt-decode";
@@ -7,17 +6,20 @@ import { InMemoryCache } from "@apollo/client";
 
 const cache = new InMemoryCache({});
 
-export const generateApolloClient = (baseUrl: string) => {
+export const generateApolloClient = (
+  baseUrl: string,
+  tokenGetter: () => string,
+  tokenSetter: any
+) => {
   const requestLink = new ApolloLink(
     (operation, forward) =>
       new Observable((observer) => {
         let handle: any;
         Promise.resolve(operation)
           .then((operation) => {
-            const accessToken = getAccessToken();
+            const accessToken = tokenGetter();
             console.log(accessToken);
             if (accessToken) {
-              console.log("THERE WE GO");
               operation.setContext({
                 headers: {
                   authorization: `bearer ${accessToken}`,
@@ -45,7 +47,7 @@ export const generateApolloClient = (baseUrl: string) => {
       new TokenRefreshLink({
         accessTokenField: "accessToken",
         isTokenValidOrUndefined: () => {
-          const token = getAccessToken();
+          const token = tokenGetter();
 
           if (!token) {
             return true;
@@ -71,7 +73,7 @@ export const generateApolloClient = (baseUrl: string) => {
           });
         },
         handleFetch: (accessToken) => {
-          setAccessToken(accessToken);
+          tokenSetter(accessToken);
         },
         handleError: (err) => {
           console.warn("Your refresh token is invalid. Try to relogin");
