@@ -138,10 +138,6 @@ export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
     }
   };
 
-  /**
-   *
-   * We have to take an user object because it just doesn't work when we don't
-   */
   const authState = () => {
     if (currentUser !== null) {
       if (currentUser !== undefined) {
