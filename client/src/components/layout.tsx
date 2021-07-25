@@ -3,9 +3,7 @@ import React from "react";
 import { CustomApolloProvider } from "../contexts/ApolloContext";
 import { Nav } from "./nav/Nav";
 
-interface LayoutProps {}
-
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout: React.FC = ({ children }) => {
   return (
     <>
       <Head>
