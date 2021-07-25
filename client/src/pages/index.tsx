@@ -1,15 +1,15 @@
 import Head from "next/head";
-import { useMeQuery } from "../generated/graphql";
+import { useAuth } from "../contexts/AuthContext";
 
 const Home = () => {
-  const { data } = useMeQuery();
+  const { currentUser } = useAuth()!;
 
   return (
     <div>
       <Head>
-        <title>I override everything</title>
+        <title>Home | Your Doge</title>
       </Head>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+      <pre>{JSON.stringify(currentUser, null, 2)}</pre>
     </div>
   );
 };
