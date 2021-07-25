@@ -27,7 +27,7 @@ export const Alert: React.FC<Props> = (props) => {
         src="/images/icons/close.svg"
         onClick={() => handleClick()}
         className="close-icon"
-        alt="button"
+        alt=""
       />
     </div>
   );
