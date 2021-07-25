@@ -20,7 +20,7 @@ interface InformationProps {
   avatarIdSetter: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export const Information: React.FC<InformationProps> = ({
+export const Profile: React.FC<InformationProps> = ({
   avatarId,
   avatarIdSetter,
   username,

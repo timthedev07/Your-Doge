@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Information } from "../components/Information";
+import { Profile } from "../components/Profile";
 import { SettingsTab } from "../components/SettingsTab";
 import { TabData, TabSwitcher } from "../components/TabSwitcher";
 import { useRouter } from "next/router";
@@ -29,7 +29,7 @@ const Account: React.FC = () => {
   const TABS: Array<TabData> = [
     {
       content: (
-        <Information
+        <Profile
           avatarId={`${currAvatarId <= 15 ? currAvatarId : 0}` as any}
           bio={currentUser.bio}
           email={currentUser.email}
