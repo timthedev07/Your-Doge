@@ -59,17 +59,25 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
     window.localStorage.removeItem("serverId");
   };
   return (
-    <div>
-      <button className="rounded-btn sorrowful" onClick={() => handleLogout()}>
-        Logout
-      </button>
-      <button className="rounded-btn danger" onClick={() => setShow(true)}>
-        Delete Account
-      </button>
-      <select defaultValue={"default"} style={{ width: "190px" }}>
-        <option>private</option>
-        <option>public</option>
-      </select>
+    <>
+      <div className="settings-content-container">
+        <button
+          className="rounded-btn sorrowful"
+          onClick={() => handleLogout()}
+        >
+          Logout
+        </button>
+        <br />
+        <button className="rounded-btn danger" onClick={() => setShow(true)}>
+          Delete Account
+        </button>
+        <select defaultValue={"default"} style={{ width: "190px" }}>
+          <option>private</option>
+          <option>public</option>
+        </select>
+      </div>
+
+      {/* delete account modal */}
       <Modal
         className="bootstrap-modal margin-top-nav"
         show={show}
@@ -81,6 +89,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
           setActive={setAlertDisplay}
           text="Invalid username/password"
         />
+
         <Modal.Header>
           <Modal.Title>Delete Your Account</Modal.Title>
           <CloseButton
@@ -109,6 +118,6 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 };
