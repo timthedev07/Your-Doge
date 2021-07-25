@@ -1,0 +1,25 @@
+.stack-layout {
+  display: flex;
+  flex-direction: column;
+  /* equal size as parent, so the size of the layout could be defined using its parent container */
+  width: 100%;
+  height: 100%;
+  background-color: rgba(53, 53, 53, 0.329);
+  box-shadow: 0 0 10px rgb(48, 48, 48);
+  border-radius: 5px;
+  border: 1px white darkgray;
+}
+
+.stack-layout.horizontal {
+  flex-direction: row;
+}
+
+.stack-layout-items {
+  height: 50px;
+  width: 100%;
+  flex: 0;
+  color: white;
+  background: inherit;
+  filter: brightness(120%);
+  padding: 18px;
+}
