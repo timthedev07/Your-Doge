@@ -9,7 +9,7 @@ const Home = () => {
       <Head>
         <title>I override everything</title>
       </Head>
-      {JSON.stringify(data)}
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 };
