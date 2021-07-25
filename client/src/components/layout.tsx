@@ -1,0 +1,33 @@
+import Head from "next/head";
+import React from "react";
+import { CustomApolloProvider } from "../contexts/ApolloContext";
+import { Nav } from "./nav/Nav";
+
+interface LayoutProps {}
+
+export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  return (
+    <>
+      <Head>
+        <title>Your Doge</title>
+        <meta
+          name="description"
+          content="An awesome doge themed homework manager."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Your Doge Home" />
+        <meta
+          property="og:description"
+          content="An awesome doge themed homework manager."
+        />
+        <meta property="og:site_name" content="Your Doge" />
+      </Head>
+      <CustomApolloProvider>
+        <Nav transparent={false} />
+        <div className="App">
+          <main>{children}</main>
+        </div>
+      </CustomApolloProvider>
+    </>
+  );
+};
