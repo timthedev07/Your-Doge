@@ -1,14 +1,14 @@
 import React, { useRef, useState } from "react";
-import { useHistory } from "react-router";
 import { useResendConfEmailMutation } from "../../../generated/graphql";
 import { Alert } from "../../../components/Alert";
+import { useRouter } from "next/router";
 
 interface ResendConfEmailProps {}
 
 const ResendConfEmail: React.FC<ResendConfEmailProps> = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const [resend] = useResendConfEmailMutation();
-  const history = useHistory();
+  const { push } = useRouter();
   const [active, setActive] = useState<boolean>(false);
 
   return (
@@ -33,7 +33,7 @@ const ResendConfEmail: React.FC<ResendConfEmailProps> = () => {
             text={"Check your inbox for further instructions."}
             type={"success"}
             onClose={() => {
-              history.push("/");
+              push("/");
             }}
           />
           <h2>Didn&#39;t receive the confirmation email?</h2>
