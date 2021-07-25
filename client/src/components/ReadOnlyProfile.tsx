@@ -64,12 +64,8 @@ export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
           </h6>
         </div>
       </div>
-
       <div className="profile-bio-container">
         <div style={{ width: "100%" }}>
-          <br />
-          <br />
-          <br />
           <ReactMarkdown>{bio}</ReactMarkdown>
         </div>
       </div>
