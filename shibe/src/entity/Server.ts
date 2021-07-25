@@ -11,10 +11,6 @@ import {
 @Unique(["url"])
 @Entity("servers")
 export class Server extends BaseEntity {
-  /**
-   * Here we are basically creating columns for our database
-   */
-
   @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
