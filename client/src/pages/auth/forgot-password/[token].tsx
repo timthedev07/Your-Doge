@@ -87,6 +87,9 @@ const ResetPassword: React.FC = () => {
         "URL expired, please send another request and complete the process in 30 minutes."
       );
       setActive(true);
+      alertProps.onClose = () => {
+        push("/auth/forgot-password");
+      };
     }
   };
 
@@ -95,9 +98,7 @@ const ResetPassword: React.FC = () => {
     setActive,
     text: alertMessage,
     type: "danger",
-    onClose: () => {
-      push("/auth/forgot-password");
-    },
+    onClose: undefined,
   };
 
   return !loading ? (
