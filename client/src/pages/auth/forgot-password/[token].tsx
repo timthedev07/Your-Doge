@@ -107,11 +107,13 @@ const ResetPassword: React.FC = () => {
                 className="rounded-input emphasized margin-20"
                 placeholder="New Password"
                 ref={passwordRef}
+                type="password"
               />
               <input
                 className="rounded-input emphasized margin-20"
                 placeholder="Confirm Your Password"
                 ref={confirmationRef}
+                type="password"
               />
               <br />
               <button
