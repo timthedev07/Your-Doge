@@ -5,7 +5,7 @@ import {
   // MeQuery,
   // MeDocument,
 } from "../../../generated/graphql";
-import { Alert } from "../../../components/Alert";
+import { Alert, AlertProps } from "../../../components/Alert";
 import { Loading } from "../../../components/Loading";
 import { useRouter } from "next/router";
 import { routeQueryProcessor } from "../../../lib/routeQueryProcessor";
@@ -80,18 +80,24 @@ const ResetPassword: React.FC = () => {
         variables: { token, confirmation: confirmation, newPassword: password },
       });
       if (data && data.resetPassword) {
-        push("/login");
+        push("/auth/login");
       }
     } catch (err) {
-      push("/login");
+      setAlertMessage(
+        "URL expired, please send another request and complete the process in 30 minutes."
+      );
+      setActive(true);
     }
   };
 
-  const alertProps = {
+  const alertProps: AlertProps = {
     active,
     setActive,
     text: alertMessage,
     type: "danger",
+    onClose: () => {
+      push("/auth/forgot-password");
+    },
   };
 
   return !loading ? (
