@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Props {
+export interface AlertProps {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
   active: boolean;
   text: string;
@@ -8,7 +8,7 @@ interface Props {
   onClose?: () => void;
 }
 
-export const Alert: React.FC<Props> = (props) => {
+export const Alert: React.FC<AlertProps> = (props) => {
   function handleClick() {
     props.setActive(false);
     if (props.onClose) {
