@@ -41,9 +41,12 @@ export const registerUser: () => Promise<number> = async () => {
 
   const newCount = available.usersCount + 1;
 
-  available.save({
-    data: { usersCount: newCount, available: newCount < LIMIT },
-  });
+  await getConnection()
+    .createQueryBuilder()
+    .update(Server)
+    .set({ usersCount: newCount, available: newCount < LIMIT })
+    .where("id = :id", { id: available.id })
+    .execute();
 
   return available.id;
 };
@@ -59,9 +62,12 @@ export const deleteUser: (serverId: number) => Promise<boolean> = async (
 
   const newCount = server.usersCount - 1;
 
-  server.save({
-    data: { usersCount: newCount, available: newCount < LIMIT },
-  });
+  await getConnection()
+    .createQueryBuilder()
+    .update(Server)
+    .set({ usersCount: newCount, available: newCount < LIMIT })
+    .where("id = :id", { id: server.id })
+    .execute();
 
   return true;
 };
