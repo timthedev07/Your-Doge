@@ -19,12 +19,12 @@
   color: black !important;
 }
 
-.damn {
+.dangit {
   background-color: rgba(255, 48, 21, 0.788) !important;
 }
 
 /* container calendar */
-.big-ass-calendar {
+body .big-ass-calendar {
   background: linear-gradient(100deg, #414141 0%, #292929 100%);
   color: white !important;
   width: 80vw !important;
@@ -35,47 +35,45 @@
   box-shadow: 0 0 20px gray;
 }
 
-body.dark.dark.dark#body.dark.dark.dark#body abbr {
+body abbr {
   color: white;
 }
 
-body.dark.dark.dark .react-calendar__navigation__arrow {
+body .react-calendar__navigation__arrow {
   color: white;
 }
 
-body.dark.dark.dark .react-calendar__navigation__label {
+body .react-calendar__navigation__label {
   color: white;
 }
 
-body.dark .react-calendar__tile--now {
+body .react-calendar__tile--now {
   background-color: rgba(24, 151, 224, 0.959);
 }
 
-body.dark .react-calendar__tile--now:hover {
+body .react-calendar__tile--now:hover {
   background-color: rgba(19, 167, 252, 0.959);
 }
 
-body.dark .react-calendar__navigation__label {
+body .react-calendar__navigation__label {
   background-color: transparent !important;
 }
 
-body.dark .react-calendar__navigation__arrow:hover,
-body.dark .react-calendar__navigation__label:hover,
-body.dark.dark
-  .react-calendar__tile.react-calendar__month-view__days__day:hover,
-body.dark .react-calendar__tile.react-calendar__decade-view__years__year:hover,
-body.dark .react-calendar__tile.react-calendar__year-view__months__month:hover,
-body.dark
-  .react-calendar__tile.react-calendar__century-view__decades__decade:hover {
+body .react-calendar__navigation__arrow:hover,
+body .react-calendar__navigation__label:hover,
+body .react-calendar__tile.react-calendar__month-view__days__day:hover,
+body .react-calendar__tile.react-calendar__decade-view__years__year:hover,
+body .react-calendar__tile.react-calendar__year-view__months__month:hover,
+body .react-calendar__tile.react-calendar__century-view__decades__decade:hover {
   background-color: rgb(88, 88, 88) !important;
 }
 
-body.dark .react-calendar__tile.react-calendar__decade-view__years__year,
-body.dark .react-calendar__tile.react-calendar__century-view__decades__decade {
+body .react-calendar__tile.react-calendar__decade-view__years__year,
+body .react-calendar__tile.react-calendar__century-view__decades__decade {
   color: white !important;
 }
 
-body.dark
+body
   .react-calendar__tile.react-calendar__tile--hasActive.react-calendar__year-view__months__month {
   background-color: #977b00;
 }
