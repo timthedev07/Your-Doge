@@ -8,7 +8,7 @@ import { Loading } from "../components/Loading";
 import { BACKEND } from "../constants/apollo";
 import { isClient } from "../lib/isClient";
 import { getWithExpiry } from "../lib/localStorageExpiration";
-import { AuthProvider, ContextProps } from "./AuthContext";
+import { AuthProvider } from "./AuthContext";
 import { Observable, ApolloLink, HttpLink } from "@apollo/client";
 import { onError } from "apollo-link-error";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
@@ -32,7 +32,7 @@ export const useApollo = () => {
   return useContext(ApolloContext);
 };
 
-export const CustomApolloProvider: React.FC<ContextProps> = ({ children }) => {
+export const CustomApolloProvider: React.FC = ({ children }) => {
   // global states
   const [accessToken, setAccessToken] = useState<string | null>(() => null);
   const [loading, setLoading] = useState<boolean>(true);

@@ -13,10 +13,6 @@ import {
 import { setWithExpiry } from "../lib/localStorageExpiration";
 import { useApollo } from "./ApolloContext";
 
-export interface ContextProps {
-  children: JSX.Element;
-}
-
 type UserType =
   | Maybe<
       {
@@ -46,7 +42,7 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-export const AuthProvider: React.FC<ContextProps> = ({ children }) => {
+export const AuthProvider: React.FC = ({ children }) => {
   // graphql stuff
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
