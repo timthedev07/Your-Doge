@@ -14,11 +14,26 @@
   <a href="https://yourdoge.vercel.app">
     <img src="https://img.shields.io/badge/license-GPL--3.0--or--later-yellow?style=for-the-badge" />
   </a>
-
-  <a href="https://open.vscode.dev/timthedev07/Your-Doge">
-    <img src="https://img.shields.io/badge/ -open in vscode-blue?style=for-the-badge&logo=visualstudiocode">
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/w/timthedev07/Your-Doge?logo=github&style=for-the-badge">
+  <a href="https://github.com/timthedev07/Your-Doge/tree/staging">
+    <img alt="last-commit" src="https://img.shields.io/github/last-commit/timthedev07/Your-Doge/staging?logo=github&logoColor=cyan&style=for-the-badge">
   </a>
-
+</p>
+<p align="center">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/timthedev07/Your-Doge?logo=typescript&logoColor=5bbff5&style=for-the-badge">
+  <img alt="next" src="https://img.shields.io/badge/uses-Next.js-blue?style=for-the-badge&logo=nextdotjs">
+  <img alt="next" src="https://img.shields.io/badge/uses-Apollo GraphQL-blue?style=for-the-badge&logo=apollographql">
+  <img alt="next" src="https://img.shields.io/badge/uses-React-blue?style=for-the-badge&logo=react">
+  <img alt="next" src="https://img.shields.io/badge/uses-Redis-blue?style=for-the-badge&logo=redis">
+</p>
+<p align="center">
+  <a href="https://yourdoge.vercel.app"><img alt="GitHub deployments" src="https://img.shields.io/github/deployments/timthedev07/Your-Doge/production?label=vercel&logo=vercel&logoColor=white&style=for-the-badge">
+  </a>
+</p>
+<p align="center">
+  <a href="https://open.vscode.dev/timthedev07/Your-Doge">
+    <img src="https://img.shields.io/badge/   -open in vscode-blue?style=for-the-badge&logo=visualstudiocode">
+  </a>
 </p>
 
 <p align="center">
