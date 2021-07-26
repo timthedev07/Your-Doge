@@ -6,7 +6,6 @@ import { useAuth } from "../../contexts/AuthContext";
 const THRESHOLD = 481;
 
 interface SBItemProps {
-  children: JSX.Element | string;
   url: string;
   home?: boolean;
 }
