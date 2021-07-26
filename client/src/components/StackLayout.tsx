@@ -1,9 +1,5 @@
 import React from "react";
-
-interface StackLayoutProps {
-  width: string;
-  height: string;
-}
+import { StackLayoutProps } from "../types/props";
 
 const Item: React.FC = ({ children }) => {
   return <div className={`stack-layout-items`}>{children}</div>;

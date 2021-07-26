@@ -1,25 +1,5 @@
-import React, { MouseEventHandler, useState } from "react";
-
-export interface TabData {
-  title: string;
-  content: React.ReactNode;
-}
-
-/* Props interface */
-interface TabSwitcherProps {
-  tabs: Array<TabData>;
-}
-
-interface TabProps {
-  title: string;
-  children: React.ReactNode;
-}
-
-interface TabsBarItemProps {
-  onClick: MouseEventHandler<HTMLDivElement>;
-  title: string;
-  active: boolean;
-}
+import React, { useState } from "react";
+import { TabProps, TabsBarItemProps, TabSwitcherProps } from "../types/props";
 
 /* Smaller components */
 const Tab: React.FC<TabProps> = ({ children }) => {

@@ -1,11 +1,7 @@
 import React, { useRef } from "react";
+import { MenuButtonProps } from "../../types/props";
 
-interface Props {
-  open: boolean;
-  onClick: () => void;
-}
-
-export const MenuButton: React.FC<Props> = ({ open, onClick }) => {
+export const MenuButton: React.FC<MenuButtonProps> = ({ open, onClick }) => {
   // setting up the references to the elements
   const menuBtnRef = useRef<HTMLDivElement>(null);
   const burgerRef = useRef<HTMLDivElement>(null);

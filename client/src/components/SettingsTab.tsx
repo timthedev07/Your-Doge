@@ -9,10 +9,7 @@ import { Modal, Button } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
 import { Alert } from "./Alert";
 import { useApollo } from "../contexts/ApolloContext";
-
-interface SettingsTabProps {
-  username: string;
-}
+import { SettingsTabProps } from "../types/props";
 
 export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const [logout, { client }] = useLogoutMutation();

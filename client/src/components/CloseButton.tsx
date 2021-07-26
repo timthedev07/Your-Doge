@@ -1,8 +1,5 @@
 import React from "react";
-
-interface CloseButtonProps {
-  handleClick: () => void;
-}
+import { CloseButtonProps } from "../types/props";
 
 export const CloseButton: React.FC<CloseButtonProps> = ({ handleClick }) => {
   return (

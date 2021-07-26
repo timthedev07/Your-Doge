@@ -2,39 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
 import { unknownErrMsg } from "../constants/general";
 import {
-  Maybe,
   MeDocument,
   MeQuery,
   useLoginMutation,
   useMeQuery,
-  User,
   useRegisterMutation,
 } from "../generated/graphql";
 import { setWithExpiry } from "../lib/localStorageExpiration";
+import { AuthContextType, UserType } from "../types/types";
 import { useApollo } from "./ApolloContext";
-
-type UserType =
-  | Maybe<
-      {
-        __typename?: "User" | undefined;
-      } & Pick<
-        User,
-        "id" | "username" | "email" | "bio" | "serverId" | "avatarId" | "age"
-      >
-    >
-  | undefined
-  | null;
-
-interface AuthContextType {
-  login: (email: string, password: string) => Promise<boolean>;
-  register: (
-    email: string,
-    password: string,
-    username: string
-  ) => Promise<boolean>;
-  currentUser: UserType;
-  authState: () => "auth" | "loading" | "none";
-}
 
 const AuthContext = React.createContext<AuthContextType | null>(null);
 

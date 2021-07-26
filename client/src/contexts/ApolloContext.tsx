@@ -1,8 +1,4 @@
-import {
-  ApolloProvider,
-  ApolloClient,
-  NormalizedCacheObject,
-} from "@apollo/client";
+import { ApolloProvider, ApolloClient } from "@apollo/client";
 import React, { useContext, useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
 import { BACKEND } from "../constants/apollo";
@@ -14,17 +10,11 @@ import { onError } from "apollo-link-error";
 import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import { InMemoryCache } from "@apollo/client";
+import { ApolloContextType } from "../types/types";
 
 export const SERVER_ID = isClient
   ? getWithExpiry(window.localStorage, "serverId")
   : -1;
-
-interface ApolloContextType {
-  accessToken: string | null;
-  setAccessToken: React.Dispatch<React.SetStateAction<string | null>>;
-  shibe: ApolloClient<NormalizedCacheObject>;
-  burrito: ApolloClient<NormalizedCacheObject>;
-}
 
 const ApolloContext = React.createContext<ApolloContextType | null>(null);
 

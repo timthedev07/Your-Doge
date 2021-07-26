@@ -3,9 +3,7 @@ import { useResendConfEmailMutation } from "../../../generated/graphql";
 import { Alert } from "../../../components/Alert";
 import { useRouter } from "next/router";
 
-interface ResendConfEmailProps {}
-
-const ResendConfEmail: React.FC<ResendConfEmailProps> = () => {
+const ResendConfEmail: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const [resend] = useResendConfEmailMutation();
   const { push } = useRouter();

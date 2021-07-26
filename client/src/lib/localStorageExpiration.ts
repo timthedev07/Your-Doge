@@ -1,7 +1,5 @@
-interface ExpiryObject {
-  value: any;
-  expiry: number;
-}
+import { ExpiryObject } from "../types/types";
+
 /**
  *
  * @param key They key that maps to the value

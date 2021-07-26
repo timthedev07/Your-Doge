@@ -1,12 +1,5 @@
 import React from "react";
-
-export interface AlertProps {
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
-  active: boolean;
-  text: string;
-  type: string;
-  onClose?: () => void;
-}
+import { AlertProps } from "../types/props";
 
 export const Alert: React.FC<AlertProps> = (props) => {
   function handleClick() {

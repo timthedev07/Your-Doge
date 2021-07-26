@@ -2,10 +2,6 @@ import React, { useEffect } from "react";
 import { useMeQuery } from "../../../generated/graphql";
 import { useRouter } from "next/router";
 
-export interface ConfirmationRouteParams {
-  token?: string;
-}
-
 /**
  * This component routes returns different component in different scenarios to prevent conditionally calling hooks
  * @returns react node

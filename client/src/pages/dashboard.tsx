@@ -2,21 +2,9 @@ import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import { useApollo } from "../contexts/ApolloContext";
 import { useGetProfileQuery as useAllUserHomeworkQuery } from "../generated/graphql";
+import { MarkRecordValue } from "../types/types";
 
-interface DashdoardProps {}
-
-interface Homework {
-  deadline: string;
-  title: string;
-  description: string;
-}
-
-interface MarkRecordValue {
-  count: number;
-  homeworkList: Array<Homework>;
-}
-
-const Dashboard: React.FC<DashdoardProps> = () => {
+const Dashboard: React.FC = () => {
   const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
 
   const { shibe } = useApollo()!;

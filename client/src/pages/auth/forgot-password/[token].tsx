@@ -5,7 +5,8 @@ import {
   // MeQuery,
   // MeDocument,
 } from "../../../generated/graphql";
-import { Alert, AlertProps } from "../../../components/Alert";
+import { Alert } from "../../../components/Alert";
+import { AlertProps } from "../../../types/props";
 import { Loading } from "../../../components/Loading";
 import { useRouter } from "next/router";
 import { routeQueryProcessor } from "../../../lib/routeQueryProcessor";

@@ -2,9 +2,7 @@ import React, { useRef } from "react";
 import { burrito } from "../lib/ApolloWrapper";
 import { useAddHomeworkMutation } from "../generated/sub-graphql";
 
-interface NewHomeworkProps {}
-
-export const NewHomework: React.FC<NewHomeworkProps> = () => {
+export const NewHomework: React.FC = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLInputElement>(null);
   const dueDateRef = useRef<HTMLInputElement>(null);

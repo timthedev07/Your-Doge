@@ -1,31 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AvatarData from "../../avatarData.json";
 import ReactMarkdown from "react-markdown";
-
-export type AvatarKeyType =
-  | "0"
-  | "1"
-  | "2"
-  | "3"
-  | "4"
-  | "5"
-  | "6"
-  | "7"
-  | "8"
-  | "9"
-  | "10"
-  | "11"
-  | "12"
-  | "13"
-  | "14";
-
-interface ReadOnlyProfileProps {
-  avatarId: AvatarKeyType;
-  username: string;
-  email: string;
-  bio: string;
-  age: number;
-}
+import { ReadOnlyProfileProps } from "../types/props";
+import { AvatarKeyType } from "../types/types";
 
 export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
   avatarId,

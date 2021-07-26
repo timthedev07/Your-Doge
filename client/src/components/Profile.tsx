@@ -3,24 +3,16 @@ import React, { useEffect, useMemo, useState } from "react";
 import AvatarData from "../../avatarData.json";
 import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
-import { AvatarKeyType } from "./ReadOnlyProfile";
 import {
   MeDocument,
   MeQuery,
   useUpdateAvatarMutation,
   useUpdateProfileMutation,
 } from "../generated/graphql";
+import { ProfileProps } from "../types/props";
+import { AvatarKeyType } from "../types/types";
 
-interface InformationProps {
-  avatarId: AvatarKeyType;
-  username: string;
-  email: string;
-  bio: string;
-  age: number;
-  avatarIdSetter: React.Dispatch<React.SetStateAction<number>>;
-}
-
-export const Profile: React.FC<InformationProps> = ({
+export const Profile: React.FC<ProfileProps> = ({
   avatarId,
   avatarIdSetter,
   username,
