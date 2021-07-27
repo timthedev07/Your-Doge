@@ -63,10 +63,12 @@ export class UserResolver {
   async register(
     @Arg("email") email: string,
     @Arg("password") password: string,
-    @Arg("username") username: string
+    @Arg("username") username: string,
+    @Arg("recaptchaToken") recaptchaToken: string
   ): Promise<boolean> {
     /* hashing the password using the bcrypt library */
     const hashed = await hash(password, 12);
+    console.log(recaptchaToken);
 
     if (!validateEmail(email)) {
       throw new Error("Invalid email");
