@@ -15,14 +15,25 @@ const Pricing: React.FC<PricingProps> = ({}) => {
       >
         <h1 style={{ textAlign: "center" }}>IT&apos;S FREE</h1>
       </div>
-      <img
-        src="https://i.pinimg.com/originals/62/9b/06/629b065f07bd59226785164e6a2310f1.gif"
-        alt="doge dancing"
-      />
-      <img
-        src="https://media1.giphy.com/media/9C1nyePnovqlpEYFMD/giphy.gif"
-        alt="doge"
-      />
+      <div
+        style={{
+          width: "70%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {["dancin.gif", "lala.gif"].map((each) => {
+          return (
+            <img
+              key={each}
+              src={`https://raw.githubusercontent.com/timthedev07/Your-Doge/assets-server/gif/${each}`}
+              alt="doge dancing"
+              style={{ height: "200px" }}
+            />
+          );
+        })}
+      </div>
     </>
   );
 };
