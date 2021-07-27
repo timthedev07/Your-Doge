@@ -100,7 +100,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
     },
     {
       name: auth === "auth" ? "Account" : "Sign In",
-      url: auth === "auth" ? "/account" : "/login",
+      url: auth === "auth" ? "/account" : "/auth/login",
     },
     {
       name: "Pricing",
