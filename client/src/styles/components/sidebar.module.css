@@ -39,15 +39,17 @@
   border-radius: 100vw;
   height: 70px;
   width: 70px;
-  padding: 10px !important;
+  padding: 7.5px !important;
   margin: auto;
 }
 
 /* style for each individual sidebar item */
 .side-bar .side-bar-item {
   padding: 10px 10px;
-  padding-left: 30px;
+  font-size: 22px;
   cursor: pointer;
+  text-transform: uppercase;
+  text-align: center;
 }
 .side-bar .side-bar-item,
 .side-bar .side-bar-item:hover {
@@ -65,4 +67,9 @@
 
 .menu-btn-container.sticky ~ .page-content {
   padding-top: 60px;
+}
+
+.nav-logo {
+  width: 55px;
+  height: 55px;
 }

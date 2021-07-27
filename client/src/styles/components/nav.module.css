@@ -80,11 +80,6 @@
   color: rgb(255, 255, 255);
 }
 
-.nav-logo {
-  width: auto;
-  height: 70% !important;
-}
-
 /* Adjust the spacing on screens of different sizes */
 @media screen and (min-width: 1250px) {
   .nav-bar .nav-item,
