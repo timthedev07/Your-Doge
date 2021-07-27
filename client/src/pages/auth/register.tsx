@@ -5,6 +5,7 @@ import { Loading } from "../../components/Loading";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../../constants/general";
 import { useRouter } from "next/router";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const THRESHOLD = 360;
 
@@ -24,6 +25,7 @@ const Register: React.FC = () => {
   const emRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
   const unameRef = useRef<HTMLInputElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>();
 
   const [alertActive, setAlertActive] = useState<boolean>(false);
   const [alertType, setAlertType] = useState<string>("danger");
@@ -70,7 +72,15 @@ const Register: React.FC = () => {
 
     setLoading(true);
 
-    if (!emRef.current || !pwRef.current || !unameRef.current) return;
+    if (
+      !emRef.current ||
+      !pwRef.current ||
+      !unameRef.current ||
+      !recaptchaRef.current
+    )
+      return;
+
+    const token = await recaptchaRef.current.executeAsync();
 
     // get the values of the fields
     const email = emRef.current.value;
@@ -106,7 +116,7 @@ const Register: React.FC = () => {
 
     // this is how you pass parameters to the graphql function
     try {
-      const data = await register(email, password, username);
+      const data = await register(email, password, username, token || "");
 
       if (data) {
         push("/auth/confirm");
@@ -166,7 +176,6 @@ const Register: React.FC = () => {
             <input
               required
               className="regular-input"
-              type="email"
               placeholder="14 characters maximal"
               ref={unameRef}
               onChange={(e) =>
@@ -217,6 +226,11 @@ const Register: React.FC = () => {
           </div>
         </Form>
       </div>
+      <ReCAPTCHA
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA || ""}
+        size="invisible"
+        ref={recaptchaRef as any}
+      />
     </div>
   );
 };
