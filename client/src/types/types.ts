@@ -47,7 +47,8 @@ export interface AuthContextType {
   register: (
     email: string,
     password: string,
-    username: string
+    username: string,
+    recaptchaToken: string
   ) => Promise<boolean>;
   currentUser: UserType;
   authState: () => "auth" | "loading" | "none";
