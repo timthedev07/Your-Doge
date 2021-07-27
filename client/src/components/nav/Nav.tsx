@@ -153,7 +153,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           className="side-bar-item side-bar-item-home"
           onClick={() => push("/")}
         >
-          <img src="/images/logo.png" alt="" className="nav-logo" />
+          <img src="/images/logo.png" alt="" className="sidebar-logo" />
         </div>
         {NAV_LINKS.map((each) => (
           <SidebarItem key={each.name} url={each.url}>
