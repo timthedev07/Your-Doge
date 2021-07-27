@@ -29,7 +29,7 @@ const Pricing: React.FC<PricingProps> = ({}) => {
               key={each}
               src={`https://raw.githubusercontent.com/timthedev07/Your-Doge/assets-server/gif/${each}`}
               alt="doge dancing"
-              style={{ height: "200px" }}
+              style={{ height: "200px", borderRadius: "5px", margin: "5px" }}
             />
           );
         })}
