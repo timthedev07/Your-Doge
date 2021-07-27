@@ -10,6 +10,7 @@
   transition: 0.3s;
   transform: scale(1);
   min-width: max-content;
+  width: max-content;
 }
 
 .rounded-btn:hover {
