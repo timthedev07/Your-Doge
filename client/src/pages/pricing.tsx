@@ -17,13 +17,13 @@ const Pricing: React.FC<PricingProps> = ({}) => {
       </div>
       <div
         style={{
-          width: "70%",
+          width: "100%",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        {["dancin.gif", "lala.gif"].map((each) => {
+        {["dancin.gif", "dancinWithDrumstick.gif", "lala.gif"].map((each) => {
           return (
             <img
               key={each}
