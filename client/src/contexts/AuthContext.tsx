@@ -88,7 +88,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   const register = async (
     email: string,
     password: string,
-    username: string
+    username: string,
+    recaptchaToken: string
   ) => {
     try {
       const res = await signup({
@@ -96,6 +97,7 @@ export const AuthProvider: React.FC = ({ children }) => {
           email,
           password,
           username,
+          recaptchaToken,
         },
       });
       if (res.data?.register) {
