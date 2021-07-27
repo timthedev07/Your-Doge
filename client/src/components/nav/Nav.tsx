@@ -28,7 +28,7 @@ interface Props {
 // Responsive Navigation Bar
 export const Nav: React.FC<Props> = ({ transparent }) => {
   const { pathname, push } = useRouter();
-  const { currentUser } = useAuth()!;
+  const { authState } = useAuth()!;
 
   // create a ref for the navigation bars and some of their components
   const navBarRef = useRef<HTMLDivElement>(null);
@@ -91,6 +91,23 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
     setSideBarOpen((prev) => !prev);
   };
 
+  const auth = authState();
+
+  const NAV_LINKS = [
+    {
+      name: "Dashboard",
+      url: "/dashboard",
+    },
+    {
+      name: auth === "auth" ? "Account" : "Sign In",
+      url: auth === "auth" ? "/account" : "/login",
+    },
+    {
+      name: "Pricing",
+      url: "/pricing",
+    },
+  ];
+
   // define the nav bar for larger screens
   const navbar = (
     <div className="nav-bar-background">
@@ -103,23 +120,21 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           <img src={"/images/logo.png"} alt="logo" className="nav-logo" />
         </a>
 
-        <a
-          className={
-            currPath === "dashboard" ? "nav-item nav-item-active" : "nav-item"
-          }
-          href="/dashboard"
-        >
-          Dashboard
-        </a>
-
-        <a
-          className={
-            currPath === "account" ? "nav-item nav-item-active" : "nav-item"
-          }
-          href="/account"
-        >
-          {currentUser ? "Account" : "Sign In"}
-        </a>
+        {NAV_LINKS.map((each) => {
+          return (
+            <a
+              key={each.name}
+              className={
+                currPath === "/" + each.name
+                  ? "nav-item nav-item-active"
+                  : "nav-item"
+              }
+              href={each.url}
+            >
+              {each.name}
+            </a>
+          );
+        })}
       </div>
     </div>
   );
@@ -138,12 +153,11 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           className="side-bar-item side-bar-item-home"
           onClick={() => push("/")}
         ></div>
-        <SidebarItem home url="/">
-          Home
-        </SidebarItem>
-        <SidebarItem url="/political-parties">Political Parties</SidebarItem>
-        <SidebarItem url="/travel-guide">Travel Guide</SidebarItem>
-        <SidebarItem url="/sports">Sports</SidebarItem>
+        {NAV_LINKS.map((each) => (
+          <SidebarItem key={each.name} home url={each.url}>
+            {each.name}
+          </SidebarItem>
+        ))}
       </div>
     </>
   );
