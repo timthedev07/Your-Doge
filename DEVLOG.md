@@ -1,3 +1,7 @@
+# July 25
+
+Finally we migrated to nextjs!
+
 # July 21
 
 Hey guys, I'm back!!!!!!!!!
