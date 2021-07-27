@@ -154,7 +154,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
           onClick={() => push("/")}
         ></div>
         {NAV_LINKS.map((each) => (
-          <SidebarItem key={each.name} home url={each.url}>
+          <SidebarItem key={each.name} url={each.url}>
             {each.name}
           </SidebarItem>
         ))}
