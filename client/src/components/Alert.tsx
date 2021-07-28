@@ -35,11 +35,17 @@ export const Alert: React.FC<AlertProps> = ({
   }
 
   useEffect(() => {
-    window.addEventListener("keyup", (e) => {
+    const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         handleClick();
       }
-    });
+    };
+
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keyup", handleKeyUp);
+    };
   });
 
   return (
