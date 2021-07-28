@@ -40,8 +40,14 @@ export const Alert: React.FC<AlertProps> = ({
         active ? "alert-active" : "alert-inactive"
       }`}
     >
-      <h5>{TEXT_MAP[type]}</h5>
-      <p className="alert-text">{text}</p>
+      <div className="alert-content">
+        <img className="alert-sign" src={`/images/alert/${type}.svg`} alt="" />
+        <div className="alert-text">
+          <h5>{TEXT_MAP[type]}</h5>
+          <p className="alert-paragraph">{text}</p>
+        </div>
+      </div>
+
       <img
         src="/images/icons/close.svg"
         onClick={() => handleClick()}

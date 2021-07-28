@@ -36,7 +36,7 @@
   transition: 0.15s;
 }
 
-.custom-alert .alert-text {
+.custom-alert .alert-content .alert-paragraph {
   font-size: 7px;
   color: rgb(212, 212, 212);
 }
@@ -66,4 +66,22 @@
 
 .custom-alert .close-icon:hover {
   background-color: rgba(255, 255, 255, 0.356);
+}
+
+.custom-alert .alert-content .alert-sign {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.custom-alert .alert-content .alert-text {
+  margin-top: 10px;
+}
+
+.custom-alert .alert-content {
+  display: flex;
+  justify-content: start;
+  height: max-content;
+  align-items: center;
 }
