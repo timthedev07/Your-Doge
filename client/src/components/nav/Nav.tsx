@@ -70,11 +70,20 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
       classManipulator();
     };
 
+    const node = navBarRef.current;
+
     window.addEventListener("resize", handleResize);
 
-    if (navBarRef.current) {
+    if (node) {
       window.addEventListener("scroll", handleScroll);
     }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (node) {
+        window.removeEventListener("scroll", handleScroll);
+      }
+    };
   });
 
   useEffect(() => {
