@@ -21,6 +21,8 @@ export const Layout: React.FC = ({ children }) => {
         <meta property="og:site_name" content="Your Doge" />
       </Head>
 
+      <div className="screen-cover"></div>
+
       <CustomApolloProvider>
         <Nav transparent={false} />
         <div className="App">
