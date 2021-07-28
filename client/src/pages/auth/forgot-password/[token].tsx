@@ -98,7 +98,7 @@ const ResetPassword: React.FC = () => {
     active,
     setActive,
     text: alertMessage,
-    type: "danger",
+    type: "warning",
     onClose: undefined,
   };
 

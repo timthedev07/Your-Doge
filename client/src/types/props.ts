@@ -5,7 +5,7 @@ export interface AlertProps {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
   active: boolean;
   text: string;
-  type: string;
+  type: "warning" | "success" | "info";
   onClose?: () => void;
 }
 

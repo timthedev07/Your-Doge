@@ -6,6 +6,7 @@ import { Loading } from "../../components/Loading";
 import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../../constants/general";
 import { useRouter } from "next/router";
+import { AlertType } from "../../types/types";
 
 const THRESHOLD = 360;
 
@@ -17,7 +18,7 @@ const Login: React.FC = () => {
   const { authState } = useAuth()!;
 
   const [alertActive, setAlertActive] = useState<boolean>(false);
-  const [alertType, setAlertType] = useState<string>("danger");
+  const [alertType, setAlertType] = useState<AlertType>("warning");
   const [alertMessage, setAlertMessage] = useState<string>("");
   const [pageLoading, setPageLoading] = useState<boolean>(false);
 
@@ -45,7 +46,7 @@ const Login: React.FC = () => {
     setAlertMessage(message);
     setPageLoading(false);
     setAlertActive(true);
-    setAlertType("danger");
+    setAlertType("warning");
   };
 
   function routeToRegister() {

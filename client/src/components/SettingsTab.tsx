@@ -81,7 +81,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
         onHide={() => setShow(false)}
       >
         <Alert
-          type={"danger"}
+          type={"warning"}
           active={alertDisplay}
           setActive={setAlertDisplay}
           text="Invalid username/password"

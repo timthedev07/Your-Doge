@@ -69,3 +69,5 @@ export interface MarkRecordValue {
   count: number;
   homeworkList: Array<Homework>;
 }
+
+export type AlertType = "warning" | "success" | "info";

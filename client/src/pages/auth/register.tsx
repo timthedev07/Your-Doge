@@ -6,6 +6,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../../constants/general";
 import { useRouter } from "next/router";
 import ReCAPTCHA from "react-google-recaptcha";
+import { AlertType } from "../../types/types";
 
 const THRESHOLD = 360;
 
@@ -28,7 +29,7 @@ const Register: React.FC = () => {
   const recaptchaRef = useRef<ReCAPTCHA>();
 
   const [alertActive, setAlertActive] = useState<boolean>(false);
-  const [alertType, setAlertType] = useState<string>("danger");
+  const [alertType, setAlertType] = useState<AlertType>("warning");
   const [alertMessage, setAlertMessage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -40,7 +41,7 @@ const Register: React.FC = () => {
     setAlertMessage(message);
     setLoading(false);
     setAlertActive(true);
-    setAlertType("danger");
+    setAlertType("warning");
   };
 
   function routeToLogin() {
