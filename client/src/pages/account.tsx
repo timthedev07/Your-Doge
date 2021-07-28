@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Profile } from "../components/Profile";
 import { SettingsTab } from "../components/SettingsTab";
-import { TabData, TabSwitcher } from "../components/TabSwitcher";
+import { TabSwitcher } from "../components/TabSwitcher";
+import { TabData } from "../types/types";
 import { useRouter } from "next/router";
 import { useAuth } from "../contexts/AuthContext";
 
