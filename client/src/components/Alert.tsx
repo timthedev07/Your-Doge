@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AlertProps } from "../types/props";
 
 const TEXT_MAP = {
@@ -34,6 +34,14 @@ export const Alert: React.FC<AlertProps> = ({
     }
   }
 
+  useEffect(() => {
+    window.addEventListener("keyup", (e) => {
+      if (e.key === "Escape") {
+        handleClick();
+      }
+    });
+  });
+
   return (
     <div
       className={`custom-alert custom-alert ${
@@ -48,6 +56,7 @@ export const Alert: React.FC<AlertProps> = ({
           <p className="alert-paragraph">{text}</p>
         </div>
       </div>
+      <pre style={{ textAlign: "right", color: "#b3b3b3" }}>ESC</pre>
     </div>
   );
 };
