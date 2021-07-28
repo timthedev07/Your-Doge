@@ -14,10 +14,23 @@ export const Alert: React.FC<AlertProps> = ({
   text,
   active,
 }) => {
+  const element = document.querySelector("div.screen-cover");
+
   function handleClick() {
+    if (element?.classList.contains("active")) {
+      element?.classList.remove("active");
+    }
+
     setActive(false);
+
     if (onClose) {
       onClose();
+    }
+  }
+
+  if (active) {
+    if (!element?.classList.contains("active")) {
+      element?.classList.add("active");
     }
   }
 
