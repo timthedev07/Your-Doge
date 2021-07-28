@@ -5,7 +5,7 @@ import { useGetProfileQuery as useAllUserHomeworkQuery } from "../generated/grap
 import { MarkRecordValue } from "../types/types";
 
 const Dashboard: React.FC = () => {
-  const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
+  const [marks] = useState<Record<string, MarkRecordValue>>({});
 
   const { shibe } = useApollo()!;
 
