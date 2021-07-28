@@ -1,12 +1,13 @@
 .custom-alert {
-  width: 50vw;
+  width: 45vw;
   min-width: 300px;
   max-width: 600px;
-  background: linear-gradient(135deg, rgb(65, 65, 65) 0%, rgb(44, 44, 44) 100%);
+  background: rgb(65, 65, 65);
   padding: 20px;
   min-height: max-content;
 
   top: -100vw;
+  height: 150px;
 
   border-radius: 5px 5px 5px 5px;
 
@@ -17,6 +18,11 @@
   left: 0;
   right: 0;
   display: block;
+}
+
+.custom-alert .alert-text {
+  font-size: 7px;
+  color: rgb(212, 212, 212);
 }
 
 .alert-active {
@@ -45,9 +51,4 @@
 
 .custom-alert .close-icon:hover {
   background-color: rgba(255, 255, 255, 0.356);
-}
-
-.custom-alert-danger.custom-alert {
-  background: rgb(116, 6, 20);
-  color: rgb(212, 212, 212);
 }
