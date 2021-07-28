@@ -39,6 +39,7 @@ export const Alert: React.FC<AlertProps> = ({
       className={`custom-alert custom-alert ${
         active ? "alert-active" : "alert-inactive"
       }`}
+      onClick={handleClick}
     >
       <div className="alert-content">
         <img className="alert-sign" src={`/images/alert/${type}.svg`} alt="" />
@@ -47,13 +48,6 @@ export const Alert: React.FC<AlertProps> = ({
           <p className="alert-paragraph">{text}</p>
         </div>
       </div>
-
-      <img
-        src="/images/icons/close.svg"
-        onClick={() => handleClick()}
-        className="close-icon"
-        alt=""
-      />
     </div>
   );
 };

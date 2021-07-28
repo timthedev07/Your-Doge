@@ -5,13 +5,10 @@
   background: rgb(65, 65, 65);
   padding: 20px;
   min-height: max-content;
-
+  cursor: pointer;
   top: -100vw;
   height: 150px;
-
   border-radius: 5px 5px 5px 5px;
-
-  /*centering it*/
   position: fixed;
   margin-left: auto;
   margin-right: auto;
