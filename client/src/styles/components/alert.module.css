@@ -25,12 +25,12 @@
   z-index: -10;
   opacity: 0;
   background-color: #1a1a1a94;
-  transition: 0.15s;
+  transition: var(--alert-transition-duration);
 }
 .screen-cover.active {
   opacity: 1;
   z-index: 10000000000000;
-  transition: 0.15s;
+  transition: var(--alert-transition-duration);
 }
 
 .custom-alert .alert-content .alert-paragraph {
@@ -41,13 +41,13 @@
 
 .alert-active {
   top: 20px;
-  transition: 0.15s;
+  transition: var(--alert-transition-duration);
   z-index: 10000000000001;
 }
 
 .alert-inactive {
   top: -100vw;
-  transition: 0.15s;
+  transition: var(--alert-transition-duration);
 }
 
 .custom-alert .close-icon {
