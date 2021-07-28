@@ -39,6 +39,7 @@
 .custom-alert .alert-content .alert-paragraph {
   font-size: 7px;
   color: rgb(212, 212, 212);
+  text-align: left;
 }
 
 .alert-active {
