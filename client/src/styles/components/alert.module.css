@@ -28,12 +28,12 @@
   z-index: -10;
   opacity: 0;
   background-color: #1a1a1a94;
-  transition: 0.3s;
+  transition: 0.15s;
 }
 .screen-cover.active {
   opacity: 1;
   z-index: 10000000000000;
-  transition: 0.3s;
+  transition: 0.15s;
 }
 
 .custom-alert .alert-text {
@@ -43,13 +43,13 @@
 
 .alert-active {
   top: 20px;
-  transition: 0.5s;
+  transition: 0.15s;
   z-index: 10000000000001;
 }
 
 .alert-inactive {
   top: -100vw;
-  transition: 0.5s;
+  transition: 0.15s;
 }
 
 .custom-alert .close-icon {
