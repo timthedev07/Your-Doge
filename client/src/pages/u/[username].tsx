@@ -2,7 +2,8 @@ import { useRouter } from "next/router";
 import React from "react";
 import { ReadOnlyProfile } from "../../components/ReadOnlyProfile";
 import { Loading } from "../../components/Loading";
-import { TabData, TabSwitcher } from "../../components/TabSwitcher";
+import { TabSwitcher } from "../../components/TabSwitcher";
+import { TabData } from "../../types/types";
 import { useGetProfileQuery } from "../../generated/graphql";
 
 const OtherUsers: React.FC = () => {
