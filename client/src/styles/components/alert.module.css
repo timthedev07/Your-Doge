@@ -81,7 +81,7 @@
 
 .custom-alert .alert-content {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   height: max-content;
   align-items: center;
 }
