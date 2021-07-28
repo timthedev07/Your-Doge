@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useMeQuery } from "../../../generated/graphql";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 /**
  * This component routes returns different component in different scenarios to prevent conditionally calling hooks
@@ -27,9 +28,9 @@ const Confirm: React.FC = () => {
             Check your inbox for further instructions, this step is mandatory
             for the purpose of your security and privacy. If you didn&#39;t
             receive the email, give it another shot{" "}
-            <a className="normal-links" href="/auth/confirm/resend">
-              here
-            </a>
+            <Link href="/auth/confirm/resend">
+              <a className="normal-links">here</a>
+            </Link>
             .
           </p>
         </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { MenuButton } from "./MenuButton";
 import { useRouter } from "next/router";
 import { useAuth } from "../../contexts/AuthContext";
+import Link from "next/link";
 
 const THRESHOLD = 481;
 
@@ -124,10 +125,12 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
         className={transparent ? "nav-bar nav-bar-transparent" : "nav-bar"}
         ref={navBarRef}
       >
-        <a className="nav-item nav-item-home" href="/">
-          Your Doge&nbsp;&nbsp;&nbsp;&nbsp;
-          <img src={"/images/logo.png"} alt="logo" className="nav-logo" />
-        </a>
+        <Link href="/">
+          <a className="nav-item nav-item-home">
+            Your Doge&nbsp;&nbsp;&nbsp;&nbsp;
+            <img src={"/images/logo.png"} alt="logo" className="nav-logo" />
+          </a>
+        </Link>
 
         {NAV_LINKS.map((each) => {
           return (
