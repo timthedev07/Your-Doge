@@ -20,12 +20,28 @@
   display: block;
 }
 
+.screen-cover {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  cursor: not-allowed;
+  z-index: -1;
+  margin: 0;
+  background-color: rgba(26, 26, 26, 0.582);
+}
+
 .custom-alert .alert-text {
   font-size: 7px;
   color: rgb(212, 212, 212);
 }
 
 .alert-active {
+  top: 20px;
+  transition: 0.5s;
+  z-index: 10000000000001;
+}
+
+.alert-active ~ html {
   top: 20px;
   transition: 0.5s;
   z-index: 10000000000000;
