@@ -1,36 +1,18 @@
-import { OAuth2Client } from "google-auth-library";
-import { google } from "googleapis";
+import * as queryString from "query-string";
+import { FRONTEND_URL } from "../constants/general";
 
-const config = {
-  clientId: process.env.GOOGLE_CLIENT_ID || "",
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
-  redirect:
-    process.env.NODE_ENV === "production"
-      ? "https://yourdoge.vercel.app/auth/oauth/google"
-      : "http://localhost:3000/auth/oauth/google",
-};
+const stringifiedParams = queryString.stringify({
+  client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",
+  redirect_uri: `${FRONTEND_URL}/auth/oauth/google`,
+  scope: [
+    "https://www.googleapis.com/auth/userinfo.email",
+    "https://www.googleapis.com/auth/userinfo.profile",
+  ].join(" "), // space seperated string
+  response_type: "code",
+  access_type: "offline",
+  prompt: "consent",
+});
 
-const createConnection = () => {
-  return new google.auth.OAuth2(
-    config.clientId,
-    config.clientSecret,
-    config.redirect
-  );
-};
+console.log(stringifiedParams);
 
-const authScope = [
-  "https://www.googleapis.com/auth/plus.me",
-  "https://www.googleapis.com/auth/userinfo.email",
-];
-
-const getConnectionUrl = (auth: OAuth2Client) => {
-  return auth.generateAuthUrl({
-    access_type: "offline",
-    prompt: "consent",
-    scope: authScope,
-  });
-};
-
-export const getGoogleAuthUrl = () => {
-  return getConnectionUrl(createConnection());
-};
+export const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
