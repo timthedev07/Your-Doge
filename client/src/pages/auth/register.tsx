@@ -169,7 +169,14 @@ const Register: React.FC = () => {
                 })
               }
             />
-            <label>Email*</label>
+            <label>
+              Email
+              <img
+                className="auth-label-icon"
+                src="/images/icons/email.svg"
+                alt=""
+              />
+            </label>
           </div>
 
           <div className="input-data form-padding-child">
@@ -185,7 +192,14 @@ const Register: React.FC = () => {
                 })
               }
             />
-            <label>Username*</label>
+            <label>
+              Username
+              <img
+                className="auth-label-icon"
+                src="/images/icons/username.svg"
+                alt=""
+              />
+            </label>
           </div>
 
           <div className="input-data form-padding-child">
@@ -201,7 +215,14 @@ const Register: React.FC = () => {
                 })
               }
             />
-            <label>Password*</label>
+            <label>
+              Password
+              <img
+                className="auth-label-icon"
+                src="/images/icons/password.svg"
+                alt=""
+              />
+            </label>
           </div>
 
           <div className="text-center form-padding-child">
