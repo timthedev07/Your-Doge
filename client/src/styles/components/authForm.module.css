@@ -150,3 +150,10 @@
     margin-left: 10px;
   }
 }
+
+.auth-label-icon {
+  width: 23px;
+  height: 23px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
