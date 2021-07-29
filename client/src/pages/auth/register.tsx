@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import ReCAPTCHA from "react-google-recaptcha";
 import { AlertType } from "../../types/types";
 import { OAuthButton } from "../../components/OAuthButton";
-import { getGoogleAuthUrl } from "../../lib/google";
+import { googleAuthUrl } from "../../lib/google";
 
 const THRESHOLD = 360;
 
@@ -150,11 +150,7 @@ const Register: React.FC = () => {
       <h1 className="form-heading">Join Us</h1>
 
       <div>
-        <OAuthButton
-          provider="google"
-          action="Sign up"
-          href={getGoogleAuthUrl()}
-        />
+        <OAuthButton provider="google" action="Sign up" href={googleAuthUrl} />
         <Form className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}
