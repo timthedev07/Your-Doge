@@ -106,7 +106,14 @@ const Login: React.FC = () => {
               type="email"
               ref={emRef}
             />
-            <label>Email/Username</label>
+            <label>
+              Email/Username
+              <img
+                className="auth-label-icon"
+                src="/images/icons/email.svg"
+                alt=""
+              />
+            </label>
           </div>
 
           <div className="input-data form-padding-child">
@@ -116,7 +123,14 @@ const Login: React.FC = () => {
               type="password"
               ref={pwRef}
             />
-            <label>Password</label>
+            <label>
+              Password
+              <img
+                className="auth-label-icon"
+                src="/images/icons/password.svg"
+                alt=""
+              />
+            </label>
           </div>
           <div className="text-center form-padding-child">
             {!pageLoading ? (
