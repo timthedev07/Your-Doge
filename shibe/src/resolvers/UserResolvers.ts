@@ -447,12 +447,16 @@ export class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  async oauth(@Args() userData: GoogleUser): Promise<boolean> {
+  async googleOAuth(@Args() userData: GoogleUser): Promise<boolean> {
     await userCleanup();
 
     const res = await registerUser();
     if (res < 0) {
       throw new Error("Sorry, registration is temporarily closed.");
+    }
+
+    if (!Object.values(userData).some((val) => !val)) {
+      throw new Error("Data contains null fields.");
     }
 
     const email = userData.email;
