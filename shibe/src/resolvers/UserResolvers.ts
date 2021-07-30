@@ -455,10 +455,6 @@ export class UserResolver {
       throw new Error("Sorry, registration is temporarily closed.");
     }
 
-    if (!Object.values(userData).some((val) => !val)) {
-      throw new Error("Data contains null fields.");
-    }
-
     const email = userData.email;
 
     if (!email || !email.length || !validateEmailRegex(email)) {
