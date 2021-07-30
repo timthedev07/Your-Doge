@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as queryString from "query-string";
-import { FRONTEND_URL } from "../constants/general";
+import { FRONTEND_URL } from "../../constants/general";
 
 const stringifiedParams = queryString.stringify({
   client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || "",

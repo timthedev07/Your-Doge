@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import ReCAPTCHA from "react-google-recaptcha";
 import { AlertType } from "../../types/types";
 import { OAuthButton } from "../../components/OAuthButton";
-import { googleAuthUrl } from "../../lib/google";
+import { googleAuthUrl } from "../../lib/oauth/google";
 
 const THRESHOLD = 360;
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as queryString from "query-string";
-import { getGoogleUserInfo } from "../../../lib/google";
+import { getGoogleUserInfo } from "../../../lib/oauth/google";
 
 interface GoogleProps {}
 
