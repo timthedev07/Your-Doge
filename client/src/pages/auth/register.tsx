@@ -150,7 +150,7 @@ const Register: React.FC = () => {
       <h1 className="form-heading">Join Us</h1>
 
       <div>
-        <OAuthButton provider="google" action="Sign up" href={googleAuthUrl} />
+        <OAuthButton provider="google" href={googleAuthUrl} />
         <Form className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}
