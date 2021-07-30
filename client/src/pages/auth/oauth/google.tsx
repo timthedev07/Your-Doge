@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import * as queryString from "query-string";
-import { getGoogleUserInfo } from "../../../lib/oauth/google";
 import { useGoogleOAuthMutation } from "../../../generated/graphql";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const Google: React.FC = () => {
   const urlParams = queryString.parse(window.location.search);
@@ -12,9 +12,23 @@ const Google: React.FC = () => {
 
   useEffect(() => {
     const asyncFunc = async () => {
-      const response = await getGoogleUserInfo(code);
-      const res = await registerGoogleUser({ variables: { ...response } });
-      if (res.data?.googleOAuth) {
+      if (!code) {
+        return;
+      }
+
+      const { data } = await axios({
+        url: "/api/auth/oauth/google",
+        method: "POST",
+        data: {
+          code,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const res = await registerGoogleUser({ variables: { ...data } });
+      if (res.data?.googleOAuth.status === "logged-in") {
         push("/dashboard");
       }
     };
