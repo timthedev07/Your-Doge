@@ -20,12 +20,12 @@ export class GoogleUser {
   @Field()
   family_name: string;
 
-  @Field()
-  picture: string;
+  @Field(() => String, { nullable: true })
+  picture: string | null;
 
   @Field()
   locale: string;
 
-  @Field()
-  hd: string;
+  @Field(() => String, { nullable: true })
+  hd: string | null;
 }
