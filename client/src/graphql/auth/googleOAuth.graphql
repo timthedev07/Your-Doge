@@ -19,5 +19,17 @@ mutation GoogleOAuth(
     name: $name
     picture: $picture
     verified_email: $verified_email
-  )
+  ) {
+    status
+    user {
+      id
+      username
+      email
+      bio
+      serverId
+      avatarId
+      age
+    }
+    accessToken
+  }
 }

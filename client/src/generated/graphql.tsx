@@ -34,7 +34,7 @@ export type Mutation = {
   validTmpToken: Scalars['Boolean'];
   resetPassword: Scalars['Boolean'];
   deleteAccount: Scalars['Boolean'];
-  googleOAuth: Scalars['Boolean'];
+  googleOAuth: OAuthResponse;
 };
 
 
@@ -113,6 +113,13 @@ export type MutationGoogleOAuthArgs = {
   hd?: Maybe<Scalars['String']>;
 };
 
+export type OAuthResponse = {
+  __typename?: 'OAuthResponse';
+  accessToken: Scalars['String'];
+  user?: Maybe<User>;
+  status: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
@@ -177,7 +184,14 @@ export type GoogleOAuthMutationVariables = Exact<{
 
 export type GoogleOAuthMutation = (
   { __typename?: 'Mutation' }
-  & Pick<Mutation, 'googleOAuth'>
+  & { googleOAuth: (
+    { __typename?: 'OAuthResponse' }
+    & Pick<OAuthResponse, 'status' | 'accessToken'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
+    )> }
+  ) }
 );
 
 export type LoginMutationVariables = Exact<{
@@ -396,7 +410,19 @@ export const GoogleOAuthDocument = gql`
     name: $name
     picture: $picture
     verified_email: $verified_email
-  )
+  ) {
+    status
+    user {
+      id
+      username
+      email
+      bio
+      serverId
+      avatarId
+      age
+    }
+    accessToken
+  }
 }
     `;
 export type GoogleOAuthMutationFn = Apollo.MutationFunction<GoogleOAuthMutation, GoogleOAuthMutationVariables>;
