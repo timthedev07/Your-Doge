@@ -9,6 +9,7 @@ const adjective1 = [
   "cheerful",
   "warm",
   "hair-rasing",
+  "cool",
 ];
 const adjective2 = [
   "smelly",
