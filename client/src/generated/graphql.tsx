@@ -108,9 +108,9 @@ export type MutationGoogleOAuthArgs = {
   name: Scalars['String'];
   given_name: Scalars['String'];
   family_name: Scalars['String'];
-  picture: Scalars['String'];
+  picture?: Maybe<Scalars['String']>;
   locale: Scalars['String'];
-  hd: Scalars['String'];
+  hd?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -166,11 +166,11 @@ export type GoogleOAuthMutationVariables = Exact<{
   email: Scalars['String'];
   family_name: Scalars['String'];
   given_name: Scalars['String'];
-  hd: Scalars['String'];
+  hd?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   locale: Scalars['String'];
   name: Scalars['String'];
-  picture: Scalars['String'];
+  picture?: Maybe<Scalars['String']>;
   verified_email: Scalars['Boolean'];
 }>;
 
@@ -385,7 +385,7 @@ export type ForgotPasswordMutationHookResult = ReturnType<typeof useForgotPasswo
 export type ForgotPasswordMutationResult = Apollo.MutationResult<ForgotPasswordMutation>;
 export type ForgotPasswordMutationOptions = Apollo.BaseMutationOptions<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
 export const GoogleOAuthDocument = gql`
-    mutation GoogleOAuth($email: String!, $family_name: String!, $given_name: String!, $hd: String!, $id: String!, $locale: String!, $name: String!, $picture: String!, $verified_email: Boolean!) {
+    mutation GoogleOAuth($email: String!, $family_name: String!, $given_name: String!, $hd: String, $id: String!, $locale: String!, $name: String!, $picture: String, $verified_email: Boolean!) {
   googleOAuth(
     email: $email
     family_name: $family_name
