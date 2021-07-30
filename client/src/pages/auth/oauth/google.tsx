@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import * as queryString from "query-string";
 import { getGoogleUserInfo } from "../../../lib/oauth/google";
 import { useGoogleOAuthMutation } from "../../../generated/graphql";
+import { useRouter } from "next/router";
 
 interface GoogleProps {}
 
@@ -9,18 +10,19 @@ const Google: React.FC<GoogleProps> = ({}) => {
   const urlParams = queryString.parse(window.location.search);
   let code = urlParams.code as string;
   const [registerGoogleUser] = useGoogleOAuthMutation();
+  const { push } = useRouter();
 
   useEffect(() => {
-    if (!code) {
-      return;
-    }
     const asyncFunc = async () => {
       const response = await getGoogleUserInfo(code);
-      registerGoogleUser({ variables: { ...response } });
+      const res = await registerGoogleUser({ variables: { ...response } });
+      if (res.data?.googleOAuth) {
+        push("/dashboard");
+      }
     };
 
     asyncFunc();
-  }, [code, registerGoogleUser]);
+  }, [code, registerGoogleUser, push]);
 
   return (
     <div className="email-confirmation">
