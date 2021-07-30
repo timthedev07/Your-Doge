@@ -150,7 +150,6 @@ const Register: React.FC = () => {
       <h1 className="form-heading">Join Us</h1>
 
       <div>
-        <OAuthButton provider="google" href={googleAuthUrl} />
         <Form className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}
@@ -158,6 +157,11 @@ const Register: React.FC = () => {
             type={alertType}
             text={alertMessage}
           />
+          <div className="oauth-buttons-wrapper">
+            <OAuthButton provider="google" href={googleAuthUrl} />
+            <OAuthButton provider="facebook" href={googleAuthUrl} />
+            <OAuthButton provider="discord" href={googleAuthUrl} />
+          </div>
 
           <div className="input-data form-padding-child">
             <span className="field-hint-icon"></span>
