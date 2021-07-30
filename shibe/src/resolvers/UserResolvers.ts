@@ -29,6 +29,7 @@ import {
 import { validateHuman } from "../utils/validateHuman";
 import { userCleanup } from "../utils/userCleanup";
 import { randSlug } from "../utils/slugs";
+import { GoogleUser } from "../types/googleUser";
 
 const EMAIL_VALIDATION_REGEX =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
@@ -445,15 +446,15 @@ export class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  async oauth(@Arg("email") email: string): Promise<boolean> {
+  async oauth(@Arg("userData") userData: GoogleUser): Promise<boolean> {
     await userCleanup();
 
-    // try to update the server record
-    // if it returns -1, all servers are full
     const res = await registerUser();
     if (res < 0) {
       throw new Error("Sorry, registration is temporarily closed.");
     }
+
+    const email = userData.email;
 
     if (!email || !email.length || !validateEmailRegex(email)) {
       throw new Error("Invalid email.");
@@ -466,6 +467,7 @@ export class UserResolver {
         email: email,
         username: `${randSlug()}${count}`,
         serverId: res,
+        confirmed: userData.verified_email,
       });
     } catch (err) {
       throw new Error("Email already linked with another account.");
@@ -477,13 +479,15 @@ export class UserResolver {
       throw new Error("Registration failed");
     }
 
-    await sendEmail(
-      email,
-      await createActionUrl(user.id, "confirm"),
-      "verify",
-      "email",
-      CONFIRM_EMAIL_LETTER_CONTENT
-    );
+    if (!user.confirmed) {
+      await sendEmail(
+        email,
+        await createActionUrl(user.id, "confirm"),
+        "verify",
+        "email",
+        CONFIRM_EMAIL_LETTER_CONTENT
+      );
+    }
 
     return true;
   }
