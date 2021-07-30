@@ -5,10 +5,10 @@ const adjective1 = [
   "random",
   "stupid",
   "polluted",
-  "brain-washed",
+  "brain_washed",
   "cheerful",
   "warm",
-  "hair-rasing",
+  "hair_rasing",
   "cool",
 ];
 const adjective2 = [
