@@ -10,6 +10,11 @@ const adjective1 = [
   "warm",
   "hair_rasing",
   "cool",
+  "fantastic",
+  "legit",
+  "interactive",
+  "legendary",
+  "strong",
 ];
 const adjective2 = [
   "smelly",
@@ -44,8 +49,14 @@ const noun = [
   "meme",
   "CaptainAmerica",
   "Thor",
+  "StarLord",
   "franchise",
   "city",
+  "IronMan",
+  "WarMachine",
+  "mathematician",
+  "linguist",
+  "whisper",
 ];
 const words = { adjective1, adjective2, noun } as any;
 const order = ["adjective1", "adjective2", "noun"];
