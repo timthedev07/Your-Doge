@@ -49,6 +49,19 @@ class LoginResponse {
   user: User;
 }
 
+// defining our own object type consisting of a few fields
+@ObjectType()
+class OAuthResponse {
+  @Field()
+  accessToken: string;
+
+  @Field(() => User, { nullable: true })
+  user: User | null;
+
+  @Field(() => String)
+  status: "verification-required" | "logged-in";
+}
+
 @Resolver()
 export class UserResolver {
   // /**
@@ -446,8 +459,11 @@ export class UserResolver {
     }
   }
 
-  @Mutation(() => Boolean)
-  async googleOAuth(@Args() userData: GoogleUser): Promise<boolean> {
+  @Mutation(() => OAuthResponse)
+  async googleOAuth(
+    @Args() userData: GoogleUser,
+    @Ctx() { res: response }: MyContext
+  ): Promise<OAuthResponse> {
     await userCleanup();
 
     const res = await registerUser();
@@ -488,8 +504,20 @@ export class UserResolver {
         "email",
         CONFIRM_EMAIL_LETTER_CONTENT
       );
-    }
+      return {
+        accessToken: "",
+        user: null,
+        status: "verification-required",
+      };
+    } else {
+      const token = createRefreshToken(user);
+      sendRefreshToken(response, token);
 
-    return true;
+      return {
+        accessToken: createAccessToken(user),
+        user,
+        status: "logged-in",
+      };
+    }
   }
 }
