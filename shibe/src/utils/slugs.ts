@@ -22,7 +22,7 @@ const adjective2 = [
 ];
 const noun = [
   "salmon",
-  "kayboard",
+  "keyboard",
   "sunshine",
   "drumstick",
   "man",
