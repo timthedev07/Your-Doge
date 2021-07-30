@@ -24,12 +24,17 @@ const adjective2 = [
   "flaccid",
   "wasted",
   "smartass",
+  "deep_fried",
+  "amazing",
+  "not_so_pleasant",
 ];
 const noun = [
   "salmon",
   "keyboard",
   "sunshine",
   "drumstick",
+  "introvert",
+  "entrepreneur",
   "man",
   "shepherd",
   "socks",
@@ -44,6 +49,8 @@ const noun = [
   "dumplings",
   "pepsi",
   "meme",
+  "sushi",
+  "book",
   "mathematician",
   "linguist",
   "whisper",
@@ -67,6 +74,7 @@ const noun = [
   "WinterSoldier",
   "Hawkeye",
 ];
+
 const words = { adjective1, adjective2, noun } as any;
 const order = ["adjective1", "adjective2", "noun"];
 
