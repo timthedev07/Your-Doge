@@ -27,6 +27,8 @@ import {
   RESET_PASSWORD_LETTER_CONTENT,
 } from "../constants/email";
 import { validateHuman } from "../utils/validateHuman";
+import { userCleanup } from "../utils/userCleanup";
+import { randSlug } from "../utils/slugs";
 
 const EMAIL_VALIDATION_REGEX =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
@@ -88,19 +90,7 @@ export class UserResolver {
       throw new Error("Username exceeds the maximal length");
     }
 
-    /* now it's the clean up part, delete all unverified users registered more than 3 days ago */
-    const threeDaysAgo = new Date().valueOf() - 1000 * 60 * 60 * 24 * 3;
-
-    await getConnection()
-      .createQueryBuilder()
-      .delete()
-      .from(User)
-      .where("confirmed = :confirmed AND memberSince <= :threeDaysAgo", {
-        confirmed: false,
-        threeDaysAgo,
-      })
-      .returning("*")
-      .execute();
+    await userCleanup();
 
     // try to update the server record
     // if it returns -1, all servers are full
@@ -120,7 +110,6 @@ export class UserResolver {
     } catch (err) {
       throw new Error("Email/username already registered");
     }
-    // make it so that the user gets automatically logged in after register
     const user = await User.findOne({ where: { email } });
 
     if (!user) {
@@ -155,7 +144,7 @@ export class UserResolver {
     /* comparing the password stored in the database
       with the password the user typed in
     */
-    const valid = await compare(password, user.password);
+    const valid = user.password ? await compare(password, user.password) : true;
 
     if (!valid) {
       throw new Error("Invalid username/password");
@@ -435,7 +424,7 @@ export class UserResolver {
       return false;
     }
 
-    if (!(await compare(password, user.password))) {
+    if (user.password && !(await compare(password, user.password))) {
       return false;
     }
 
@@ -453,5 +442,49 @@ export class UserResolver {
     } catch (err) {
       return false;
     }
+  }
+
+  @Mutation(() => Boolean)
+  async oauth(@Arg("email") email: string): Promise<boolean> {
+    await userCleanup();
+
+    // try to update the server record
+    // if it returns -1, all servers are full
+    const res = await registerUser();
+    if (res < 0) {
+      throw new Error("Sorry, registration is temporarily closed.");
+    }
+
+    if (!email || !email.length || !validateEmailRegex(email)) {
+      throw new Error("Invalid email.");
+    }
+
+    const count = await User.count();
+
+    try {
+      await User.insert({
+        email: email,
+        username: `${randSlug()}${count}`,
+        serverId: res,
+      });
+    } catch (err) {
+      throw new Error("Email already linked with another account.");
+    }
+
+    const user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      throw new Error("Registration failed");
+    }
+
+    await sendEmail(
+      email,
+      await createActionUrl(user.id, "confirm"),
+      "verify",
+      "email",
+      CONFIRM_EMAIL_LETTER_CONTENT
+    );
+
+    return true;
   }
 }
