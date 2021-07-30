@@ -4,9 +4,7 @@ import { getGoogleUserInfo } from "../../../lib/oauth/google";
 import { useGoogleOAuthMutation } from "../../../generated/graphql";
 import { useRouter } from "next/router";
 
-interface GoogleProps {}
-
-const Google: React.FC<GoogleProps> = ({}) => {
+const Google: React.FC = ({}) => {
   const urlParams = queryString.parse(window.location.search);
   let code = urlParams.code as string;
   const [registerGoogleUser] = useGoogleOAuthMutation();
