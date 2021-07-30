@@ -26,11 +26,9 @@ const Google: React.FC<GoogleProps> = ({}) => {
     <div className="email-confirmation">
       <div className="email-confirmation-card">
         <div>
-          <h2>Please wait while we sign you in/up...</h2>
-          <h4>Take a gentle sip of that cappuccino, and chill.</h4>
-          <br />
-          <br />
-          <img src="/images/wait.svg" alt="" style={{ width: "300px" }} />
+          <h2>You are almost there...</h2>
+          <h4>Please wait while we sign you in/up...</h4>
+          <img src="/images/wait.svg" alt="" style={{ width: "200px" }} />
         </div>
       </div>
     </div>
