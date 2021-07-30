@@ -1,5 +1,6 @@
 import {
   Arg,
+  Args,
   Ctx,
   Field,
   Int,
@@ -446,7 +447,7 @@ export class UserResolver {
   }
 
   @Mutation(() => Boolean)
-  async oauth(@Arg("userData") userData: GoogleUser): Promise<boolean> {
+  async oauth(@Args() userData: GoogleUser): Promise<boolean> {
     await userCleanup();
 
     const res = await registerUser();
