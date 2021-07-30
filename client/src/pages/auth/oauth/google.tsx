@@ -1,22 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import * as queryString from "query-string";
 import { getGoogleUserInfo } from "../../../lib/oauth/google";
+import { useGoogleOAuthMutation } from "../../../generated/graphql";
 
 interface GoogleProps {}
 
 const Google: React.FC<GoogleProps> = ({}) => {
   const urlParams = queryString.parse(window.location.search);
   let code = urlParams.code as string;
-  const [data, setData] = useState({});
+  const [registerGoogleUser] = useGoogleOAuthMutation();
 
   useEffect(() => {
     const asyncFunc = async () => {
       const response = await getGoogleUserInfo(code);
-      setData(response);
+      registerGoogleUser({ variables: { ...response } });
     };
 
     asyncFunc();
-  }, [code]);
+  }, [code, registerGoogleUser]);
 
   return (
     <div className="email-confirmation">
