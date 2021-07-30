@@ -16,38 +16,39 @@ const stringifiedParams = queryString.stringify({
 
 const getAccessTokenFromCode = async (code: string) => {
   try {
-    const { secret } = await (await fetch("/api/gauth-secret")).json();
-
     const { data } = await axios({
       url: `https://oauth2.googleapis.com/token`,
       method: "post",
       data: {
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-        client_secret: secret,
+        client_secret: process.env.GOOGLE_CLIENT_SECRET || "",
         redirect_uri: `${FRONTEND_URL}/auth/oauth/google`,
         grant_type: "authorization_code",
         code,
       },
     });
 
-    return data.access_token;
+    return data.access_token || "";
   } catch (err) {
-    return;
+    return "";
   }
 };
 
 export const getGoogleUserInfo = async (code: string) => {
   const accessToken: string = await getAccessTokenFromCode(code);
 
-  const { data } = await axios({
-    url: "https://www.googleapis.com/oauth2/v2/userinfo",
-    method: "get",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  return data;
+  try {
+    const { data } = await axios({
+      url: "https://www.googleapis.com/oauth2/v2/userinfo",
+      method: "get",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return data;
+  } catch (err) {
+    return {};
+  }
 };
 
 export const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?${stringifiedParams}`;
