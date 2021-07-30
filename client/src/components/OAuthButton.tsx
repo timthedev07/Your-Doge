@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 interface OAuthButtonProps {
-  provider: "google" | "twitter" | "facebook";
+  provider: "google" | "discord" | "facebook";
   href: string;
 }
 
