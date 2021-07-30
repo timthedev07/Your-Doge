@@ -11,6 +11,9 @@ const Google: React.FC<GoogleProps> = ({}) => {
   const [registerGoogleUser] = useGoogleOAuthMutation();
 
   useEffect(() => {
+    if (!code) {
+      return;
+    }
     const asyncFunc = async () => {
       const response = await getGoogleUserInfo(code);
       registerGoogleUser({ variables: { ...response } });
@@ -22,9 +25,13 @@ const Google: React.FC<GoogleProps> = ({}) => {
   return (
     <div className="email-confirmation">
       <div className="email-confirmation-card">
-        <h2>Please wait until while we sign you in/up.</h2>
-        <br />
-        <img src="/images/wait.svg" alt="" style={{ width: "300px" }} />
+        <div>
+          <h2>Please wait while we sign you in/up...</h2>
+          <h4>Take a gentle sip of that cappuccino, and chill.</h4>
+          <br />
+          <br />
+          <img src="/images/wait.svg" alt="" style={{ width: "300px" }} />
+        </div>
       </div>
     </div>
   );
