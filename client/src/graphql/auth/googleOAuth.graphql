@@ -1,0 +1,23 @@
+mutation GoogleOAuth(
+  $email: String!
+  $family_name: String!
+  $given_name: String!
+  $hd: String!
+  $id: String!
+  $locale: String!
+  $name: String!
+  $picture: String!
+  $verified_email: Boolean!
+) {
+  googleOAuth(
+    email: $email
+    family_name: $family_name
+    given_name: $given_name
+    hd: $hd
+    id: $id
+    locale: $locale
+    name: $name
+    picture: $picture
+    verified_email: $verified_email
+  )
+}

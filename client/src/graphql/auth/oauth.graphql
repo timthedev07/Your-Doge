@@ -1,3 +1,0 @@
-mutation OauthRegister($email: String!) {
-  oauth(email: $email)
-}
