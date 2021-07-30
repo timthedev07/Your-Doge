@@ -19,8 +19,11 @@ const Google: React.FC<GoogleProps> = ({}) => {
   }, [code]);
 
   return (
-    <div>
-      <pre>{JSON.stringify(data, null, 10)}</pre>
+    <div className="email-confirmation">
+      <div className="email-confirmation-card">
+        <h2>Please wait until while we sign you in/up.</h2>
+        <img src="/images/wait.svg" alt="" style={{ width: "300px" }} />
+      </div>
     </div>
   );
 };
