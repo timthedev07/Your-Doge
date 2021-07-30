@@ -34,6 +34,7 @@ export type Mutation = {
   validTmpToken: Scalars['Boolean'];
   resetPassword: Scalars['Boolean'];
   deleteAccount: Scalars['Boolean'];
+  googleOAuth: Scalars['Boolean'];
 };
 
 
@@ -99,6 +100,19 @@ export type MutationDeleteAccountArgs = {
   username: Scalars['String'];
 };
 
+
+export type MutationGoogleOAuthArgs = {
+  id: Scalars['String'];
+  email: Scalars['String'];
+  verified_email: Scalars['Boolean'];
+  name: Scalars['String'];
+  given_name: Scalars['String'];
+  family_name: Scalars['String'];
+  picture: Scalars['String'];
+  locale: Scalars['String'];
+  hd: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
@@ -146,6 +160,24 @@ export type ForgotPasswordMutationVariables = Exact<{
 export type ForgotPasswordMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'forgotPassword'>
+);
+
+export type GoogleOAuthMutationVariables = Exact<{
+  email: Scalars['String'];
+  family_name: Scalars['String'];
+  given_name: Scalars['String'];
+  hd: Scalars['String'];
+  id: Scalars['String'];
+  locale: Scalars['String'];
+  name: Scalars['String'];
+  picture: Scalars['String'];
+  verified_email: Scalars['Boolean'];
+}>;
+
+
+export type GoogleOAuthMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'googleOAuth'>
 );
 
 export type LoginMutationVariables = Exact<{
@@ -352,6 +384,55 @@ export function useForgotPasswordMutation(baseOptions?: Apollo.MutationHookOptio
 export type ForgotPasswordMutationHookResult = ReturnType<typeof useForgotPasswordMutation>;
 export type ForgotPasswordMutationResult = Apollo.MutationResult<ForgotPasswordMutation>;
 export type ForgotPasswordMutationOptions = Apollo.BaseMutationOptions<ForgotPasswordMutation, ForgotPasswordMutationVariables>;
+export const GoogleOAuthDocument = gql`
+    mutation GoogleOAuth($email: String!, $family_name: String!, $given_name: String!, $hd: String!, $id: String!, $locale: String!, $name: String!, $picture: String!, $verified_email: Boolean!) {
+  googleOAuth(
+    email: $email
+    family_name: $family_name
+    given_name: $given_name
+    hd: $hd
+    id: $id
+    locale: $locale
+    name: $name
+    picture: $picture
+    verified_email: $verified_email
+  )
+}
+    `;
+export type GoogleOAuthMutationFn = Apollo.MutationFunction<GoogleOAuthMutation, GoogleOAuthMutationVariables>;
+
+/**
+ * __useGoogleOAuthMutation__
+ *
+ * To run a mutation, you first call `useGoogleOAuthMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useGoogleOAuthMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [googleOAuthMutation, { data, loading, error }] = useGoogleOAuthMutation({
+ *   variables: {
+ *      email: // value for 'email'
+ *      family_name: // value for 'family_name'
+ *      given_name: // value for 'given_name'
+ *      hd: // value for 'hd'
+ *      id: // value for 'id'
+ *      locale: // value for 'locale'
+ *      name: // value for 'name'
+ *      picture: // value for 'picture'
+ *      verified_email: // value for 'verified_email'
+ *   },
+ * });
+ */
+export function useGoogleOAuthMutation(baseOptions?: Apollo.MutationHookOptions<GoogleOAuthMutation, GoogleOAuthMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<GoogleOAuthMutation, GoogleOAuthMutationVariables>(GoogleOAuthDocument, options);
+      }
+export type GoogleOAuthMutationHookResult = ReturnType<typeof useGoogleOAuthMutation>;
+export type GoogleOAuthMutationResult = Apollo.MutationResult<GoogleOAuthMutation>;
+export type GoogleOAuthMutationOptions = Apollo.BaseMutationOptions<GoogleOAuthMutation, GoogleOAuthMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($email: String!, $password: String!) {
   login(email: $email, password: $password) {
