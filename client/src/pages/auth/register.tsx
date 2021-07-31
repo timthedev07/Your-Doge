@@ -7,9 +7,7 @@ import { unknownErrMsg } from "../../constants/general";
 import { useRouter } from "next/router";
 import ReCAPTCHA from "react-google-recaptcha";
 import { AlertType } from "../../types/types";
-import { OAuthButton } from "../../components/OAuthButton";
-import { googleAuthUrl } from "../../lib/oauth/google";
-import { discordOAuthUrl } from "../../constants/discord";
+import { OAuthButtons } from "../../components/OAuthButtons";
 
 const THRESHOLD = 360;
 
@@ -158,11 +156,8 @@ const Register: React.FC = () => {
             type={alertType}
             text={alertMessage}
           />
-          <div className="oauth-buttons-wrapper">
-            <OAuthButton provider="google" href={googleAuthUrl} />
-            <OAuthButton provider="facebook" href={googleAuthUrl} />
-            <OAuthButton provider="discord" href={discordOAuthUrl} />
-          </div>
+
+          <OAuthButtons />
 
           <div className="input-data form-padding-child">
             <span className="field-hint-icon"></span>
