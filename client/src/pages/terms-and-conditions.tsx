@@ -2,7 +2,7 @@ import React from "react";
 
 const TermsAndConditions: React.FC = () => {
   return (
-    <div>
+    <div className="policies-container">
       <h2>
         <strong>Terms and Conditions</strong>
       </h2>

@@ -2,7 +2,7 @@ import React from "react";
 
 const PrivacyPolicies: React.FC = ({}) => {
   return (
-    <div>
+    <div className="policies-container">
       <h1>Privacy Policy for Your Doge</h1>
 
       <p>
