@@ -1,8 +1,12 @@
+import Head from "next/head";
 import React from "react";
 
 const TermsAndConditions: React.FC = () => {
   return (
     <div className="policies-container">
+      <Head>
+        <title>Terms and Conditions | Your Doge</title>
+      </Head>
       <h2>
         <strong>Terms and Conditions</strong>
       </h2>

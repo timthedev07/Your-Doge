@@ -1,9 +1,13 @@
+import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 
 const PrivacyPolicies: React.FC = ({}) => {
   return (
     <div className="policies-container">
+      <Head>
+        <title>Privacy Policy | Your Doge</title>
+      </Head>
       <h1>Privacy Policy for Your Doge</h1>
 
       <p>
