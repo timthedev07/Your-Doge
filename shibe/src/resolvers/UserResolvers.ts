@@ -524,7 +524,7 @@ export class UserResolver {
 
   @Mutation(() => OAuthResponse)
   async discordOAuth(
-    @Args() userData: DiscordUser,
+    @Args(() => DiscordUser) userData: DiscordUser,
     @Ctx() { res: response }: MyContext
   ): Promise<OAuthResponse> {
     await userCleanup();
