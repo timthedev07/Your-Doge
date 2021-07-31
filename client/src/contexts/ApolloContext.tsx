@@ -125,8 +125,8 @@ export const CustomApolloProvider: React.FC = ({ children }) => {
   const burrito = generateApolloClient(
     `${
       process.env.NODE_ENV === "development"
-        ? `http://localhost:500${SERVER_ID}`
-        : `http://homework-manager-db${SERVER_ID}.herokuapp.com`
+        ? `http://localhost:500${SERVER_ID - 1}`
+        : `http://homework-manager-db${SERVER_ID - 1}.herokuapp.com`
     }`
   );
 
