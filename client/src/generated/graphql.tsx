@@ -35,6 +35,7 @@ export type Mutation = {
   resetPassword: Scalars['Boolean'];
   deleteAccount: Scalars['Boolean'];
   googleOAuth: OAuthResponse;
+  discordOAuth: OAuthResponse;
 };
 
 
@@ -113,6 +114,23 @@ export type MutationGoogleOAuthArgs = {
   hd?: Maybe<Scalars['String']>;
 };
 
+
+export type MutationDiscordOAuthArgs = {
+  accent_color?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  banner?: Maybe<Scalars['String']>;
+  banner_color?: Maybe<Scalars['String']>;
+  discriminator: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  flags: Scalars['Float'];
+  id: Scalars['String'];
+  locale: Scalars['String'];
+  mfa_enabled: Scalars['Boolean'];
+  public_flags: Scalars['Float'];
+  username: Scalars['String'];
+  verified: Scalars['Boolean'];
+};
+
 export type OAuthResponse = {
   __typename?: 'OAuthResponse';
   accessToken: Scalars['String'];
@@ -156,6 +174,35 @@ export type ConfirmEmailMutation = (
       { __typename?: 'User' }
       & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
     ) }
+  ) }
+);
+
+export type DiscordOAuthMutationVariables = Exact<{
+  accent_color?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['String']>;
+  banner?: Maybe<Scalars['String']>;
+  banner_color?: Maybe<Scalars['String']>;
+  discriminator: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  flags: Scalars['Float'];
+  id: Scalars['String'];
+  locale: Scalars['String'];
+  mfa_enabled: Scalars['Boolean'];
+  public_flags: Scalars['Float'];
+  username: Scalars['String'];
+  verified: Scalars['Boolean'];
+}>;
+
+
+export type DiscordOAuthMutation = (
+  { __typename?: 'Mutation' }
+  & { discordOAuth: (
+    { __typename?: 'OAuthResponse' }
+    & Pick<OAuthResponse, 'status' | 'accessToken'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
+    )> }
   ) }
 );
 
@@ -367,6 +414,75 @@ export function useConfirmEmailMutation(baseOptions?: Apollo.MutationHookOptions
 export type ConfirmEmailMutationHookResult = ReturnType<typeof useConfirmEmailMutation>;
 export type ConfirmEmailMutationResult = Apollo.MutationResult<ConfirmEmailMutation>;
 export type ConfirmEmailMutationOptions = Apollo.BaseMutationOptions<ConfirmEmailMutation, ConfirmEmailMutationVariables>;
+export const DiscordOAuthDocument = gql`
+    mutation DiscordOAuth($accent_color: String, $avatar: String, $banner: String, $banner_color: String, $discriminator: String!, $email: String, $flags: Float!, $id: String!, $locale: String!, $mfa_enabled: Boolean!, $public_flags: Float!, $username: String!, $verified: Boolean!) {
+  discordOAuth(
+    accent_color: $accent_color
+    avatar: $avatar
+    banner: $banner
+    banner_color: $banner_color
+    discriminator: $discriminator
+    email: $email
+    flags: $flags
+    id: $id
+    locale: $locale
+    mfa_enabled: $mfa_enabled
+    public_flags: $public_flags
+    username: $username
+    verified: $verified
+  ) {
+    status
+    user {
+      id
+      username
+      email
+      bio
+      serverId
+      avatarId
+      age
+    }
+    accessToken
+  }
+}
+    `;
+export type DiscordOAuthMutationFn = Apollo.MutationFunction<DiscordOAuthMutation, DiscordOAuthMutationVariables>;
+
+/**
+ * __useDiscordOAuthMutation__
+ *
+ * To run a mutation, you first call `useDiscordOAuthMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDiscordOAuthMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [discordOAuthMutation, { data, loading, error }] = useDiscordOAuthMutation({
+ *   variables: {
+ *      accent_color: // value for 'accent_color'
+ *      avatar: // value for 'avatar'
+ *      banner: // value for 'banner'
+ *      banner_color: // value for 'banner_color'
+ *      discriminator: // value for 'discriminator'
+ *      email: // value for 'email'
+ *      flags: // value for 'flags'
+ *      id: // value for 'id'
+ *      locale: // value for 'locale'
+ *      mfa_enabled: // value for 'mfa_enabled'
+ *      public_flags: // value for 'public_flags'
+ *      username: // value for 'username'
+ *      verified: // value for 'verified'
+ *   },
+ * });
+ */
+export function useDiscordOAuthMutation(baseOptions?: Apollo.MutationHookOptions<DiscordOAuthMutation, DiscordOAuthMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DiscordOAuthMutation, DiscordOAuthMutationVariables>(DiscordOAuthDocument, options);
+      }
+export type DiscordOAuthMutationHookResult = ReturnType<typeof useDiscordOAuthMutation>;
+export type DiscordOAuthMutationResult = Apollo.MutationResult<DiscordOAuthMutation>;
+export type DiscordOAuthMutationOptions = Apollo.BaseMutationOptions<DiscordOAuthMutation, DiscordOAuthMutationVariables>;
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
   forgotPassword(email: $email)

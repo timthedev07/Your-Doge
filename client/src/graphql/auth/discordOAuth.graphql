@@ -1,0 +1,43 @@
+mutation DiscordOAuth(
+  $accent_color: String
+  $avatar: String
+  $banner: String
+  $banner_color: String
+  $discriminator: String!
+  $email: String
+  $flags: Float!
+  $id: String!
+  $locale: String!
+  $mfa_enabled: Boolean!
+  $public_flags: Float!
+  $username: String!
+  $verified: Boolean!
+) {
+  discordOAuth(
+    accent_color: $accent_color
+    avatar: $avatar
+    banner: $banner
+    banner_color: $banner_color
+    discriminator: $discriminator
+    email: $email
+    flags: $flags
+    id: $id
+    locale: $locale
+    mfa_enabled: $mfa_enabled
+    public_flags: $public_flags
+    username: $username
+    verified: $verified
+  ) {
+    status
+    user {
+      id
+      username
+      email
+      bio
+      serverId
+      avatarId
+      age
+    }
+    accessToken
+  }
+}
