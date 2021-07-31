@@ -15,7 +15,7 @@ export const FRONTEND =
     : "http://localhost:3000";
 const PLAYGROUND = "https://studio.apollographql.com";
 const PORT = parseInt(process.env.PORT || "9000");
-const HOSTNAME = process.env.HOST || "localhost";
+const HOSTNAME = process.env.HOST || "0.0.0.0";
 
 (async () => {
   const app = express();
