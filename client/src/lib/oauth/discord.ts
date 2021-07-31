@@ -1,5 +1,6 @@
 import { FRONTEND_URL } from "../../constants/general";
 import axios from "axios";
+import { DiscordAccessTokenResponse } from "../../types/types";
 
 const API_ENDPOINT = "https://discord.com/api/v8";
 const CLIENT_ID = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "";
@@ -8,10 +9,16 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "";
  * Get access token from the discord api with the given code
  * @param code
  * @param clientSecret
- * @returns Access token
+ * @returns Object
  */
-export const exchangeCode = async (code: string, clientSecret: string) => {
-  const { data } = await axios({
+export const exchangeCode: (
+  code: string,
+  clientSecret: string
+) => Promise<DiscordAccessTokenResponse> = async (
+  code: string,
+  clientSecret: string
+) => {
+  const { data }: { data: DiscordAccessTokenResponse } = await axios({
     url: `${API_ENDPOINT}/oauth2/token`,
     method: "post",
     data: {
@@ -35,7 +42,10 @@ export const exchangeCode = async (code: string, clientSecret: string) => {
  * @param clientSecret
  * @returns new accessToken
  */
-export const refreshToken = async (
+export const refreshToken: (
+  refreshToken: string,
+  clientSecret: string
+) => Promise<DiscordAccessTokenResponse> = async (
   refreshToken: string,
   clientSecret: string
 ) => {
