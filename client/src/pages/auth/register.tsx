@@ -9,6 +9,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { AlertType } from "../../types/types";
 import { OAuthButton } from "../../components/OAuthButton";
 import { googleAuthUrl } from "../../lib/oauth/google";
+import { discordOAuthUrl } from "../../constants/discord";
 
 const THRESHOLD = 360;
 
@@ -160,7 +161,7 @@ const Register: React.FC = () => {
           <div className="oauth-buttons-wrapper">
             <OAuthButton provider="google" href={googleAuthUrl} />
             <OAuthButton provider="facebook" href={googleAuthUrl} />
-            <OAuthButton provider="discord" href={googleAuthUrl} />
+            <OAuthButton provider="discord" href={discordOAuthUrl} />
           </div>
 
           <div className="input-data form-padding-child">
