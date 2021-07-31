@@ -6,7 +6,9 @@ const API_ENDPOINT = "https://discord.com/api/v8";
 const CLIENT_ID = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "";
 
 /**
- * Get access token from the discord api with the given code
+ * Get access token from the discord api with the given code.
+ *
+ * Returns null on error
  * @param code
  * @param clientSecret
  * @returns Object
@@ -14,26 +16,31 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "";
 export const exchangeCode: (
   code: string,
   clientSecret: string
-) => Promise<DiscordAccessTokenResponse> = async (
+) => Promise<DiscordAccessTokenResponse | null> = async (
   code: string,
   clientSecret: string
 ) => {
-  const { data }: { data: DiscordAccessTokenResponse } = await axios({
-    url: `${API_ENDPOINT}/oauth2/token`,
-    method: "post",
-    data: {
-      client_id: CLIENT_ID,
-      client_secret: clientSecret,
-      grant_type: "authorization_code",
-      code: code,
-      redirect_uri: FRONTEND_URL + "/auth/oauth/discord",
-    },
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-  });
+  try {
+    const { data }: { data: DiscordAccessTokenResponse } = await axios({
+      url: `${API_ENDPOINT}/oauth2/token`,
+      method: "post",
+      data: {
+        client_id: CLIENT_ID,
+        client_secret: clientSecret,
+        grant_type: "authorization_code",
+        code: code,
+        redirect_uri: FRONTEND_URL + "/auth/oauth/discord",
+      },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    });
 
-  return data;
+    return data;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 };
 
 /**
