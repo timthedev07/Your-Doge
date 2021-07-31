@@ -102,7 +102,7 @@ const PrivacyPolicies: React.FC = ({}) => {
           href="https://www.privacypolicyonline.com/what-are-cookies/"
           passHref
         >
-          <a>&quot;What Are Cookies&quot;</a>
+          <a className="normal-links">&quot;What Are Cookies&quot;</a>
         </Link>
         .
       </p>
