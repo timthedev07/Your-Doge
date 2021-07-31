@@ -7,6 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "../../constants/general";
 import { useRouter } from "next/router";
 import { AlertType } from "../../types/types";
+import { OAuthButtons } from "../../components/OAuthButtons";
 
 const THRESHOLD = 360;
 
@@ -97,6 +98,8 @@ const Login: React.FC = () => {
             type={alertType}
             text={alertMessage}
           />
+
+          <OAuthButtons />
 
           <div className="input-data form-padding-child">
             <span className="field-hint-icon"></span>
