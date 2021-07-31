@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import * as queryString from "query-string";
-import { useGoogleOAuthMutation } from "../../../generated/graphql";
+import {
+  MeDocument,
+  MeQuery,
+  useGoogleOAuthMutation,
+} from "../../../generated/graphql";
 import { useRouter } from "next/router";
 import axios from "axios";
 
@@ -27,7 +31,21 @@ const Google: React.FC = () => {
         },
       });
 
-      const res = await registerGoogleUser({ variables: { ...data } });
+      const res = await registerGoogleUser({
+        variables: { ...data },
+        update: (store, { data }) => {
+          if (!data) return null;
+          store.writeQuery<MeQuery>({
+            query: MeDocument,
+            data: {
+              __typename: "Query",
+              me: data.googleOAuth.user,
+            },
+          });
+          return null;
+        },
+      });
+
       if (res.data?.googleOAuth.status === "logged-in") {
         push("/dashboard");
       }
