@@ -7,13 +7,13 @@ import { MarkRecordValue } from "../types/types";
 const Dashboard: React.FC = () => {
   const [marks] = useState<Record<string, MarkRecordValue>>({});
 
-  const { shibe } = useApollo()!;
+  const { burrito } = useApollo()!;
 
   const {
     data: gqlData,
     // loading: gqlLoading,
     // error: gqlError,
-  } = useAllUserHomeworkQuery({ client: shibe });
+  } = useAllUserHomeworkQuery({ client: burrito });
 
   const BUSY_CLASSES: Record<string, string> = {
     "0": "free",
