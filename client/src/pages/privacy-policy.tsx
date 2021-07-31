@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const PrivacyPolicies: React.FC = ({}) => {
@@ -22,11 +23,6 @@ const PrivacyPolicies: React.FC = ({}) => {
         for visitors to our website with regards to the information that they
         shared and/or collect in Your Doge. This policy is not applicable to any
         information collected offline or via channels other than this website.
-        Our Privacy Policy was created with the help of the{" "}
-        <a href="https://www.privacypolicygenerator.info/">
-          Privacy Policy Generator
-        </a>
-        .
       </p>
 
       <h2>Consent</h2>
@@ -102,9 +98,12 @@ const PrivacyPolicies: React.FC = ({}) => {
 
       <p>
         For more general information on cookies, please read{" "}
-        <a href="https://www.privacypolicyonline.com/what-are-cookies/">
-          &quot;What Are Cookies&quot;
-        </a>
+        <Link
+          href="https://www.privacypolicyonline.com/what-are-cookies/"
+          passHref
+        >
+          <a>&quot;What Are Cookies&quot;</a>
+        </Link>
         .
       </p>
 

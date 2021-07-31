@@ -76,15 +76,6 @@ const TermsAndConditions: React.FC = () => {
       </ul>
 
       <p>
-        This Agreement shall begin on the date hereof. Our Terms and Conditions
-        were created with the help of the{" "}
-        <a href="https://www.termsandconditionsgenerator.com">
-          Terms And Conditions Generator
-        </a>
-        .
-      </p>
-
-      <p>
         Parts of this website offer an opportunity for users to post and
         exchange opinions and information in certain areas of the website. Your
         Doge does not filter, edit, publish or review Comments prior to their
