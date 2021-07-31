@@ -5,7 +5,7 @@ const API_ENDPOINT = "https://discord.com/api/v8";
 const CLIENT_ID = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "";
 
 /**
- * Get access token from the discord api based with the given code
+ * Get access token from the discord api with the given code
  * @param code
  * @param clientSecret
  * @returns Access token
