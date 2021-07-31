@@ -1,21 +1,33 @@
 import React, { useEffect } from "react";
 import * as queryString from "query-string";
-import { useRouter } from "next/router";
+import axios from "axios";
 
 const Discord: React.FC = () => {
   const urlParams = queryString.parse(window.location.search);
   let code = urlParams.code as string;
-  const { push } = useRouter();
 
   useEffect(() => {
-    const asyncFunc = async () => {};
+    const asyncFunc = async () => {
+      if (!code) {
+        return;
+      }
 
-    if (1 < 1) {
-      push("/");
-    }
+      const { data } = await axios({
+        url: "/api/auth/oauth/discord",
+        method: "POST",
+        data: {
+          code,
+        },
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      console.log(data);
+    };
 
     asyncFunc();
-  });
+  }, [code]);
 
   return (
     <div className="email-confirmation">
