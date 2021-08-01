@@ -22,11 +22,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   // graphql stuff
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
-  const { data, loading } = useMeQuery({
-    fetchPolicy: "network-only",
-    notifyOnNetworkStatusChange: true,
-  });
   const { setAccessToken } = useApollo()!;
+  const { data, loading } = useMeQuery();
 
   // current user state
   const [currentUser, setCurrentUser] = useState<UserType>(null);
@@ -116,6 +113,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const authState = () => {
+    console.log(currentUser);
     if (currentUser !== null) {
       if (currentUser !== undefined) {
         return "auth";
@@ -133,10 +131,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     authState,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {loading && <Loading />}
-      {children}
-    </AuthContext.Provider>
-  );
+  if (authState() === "loading") {
+    return <Loading />;
+  }
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
