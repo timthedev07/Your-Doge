@@ -22,7 +22,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   // graphql stuff
   const [signin] = useLoginMutation();
   const [signup] = useRegisterMutation();
-  const { data, loading } = useMeQuery();
+  const { data, loading } = useMeQuery({ fetchPolicy: "network-only" });
   const { setAccessToken } = useApollo()!;
 
   // current user state
@@ -130,9 +130,10 @@ export const AuthProvider: React.FC = ({ children }) => {
     authState,
   };
 
-  if (loading) {
-    return <Loading />;
-  }
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {loading && <Loading />}
+      {children}
+    </AuthContext.Provider>
+  );
 };
