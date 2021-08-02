@@ -48,6 +48,8 @@ export const CustomApolloProvider: React.FC = ({ children }) => {
     const requestLink = new ApolloLink(
       (operation, forward) =>
         new Observable((observer) => {
+          console.log("Operation");
+          console.log(operation);
           let handle: any;
           Promise.resolve(operation)
             .then((operation) => {
@@ -65,6 +67,7 @@ export const CustomApolloProvider: React.FC = ({ children }) => {
                 error: observer.error.bind(observer),
                 complete: observer.complete.bind(observer),
               });
+              console.log(observer);
             })
             .catch(observer.error.bind(observer));
 
@@ -108,7 +111,9 @@ export const CustomApolloProvider: React.FC = ({ children }) => {
             console.error(err);
           },
         }),
-        onError(() => {}) as any,
+        onError((stuff) => {
+          console.log("Take a look", stuff);
+        }) as any,
         requestLink,
         new HttpLink({
           uri: `${baseUrl}/graphql`,

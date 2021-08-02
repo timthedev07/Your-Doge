@@ -131,7 +131,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     authState,
   };
 
-  if (authState() === "loading") {
+  if (loading) {
     return <Loading />;
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
