@@ -1,14 +1,7 @@
 import { Field, Int, ObjectType } from "type-graphql";
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  BaseEntity,
-  Unique,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 @ObjectType()
-@Unique(["email", "username"]) // here we are forcing an unique constraint on the email
 @Entity("users")
 export class User extends BaseEntity {
   /**
@@ -20,7 +13,7 @@ export class User extends BaseEntity {
   id: number;
 
   @Field(() => String)
-  @Column("text")
+  @Column({ type: "text", unique: true })
   email: string;
 
   @Field(() => String)
