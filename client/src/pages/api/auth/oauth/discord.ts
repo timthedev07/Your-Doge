@@ -30,11 +30,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       });
 
-      console.log(data);
-
       return res.json(data);
     } catch (err) {
-      console.log(err);
       return res.end("Bad Request");
     }
   }

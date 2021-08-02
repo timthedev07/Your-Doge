@@ -198,10 +198,7 @@ export class UserResolver {
   async me(@Ctx() context: MyContext) {
     const authorization = context.req.headers["authorization"];
 
-    console.log("request");
-
     if (!authorization) {
-      console.log("invalid");
       return null;
     }
 
@@ -212,10 +209,8 @@ export class UserResolver {
       const res = await User.findOne(payload.userId);
       if (res && res.confirmed) {
         // only confirmed users are considered to be valid
-        console.log("valid");
         return res;
       }
-      console.log("invalid");
       return null;
     } catch (err) {
       console.error(err);

@@ -132,9 +132,7 @@ export const Profile: React.FC<ProfileProps> = ({
           setAvatars((prev) => {
             return [...prev, res.src as string];
           });
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
       }
     };
 

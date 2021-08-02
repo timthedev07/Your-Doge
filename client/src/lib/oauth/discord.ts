@@ -41,7 +41,6 @@ export const exchangeCode: (
 
     return data;
   } catch (err) {
-    console.log(err);
     return null;
   }
 };

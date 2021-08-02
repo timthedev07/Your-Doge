@@ -36,9 +36,7 @@ export const sendEmail = async (
       text,
     };
     html = template(data);
-  } catch (err) {
-    console.log("err: ", err);
-  }
+  } catch (err) {}
 
   const mailOptions: Mail.Options = {
     from: `"Your Doge - No Reply" <${process.env.USERNAME}>`,

@@ -113,7 +113,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   const authState = () => {
-    console.log(currentUser);
     if (currentUser !== null) {
       if (currentUser !== undefined) {
         return "auth";
