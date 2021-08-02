@@ -1,3 +1,7 @@
+# August 2
+
+Let's go boys, we solved the issue. It's just the new version of apollo client that's crashing the entire website.
+
 # July 25
 
 Finally we migrated to nextjs!
