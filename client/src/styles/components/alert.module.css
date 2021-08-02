@@ -7,7 +7,7 @@
   min-height: max-content;
   cursor: pointer;
   top: -100vw;
-  height: 150px;
+  max-height: 190px;
   border-radius: 5px 5px 5px 5px;
   position: fixed;
   margin-left: auto;
@@ -48,22 +48,6 @@
 .alert-inactive {
   top: -100vw;
   transition: var(--alert-transition-duration);
-}
-
-.custom-alert .close-icon {
-  width: 45px;
-  height: 45px;
-  float: right;
-  position: relative;
-  display: block;
-  transition: 0.4s;
-  border-radius: 100vw;
-  padding: 5px;
-  fill: white;
-}
-
-.custom-alert .close-icon:hover {
-  background-color: rgba(255, 255, 255, 0.356);
 }
 
 .custom-alert .alert-content .alert-sign {

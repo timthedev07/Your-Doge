@@ -62,7 +62,16 @@ export const Alert: React.FC<AlertProps> = ({
           <p className="alert-paragraph">{text}</p>
         </div>
       </div>
-      <pre style={{ textAlign: "right", color: "#b3b3b3" }}>ESC</pre>
+      <pre
+        style={{
+          textAlign: "right",
+          color: "#b3b3b3",
+          marginTop: "auto",
+          marginBottom: "0",
+        }}
+      >
+        ESC
+      </pre>
     </div>
   );
 };
