@@ -52,5 +52,5 @@ export class User extends BaseEntity {
   emailPrivate: boolean;
 
   @Column("text", { nullable: true })
-  provider: string;
+  provider: string | null;
 }
