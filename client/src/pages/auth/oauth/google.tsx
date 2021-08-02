@@ -57,14 +57,13 @@ const Google: React.FC = () => {
 
         if (res.data?.googleOAuth.status === "logged-in") {
           push("/dashboard");
-        } else {
-          displayError(unknownErrMsg);
         }
       } catch (err: any) {
         if (err?.graphQLErrors[0]?.message) {
           displayError(err.graphQLErrors[0].message);
+        } else {
+          displayError(unknownErrMsg);
         }
-        displayError(unknownErrMsg);
       }
     };
 
