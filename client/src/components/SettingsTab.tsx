@@ -57,6 +57,12 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   };
   return (
     <>
+      <Alert
+        type={"warning"}
+        active={alertDisplay}
+        setActive={setAlertDisplay}
+        text="Invalid username/password"
+      />
       <div className="settings-content-container">
         <button
           className="rounded-btn sorrowful"
@@ -80,13 +86,6 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
         show={show}
         onHide={() => setShow(false)}
       >
-        <Alert
-          type={"warning"}
-          active={alertDisplay}
-          setActive={setAlertDisplay}
-          text="Invalid username/password"
-        />
-
         <Modal.Header>
           <Modal.Title>Delete Your Account</Modal.Title>
           <CloseButton
