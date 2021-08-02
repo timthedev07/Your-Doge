@@ -13,11 +13,7 @@ import { getConnection } from "typeorm";
 import { hash, compare } from "bcrypt";
 import { User } from "../entity/User";
 import { MyContext } from "../types/MyContext";
-import {
-  createAccessToken,
-  createRefreshToken,
-  sendRefreshToken,
-} from "../utils/AuthHelper";
+import { sendRefreshToken } from "../utils/AuthHelper";
 import { verify } from "jsonwebtoken";
 import { sendEmail } from "../utils/sendEmail";
 import { createActionUrl } from "../utils/createActionUrl";
@@ -32,6 +28,8 @@ import { userCleanup } from "../utils/userCleanup";
 import { randSlug } from "../utils/slugs";
 import { GoogleUser } from "../types/googleUser";
 import { DiscordUser } from "../types/discordUser";
+import { OAuthStatusType } from "../types/oauth";
+import { login, loginOAuth } from "../utils/login";
 
 const EMAIL_VALIDATION_REGEX =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
@@ -42,7 +40,7 @@ const validateEmailRegex = (email: string) => {
 
 // defining our own object type consisting of a few fields
 @ObjectType()
-class LoginResponse {
+export class LoginResponse {
   @Field()
   accessToken: string;
 
@@ -52,7 +50,7 @@ class LoginResponse {
 
 // defining our own object type consisting of a few fields
 @ObjectType()
-class OAuthResponse {
+export class OAuthResponse {
   @Field()
   accessToken: string;
 
@@ -60,7 +58,7 @@ class OAuthResponse {
   user: User | null;
 
   @Field(() => String)
-  status: "verification-required" | "logged-in";
+  status: OAuthStatusType;
 }
 
 @Resolver()
@@ -172,13 +170,7 @@ export class UserResolver {
     }
 
     // successfully logged in
-    const token = createRefreshToken(user);
-    sendRefreshToken(res, token);
-
-    return {
-      accessToken: createAccessToken(user),
-      user,
-    };
+    return login(user, res);
   }
 
   @Mutation(() => Boolean)
@@ -224,6 +216,7 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async logout(@Ctx() { res }: MyContext) {
     sendRefreshToken(res, "");
+    res.cookie("FBIsecret", "", { httpOnly: true, secure: true });
     return true;
   }
 
@@ -269,13 +262,7 @@ export class UserResolver {
 
     const user = await User.findOne({ where: { id: userId } })!;
 
-    const refreshToken = createRefreshToken(user!);
-    sendRefreshToken(res, refreshToken);
-
-    return {
-      accessToken: createAccessToken(user!),
-      user: user!,
-    };
+    return login(user!, res);
   }
 
   @Query(() => User, { nullable: true })
@@ -453,6 +440,9 @@ export class UserResolver {
         .execute();
 
       sendRefreshToken(context.res, "");
+      if (user.provider === "discord") {
+        context.res.cookie("FBIsecret", "", { httpOnly: true, secure: true });
+      }
 
       return true;
     } catch (err) {
@@ -480,46 +470,47 @@ export class UserResolver {
 
     const count = await User.count();
 
+    let user: User | undefined = await User.findOne({ where: { email } });
+
+    if (user) {
+      if (user.provider === "google") {
+        return loginOAuth(user, response, "logged-in");
+      } else {
+        throw new Error("Email already linked with another account.");
+      }
+    }
+
     try {
-      await User.insert({
+      const insertRes = await User.insert({
         email: email,
         username: `${randSlug()}${count}`,
         serverId: res,
         confirmed: userData.verified_email,
+        provider: "google",
       });
-    } catch (err) {
-      throw new Error("Email already linked with another account.");
-    }
 
-    const user = await User.findOne({ where: { email } });
+      insertRes.generatedMaps.forEach(console.log);
+    } catch (err) {}
 
-    if (!user) {
-      throw new Error("Registration failed");
-    }
+    user = await User.findOne({ where: { email } });
 
-    if (!user.confirmed) {
+    if (!userData.verified_email) {
       await sendEmail(
         email,
-        await createActionUrl(user.id, "confirm"),
+        await createActionUrl(user!.id, "confirm"),
         "verify",
         "email",
         CONFIRM_EMAIL_LETTER_CONTENT
       );
+
       return {
         accessToken: "",
         user: null,
         status: "verification-required",
       };
-    } else {
-      const token = createRefreshToken(user);
-      sendRefreshToken(response, token);
-
-      return {
-        accessToken: createAccessToken(user),
-        user,
-        status: "logged-in",
-      };
     }
+
+    return loginOAuth(user!, response, "logged-in");
   }
 
   @Mutation(() => OAuthResponse)
@@ -540,45 +531,46 @@ export class UserResolver {
       throw new Error("Invalid email.");
     }
 
+    let user: User | undefined = await User.findOne({ where: { email } });
+
+    if (user) {
+      if (user.provider === "discord") {
+        return loginOAuth(user, response, "logged-in");
+      } else {
+        throw new Error("Email already linked with another account.");
+      }
+    }
+
     try {
-      await User.insert({
+      const insertRes = await User.insert({
         email: email,
         username: `${randSlug()}${userData.discriminator}`,
         serverId: res,
         confirmed: userData.verified,
+        provider: "discord",
       });
-    } catch (err) {
-      throw new Error("Email already linked with another account.");
-    }
 
-    const user = await User.findOne({ where: { email } });
+      insertRes.generatedMaps.forEach(console.log);
+    } catch (err) {}
 
-    if (!user) {
-      throw new Error("Registration failed");
-    }
+    user = await User.findOne({ where: { email } });
 
-    if (!user.confirmed) {
+    if (!userData.verified) {
       await sendEmail(
         email,
-        await createActionUrl(user.id, "confirm"),
+        await createActionUrl(user!.id, "confirm"),
         "verify",
         "email",
         CONFIRM_EMAIL_LETTER_CONTENT
       );
+
       return {
         accessToken: "",
         user: null,
         status: "verification-required",
       };
-    } else {
-      const token = createRefreshToken(user);
-      sendRefreshToken(response, token);
-
-      return {
-        accessToken: createAccessToken(user),
-        user,
-        status: "logged-in",
-      };
     }
+
+    return loginOAuth(user!, response, "logged-in");
   }
 }
