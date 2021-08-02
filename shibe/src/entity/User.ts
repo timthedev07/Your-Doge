@@ -50,4 +50,7 @@ export class User extends BaseEntity {
 
   @Column("boolean", { default: true })
   emailPrivate: boolean;
+
+  @Column("text", { nullable: true })
+  provider: string;
 }
