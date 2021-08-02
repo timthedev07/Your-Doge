@@ -4,7 +4,7 @@ import { AlertProps } from "../types/props";
 const TEXT_MAP = {
   success: "Awesome, everything worked just fine!",
   warning: "Oops, something went wrong.",
-  info: "You know what?",
+  info: "Just so you know...",
 };
 
 export const Alert: React.FC<AlertProps> = ({
