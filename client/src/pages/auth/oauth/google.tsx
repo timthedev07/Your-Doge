@@ -77,6 +77,9 @@ const Google: React.FC = () => {
         active={active}
         type="warning"
         text={alertMessage}
+        onClose={() => {
+          push("/auth/login");
+        }}
       />
       <div className="email-confirmation">
         <div className="email-confirmation-card">
