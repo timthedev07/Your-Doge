@@ -1,5 +1,5 @@
 import React from "react";
-import { discordOAuthUrl } from "../constants/discord";
+import { discordOAuthUrl } from "../lib/oauth/discord";
 import { googleAuthUrl } from "../lib/oauth/google";
 import { OAuthButton } from "./OAuthButton";
 
