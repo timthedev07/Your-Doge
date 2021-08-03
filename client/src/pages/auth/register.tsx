@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
 import { Loading } from "../../components/Loading";
 import { useAuth } from "../../contexts/AuthContext";
@@ -16,7 +16,7 @@ const EMAIL_VALIDATION_REGEX =
   // eslint-disable-next-line
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 
-const validateEmail = (email: string) => {
+export const validateEmail = (email: string) => {
   return EMAIL_VALIDATION_REGEX.test(email);
 };
 
@@ -149,7 +149,7 @@ const Register: React.FC = () => {
       <h1 className="form-heading">Join Us</h1>
 
       <div>
-        <Form className="form-as-wrapper">
+        <div className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}
             active={alertActive}
@@ -249,7 +249,7 @@ const Register: React.FC = () => {
               {windowWidth > THRESHOLD ? "Already have an account?" : "Sign in"}
             </Button>
           </div>
-        </Form>
+        </div>
       </div>
       <ReCAPTCHA
         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA || ""}
