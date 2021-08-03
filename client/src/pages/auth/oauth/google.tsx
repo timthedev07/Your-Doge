@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import axios from "axios";
 import { unknownErrMsg } from "../../../constants/general";
 import { OAuthWait } from "../../../components/OAuthWait";
+import { parseGraphQLError } from "../../../lib/graphqlErrorParser";
 
 const Google: React.FC = () => {
   const urlParams = queryString.parse(window.location.search);
@@ -41,7 +42,7 @@ const Google: React.FC = () => {
         });
 
         const res = await registerGoogleUser({
-          variables: { ...data },
+          variables: data,
           update: (store, { data }) => {
             if (!data) return null;
             store.writeQuery<MeQuery>({
@@ -59,11 +60,7 @@ const Google: React.FC = () => {
           push("/dashboard");
         }
       } catch (err: any) {
-        try {
-          displayError(err.graphQLErrors[0].message);
-        } catch (err) {
-          displayError(unknownErrMsg);
-        }
+        displayError(parseGraphQLError(err));
       }
     };
 
