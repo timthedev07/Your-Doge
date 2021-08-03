@@ -11,6 +11,8 @@ import {
 } from "../generated/graphql";
 import { ProfileProps } from "../types/props";
 import { AvatarKeyType } from "../types/types";
+import Link from "next/link";
+import ReactTooltip from "react-tooltip";
 
 export const Profile: React.FC<ProfileProps> = ({
   avatarId,
@@ -149,10 +151,18 @@ export const Profile: React.FC<ProfileProps> = ({
 
   return (
     <>
+      <ReactTooltip />
       <div className="profile-top-section">
         <img onClick={handleShow} alt="" className="avatar" src={avatarSrc} />
         <div className="profile-top-section__headings">
-          <h2>{username}</h2>
+          <Link href={`/u/${username}`} passHref>
+            <h2
+              style={{ cursor: "pointer" }}
+              data-tip="Click here to view your public profile"
+            >
+              {username}
+            </h2>
+          </Link>
 
           <h5>{email}</h5>
 
