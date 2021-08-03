@@ -9,6 +9,7 @@ import {
 import { useRouter } from "next/router";
 import { unknownErrMsg } from "../../../constants/general";
 import { OAuthWait } from "../../../components/OAuthWait";
+import { parseGraphQLError } from "../../../lib/graphqlErrorParser";
 
 const Discord: React.FC = () => {
   const urlParams = queryString.parse(window.location.search);
@@ -62,11 +63,7 @@ const Discord: React.FC = () => {
           displayError(unknownErrMsg);
         }
       } catch (err: any) {
-        try {
-          displayError(err.graphQLErrors[0].message);
-        } catch (err) {
-          displayError(unknownErrMsg);
-        }
+        displayError(parseGraphQLError(err));
       }
     };
 
