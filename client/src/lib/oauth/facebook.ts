@@ -1,9 +1,10 @@
 import queryString from "query-string";
+import { FRONTEND_URL } from "../../constants/general";
 
 const stringifiedParams = queryString.stringify({
-  client_id: process.env.APP_ID_GOES_HERE,
-  redirect_uri: "https://www.example.com/authenticate/facebook/",
-  scope: ["email", "user_friends"].join(","), // comma seperated string
+  client_id: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID,
+  redirect_uri: `${FRONTEND_URL}/auth/oauth/facebook`,
+  scope: "email", // comma seperated string
   response_type: "code",
   auth_type: "rerequest",
   display: "popup",
