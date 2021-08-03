@@ -7,7 +7,6 @@ import {
 } from "../../../generated/graphql";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { unknownErrMsg } from "../../../constants/general";
 import { OAuthWait } from "../../../components/OAuthWait";
 import { parseGraphQLError } from "../../../lib/graphqlErrorParser";
 
