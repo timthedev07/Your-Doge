@@ -6,20 +6,15 @@ import {
   createAccessToken,
 } from "./AuthHelper";
 import { LoginResponse, OAuthResponse } from "../resolvers/UserResolvers";
-import { OAuthStatusType } from "../types/oauth";
 
-export const loginOAuth = (
-  user: User,
-  response: Response,
-  status: OAuthStatusType
-) => {
+export const loginOAuth = (user: User, response: Response) => {
   const token = createRefreshToken(user);
   sendRefreshToken(response, token);
 
   return {
     accessToken: createAccessToken(user),
     user,
-    status: status,
+    status: "logged-in",
   } as OAuthResponse;
 };
 
