@@ -7,8 +7,8 @@ import {
 } from "../../../generated/graphql";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { Alert } from "../../../components/Alert";
 import { unknownErrMsg } from "../../../constants/general";
+import { OAuthWait } from "../../../components/OAuthWait";
 
 const Google: React.FC = () => {
   const urlParams = queryString.parse(window.location.search);
@@ -71,26 +71,11 @@ const Google: React.FC = () => {
   }, [code, registerGoogleUser, push]);
 
   return (
-    <>
-      <Alert
-        setActive={setActive}
-        active={active}
-        type="warning"
-        text={alertMessage}
-        onClose={() => {
-          push("/auth/login");
-        }}
-      />
-      <div className="email-confirmation">
-        <div className="email-confirmation-card">
-          <div>
-            <h2>You are almost there...</h2>
-            <h4>Please wait while we sign you in/up...</h4>
-            <img src="/images/wait.svg" alt="" style={{ width: "200px" }} />
-          </div>
-        </div>
-      </div>
-    </>
+    <OAuthWait
+      active={active}
+      setActive={setActive}
+      alertMessage={alertMessage}
+    />
   );
 };
 
