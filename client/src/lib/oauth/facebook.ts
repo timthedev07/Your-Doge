@@ -14,7 +14,7 @@ const stringifiedParams = queryString.stringify({
 export const getAccessTokenFromCode = async (code: string) => {
   try {
     const { data } = await axios({
-      url: "https://graph.facebook.com/v4.0/oauth/access_token",
+      url: "https://graph.facebook.com/v11.0/oauth/access_token",
       method: "get",
       params: {
         client_id: process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID,
@@ -52,4 +52,4 @@ export const getFacebookUserData = async (accessToken: string) => {
   }
 };
 
-export const facebookOAuthUrl = `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`;
+export const facebookOAuthUrl = `https://www.facebook.com/v11.0/dialog/oauth?${stringifiedParams}`;
