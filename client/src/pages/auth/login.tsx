@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
 import Link from "next/link";
 import { Loading } from "../../components/Loading";
@@ -66,6 +66,12 @@ const Login: React.FC = () => {
     const email = emRef.current.value;
     const password = pwRef.current.value;
 
+    // if any field is empty
+    if (email.length < 1 || password.length < 1) {
+      displayError("Please make sure all fields are filled out");
+      return;
+    }
+
     setAlertMessage("");
     setAlertActive(false);
     setPageLoading(false);
@@ -75,10 +81,9 @@ const Login: React.FC = () => {
 
       if (data) {
         push("/");
-        return;
+      } else {
+        displayError(unknownErrMsg);
       }
-
-      displayError(unknownErrMsg);
     } catch (err: any) {
       displayError(err.message);
     }
@@ -91,7 +96,7 @@ const Login: React.FC = () => {
       <h1 className="form-heading">Welcome Back</h1>
 
       <div>
-        <Form className="form-as-wrapper">
+        <div className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}
             active={alertActive}
@@ -178,7 +183,7 @@ const Login: React.FC = () => {
               {windowWidth > THRESHOLD ? "Not a member yet?" : "Join"}
             </Button>
           </div>
-        </Form>
+        </div>
       </div>
     </div>
   );
