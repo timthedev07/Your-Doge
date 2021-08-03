@@ -79,3 +79,10 @@ export interface DiscordAccessTokenResponse {
   refresh_token: string;
   scope: string;
 }
+
+export interface FacebookUserData {
+  id: unknown;
+  email: string;
+  first_name: string;
+  last_name: string;
+}
