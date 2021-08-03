@@ -42,10 +42,6 @@ export const getFacebookUserData = async (accessToken: string) => {
         access_token: accessToken,
       },
     });
-    console.log(data);
-    /**
-     * data: { id: idk?, email, first_name, last_name }
-     */
     return data;
   } catch (err) {
     return undefined;
