@@ -41,8 +41,6 @@ const Facebook: React.FC = ({}) => {
           },
         });
 
-        console.log("User data: ", userData);
-
         const response = await registerFacebookUser({
           variables: { ...userData },
           update: (store, { data }) => {
@@ -62,7 +60,6 @@ const Facebook: React.FC = ({}) => {
           push("/dashboard");
         }
       } catch (err: any) {
-        console.log(JSON.stringify(err, null, 2));
         displayError(parseGraphQLError(err));
       }
     };

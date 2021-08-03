@@ -482,15 +482,13 @@ export class UserResolver {
     }
 
     try {
-      const insertRes = await User.insert({
+      await User.insert({
         email: email,
         username: `${randSlug()}${count}`,
         serverId: res,
         confirmed: userData.verified_email,
         provider: "google",
       });
-
-      insertRes.generatedMaps.forEach(console.log);
     } catch (err) {}
 
     user = await User.findOne({ where: { email } });
@@ -543,15 +541,13 @@ export class UserResolver {
     }
 
     try {
-      const insertRes = await User.insert({
+      await User.insert({
         email: email,
         username: `${randSlug()}${userData.discriminator}`,
         serverId: res,
         confirmed: userData.verified,
         provider: "discord",
       });
-
-      insertRes.generatedMaps.forEach(console.log);
     } catch (err) {}
 
     user = await User.findOne({ where: { email } });
