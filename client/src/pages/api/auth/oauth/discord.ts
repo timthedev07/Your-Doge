@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { exchangeCode } from "../../../../lib/oauth/discord";
-import { serialize } from "cookie";
 import axios from "axios";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -15,12 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.send("Bad Request");
     }
 
-    const { access_token, refresh_token } = response;
-
-    res.setHeader(
-      "Set-Cookie",
-      serialize("FBIsecret", refresh_token, { secure: true })
-    );
+    const { access_token } = response;
 
     try {
       const { data } = await axios({

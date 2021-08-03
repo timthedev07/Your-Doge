@@ -22,5 +22,9 @@ export const createRefreshToken = (user: User) => {
 };
 
 export const sendRefreshToken = (res: Response, token: string) => {
-  res.cookie("jimrayd", token, { httpOnly: true, secure: true });
+  if (token === "") {
+    res.clearCookie("jimrayd");
+  } else {
+    res.cookie("jimrayd", token, { httpOnly: true, secure: true });
+  }
 };

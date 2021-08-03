@@ -217,7 +217,6 @@ export class UserResolver {
   @Mutation(() => Boolean)
   async logout(@Ctx() { res }: MyContext) {
     sendRefreshToken(res, "");
-    res.cookie("FBIsecret", "", { httpOnly: true, secure: true });
     return true;
   }
 
@@ -444,9 +443,6 @@ export class UserResolver {
         .execute();
 
       sendRefreshToken(context.res, "");
-      if (user.provider === "discord") {
-        context.res.cookie("FBIsecret", "", { httpOnly: true, secure: true });
-      }
 
       return true;
     } catch (err) {
