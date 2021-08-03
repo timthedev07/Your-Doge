@@ -52,6 +52,7 @@ export class User extends BaseEntity {
   @Column("boolean", { default: true })
   emailPrivate: boolean;
 
+  @Field(() => String, { nullable: true })
   @Column("text", { nullable: true })
   provider: string | null;
 }
