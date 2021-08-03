@@ -10,13 +10,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const { code } = req.body;
 
     if (!code) {
-      return res.status(400).send("Bad Request");
+      return res.send("Bad Request");
     }
 
     const accessToken = await getAccessTokenFromCode(code);
 
     if (!accessToken) {
-      return res.status(400).send("Bad Request");
+      return res.send("Bad Request");
     }
 
     const userData: FacebookUserData | undefined = await getFacebookUserData(
@@ -24,13 +24,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     if (!userData) {
-      return res.status(400).send("Bad Request");
+      return res.end("Bad Request");
     }
 
-    return res.status(200).json(userData);
+    return res.json(userData);
   }
 
-  res.status(405).send("Method Not Allowed");
+  res.end("Method Not Allowed");
 };
 
 export default handler;

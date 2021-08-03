@@ -3,14 +3,20 @@ import React, { useEffect, useState } from "react";
 import { OAuthWait } from "../../../components/OAuthWait";
 import queryString from "query-string";
 import axios from "axios";
-import { unknownErrMsg } from "../../../constants/general";
+import {
+  MeDocument,
+  MeQuery,
+  useFacebookOAuthMutationMutation,
+} from "../../../generated/graphql";
+import { parseGraphQLError } from "../../../lib/graphqlErrorParser";
 
 const Facebook: React.FC = ({}) => {
   const urlParams = queryString.parse(window.location.search);
   let code = urlParams.code as string;
-  const {} = useRouter();
+  const { push } = useRouter();
   const [active, setActive] = useState<boolean>(false);
   const [alertMessage, setAlertMessage] = useState<string>("");
+  const [registerFacebookUser] = useFacebookOAuthMutationMutation();
 
   const displayError = (message: string) => {
     setActive(true);
@@ -24,7 +30,7 @@ const Facebook: React.FC = ({}) => {
       }
 
       try {
-        const { data } = await axios({
+        const { data: userData } = await axios({
           url: "/api/auth/oauth/facebook",
           method: "POST",
           data: {
@@ -34,17 +40,35 @@ const Facebook: React.FC = ({}) => {
             "Content-Type": "application/json",
           },
         });
-      } catch (err: any) {
-        try {
-          displayError(err.graphQLErrors[0].message);
-        } catch (err) {
-          displayError(unknownErrMsg);
+
+        console.log("User data: ", userData);
+
+        const response = await registerFacebookUser({
+          variables: { ...userData },
+          update: (store, { data }) => {
+            if (!data) return null;
+            store.writeQuery<MeQuery>({
+              query: MeDocument,
+              data: {
+                __typename: "Query",
+                me: data.facebookOAuth.user,
+              },
+            });
+            return null;
+          },
+        });
+
+        if (response.data?.facebookOAuth.status === "logged-in") {
+          push("/dashboard");
         }
+      } catch (err: any) {
+        console.log(JSON.stringify(err, null, 2));
+        displayError(parseGraphQLError(err));
       }
     };
 
     asyncFunc();
-  });
+  }, [code, push, registerFacebookUser]);
 
   return (
     <OAuthWait

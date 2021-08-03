@@ -1,14 +1,14 @@
 mutation FacebookOAuthMutation(
   $id: String!
   $email: String!
-  $firstName: String!
-  $lastName: String!
+  $first_name: String!
+  $last_name: String!
 ) {
   facebookOAuth(
     id: $id
     email: $email
-    first_name: $firstName
-    last_name: $lastName
+    first_name: $first_name
+    last_name: $last_name
   ) {
     accessToken
     status

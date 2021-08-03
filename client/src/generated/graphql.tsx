@@ -198,8 +198,8 @@ export type DiscordOAuthMutation = { __typename?: 'Mutation', discordOAuth: { __
 export type FacebookOAuthMutationMutationVariables = Exact<{
   id: Scalars['String'];
   email: Scalars['String'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
 }>;
 
 
@@ -421,12 +421,12 @@ export type DiscordOAuthMutationHookResult = ReturnType<typeof useDiscordOAuthMu
 export type DiscordOAuthMutationResult = Apollo.MutationResult<DiscordOAuthMutation>;
 export type DiscordOAuthMutationOptions = Apollo.BaseMutationOptions<DiscordOAuthMutation, DiscordOAuthMutationVariables>;
 export const FacebookOAuthMutationDocument = gql`
-    mutation FacebookOAuthMutation($id: String!, $email: String!, $firstName: String!, $lastName: String!) {
+    mutation FacebookOAuthMutation($id: String!, $email: String!, $first_name: String!, $last_name: String!) {
   facebookOAuth(
     id: $id
     email: $email
-    first_name: $firstName
-    last_name: $lastName
+    first_name: $first_name
+    last_name: $last_name
   ) {
     accessToken
     status
@@ -459,8 +459,8 @@ export type FacebookOAuthMutationMutationFn = Apollo.MutationFunction<FacebookOA
  *   variables: {
  *      id: // value for 'id'
  *      email: // value for 'email'
- *      firstName: // value for 'firstName'
- *      lastName: // value for 'lastName'
+ *      first_name: // value for 'first_name'
+ *      last_name: // value for 'last_name'
  *   },
  * });
  */
