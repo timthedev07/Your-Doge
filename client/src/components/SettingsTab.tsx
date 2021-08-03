@@ -10,6 +10,7 @@ import { CloseButton } from "./CloseButton";
 import { Alert } from "./Alert";
 import { useApollo } from "../contexts/ApolloContext";
 import { SettingsTabProps } from "../types/props";
+import { useAuth } from "../contexts/AuthContext";
 
 export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const [logout, { client }] = useLogoutMutation();
@@ -19,6 +20,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const unRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
   const { setAccessToken } = useApollo()!;
+  const { currentUser } = useAuth()!;
 
   const handleSubmit = async () => {
     const { data } = await deleteAccount({
@@ -64,6 +66,29 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
         text="Invalid username/password"
       />
       <div className="settings-content-container">
+        <section className="settings-content-section">
+          <h4>Update your username</h4>
+          <hr />
+          <div className="settings-content-section__inner-content"></div>
+        </section>
+
+        <section className="settings-content-section">
+          <h4 style={{ color: "#e9574f" }}>Delete your account</h4>
+          <hr />
+          <div className="settings-content-section__inner-content">
+            <p>
+              Note that this a one way action. All your records will be{" "}
+              <em>permanently</em> deleted once you do so, please be certain!
+            </p>
+            <button
+              className="rounded-btn danger"
+              onClick={() => setShow(true)}
+            >
+              Delete Account
+            </button>
+          </div>
+        </section>
+
         <button
           className="rounded-btn sorrowful"
           onClick={() => handleLogout()}
@@ -71,9 +96,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
           Logout
         </button>
         <br />
-        <button className="rounded-btn danger" onClick={() => setShow(true)}>
-          Delete Account
-        </button>
+
         <select defaultValue={"default"} style={{ width: "190px" }}>
           <option>private</option>
           <option>public</option>
@@ -103,10 +126,18 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
             Please type in your username <code>{username}</code>.
           </label>
           <input ref={unRef} className="rounded-input emphasized" />
-          <label style={{ margin: "5px" }}>
-            Please type in your password to make sure it&#39;s really you.
-          </label>
-          <input type="password" ref={pwRef} className="rounded-input danger" />
+          {currentUser!.provider ? null : (
+            <>
+              <label style={{ margin: "5px" }}>
+                Please type in your password to make sure it&#39;s really you.
+              </label>
+              <input
+                type="password"
+                ref={pwRef}
+                className="rounded-input danger"
+              />
+            </>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={() => handleSubmit()}>
