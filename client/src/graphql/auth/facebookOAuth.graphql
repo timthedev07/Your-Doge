@@ -1,0 +1,25 @@
+mutation FacebookOAuthMutation(
+  $id: String!
+  $email: String!
+  $firstName: String!
+  $lastName: String!
+) {
+  facebookOAuth(
+    id: $id
+    email: $email
+    first_name: $firstName
+    last_name: $lastName
+  ) {
+    accessToken
+    status
+    user {
+      id
+      username
+      email
+      bio
+      serverId
+      avatarId
+      age
+    }
+  }
+}

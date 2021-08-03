@@ -36,6 +36,7 @@ export type Mutation = {
   deleteAccount: Scalars['Boolean'];
   googleOAuth: OAuthResponse;
   discordOAuth: OAuthResponse;
+  facebookOAuth: OAuthResponse;
 };
 
 
@@ -131,6 +132,14 @@ export type MutationDiscordOAuthArgs = {
   verified: Scalars['Boolean'];
 };
 
+
+export type MutationFacebookOAuthArgs = {
+  id: Scalars['String'];
+  email: Scalars['String'];
+  first_name: Scalars['String'];
+  last_name: Scalars['String'];
+};
+
 export type OAuthResponse = {
   __typename?: 'OAuthResponse';
   accessToken: Scalars['String'];
@@ -165,17 +174,7 @@ export type ConfirmEmailMutationVariables = Exact<{
 }>;
 
 
-export type ConfirmEmailMutation = (
-  { __typename?: 'Mutation' }
-  & { confirmUser: (
-    { __typename?: 'LoginResponse' }
-    & Pick<LoginResponse, 'accessToken'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
-    ) }
-  ) }
-);
+export type ConfirmEmailMutation = { __typename?: 'Mutation', confirmUser: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number } } };
 
 export type DiscordOAuthMutationVariables = Exact<{
   accent_color?: Maybe<Scalars['String']>;
@@ -194,27 +193,24 @@ export type DiscordOAuthMutationVariables = Exact<{
 }>;
 
 
-export type DiscordOAuthMutation = (
-  { __typename?: 'Mutation' }
-  & { discordOAuth: (
-    { __typename?: 'OAuthResponse' }
-    & Pick<OAuthResponse, 'status' | 'accessToken'>
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
-    )> }
-  ) }
-);
+export type DiscordOAuthMutation = { __typename?: 'Mutation', discordOAuth: { __typename?: 'OAuthResponse', status: string, accessToken: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number }> } };
+
+export type FacebookOAuthMutationMutationVariables = Exact<{
+  id: Scalars['String'];
+  email: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+}>;
+
+
+export type FacebookOAuthMutationMutation = { __typename?: 'Mutation', facebookOAuth: { __typename?: 'OAuthResponse', accessToken: string, status: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number }> } };
 
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type ForgotPasswordMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'forgotPassword'>
-);
+export type ForgotPasswordMutation = { __typename?: 'Mutation', forgotPassword: boolean };
 
 export type GoogleOAuthMutationVariables = Exact<{
   email: Scalars['String'];
@@ -229,17 +225,7 @@ export type GoogleOAuthMutationVariables = Exact<{
 }>;
 
 
-export type GoogleOAuthMutation = (
-  { __typename?: 'Mutation' }
-  & { googleOAuth: (
-    { __typename?: 'OAuthResponse' }
-    & Pick<OAuthResponse, 'status' | 'accessToken'>
-    & { user?: Maybe<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
-    )> }
-  ) }
-);
+export type GoogleOAuthMutation = { __typename?: 'Mutation', googleOAuth: { __typename?: 'OAuthResponse', status: string, accessToken: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number }> } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -247,25 +233,12 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = (
-  { __typename?: 'Mutation' }
-  & { login: (
-    { __typename?: 'LoginResponse' }
-    & Pick<LoginResponse, 'accessToken'>
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
-    ) }
-  ) }
-);
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number } } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LogoutMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'logout'>
-);
+export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
 
 export type RegisterMutationVariables = Exact<{
   email: Scalars['String'];
@@ -275,20 +248,14 @@ export type RegisterMutationVariables = Exact<{
 }>;
 
 
-export type RegisterMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'register'>
-);
+export type RegisterMutation = { __typename?: 'Mutation', register: boolean };
 
 export type ResendConfEmailMutationVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-export type ResendConfEmailMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'resendConfirmationUrl'>
-);
+export type ResendConfEmailMutation = { __typename?: 'Mutation', resendConfirmationUrl: boolean };
 
 export type DeleteAccountMutationVariables = Exact<{
   password: Scalars['String'];
@@ -296,34 +263,19 @@ export type DeleteAccountMutationVariables = Exact<{
 }>;
 
 
-export type DeleteAccountMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'deleteAccount'>
-);
+export type DeleteAccountMutation = { __typename?: 'Mutation', deleteAccount: boolean };
 
 export type GetProfileQueryVariables = Exact<{
   username: Scalars['String'];
 }>;
 
 
-export type GetProfileQuery = (
-  { __typename?: 'Query' }
-  & { getProfile?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'username' | 'bio' | 'email' | 'age' | 'avatarId'>
-  )> }
-);
+export type GetProfileQuery = { __typename?: 'Query', getProfile?: Maybe<{ __typename?: 'User', username: string, bio: string, email: string, age: number, avatarId: number }> };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = (
-  { __typename?: 'Query' }
-  & { me?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
-  )> }
-);
+export type MeQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number }> };
 
 export type ResetPasswordMutationVariables = Exact<{
   token: Scalars['String'];
@@ -332,20 +284,14 @@ export type ResetPasswordMutationVariables = Exact<{
 }>;
 
 
-export type ResetPasswordMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'resetPassword'>
-);
+export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword: boolean };
 
 export type UpdateAvatarMutationVariables = Exact<{
   newId: Scalars['Float'];
 }>;
 
 
-export type UpdateAvatarMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'updateAvatarId'>
-);
+export type UpdateAvatarMutation = { __typename?: 'Mutation', updateAvatarId: boolean };
 
 export type UpdateProfileMutationVariables = Exact<{
   bio?: Maybe<Scalars['String']>;
@@ -353,23 +299,14 @@ export type UpdateProfileMutationVariables = Exact<{
 }>;
 
 
-export type UpdateProfileMutation = (
-  { __typename?: 'Mutation' }
-  & { updateProfile?: Maybe<(
-    { __typename?: 'User' }
-    & Pick<User, 'id' | 'username' | 'email' | 'bio' | 'serverId' | 'avatarId' | 'age'>
-  )> }
-);
+export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number }> };
 
 export type ValidTmpTokenMutationVariables = Exact<{
   token: Scalars['String'];
 }>;
 
 
-export type ValidTmpTokenMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'validTmpToken'>
-);
+export type ValidTmpTokenMutation = { __typename?: 'Mutation', validTmpToken: boolean };
 
 
 export const ConfirmEmailDocument = gql`
@@ -483,6 +420,57 @@ export function useDiscordOAuthMutation(baseOptions?: Apollo.MutationHookOptions
 export type DiscordOAuthMutationHookResult = ReturnType<typeof useDiscordOAuthMutation>;
 export type DiscordOAuthMutationResult = Apollo.MutationResult<DiscordOAuthMutation>;
 export type DiscordOAuthMutationOptions = Apollo.BaseMutationOptions<DiscordOAuthMutation, DiscordOAuthMutationVariables>;
+export const FacebookOAuthMutationDocument = gql`
+    mutation FacebookOAuthMutation($id: String!, $email: String!, $firstName: String!, $lastName: String!) {
+  facebookOAuth(
+    id: $id
+    email: $email
+    first_name: $firstName
+    last_name: $lastName
+  ) {
+    accessToken
+    status
+    user {
+      id
+      username
+      email
+      bio
+      serverId
+      avatarId
+      age
+    }
+  }
+}
+    `;
+export type FacebookOAuthMutationMutationFn = Apollo.MutationFunction<FacebookOAuthMutationMutation, FacebookOAuthMutationMutationVariables>;
+
+/**
+ * __useFacebookOAuthMutationMutation__
+ *
+ * To run a mutation, you first call `useFacebookOAuthMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useFacebookOAuthMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [facebookOAuthMutationMutation, { data, loading, error }] = useFacebookOAuthMutationMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      email: // value for 'email'
+ *      firstName: // value for 'firstName'
+ *      lastName: // value for 'lastName'
+ *   },
+ * });
+ */
+export function useFacebookOAuthMutationMutation(baseOptions?: Apollo.MutationHookOptions<FacebookOAuthMutationMutation, FacebookOAuthMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<FacebookOAuthMutationMutation, FacebookOAuthMutationMutationVariables>(FacebookOAuthMutationDocument, options);
+      }
+export type FacebookOAuthMutationMutationHookResult = ReturnType<typeof useFacebookOAuthMutationMutation>;
+export type FacebookOAuthMutationMutationResult = Apollo.MutationResult<FacebookOAuthMutationMutation>;
+export type FacebookOAuthMutationMutationOptions = Apollo.BaseMutationOptions<FacebookOAuthMutationMutation, FacebookOAuthMutationMutationVariables>;
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
   forgotPassword(email: $email)
