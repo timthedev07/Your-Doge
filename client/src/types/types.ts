@@ -29,7 +29,14 @@ export type UserType =
         __typename?: "User" | undefined;
       } & Pick<
         User,
-        "id" | "username" | "email" | "bio" | "serverId" | "avatarId" | "age"
+        | "id"
+        | "username"
+        | "email"
+        | "bio"
+        | "serverId"
+        | "avatarId"
+        | "age"
+        | "provider"
       >
     >
   | undefined
