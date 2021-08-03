@@ -603,15 +603,13 @@ export class UserResolver {
     }
 
     try {
-      const insertRes = await User.insert({
+      await User.insert({
         email: email,
         username: `${randSlug()}${userData.id.slice(userData.id.length - 4)}`,
         serverId: res,
         confirmed: true,
-        provider: "discord",
+        provider: "facebook",
       });
-
-      console.log(insertRes);
     } catch (err) {}
 
     user = await User.findOne({ where: { email } });
