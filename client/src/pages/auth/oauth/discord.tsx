@@ -62,9 +62,9 @@ const Discord: React.FC = () => {
           displayError(unknownErrMsg);
         }
       } catch (err: any) {
-        if (err?.graphQLErrors[0]?.message) {
+        try {
           displayError(err.graphQLErrors[0].message);
-        } else {
+        } catch (err) {
           displayError(unknownErrMsg);
         }
       }

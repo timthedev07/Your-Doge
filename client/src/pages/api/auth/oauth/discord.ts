@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     );
 
     if (!response) {
-      return res.end("Bad Request");
+      return res.send("Bad Request");
     }
 
     const { access_token, refresh_token } = response;
@@ -32,11 +32,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       return res.json(data);
     } catch (err) {
-      return res.end("Bad Request");
+      return res.send("Bad Request");
     }
   }
 
-  res.end("Method Not Allowed");
+  res.send("Method Not Allowed");
 };
 
 export default handler;

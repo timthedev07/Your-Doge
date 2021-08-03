@@ -72,10 +72,11 @@ export const AuthProvider: React.FC = ({ children }) => {
       }
       throw new Error(unknownErrMsg);
     } catch (err: any) {
-      if (err?.graphQLErrors[0]?.message) {
+      try {
         throw new Error(err.graphQLErrors[0].message);
+      } catch (err) {
+        throw new Error(unknownErrMsg);
       }
-      throw new Error(unknownErrMsg);
     }
   };
 
@@ -105,10 +106,11 @@ export const AuthProvider: React.FC = ({ children }) => {
       }
       throw new Error(unknownErrMsg);
     } catch (err: any) {
-      if (err?.graphQLErrors[0]?.message) {
+      try {
         throw new Error(err.graphQLErrors[0].message);
+      } catch (err) {
+        throw new Error(unknownErrMsg);
       }
-      throw new Error(unknownErrMsg);
     }
   };
 

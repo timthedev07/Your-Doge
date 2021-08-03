@@ -10,7 +10,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.json(result);
   }
 
-  res.end("Method Not Allowed");
+  res.send("Method Not Allowed");
 };
 
 export default handler;
