@@ -340,6 +340,15 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@graphql-tools/merge@6.2.16":
+  version "6.2.16"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-6.2.16.tgz#5dd5f582075c21ef4d74ef84dfcc4e8d0c2db186"
+  integrity sha512-KjZ1pppzKcr2Uspgb53p8uw5yhWVuGIL+sEroar7vLsClSsuiGib8OKVICAGWjC9wrCxGaL9SjJGavfXpJMQIg==
+  dependencies:
+    "@graphql-tools/schema" "^8.0.1"
+    "@graphql-tools/utils" "8.0.1"
+    tslib "~2.3.0"
+
 "@graphql-tools/mock@^8.1.2":
   version "8.1.3"
   resolved "https://registry.npmjs.org/@graphql-tools/mock/-/mock-8.1.3.tgz"
@@ -351,7 +360,7 @@
     ts-is-defined "^1.0.0"
     tslib "~2.2.0"
 
-"@graphql-tools/schema@^7.0.0", "@graphql-tools/schema@^7.1.5":
+"@graphql-tools/schema@^7.0.0":
   version "7.1.5"
   resolved "https://registry.npmjs.org/@graphql-tools/schema/-/schema-7.1.5.tgz"
   integrity sha512-uyn3HSNSckf4mvQSq0Q07CPaVZMNFCYEVxroApOaw802m9DcZPgf9XVPy/gda5GWj9AhbijfRYVTZQgHnJ4CXA==
@@ -360,7 +369,24 @@
     tslib "~2.2.0"
     value-or-promise "1.0.6"
 
-"@graphql-tools/utils@^7.0.0", "@graphql-tools/utils@^7.1.2", "@graphql-tools/utils@^7.9.0":
+"@graphql-tools/schema@^8.0.0", "@graphql-tools/schema@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/schema/-/schema-8.0.1.tgz#178b734f3784e632a76bdd144ffa8a32169a6f4a"
+  integrity sha512-QG2HGLJjmsNc1wcj+rwZTEArgfMp7rsrb8iVq4P8ce1mDYAt6kRV6bLyPVb9q/j8Ik2zBc/B/Y1jPsnAVUHwdA==
+  dependencies:
+    "@graphql-tools/merge" "6.2.16"
+    "@graphql-tools/utils" "8.0.1"
+    tslib "~2.3.0"
+    value-or-promise "1.0.10"
+
+"@graphql-tools/utils@8.0.1", "@graphql-tools/utils@^8.0.0":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.0.1.tgz#bf09e8d6d17c4a0830f0fbf2c69dd725de19058c"
+  integrity sha512-gjQk6sht4b0/hcG+QEVxfMyO8bn5tuU1nIOVhQ4whgFaUmrnb3hx2mwzz1EJzfIOAuHKE8tY0lu6jt3bGTD4yg==
+  dependencies:
+    tslib "~2.3.0"
+
+"@graphql-tools/utils@^7.0.0", "@graphql-tools/utils@^7.1.2":
   version "7.10.0"
   resolved "https://registry.npmjs.org/@graphql-tools/utils/-/utils-7.10.0.tgz"
   integrity sha512-d334r6bo9mxdSqZW6zWboEnnOOFRrAPVQJ7LkU8/6grglrbcu6WhwCLzHb90E94JI3TD3ricC3YGbUqIi9Xg0w==
@@ -1175,16 +1201,16 @@ apollo-server-caching@^3.0.1:
   dependencies:
     lru-cache "^6.0.0"
 
-apollo-server-core@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-3.1.1.tgz#3d1f3ea35f8c2972c2455c60c7b2686ad750c761"
-  integrity sha512-MLN6AD8pumdf3c4qYDqXeLkgtJONfvtx0okhvhrbN1DC1YX9W2d1mcTGQa88jTBtgDAXZQS1N5DncS9ctUekDw==
+apollo-server-core@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-core/-/apollo-server-core-3.1.2.tgz#a9d24b9453b7aad89df464f6527d80e2f46b0a6f"
+  integrity sha512-bFmzPDGBT97vMzdhhjlycL9Ey4YDa0eCVaHjI5TcYQM8Vphzvndd033DvvQFVRPWoZr8uwupeUyVa82Ne/iM6A==
   dependencies:
     "@apollographql/apollo-tools" "^0.5.1"
     "@apollographql/graphql-playground-html" "1.6.29"
     "@graphql-tools/mock" "^8.1.2"
-    "@graphql-tools/schema" "^7.1.5"
-    "@graphql-tools/utils" "^7.9.0"
+    "@graphql-tools/schema" "^8.0.0"
+    "@graphql-tools/utils" "^8.0.0"
     "@josephg/resolvable" "^1.0.0"
     apollo-datasource "^3.0.3"
     apollo-graphql "^0.9.0"
@@ -1214,10 +1240,10 @@ apollo-server-errors@^3.0.1:
   resolved "https://registry.yarnpkg.com/apollo-server-errors/-/apollo-server-errors-3.0.1.tgz#0dfcc1fe8b10eab311fc7e4f6da93189ea6bcdae"
   integrity sha512-PSp64IFeN1YK5EYZ3V/8iDRESMMyE00h1vE5aCr83wHL3T0mN7VRiMKoOIZ+2rUtnn7CpK73o6QLmouhxPtXsQ==
 
-apollo-server-express@^3.0.0, apollo-server-express@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-3.1.1.tgz#ca9790f2fe5dffaebad9a9cfb938b593658e1e1a"
-  integrity sha512-W6VDth39mv1SCaJjnTwc0OmXIWzpELAJ3+/Id4cw+99HXdeRMJXDN5lbMENYEu+1a+pUK8iOoctwlJbikwBPGA==
+apollo-server-express@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-3.1.2.tgz#274c71c0269fb126d1c6fd30889fbcd661493f4e"
+  integrity sha512-GeeQlFjFqugiGfLApBNmgLtyDXGVqacLdGhBccn7GQaxzpJ9YSsREUsoN+Fze6RVQ4/Igaq3QoNgBhrahXwBBQ==
   dependencies:
     "@types/accepts" "^1.3.5"
     "@types/body-parser" "1.19.1"
@@ -1225,7 +1251,7 @@ apollo-server-express@^3.0.0, apollo-server-express@^3.1.1:
     "@types/express" "4.17.13"
     "@types/express-serve-static-core" "4.17.24"
     accepts "^1.3.5"
-    apollo-server-core "^3.1.1"
+    apollo-server-core "^3.1.2"
     apollo-server-types "^3.1.1"
     body-parser "^1.19.0"
     cors "^2.8.5"
@@ -1247,13 +1273,13 @@ apollo-server-types@^3.1.1:
     apollo-server-caching "^3.0.1"
     apollo-server-env "^4.0.3"
 
-apollo-server@^3.0.0:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/apollo-server/-/apollo-server-3.1.1.tgz#6289905c80e2ed1d2e8af9e436c0f67a0ae00986"
-  integrity sha512-wuqLQk1GncAqq9HQqTgoH0mTD3oriTkT7Eli51fUPg4vmhR/rmO2RVQVBB8pGzC7CX+XToPzs21HeW2C4HJo4Q==
+apollo-server@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/apollo-server/-/apollo-server-3.1.2.tgz#84a1d7fd0633362c5d0a24b6bb1da7f7fa0a05f3"
+  integrity sha512-PxM0ZiyQok88XqzsCnKStT7o1TKbjvKDTtjKK25JQhSmaI6/X1gjfj5SJtuB9xIYT5u4gbPVWZeP6M4aeZ9wxQ==
   dependencies:
-    apollo-server-core "^3.1.1"
-    apollo-server-express "^3.1.1"
+    apollo-server-core "^3.1.2"
+    apollo-server-express "^3.1.2"
     express "^4.17.1"
 
 app-root-path@^3.0.0:
@@ -1626,7 +1652,7 @@ cli-boxes@^2.2.0:
   resolved "https://registry.npmjs.org/cli-boxes/-/cli-boxes-2.2.1.tgz"
   integrity sha512-y4coMcylgSCdVinjiDBuR8PCC2bLjyGTwEmPb9NHR/QaNU6EUOXcTY/s6VjGMD6ENSEaeQYHCY0GNGS5jfMwPw==
 
-cli-highlight@^2.1.10:
+cli-highlight@^2.1.11:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/cli-highlight/-/cli-highlight-2.1.11.tgz#49736fa452f0aaf4fae580e30acb26828d2dc1bf"
   integrity sha512-9KDcoEVwyUXrjcJNvHD0NFc/hiwe/WPVYIleQh2O1N2Zro5gWJZ/K+3DGn8w8P/F6FxOgzyC5bxDyHIgCSPhGg==
@@ -2577,16 +2603,17 @@ ini@~1.3.0:
   resolved "https://registry.npmjs.org/ini/-/ini-1.3.8.tgz"
   integrity sha512-JV/yugV2uzW5iMRSiZAyDtQd+nxtUnjeLt0acNdw98kKLrvuRVyB80tsREOE7yvGVgalhZ6RNXCmEHkUKBKxew==
 
-ioredis@^4.27.6:
-  version "4.27.6"
-  resolved "https://registry.npmjs.org/ioredis/-/ioredis-4.27.6.tgz"
-  integrity sha512-6W3ZHMbpCa8ByMyC1LJGOi7P2WiOKP9B3resoZOVLDhi+6dDBOW+KNsRq3yI36Hmnb2sifCxHX+YSarTeXh48A==
+ioredis@^4.27.7:
+  version "4.27.7"
+  resolved "https://registry.yarnpkg.com/ioredis/-/ioredis-4.27.7.tgz#11bf2947e23a0e8055931afa7c2da89fc48c8ff3"
+  integrity sha512-lqvFFmUyGIHlrNyDvBoakzy1+ioJzNyoP6CP97GWtdTjWq9IOAnv6l0HUTsqhvd/z9etGgtrDHZ4kWCMAwNkug==
   dependencies:
     cluster-key-slot "^1.1.0"
     debug "^4.3.1"
     denque "^1.1.0"
     lodash.defaults "^4.2.0"
     lodash.flatten "^4.4.0"
+    lodash.isarguments "^3.1.0"
     p-map "^2.1.0"
     redis-commands "1.7.0"
     redis-errors "^1.2.0"
@@ -3354,6 +3381,11 @@ lodash.includes@^4.3.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/lodash.includes/-/lodash.includes-4.3.0.tgz"
   integrity sha1-YLuYqHy5I8aMoeUTJUgzFISfVT8=
+
+lodash.isarguments@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/lodash.isarguments/-/lodash.isarguments-3.1.0.tgz#2f573d85c6a24289ff00663b491c1d338ff3458a"
+  integrity sha1-L1c9hcaiQon/AGY7SRwdM4/zRYo=
 
 lodash.isboolean@^3.0.3:
   version "3.0.3"
@@ -4686,7 +4718,7 @@ tsconfig@^7.0.0:
     strip-bom "^3.0.0"
     strip-json-comments "^2.0.0"
 
-tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0:
+tslib@^2.0.1, tslib@^2.0.3, tslib@^2.1.0, tslib@~2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.3.0.tgz"
   integrity sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==
@@ -4752,16 +4784,16 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typeorm@0.2.34:
-  version "0.2.34"
-  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.34.tgz#637b3cec2de54ee7f423012b813a2022c0aacc8b"
-  integrity sha512-FZAeEGGdSGq7uTH3FWRQq67JjKu0mgANsSZ04j3kvDYNgy9KwBl/6RFgMVgiSgjf7Rqd7NrhC2KxVT7I80qf7w==
+typeorm@0.2.36:
+  version "0.2.36"
+  resolved "https://registry.yarnpkg.com/typeorm/-/typeorm-0.2.36.tgz#02295462438b4f1279d26d15d32823c522ae1a04"
+  integrity sha512-l4knslldEqKi5EavopnQASnt2V+kLby3SQaww34tXq//ckfUqq/GCU4eMcLhVBQl9OXCxoWOVEDwklBqk+Q+KQ==
   dependencies:
     "@sqltools/formatter" "^1.2.2"
     app-root-path "^3.0.0"
     buffer "^6.0.3"
     chalk "^4.1.0"
-    cli-highlight "^2.1.10"
+    cli-highlight "^2.1.11"
     debug "^4.3.1"
     dotenv "^8.2.0"
     glob "^7.1.6"
@@ -4772,7 +4804,7 @@ typeorm@0.2.34:
     tslib "^2.1.0"
     xml2js "^0.4.23"
     yargonaut "^1.1.4"
-    yargs "^16.2.0"
+    yargs "^17.0.1"
     zen-observable-ts "^1.0.0"
 
 typescript@^4.3.5:
@@ -4870,6 +4902,11 @@ validator@^13.5.2:
   version "13.6.0"
   resolved "https://registry.npmjs.org/validator/-/validator-13.6.0.tgz"
   integrity sha512-gVgKbdbHgtxpRyR8K0O6oFZPhhB5tT1jeEHZR0Znr9Svg03U0+r9DXWMrnRAB+HtCStDQKlaIZm42tVsVjqtjg==
+
+value-or-promise@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/value-or-promise/-/value-or-promise-1.0.10.tgz#5bf041f1e9a8e7043911875547636768a836e446"
+  integrity sha512-1OwTzvcfXkAfabk60UVr5NdjtjJ0Fg0T5+B1bhxtrOEwSH2fe8y4DnLgoksfCyd8yZCOQQHB0qLMQnwgCjbXLQ==
 
 value-or-promise@1.0.6:
   version "1.0.6"
@@ -5058,10 +5095,23 @@ yargs-parser@20.x, yargs-parser@^20.2.2:
   resolved "https://registry.npmjs.org/yargs-parser/-/yargs-parser-20.2.9.tgz"
   integrity sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==
 
-yargs@^16.0.0, yargs@^16.0.3, yargs@^16.2.0:
+yargs@^16.0.0, yargs@^16.0.3:
   version "16.2.0"
   resolved "https://registry.npmjs.org/yargs/-/yargs-16.2.0.tgz"
   integrity sha512-D1mvvtDG0L5ft/jGWkLpG1+m0eQxOfaBvTNELraWj22wSVUMWxZUvYgJYcKh6jGGIkJFhH4IZPQhR4TKpc8mBw==
+  dependencies:
+    cliui "^7.0.2"
+    escalade "^3.1.1"
+    get-caller-file "^2.0.5"
+    require-directory "^2.1.1"
+    string-width "^4.2.0"
+    y18n "^5.0.5"
+    yargs-parser "^20.2.2"
+
+yargs@^17.0.1:
+  version "17.0.1"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.0.1.tgz#6a1ced4ed5ee0b388010ba9fd67af83b9362e0bb"
+  integrity sha512-xBBulfCc8Y6gLFcrPvtqKz9hz8SO0l1Ni8GgDekvBX2ro0HRQImDGnikfc33cgzcYUSncapnNcZDjVFIH3f6KQ==
   dependencies:
     cliui "^7.0.2"
     escalade "^3.1.1"
