@@ -1,4 +1,17 @@
 .settings-content-container {
   display: flex;
   flex-direction: column;
+  padding: 10px;
+}
+
+.settings-content-container .settings-content-section {
+  margin-bottom: 40px;
+}
+
+/* WARNING: remove this guy in production */
+.settings-content-section__inner-content {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
 }
