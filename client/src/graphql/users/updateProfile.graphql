@@ -7,5 +7,6 @@ mutation UpdateProfile($bio: String, $age: Float) {
     serverId
     avatarId
     age
+    provider
   }
 }

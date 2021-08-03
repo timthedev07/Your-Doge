@@ -9,6 +9,7 @@ mutation ConfirmEmail($token: String!) {
       serverId
       avatarId
       age
+      provider
     }
   }
 }

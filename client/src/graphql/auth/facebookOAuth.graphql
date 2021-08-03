@@ -20,6 +20,7 @@ mutation FacebookOAuthMutation(
       serverId
       avatarId
       age
+      provider
     }
   }
 }

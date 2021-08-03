@@ -29,6 +29,7 @@ mutation GoogleOAuth(
       serverId
       avatarId
       age
+      provider
     }
     accessToken
   }

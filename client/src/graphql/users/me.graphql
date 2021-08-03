@@ -7,5 +7,6 @@ query Me {
     serverId
     avatarId
     age
+    provider
   }
 }
