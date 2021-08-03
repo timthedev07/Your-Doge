@@ -271,6 +271,9 @@ export class UserResolver {
     const res = await User.findOne({ where: { username: username } });
     if (res && res.confirmed) {
       // only verified users are considered to be valid
+      if (res.emailPrivate) {
+        res.email = "";
+      }
       return res;
     }
     return null;
