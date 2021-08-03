@@ -34,8 +34,6 @@ const Facebook: React.FC = ({}) => {
             "Content-Type": "application/json",
           },
         });
-
-        console.log(data);
       } catch (err: any) {
         try {
           displayError(err.graphQLErrors[0].message);
