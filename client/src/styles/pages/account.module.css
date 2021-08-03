@@ -88,3 +88,7 @@ img.avatar {
   flex-direction: column;
   height: 200px;
 }
+
+.profile-bio-container.read-only {
+  justify-content: flex-start;
+}
