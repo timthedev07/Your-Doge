@@ -81,7 +81,7 @@ export interface DiscordAccessTokenResponse {
 }
 
 export interface FacebookUserData {
-  id: unknown;
+  id: string;
   email: string;
   first_name: string;
   last_name: string;
