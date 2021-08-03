@@ -2,6 +2,9 @@ import React from "react";
 import AvatarData from "../../avatarData.json";
 import ReactMarkdown from "react-markdown";
 import { ReadOnlyProfileProps } from "../types/props";
+import { useAuth } from "../contexts/AuthContext";
+import Link from "next/dist/client/link";
+import ReactTooltip from "react-tooltip";
 
 export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
   avatarId,
@@ -10,8 +13,11 @@ export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
   bio,
   age,
 }) => {
+  const { currentUser } = useAuth()!;
+
   return (
     <>
+      <ReactTooltip />
       <div className="profile-top-section">
         <img
           alt=""
@@ -19,7 +25,13 @@ export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
           src={`/images/avatars/${AvatarData[avatarId]}.svg`}
         />
         <div className="profile-top-section__headings">
-          <h2>{username}</h2>
+          {currentUser && currentUser.username === username ? (
+            <Link href="/account" passHref>
+              <h2 data-tip="Click on me to edit your profile.">{username}</h2>
+            </Link>
+          ) : (
+            <h2>{username}</h2>
+          )}
           <h5>{email}</h5>
           <h6>
             {age} year{age > 1 ? "s" : ""} old
