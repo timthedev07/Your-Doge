@@ -27,7 +27,12 @@ export const ReadOnlyProfile: React.FC<ReadOnlyProfileProps> = ({
         <div className="profile-top-section__headings">
           {currentUser && currentUser.username === username ? (
             <Link href="/account" passHref>
-              <h2 data-tip="Click on me to edit your profile.">{username}</h2>
+              <h2
+                style={{ cursor: "pointer" }}
+                data-tip="Click on me to edit your profile."
+              >
+                {username}
+              </h2>
             </Link>
           ) : (
             <h2>{username}</h2>
