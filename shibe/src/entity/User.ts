@@ -48,6 +48,7 @@ export class User extends BaseEntity {
   @Column("bigint", { default: new Date().valueOf() })
   memberSince: number;
 
+  @Field(() => Boolean)
   @Column("boolean", { default: true })
   emailPrivate: boolean;
 
