@@ -11,9 +11,11 @@ const Pricing: React.FC<PricingProps> = ({}) => {
           justifyContent: "center",
           alignItems: "center",
           height: "60vh",
+          flexDirection: "column",
         }}
       >
         <h1 style={{ textAlign: "center" }}>IT&apos;S FREE</h1>
+        <h4 style={{ textAlign: "center" }}>At least for now</h4>
       </div>
       <div
         style={{
