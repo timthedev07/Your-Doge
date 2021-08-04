@@ -697,4 +697,50 @@ export class UserResolver {
       throw new Error("Username already taken, pick something else.");
     }
   }
+
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuth)
+  async updatePassword(
+    @Arg("newPassword") newPassword: string,
+    @Arg("oldPassword") oldPassword: string,
+    @Ctx() { payload }: MyContext
+  ) {
+    const user = await User.findOne({ where: { id: payload?.userId } });
+
+    if (!user) {
+      throw new Error("You shall not pass.");
+    }
+
+    if (user.provider) {
+      throw new Error("Password is not supported for third-party users.");
+    }
+
+    const valid = await compare(oldPassword, user.password!);
+
+    if (!valid) {
+      throw new Error("Invalid old password");
+    }
+
+    if (newPassword.length < 8 || newPassword.length > 64) {
+      throw new Error(
+        "A valid password has to be longer than 8 characters and shorter than 64."
+      );
+    }
+    // all checks passed
+
+    try {
+      await getConnection()
+        .createQueryBuilder()
+        .update(User)
+        .set({
+          password: await hash(newPassword, 12),
+        })
+        .where("id = :id", { id: payload!.userId })
+        .execute();
+
+      return true;
+    } catch (err) {
+      throw new Error("Unknown error.");
+    }
+  }
 }
