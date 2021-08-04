@@ -4,13 +4,29 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 20px;
   width: 100%;
   height: 100%;
-  background-image: url(../../../public/images/doge-universe.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  padding-top: 20px;
+}
+
+.form-container-register {
+  background-image: url(../../../public/images/doge-universe.jpg);
+}
+
+.form-container-login {
+  background-image: url(../../../public/images/dogemoon.png);
+  align-items: flex-end;
+  padding-right: 10%;
+}
+
+@media screen and (max-width: 600px) {
+  .form-container-login {
+    align-items: center;
+    padding-right: 0;
+  }
 }
 
 .form-as-wrapper {
@@ -131,6 +147,7 @@
   display: block;
   position: relative;
   margin-top: 5px;
+
   margin-bottom: 10px;
   font-size: calc(30px + min(5vw, 20px));
 }
