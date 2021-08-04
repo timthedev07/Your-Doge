@@ -39,6 +39,11 @@
   color: rgb(212, 212, 212);
   text-align: left;
 }
+@media screen and (max-width: 800px) {
+  .custom-alert .alert-content .alert-paragraph {
+    font-size: 16px;
+  }
+}
 
 .custom-alert.alert-active {
   top: 20px;
