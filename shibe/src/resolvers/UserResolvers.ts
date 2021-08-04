@@ -672,7 +672,7 @@ export class UserResolver {
     const days = daysElapsed(user.unameLastUpdate);
     if (days < 60) {
       throw new Error(
-        `You can't update your username until ${days} days after.`
+        `You can't update your username until ${60 - days} days after.`
       );
     }
     // all checks passed
