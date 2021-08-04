@@ -112,9 +112,10 @@ export class UserResolver {
     // try to update the server record
     // if it returns -1, all servers are full
     const res = await registerUser();
-    if (res < 0) {
+    if (res === -1) {
       throw new Error("Sorry, registration is temporarily closed.");
     }
+    const [serverId, mutateServerRecord] = res;
 
     try {
       /* registering the user by inserting into the database */
@@ -122,7 +123,7 @@ export class UserResolver {
         email: email,
         password: hashed,
         username: username,
-        serverId: res,
+        serverId: serverId,
       });
     } catch (err) {
       throw new Error("Email/username already registered");
@@ -140,6 +141,8 @@ export class UserResolver {
       "email",
       CONFIRM_EMAIL_LETTER_CONTENT
     );
+
+    mutateServerRecord();
 
     return true;
   }
@@ -460,9 +463,11 @@ export class UserResolver {
     await userCleanup();
 
     const res = await registerUser();
-    if (res < 0) {
+    if (res === -1) {
       throw new Error("Sorry, registration is temporarily closed.");
     }
+
+    const [serverId, mutateServerRecord] = res;
 
     const email = userData.email;
 
@@ -486,7 +491,7 @@ export class UserResolver {
       await User.insert({
         email: email,
         username: `${randSlug()}${count}`,
-        serverId: res,
+        serverId: serverId,
         confirmed: userData.verified_email,
         provider: "google",
       });
@@ -503,6 +508,8 @@ export class UserResolver {
         CONFIRM_EMAIL_LETTER_CONTENT
       );
 
+      mutateServerRecord();
+
       return {
         accessToken: "",
         user: null,
@@ -510,6 +517,7 @@ export class UserResolver {
       };
     }
 
+    mutateServerRecord();
     return loginOAuth(user!, response);
   }
 
@@ -521,9 +529,11 @@ export class UserResolver {
     await userCleanup();
 
     const res = await registerUser();
-    if (res < 0) {
+    if (res === -1) {
       throw new Error("Sorry, registration is temporarily closed.");
     }
+
+    const [serverId, mutateServerRecord] = res;
 
     const email = userData.email;
 
@@ -545,7 +555,7 @@ export class UserResolver {
       await User.insert({
         email: email,
         username: `${randSlug()}${userData.discriminator}`,
-        serverId: res,
+        serverId: serverId,
         confirmed: userData.verified,
         provider: "discord",
       });
@@ -562,6 +572,8 @@ export class UserResolver {
         CONFIRM_EMAIL_LETTER_CONTENT
       );
 
+      mutateServerRecord();
+
       return {
         accessToken: "",
         user: null,
@@ -569,6 +581,7 @@ export class UserResolver {
       };
     }
 
+    mutateServerRecord();
     return loginOAuth(user!, response);
   }
   @Mutation(() => OAuthResponse)
@@ -579,9 +592,11 @@ export class UserResolver {
     await userCleanup();
 
     const res = await registerUser();
-    if (res < 0) {
+    if (res === -1) {
       throw new Error("Sorry, registration is temporarily closed.");
     }
+
+    const [serverId, mutateServerRecord] = res;
 
     const email = userData.email;
 
@@ -603,10 +618,11 @@ export class UserResolver {
       await User.insert({
         email: email,
         username: `${randSlug()}${userData.id.slice(userData.id.length - 4)}`,
-        serverId: res,
+        serverId: serverId,
         confirmed: true,
         provider: "facebook",
       });
+      mutateServerRecord();
     } catch (err) {}
 
     user = await User.findOne({ where: { email } });

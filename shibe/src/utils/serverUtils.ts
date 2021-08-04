@@ -30,26 +30,29 @@ export const addServer = async (url: string): Promise<Boolean> => {
 
 /**
  *
- * @returns server id - if there is an available server, -1 otherwise
+ * @returns a tuple consisting of [serverId, async mutateServerRecordFunction] - if there is an available server. -1 otherwise
  */
-export const registerUser: () => Promise<number> = async () => {
-  const available = await getAvailable();
+export const registerUser: () => Promise<[number, () => Promise<void>] | -1> =
+  async () => {
+    const available = await getAvailable();
 
-  if (!available) {
-    return -1;
-  }
+    if (!available) {
+      return -1;
+    }
 
-  const newCount = available.usersCount + 1;
+    const mutate = async () => {
+      const newCount = available.usersCount + 1;
 
-  await getConnection()
-    .createQueryBuilder()
-    .update(Server)
-    .set({ usersCount: newCount, available: newCount < LIMIT })
-    .where("id = :id", { id: available.id })
-    .execute();
+      await getConnection()
+        .createQueryBuilder()
+        .update(Server)
+        .set({ usersCount: newCount, available: newCount < LIMIT })
+        .where("id = :id", { id: available.id })
+        .execute();
+    };
 
-  return available.id;
-};
+    return [available.id, mutate];
+  };
 
 export const deleteUser: (serverId: number) => Promise<boolean> = async (
   serverId: number
