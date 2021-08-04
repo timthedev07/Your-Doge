@@ -8,6 +8,7 @@ import {
   ObjectType,
   Query,
   Resolver,
+  UseMiddleware,
 } from "type-graphql";
 import { getConnection } from "typeorm";
 import { hash, compare } from "bcrypt";
@@ -31,6 +32,7 @@ import { DiscordUser } from "../types/discordUser";
 import { OAuthStatusType } from "../types/oauth";
 import { login, loginOAuth } from "../utils/login";
 import { FacebookUser } from "../types/facebookUser";
+import { isAuth } from "../utils/isAuthMiddleWare";
 
 const EMAIL_VALIDATION_REGEX =
   /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
@@ -610,5 +612,47 @@ export class UserResolver {
     user = await User.findOne({ where: { email } });
 
     return loginOAuth(user!, response);
+  }
+
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuth)
+  async updateUsername(
+    @Arg("newUsername") newUsername: string,
+    @Ctx() { payload }: MyContext,
+    @Arg("password") password?: string
+  ) {
+    const user = await User.findOne({ where: { id: payload?.userId } });
+
+    if (!user) {
+      throw new Error("You shall not pass.");
+    }
+
+    if (user.password && !password) {
+      throw new Error("You shall not pass.");
+    }
+
+    const valid = user.password
+      ? await compare(password!, user.password)
+      : true;
+
+    if (!valid) {
+      throw new Error("Wrong password");
+    }
+
+    // all checks passed
+
+    try {
+      await getConnection()
+        .createQueryBuilder()
+        .update(User)
+        .set({ username: newUsername })
+        .where("id = :id", { id: 1 })
+        .execute();
+
+      return true;
+    } catch (err) {
+      console.log(err);
+      throw new Error("Username already taken, pick something else.");
+    }
   }
 }
