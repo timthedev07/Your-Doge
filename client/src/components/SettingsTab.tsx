@@ -12,6 +12,7 @@ import { Alert } from "./Alert";
 import { useApollo } from "../contexts/ApolloContext";
 import { SettingsTabProps } from "../types/props";
 import { useAuth } from "../contexts/AuthContext";
+import { parseGraphQLError } from "../lib/graphqlErrorParser";
 
 interface SettingsContentSectionProps {
   title: string;
@@ -44,6 +45,14 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const [updateUsername] = useUpdateUsernameMutation();
   const newUsernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [alertMessage, setAlertMessage] = useState<string>(
+    "Invalid username/password"
+  );
+
+  const displayError = (message: string) => {
+    setAlertMessage(message);
+    setAlertDisplay(true);
+  };
 
   const handleSubmit = async () => {
     const { data } = await deleteAccount({
@@ -86,12 +95,32 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
       return;
     }
 
-    await updateUsername({
-      variables: {
-        newUsername: newUsernameRef.current.value,
-        password: passwordRef.current.value || undefined,
-      },
-    });
+    const newUsername = newUsernameRef.current.value;
+
+    if (newUsername === currentUser?.username) {
+      return displayError(
+        "Pick a username you are not using that can show off how smart you are."
+      );
+    }
+
+    if (newUsername.length < 1 || newUsername.length > 35) {
+      return displayError("Pick a shorter one.");
+    }
+
+    try {
+      const response = await updateUsername({
+        variables: {
+          newUsername: newUsername,
+          password: passwordRef.current.value || undefined,
+        },
+      });
+
+      if (response.data && response.data.updateUsername) {
+        window.location.reload();
+      }
+    } catch (err) {
+      displayError(parseGraphQLError(err));
+    }
   };
 
   return (
@@ -100,7 +129,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
         type={"warning"}
         active={alertDisplay}
         setActive={setAlertDisplay}
-        text="Invalid username/password"
+        text={alertMessage}
       />
       <div className="settings-content-container">
         <SettingsContentSection title="Update Your Username">
@@ -113,7 +142,6 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
             ref={newUsernameRef}
             type="text"
             className="rounded-input emphasized margin-10"
-            style={{ width: "200px" }}
           />
           {currentUser && currentUser.provider ? (
             <input ref={passwordRef} type="hidden" value="" />
@@ -122,7 +150,6 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
               ref={passwordRef}
               type="password"
               className="rounded-input emphasized margin-10"
-              style={{ width: "200px" }}
             />
           )}
           <button
