@@ -646,7 +646,7 @@ export class UserResolver {
         .createQueryBuilder()
         .update(User)
         .set({ username: newUsername })
-        .where("id = :id", { id: 1 })
+        .where("id = :id", { id: payload!.userId })
         .execute();
 
       return true;
