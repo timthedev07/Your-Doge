@@ -674,7 +674,7 @@ export class UserResolver {
       await getConnection()
         .createQueryBuilder()
         .update(User)
-        .set({ username: newUsername })
+        .set({ username: newUsername, unameLastUpdate: new Date().valueOf() })
         .where("id = :id", { id: payload!.userId })
         .execute();
 
