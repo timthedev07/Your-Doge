@@ -1,4 +1,4 @@
-This is just me calculating how much space a user would take in the database, you can ignore it.
+This is just me calculating how much space n users would take in the database, you can ignore it. The sizes are based on the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.5/datatype-numeric.html).
 Size is measured in bytes:
 
 id: 4
