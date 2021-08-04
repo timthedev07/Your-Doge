@@ -56,6 +56,6 @@ export class User extends BaseEntity {
   @Column("text", { nullable: true })
   provider: string | null;
 
-  @Column("bigint", { default: new Date().valueOf() })
+  @Column({ type: "bigint", nullable: true })
   unameLastUpdate: number;
 }
