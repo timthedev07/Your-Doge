@@ -646,6 +646,16 @@ export class UserResolver {
       throw new Error("You shall not pass.");
     }
 
+    if (newUsername === user.username) {
+      throw new Error(
+        "Pick a username you are not using that can show off how smart you are."
+      );
+    }
+
+    if (newUsername.length < 1 || newUsername.length > 35) {
+      throw new Error("Pick a shorter but non-empty one.");
+    }
+
     if (user.password && !password) {
       throw new Error("You shall not pass.");
     }
