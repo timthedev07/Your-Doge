@@ -463,11 +463,6 @@ export class UserResolver {
     await userCleanup();
 
     const res = await registerUser();
-    if (res === -1) {
-      throw new Error("Sorry, registration is temporarily closed.");
-    }
-
-    const [serverId, mutateServerRecord] = res;
 
     const email = userData.email;
 
@@ -486,6 +481,12 @@ export class UserResolver {
         throw new Error("Email already linked with another account.");
       }
     }
+
+    if (res === -1) {
+      throw new Error("Sorry, registration is temporarily closed.");
+    }
+
+    const [serverId, mutateServerRecord] = res;
 
     try {
       await User.insert({
@@ -529,11 +530,6 @@ export class UserResolver {
     await userCleanup();
 
     const res = await registerUser();
-    if (res === -1) {
-      throw new Error("Sorry, registration is temporarily closed.");
-    }
-
-    const [serverId, mutateServerRecord] = res;
 
     const email = userData.email;
 
@@ -550,6 +546,12 @@ export class UserResolver {
         throw new Error("Email already linked with another account.");
       }
     }
+
+    if (res === -1) {
+      throw new Error("Sorry, registration is temporarily closed.");
+    }
+
+    const [serverId, mutateServerRecord] = res;
 
     try {
       await User.insert({
@@ -592,11 +594,6 @@ export class UserResolver {
     await userCleanup();
 
     const res = await registerUser();
-    if (res === -1) {
-      throw new Error("Sorry, registration is temporarily closed.");
-    }
-
-    const [serverId, mutateServerRecord] = res;
 
     const email = userData.email;
 
@@ -613,6 +610,12 @@ export class UserResolver {
         throw new Error("Email already linked with another account.");
       }
     }
+
+    if (res === -1) {
+      throw new Error("Sorry, registration is temporarily closed.");
+    }
+
+    const [serverId, mutateServerRecord] = res;
 
     try {
       await User.insert({
