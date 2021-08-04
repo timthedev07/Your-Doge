@@ -619,7 +619,7 @@ export class UserResolver {
   async updateUsername(
     @Arg("newUsername") newUsername: string,
     @Ctx() { payload }: MyContext,
-    @Arg("password") password?: string
+    @Arg("password", { nullable: true }) password?: string
   ) {
     const user = await User.findOne({ where: { id: payload?.userId } });
 
