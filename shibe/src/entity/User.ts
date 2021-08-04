@@ -27,11 +27,11 @@ export class User extends BaseEntity {
   tokenVersion: number;
 
   @Field(() => Int)
-  @Column("int", { default: 0 })
+  @Column("smallint", { default: 0 })
   serverId: number;
 
   @Field(() => Int)
-  @Column("int", { default: 0 })
+  @Column("smallint", { default: 0 })
   avatarId: number;
 
   @Field(() => String)
