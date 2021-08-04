@@ -672,7 +672,13 @@ export class UserResolver {
     const days = daysElapsed(user.unameLastUpdate);
     if (days < 60) {
       throw new Error(
-        `You just modified your username ${Math.round(days)} days ago.`
+        `You just modified your username ${
+          days > 1
+            ? `${Math.round(days)} days ago.`
+            : days < 1 && days > 0.5
+            ? "yesterday."
+            : "today."
+        }`
       );
     }
     // all checks passed
