@@ -12,6 +12,25 @@ import { useApollo } from "../contexts/ApolloContext";
 import { SettingsTabProps } from "../types/props";
 import { useAuth } from "../contexts/AuthContext";
 
+interface SettingsContentSectionProps {
+  title: string;
+  titleColor?: string;
+}
+
+const SettingsContentSection: React.FC<SettingsContentSectionProps> = ({
+  title,
+  children,
+  titleColor,
+}) => {
+  return (
+    <section className="settings-content-section">
+      <h4 style={titleColor ? { color: titleColor } : {}}>{title}</h4>
+      <hr />
+      <div className="settings-content-section__inner-content">{children}</div>
+    </section>
+  );
+};
+
 export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const [logout, { client }] = useLogoutMutation();
   const [deleteAccount] = useDeleteAccountMutation();
@@ -66,35 +85,47 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
         text="Invalid username/password"
       />
       <div className="settings-content-container">
-        <section className="settings-content-section">
-          <h4>Update your username</h4>
-          <hr />
-          <div className="settings-content-section__inner-content"></div>
-        </section>
-
-        <section className="settings-content-section">
-          <h4 style={{ color: "#e9574f" }}>Delete your account</h4>
-          <hr />
-          <div className="settings-content-section__inner-content">
-            <p>
-              Note that this a one way action. All your records will be{" "}
-              <em>permanently</em> deleted once you do so, please be certain!
-            </p>
-            <button
-              className="rounded-btn danger"
-              onClick={() => setShow(true)}
-            >
-              Delete Account
-            </button>
+        <SettingsContentSection title="Update Your Username">
+          <p>
+            <em>
+              Note: this can have unintended side effects, please be cautious.
+            </em>
+          </p>
+          <div>
+            <input
+              type="text"
+              className="rounded-input emphasized margin-10"
+              style={{ width: "200px" }}
+            />
+            <button className="rounded-btn margin-10">Update</button>
           </div>
-        </section>
+        </SettingsContentSection>
 
-        <button
-          className="rounded-btn sorrowful"
-          onClick={() => handleLogout()}
+        <SettingsContentSection title="Modify your password"></SettingsContentSection>
+
+        <SettingsContentSection title="Logout">
+          <p>You can always come back later! 🙂</p>
+          <button
+            className="rounded-btn sorrowful"
+            onClick={() => handleLogout()}
+          >
+            Logout
+          </button>
+        </SettingsContentSection>
+
+        <SettingsContentSection
+          title="Delete Your Account"
+          titleColor="#e9574f"
         >
-          Logout
-        </button>
+          <p>
+            Note that this a one way action. All your records will be{" "}
+            <em>permanently</em> deleted once you do so, please be certain!
+          </p>
+          <button className="rounded-btn danger" onClick={() => setShow(true)}>
+            Delete Account
+          </button>
+        </SettingsContentSection>
+
         <br />
 
         <select defaultValue={"default"} style={{ width: "190px" }}>

@@ -58,6 +58,9 @@ a:hover,
 .margin-20 {
   margin: 20px;
 }
+.margin-10 {
+  margin: 10px;
+}
 
 .unselectable {
   -webkit-touch-callout: none;
