@@ -143,7 +143,7 @@ const Register: React.FC = () => {
   });
 
   return (
-    <div className="form-container">
+    <div className="form-container form-container-register">
       {loading ? <Loading /> : null}
 
       <h1 className="form-heading">Join Us</h1>

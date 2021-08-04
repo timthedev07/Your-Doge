@@ -90,7 +90,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className="form-container">
+    <div className="form-container form-container-login">
       {pageLoading ? <Loading /> : null}
 
       <h1 className="form-heading">Welcome Back</h1>
