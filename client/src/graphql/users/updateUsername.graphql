@@ -1,0 +1,3 @@
+mutation UpdateUsername($newUsername: String!, $password: String) {
+  updateUsername(newUsername: $newUsername, password: $password)
+}

@@ -37,6 +37,7 @@ export type Mutation = {
   googleOAuth: OAuthResponse;
   discordOAuth: OAuthResponse;
   facebookOAuth: OAuthResponse;
+  updateUsername: Scalars['Boolean'];
 };
 
 
@@ -138,6 +139,12 @@ export type MutationFacebookOAuthArgs = {
   email: Scalars['String'];
   first_name: Scalars['String'];
   last_name: Scalars['String'];
+};
+
+
+export type MutationUpdateUsernameArgs = {
+  password?: Maybe<Scalars['String']>;
+  newUsername: Scalars['String'];
 };
 
 export type OAuthResponse = {
@@ -302,6 +309,14 @@ export type UpdateProfileMutationVariables = Exact<{
 
 
 export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string> }> };
+
+export type UpdateUsernameMutationVariables = Exact<{
+  newUsername: Scalars['String'];
+  password?: Maybe<Scalars['String']>;
+}>;
+
+
+export type UpdateUsernameMutation = { __typename?: 'Mutation', updateUsername: boolean };
 
 export type ValidTmpTokenMutationVariables = Exact<{
   token: Scalars['String'];
@@ -934,6 +949,38 @@ export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
 export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
 export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;
+export const UpdateUsernameDocument = gql`
+    mutation UpdateUsername($newUsername: String!, $password: String) {
+  updateUsername(newUsername: $newUsername, password: $password)
+}
+    `;
+export type UpdateUsernameMutationFn = Apollo.MutationFunction<UpdateUsernameMutation, UpdateUsernameMutationVariables>;
+
+/**
+ * __useUpdateUsernameMutation__
+ *
+ * To run a mutation, you first call `useUpdateUsernameMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateUsernameMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateUsernameMutation, { data, loading, error }] = useUpdateUsernameMutation({
+ *   variables: {
+ *      newUsername: // value for 'newUsername'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useUpdateUsernameMutation(baseOptions?: Apollo.MutationHookOptions<UpdateUsernameMutation, UpdateUsernameMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateUsernameMutation, UpdateUsernameMutationVariables>(UpdateUsernameDocument, options);
+      }
+export type UpdateUsernameMutationHookResult = ReturnType<typeof useUpdateUsernameMutation>;
+export type UpdateUsernameMutationResult = Apollo.MutationResult<UpdateUsernameMutation>;
+export type UpdateUsernameMutationOptions = Apollo.BaseMutationOptions<UpdateUsernameMutation, UpdateUsernameMutationVariables>;
 export const ValidTmpTokenDocument = gql`
     mutation ValidTmpToken($token: String!) {
   validTmpToken(token: $token)
