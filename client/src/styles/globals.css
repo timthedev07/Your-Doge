@@ -79,3 +79,8 @@ label {
 .policies-container {
   padding: 40px;
 }
+
+.space-out-vertical {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

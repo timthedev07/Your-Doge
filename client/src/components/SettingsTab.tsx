@@ -142,8 +142,9 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
           </p>
           <input
             ref={newUsernameRef}
+            placeholder="New Username"
             type="text"
-            className="rounded-input emphasized margin-10"
+            className="rounded-input emphasized space-out-vertical"
           />
           {currentUser && currentUser.provider ? (
             <input ref={passwordRef} type="hidden" value="" />
@@ -151,12 +152,13 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
             <input
               ref={passwordRef}
               type="password"
-              className="rounded-input emphasized margin-10"
+              placeholder="Your Password"
+              className="rounded-input emphasized space-out-vertical"
             />
           )}
           <button
             onClick={handleUpdateUsername}
-            className="rounded-btn margin-10"
+            className="rounded-btn space-out-vertical"
           >
             Update
           </button>
