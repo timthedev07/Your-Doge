@@ -674,7 +674,7 @@ export class UserResolver {
       throw new Error(
         `You just modified your username ${
           days > 1
-            ? `${Math.round(days)} days ago.`
+            ? `${Math.ceil(days)} days ago.`
             : days < 1 && days > 0.5
             ? "yesterday."
             : "today."
