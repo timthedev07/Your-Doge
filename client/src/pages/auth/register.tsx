@@ -146,9 +146,8 @@ const Register: React.FC = () => {
     <div className="form-container form-container-register">
       {loading ? <Loading /> : null}
 
-      <h1 className="form-heading">Join Us</h1>
-
       <div>
+        <h1 className="form-heading">Join Us</h1>
         <div className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}

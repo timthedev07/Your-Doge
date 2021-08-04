@@ -93,9 +93,8 @@ const Login: React.FC = () => {
     <div className="form-container form-container-login">
       {pageLoading ? <Loading /> : null}
 
-      <h1 className="form-heading">Welcome Back</h1>
-
       <div>
+        <h1 className="form-heading">Welcome Back</h1>
         <div className="form-as-wrapper">
           <Alert
             setActive={setAlertActive}
