@@ -104,7 +104,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
     }
 
     if (newUsername.length < 1 || newUsername.length > 35) {
-      return displayError("Pick a shorter one.");
+      return displayError("Pick a shorter but non-empty one.");
     }
 
     try {
