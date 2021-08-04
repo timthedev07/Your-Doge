@@ -35,7 +35,7 @@ export class User extends BaseEntity {
   avatarId: number;
 
   @Field(() => String)
-  @Column("text", { default: "" })
+  @Column({ type: "varchar", default: "", length: "130" })
   bio: string;
 
   @Field(() => Int)
