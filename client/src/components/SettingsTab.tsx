@@ -4,6 +4,7 @@ import {
   MeQuery,
   MeDocument,
   useDeleteAccountMutation,
+  useUpdateUsernameMutation,
 } from "../generated/graphql";
 import { Modal, Button } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
@@ -40,6 +41,9 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const pwRef = useRef<HTMLInputElement>(null);
   const { setAccessToken } = useApollo()!;
   const { currentUser } = useAuth()!;
+  const [updateUsername] = useUpdateUsernameMutation();
+  const newUsernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
     const { data } = await deleteAccount({
@@ -76,6 +80,20 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
     });
     window.localStorage.removeItem("serverId");
   };
+
+  const handleUpdateUsername = async () => {
+    if (!newUsernameRef.current || !passwordRef.current) {
+      return;
+    }
+
+    await updateUsername({
+      variables: {
+        newUsername: newUsernameRef.current.value,
+        password: passwordRef.current.value || undefined,
+      },
+    });
+  };
+
   return (
     <>
       <Alert
@@ -91,14 +109,28 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
               Note: this can have unintended side effects, please be cautious.
             </em>
           </p>
-          <div>
+          <input
+            ref={newUsernameRef}
+            type="text"
+            className="rounded-input emphasized margin-10"
+            style={{ width: "200px" }}
+          />
+          {currentUser && currentUser.provider ? (
+            <input ref={passwordRef} type="hidden" value="" />
+          ) : (
             <input
-              type="text"
+              ref={passwordRef}
+              type="password"
               className="rounded-input emphasized margin-10"
               style={{ width: "200px" }}
             />
-            <button className="rounded-btn margin-10">Update</button>
-          </div>
+          )}
+          <button
+            onClick={handleUpdateUsername}
+            className="rounded-btn margin-10"
+          >
+            Update
+          </button>
         </SettingsContentSection>
 
         <SettingsContentSection title="Modify your password"></SettingsContentSection>
