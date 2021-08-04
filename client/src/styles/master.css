@@ -6,7 +6,7 @@
 /* components */
 @import url(./components/animatedBtn.module.css);
 @import url(./components/loading.module.css);
-@import url(./components/authForm.module.css);
+@import url(./components/auth-page.module.css);
 @import url(./components/alert.module.css);
 @import url(./components/menuBtn.module.css);
 @import url(./components/nav.module.css);
