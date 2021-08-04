@@ -5,6 +5,7 @@ import {
   MeDocument,
   useDeleteAccountMutation,
   useUpdateUsernameMutation,
+  useUpdatePasswordMutation,
 } from "../generated/graphql";
 import { Modal, Button } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
@@ -42,12 +43,15 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const pwRef = useRef<HTMLInputElement>(null);
   const { setAccessToken } = useApollo()!;
   const { currentUser } = useAuth()!;
-  const [updateUsername] = useUpdateUsernameMutation();
   const newUsernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [alertMessage, setAlertMessage] = useState<string>(
     "Invalid username/password"
   );
+  const oldPasswordRef = useRef<HTMLInputElement>(null);
+  const newPasswordRef = useRef<HTMLInputElement>(null);
+  const [updateUsername] = useUpdateUsernameMutation();
+  const [updatePassword] = useUpdatePasswordMutation();
 
   const displayError = (message: string) => {
     setAlertMessage(message);
@@ -123,6 +127,8 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
     }
   };
 
+  const handleUpdatePassword = async () => {};
+
   return (
     <>
       <Alert
@@ -164,7 +170,20 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
           </button>
         </SettingsContentSection>
 
-        <SettingsContentSection title="Modify your password"></SettingsContentSection>
+        <SettingsContentSection title="Modify your password">
+          <p>
+            Make sure your password is at least 8 characters long, and it is
+            recommended that you include combinations of different
+            characters(letters, numbers, special characters, etc.).
+          </p>
+
+          <button
+            onClick={handleUpdateUsername}
+            className="rounded-btn space-out-vertical"
+          >
+            Update
+          </button>
+        </SettingsContentSection>
 
         <SettingsContentSection title="Logout">
           <p>You can always come back later! 🙂</p>
