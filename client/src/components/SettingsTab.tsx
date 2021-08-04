@@ -134,8 +134,10 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
       <div className="settings-content-container">
         <SettingsContentSection title="Update Your Username">
           <p>
+            You can only modify your username once within 60 days. <br />
             <em>
-              Note: this can have unintended side effects, please be cautious.
+              Also note that this can potentially cause unintended side effects,
+              please be cautious.
             </em>
           </p>
           <input
