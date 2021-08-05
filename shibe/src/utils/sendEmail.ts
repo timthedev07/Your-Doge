@@ -31,9 +31,25 @@ export const sendEmail = async (
     const template = compile(rawHtml);
 
     const data = {
-      url,
-      buttonText: verb.charAt(0).toUpperCase() + verb.slice(1),
       text,
+      extraHTML: `<a href="${url}">
+        <button
+          style="
+            width: 210px;
+            height: 30px;
+            font-size: 20px;
+            outline: none;
+            border: none;
+            border-radius: 8px;
+            background-color: #cf5300;
+            color: black;
+          "
+          type="submit"
+        >
+          ${verb.charAt(0).toUpperCase() + verb.slice(1)}
+        </button>
+      </a>
+      `,
     };
     html = template(data);
   } catch (err) {}
