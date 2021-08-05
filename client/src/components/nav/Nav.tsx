@@ -3,6 +3,8 @@ import { MenuButton } from "./MenuButton";
 import { useRouter } from "next/router";
 import { useAuth } from "../../contexts/AuthContext";
 import Link from "next/link";
+import AvatarData from "../../../avatarData.json";
+import { AvatarKeyType } from "../../types/types";
 
 const THRESHOLD = 481;
 
@@ -29,9 +31,8 @@ interface Props {
 // Responsive Navigation Bar
 export const Nav: React.FC<Props> = ({ transparent }) => {
   const { pathname, push } = useRouter();
-  const { authState } = useAuth()!;
+  const { authState, currentUser } = useAuth()!;
 
-  // create a ref for the navigation bars and some of their components
   const navBarRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -147,6 +148,21 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
             </a>
           );
         })}
+
+        {auth === "auth" ? (
+          <div
+            style={{ marginLeft: "auto", cursor: "pointer" }}
+            className="nav-item"
+          >
+            <img
+              style={{ width: "80%", height: "80%" }}
+              src={`/images/avatars/${
+                AvatarData[`${currentUser!.avatarId}` as AvatarKeyType]
+              }.svg`}
+              alt=""
+            />
+          </div>
+        ) : null}
       </div>
     </div>
   );
