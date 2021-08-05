@@ -119,7 +119,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
     },
   ];
 
-  if (auth === "auth") {
+  if (auth === "none") {
     NAV_LINKS.push({
       name: "Sign in",
       url: "/auth/login",
