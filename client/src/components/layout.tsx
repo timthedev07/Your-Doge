@@ -25,9 +25,7 @@ export const Layout: React.FC = ({ children }) => {
 
       <CustomApolloProvider>
         <Nav transparent={false} />
-        <div className="App">
-          <main>{children}</main>
-        </div>
+        <div className="App">{children}</div>
       </CustomApolloProvider>
     </>
   );
