@@ -63,6 +63,8 @@ const Contact = () => {
       activateAlert(data.message, "success");
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
