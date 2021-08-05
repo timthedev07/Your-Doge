@@ -36,28 +36,13 @@
           word-wrap: break-word; /* Internet Explorer 5.5+ */
         "
       >
-{{text}}<br /></pre>
+        {{text}}
+        <br />
+      </pre>
 
       <br />
       <br />
-
-      <a href="{{url}}">
-        <button
-          style="
-            width: 210px;
-            height: 30px;
-            font-size: 20px;
-            outline: none;
-            border: none;
-            border-radius: 8px;
-            background-color: #cf5300;
-            color: black;
-          "
-          type="submit"
-        >
-          {{buttonText}}
-        </button>
-      </a>
+      {{{extraHTML}}}
     </div>
   </body>
 </html>
