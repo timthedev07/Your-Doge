@@ -97,7 +97,7 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
     return windowWidth < THRESHOLD;
   };
 
-  // a function that toggle the sidebar
+  // a function that toggles the sidebar
   const toggleSideBar = () => {
     setSideBarOpen((prev) => !prev);
   };
@@ -113,8 +113,18 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
       name: "Contact",
       url: "/contact",
     },
+    {
+      name: "Support",
+      url: "/support",
+    },
   ];
 
+  if (auth === "auth") {
+    NAV_LINKS.push({
+      name: "Sign in",
+      url: "/auth/login",
+    });
+  }
   // define the nav bar for larger screens
   const navbar = (
     <div className="nav-bar-background">
