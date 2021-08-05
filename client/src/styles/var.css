@@ -3,6 +3,7 @@
   --nav-bar-height: 55px;
   --account-content-container-border-radius: 6px;
   --alert-transition-duration: 0.15s;
+  --small-screen-size: 571px;
 }
 
 /* custom fonts */

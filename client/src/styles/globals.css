@@ -32,6 +32,12 @@ div.App {
   background: inherit;
   background-size: cover;
 }
+
+@media screen and (max-width: 571px) {
+  div.App {
+    padding-top: 0;
+  }
+}
 div#root {
   background: inherit;
   background-size: cover;
