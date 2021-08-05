@@ -263,6 +263,12 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
             </Link>
           </SettingsContentSection>
         )}
+        <SettingsContentSection title="Change your email visibility">
+          <select defaultValue={"default"} style={{ width: "190px" }}>
+            <option>private</option>
+            <option>public</option>
+          </select>
+        </SettingsContentSection>
 
         <SettingsContentSection title="Logout">
           <p>You can always come back later! 🙂</p>
@@ -286,13 +292,6 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
             Delete Account
           </button>
         </SettingsContentSection>
-
-        <br />
-
-        <select defaultValue={"default"} style={{ width: "190px" }}>
-          <option>private</option>
-          <option>public</option>
-        </select>
       </div>
 
       {/* delete account modal */}
