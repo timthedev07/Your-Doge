@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import ReCAPTCHA from "react-google-recaptcha";
 import { AlertType } from "../../types/types";
 import { OAuthButtons } from "../../components/OAuthButtons";
+import { validatePassword } from "../../lib/validatePassword";
 
 const THRESHOLD = 360;
 
@@ -107,9 +108,10 @@ const Register: React.FC = () => {
       return;
     }
 
-    if (password.length < 8) {
-      displayError("Password too short");
-      return;
+    try {
+      validatePassword(password);
+    } catch (err) {
+      return displayError(err as any);
     }
 
     setAlertMessage("");
