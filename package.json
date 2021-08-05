@@ -1,7 +1,7 @@
 {
   "name": "your-doge",
   "version": "1.0.0",
-  "description": "<a href=\"https://yourdoge.netlify.app\">   <p align=\"center\">     <img height=150 src=\"assets/yourdogeAppleIcon.svg\"/>   </p>   <p align=\"center\">     <img height=70 src=\"assets/textLogo.svg\">   </p> </a>",
+  "description": "<a href=\"https://yourdoge.vercel.app\">   <p align=\"center\">     <img height=150 src=\"assets/yourdogeAppleIcon.svg\"/>   </p>   <p align=\"center\">     <img height=70 src=\"assets/textLogo.svg\">   </p> </a>",
   "scripts": {
     "dev": "concurrently \"cd client && yarn dev\" \"cd shibe && yarn dev\""
   },
