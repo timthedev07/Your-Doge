@@ -8,6 +8,7 @@ import { buildSchema } from "type-graphql";
 import { router as AuthRouter } from "./routes/AuthRoute";
 import cookieParser from "cookie-parser";
 import { createConnection } from "typeorm";
+import { router as BaseRouter } from "./routes/BaseRoute";
 
 export const FRONTEND =
   process.env.NODE_ENV === "production"
@@ -27,7 +28,7 @@ const HOSTNAME = process.env.HOST || "0.0.0.0";
       origin: [FRONTEND, PLAYGROUND],
     })
   );
-  app.use("/", AuthRouter);
+  app.use("/", BaseRouter);
   app.use("/auth", AuthRouter);
 
   const apolloServer = new ApolloServer({
