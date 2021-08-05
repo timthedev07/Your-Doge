@@ -61,6 +61,10 @@ const Contact = () => {
         method: "post",
       });
       activateAlert(data.message, "success");
+
+      [nameRef, topicRef, emailRef, messageRef].forEach((each) => {
+        each.current!.value = "";
+      });
     } catch (err) {
       console.log(err);
     } finally {
