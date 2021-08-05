@@ -14,6 +14,9 @@ import { useApollo } from "../contexts/ApolloContext";
 import { SettingsTabProps } from "../types/props";
 import { useAuth } from "../contexts/AuthContext";
 import { parseGraphQLError } from "../lib/graphqlErrorParser";
+import { validatePassword } from "../lib/validatePassword";
+import { AlertType } from "../types/types";
+import { unknownErrMsg } from "../constants/general";
 
 interface SettingsContentSectionProps {
   title: string;
@@ -38,6 +41,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const [logout, { client }] = useLogoutMutation();
   const [deleteAccount] = useDeleteAccountMutation();
   const [alertDisplay, setAlertDisplay] = useState<boolean>(false);
+  const [alertType, setAlertType] = useState<AlertType>("warning");
   const [show, setShow] = useState<boolean>(false);
   const unRef = useRef<HTMLInputElement>(null);
   const pwRef = useRef<HTMLInputElement>(null);
@@ -50,12 +54,25 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   );
   const oldPasswordRef = useRef<HTMLInputElement>(null);
   const newPasswordRef = useRef<HTMLInputElement>(null);
+  const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const [updateUsername] = useUpdateUsernameMutation();
   const [updatePassword] = useUpdatePasswordMutation();
+  const [alertCloseCallback, setAlertCloseCallback] = useState(() => () => {});
 
   const displayError = (message: string) => {
     setAlertMessage(message);
     setAlertDisplay(true);
+    setAlertType("warning");
+  };
+
+  const displaySuccessMsg = (
+    message: string,
+    onCloseCallback: () => void = () => {}
+  ) => {
+    setAlertMessage(message);
+    setAlertDisplay(true);
+    setAlertType("success");
+    setAlertCloseCallback(onCloseCallback);
   };
 
   const handleSubmit = async () => {
@@ -127,15 +144,57 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
     }
   };
 
-  const handleUpdatePassword = async () => {};
+  const handleUpdatePassword = async () => {
+    if (
+      !oldPasswordRef.current ||
+      !newPasswordRef.current ||
+      !confirmPasswordRef.current
+    ) {
+      return;
+    }
+
+    const newPassword = newPasswordRef.current.value;
+    const confirmPassword = confirmPasswordRef.current.value;
+    const oldPassword = oldPasswordRef.current.value;
+
+    try {
+      validatePassword(newPassword);
+    } catch (err) {
+      displayError(err as string);
+    }
+
+    if (confirmPassword !== newPassword) {
+      return displayError("New passwords don't match, try again.");
+    }
+
+    try {
+      const res = await updatePassword({
+        variables: {
+          newPassword,
+          oldPassword,
+        },
+      });
+
+      if (res.data?.updatePassword) {
+        displaySuccessMsg("Successfully updated password!", () =>
+          window.location.reload()
+        );
+      } else {
+        displayError(unknownErrMsg);
+      }
+    } catch (err) {
+      displayError(parseGraphQLError(err));
+    }
+  };
 
   return (
     <>
       <Alert
-        type={"warning"}
+        type={alertType}
         active={alertDisplay}
         setActive={setAlertDisplay}
         text={alertMessage}
+        onClose={() => alertCloseCallback()}
       />
       <div className="settings-content-container">
         <SettingsContentSection title="Update Your Username">
@@ -170,20 +229,41 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
           </button>
         </SettingsContentSection>
 
-        <SettingsContentSection title="Modify your password">
-          <p>
-            Make sure your password is at least 8 characters long, and it is
-            recommended that you include combinations of different
-            characters(letters, numbers, special characters, etc.).
-          </p>
+        {currentUser?.provider ? null : (
+          <SettingsContentSection title="Modify your password">
+            <p>
+              Make sure your password is at least 8 characters long, and it is
+              recommended that you include combinations of different
+              characters(letters, numbers, special characters, etc.).
+            </p>
 
-          <button
-            onClick={handleUpdateUsername}
-            className="rounded-btn space-out-vertical"
-          >
-            Update
-          </button>
-        </SettingsContentSection>
+            <input
+              ref={oldPasswordRef}
+              type="password"
+              placeholder="Your Old Password"
+              className="rounded-input emphasized space-out-vertical"
+            />
+            <input
+              ref={newPasswordRef}
+              type="password"
+              placeholder="Your New Password"
+              className="rounded-input emphasized space-out-vertical"
+            />
+            <input
+              ref={confirmPasswordRef}
+              type="password"
+              placeholder="Confirm Your New Password"
+              className="rounded-input emphasized space-out-vertical"
+            />
+
+            <button
+              onClick={handleUpdatePassword}
+              className="rounded-btn space-out-vertical"
+            >
+              Update
+            </button>
+          </SettingsContentSection>
+        )}
 
         <SettingsContentSection title="Logout">
           <p>You can always come back later! 🙂</p>

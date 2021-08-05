@@ -91,9 +91,7 @@ export class UserResolver {
     const hashed = await hash(password, 12);
 
     if (!(await validateHuman(recaptchaToken))) {
-      throw new Error(
-        "You think you are smart huh? Never try this anymore(at least here), this is how you disgrace yourself, this is how you disgrace your family, you are the devil! The FBI is watching you!"
-      );
+      throw new Error("Human validation failed, try again.");
     }
 
     if (!validateEmailRegex(email)) {
