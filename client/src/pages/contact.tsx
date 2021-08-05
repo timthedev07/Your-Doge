@@ -5,6 +5,7 @@ import { Loading } from "../components/Loading";
 import { BACKEND } from "../constants/apollo";
 import axios from "axios";
 import { AlertType } from "../types/types";
+import { validateEmail } from "./auth/register";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -27,13 +28,25 @@ const Contact = () => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    setLoading(true);
-
     if (
       [nameRef, topicRef, emailRef, messageRef].some((each) => !each.current)
     ) {
       return;
     }
+
+    if (
+      [nameRef, topicRef, emailRef, messageRef].some(
+        (each) => !each.current?.value.length
+      )
+    ) {
+      return activateAlert("Please make sure all fields are filled out.");
+    }
+
+    if (!validateEmail(emailRef.current!.value)) {
+      return activateAlert("Invalid email.");
+    }
+
+    setLoading(true);
 
     try {
       const { data } = await axios({
