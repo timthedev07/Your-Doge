@@ -30,14 +30,17 @@ router.post("/contact", async (req, res) => {
     const template = compile(rawHtml);
 
     const data = {
-      text: `Contact request:
-Name: ${fullName}
-Topic: ${topic}
-From: ${customerEmail}
+      extraHTML: `
+<div style="color: black;">
+  <h3>Contact request:</h3>
+  <h5>Name: ${fullName}</h5>
+  <h5>Topic: ${topic}</h5>
+  <h5>From: ${customerEmail}</h5>
 
-Message:
+  <h6>Message:</h6>
 
-${message}
+  <p>${message}</p>
+<div>
 `,
     };
     html = template(data);
