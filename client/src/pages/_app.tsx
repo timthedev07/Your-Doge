@@ -6,6 +6,7 @@ import "react-calendar/dist/Calendar.css";
 import { isClient } from "../lib/isClient";
 import React, { useEffect, useState } from "react";
 import { Layout } from "../components/layout";
+import { createTheme, ThemeProvider } from "@material-ui/core";
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [b, setB] = useState<boolean>(false);
@@ -14,10 +15,22 @@ const App = ({ Component, pageProps }: AppProps) => {
     setB(isClient);
   }, []);
 
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          type: "dark",
+        },
+      }),
+    []
+  );
+
   return b ? (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   ) : (
     <></>
   );

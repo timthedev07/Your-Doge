@@ -10,7 +10,7 @@ const FAQContent = () => {
     <div>
       <Accordion>
         <AccordionSummary
-          expandIcon={ExpandIcon}
+          expandIcon={<ExpandIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
