@@ -100,7 +100,7 @@
     padding-right: 25px;
   }
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 875px) {
   .nav-bar .nav-item,
   .nav-bar .nav-item:hover {
     padding-left: 10px;
@@ -109,5 +109,17 @@
   .nav-bar .nav-item.nav-item-home,
   .nav-bar .nav-item.nav-item-home:hover {
     width: 40%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav-bar .nav-item,
+  .nav-bar .nav-item:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .nav-bar .nav-item.nav-item-home,
+  .nav-bar .nav-item.nav-item-home:hover {
+    width: 30%;
   }
 }
