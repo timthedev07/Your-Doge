@@ -17,6 +17,7 @@ import { parseGraphQLError } from "../lib/graphqlErrorParser";
 import { validatePassword } from "../lib/validatePassword";
 import { AlertType } from "../types/types";
 import { unknownErrMsg } from "../constants/general";
+import Link from "next/link";
 
 interface SettingsContentSectionProps {
   title: string;
@@ -57,7 +58,6 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const [updateUsername] = useUpdateUsernameMutation();
   const [updatePassword] = useUpdatePasswordMutation();
-  const [alertCloseCallback, setAlertCloseCallback] = useState(() => () => {});
 
   const displayError = (message: string) => {
     setAlertMessage(message);
@@ -65,14 +65,10 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
     setAlertType("warning");
   };
 
-  const displaySuccessMsg = (
-    message: string,
-    onCloseCallback: () => void = () => {}
-  ) => {
+  const displaySuccessMsg = (message: string) => {
     setAlertMessage(message);
-    setAlertDisplay(true);
     setAlertType("success");
-    setAlertCloseCallback(onCloseCallback);
+    setAlertDisplay(true);
   };
 
   const handleSubmit = async () => {
@@ -176,9 +172,10 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
       });
 
       if (res.data?.updatePassword) {
-        displaySuccessMsg("Successfully updated password!", () =>
-          window.location.reload()
-        );
+        newPasswordRef.current.value = "";
+        oldPasswordRef.current.value = "";
+        confirmPasswordRef.current.value = "";
+        displaySuccessMsg("Successfully updated password!");
       } else {
         displayError(unknownErrMsg);
       }
@@ -194,7 +191,6 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
         active={alertDisplay}
         setActive={setAlertDisplay}
         text={alertMessage}
-        onClose={() => alertCloseCallback()}
       />
       <div className="settings-content-container">
         <SettingsContentSection title="Update Your Username">
@@ -262,6 +258,9 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
             >
               Update
             </button>
+            <Link href="/auth/forgot-password" passHref>
+              <a className="normal-links">Forgot Password?</a>
+            </Link>
           </SettingsContentSection>
         )}
 
