@@ -142,7 +142,7 @@ const Contact = () => {
                     <Button
                       className="contact-submit"
                       type="submit"
-                      variant="dark"
+                      variant="warning"
                       onClick={(event) => handleSubmit(event)}
                     >
                       Send
