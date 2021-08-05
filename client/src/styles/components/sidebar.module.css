@@ -29,7 +29,7 @@
 .menu-btn-container {
   background-color: rgb(37, 37, 37);
   height: 60px;
-  width: 100vw;
+  width: 100%;
   position: sticky;
   z-index: 80000000;
   top: 0;
