@@ -37,6 +37,7 @@ export type UserType =
         | "avatarId"
         | "age"
         | "provider"
+        | "emailPrivate"
       >
     >
   | undefined
