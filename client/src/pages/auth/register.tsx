@@ -124,10 +124,9 @@ const Register: React.FC = () => {
 
       if (data) {
         push("/auth/confirm");
-        return;
+      } else {
+        displayError(unknownErrMsg);
       }
-
-      displayError(unknownErrMsg);
     } catch (err: any) {
       displayError(err.message);
     }
