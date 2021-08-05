@@ -39,7 +39,7 @@ const Account: React.FC = () => {
           age={currentUser.age}
         />
       ),
-      title: "Information",
+      title: "Profile",
     },
     { content: "You did nothing", title: "Statistics" },
     {
