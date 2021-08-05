@@ -111,7 +111,12 @@ const Contact = () => {
                       </Form.Label>
                     </Form.Group>
                     <Form.Group className="contact-form-group">
-                      <Form.Control defaultValue="" as="select" ref={topicRef}>
+                      <Form.Control
+                        className="contact-form-group__select"
+                        defaultValue=""
+                        as="select"
+                        ref={topicRef}
+                      >
                         <option disabled value="">
                           Select Topic*
                         </option>

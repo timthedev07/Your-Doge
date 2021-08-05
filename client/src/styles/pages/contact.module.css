@@ -189,3 +189,18 @@
     width: 70vw;
   }
 }
+
+.contact-form-group__select,
+.contact-form-group__select:focus {
+  background-color: inherit !important;
+  color: inherit !important;
+}
+.contact-form-group__select:focus,
+.contact-form-group__select:active {
+  border-color: #e8b11a !important;
+  outline: none;
+}
+
+.contact-form-group__select option {
+  background-color: #313131 !important;
+}
