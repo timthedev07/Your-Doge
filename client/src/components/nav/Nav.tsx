@@ -109,6 +109,10 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
       name: "Dashboard",
       url: "/dashboard",
     },
+    {
+      name: "Contact",
+      url: "/contact",
+    },
   ];
 
   // define the nav bar for larger screens
