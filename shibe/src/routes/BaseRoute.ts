@@ -32,12 +32,12 @@ router.post("/contact", async (req, res) => {
     const data = {
       extraHTML: `
 <div style="color: black;">
-  <h3>Contact request:</h3>
-  <h5>Name: ${fullName}</h5>
-  <h5>Topic: ${topic}</h5>
-  <h5>From: ${customerEmail}</h5>
+  <h2>Contact request:</h2>
+  <h3>Name: ${fullName}</h3>
+  <h3>Topic: ${topic}</h3>
+  <h3>From: ${customerEmail}</h3>
 
-  <h6>Message:</h6>
+  <h3>Message:</h3>
 
   <p>${message}</p>
 <div>
