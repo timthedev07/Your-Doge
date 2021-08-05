@@ -109,14 +109,6 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
       name: "Dashboard",
       url: "/dashboard",
     },
-    {
-      name: auth === "auth" ? "Account" : "Sign In",
-      url: auth === "auth" ? "/account" : "/auth/login",
-    },
-    {
-      name: "Pricing",
-      url: "/pricing",
-    },
   ];
 
   // define the nav bar for larger screens
@@ -150,18 +142,20 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
         })}
 
         {auth === "auth" ? (
-          <div
-            style={{ marginLeft: "auto", cursor: "pointer" }}
-            className="nav-item"
-          >
-            <img
-              style={{ width: "80%", height: "80%" }}
-              src={`/images/avatars/${
-                AvatarData[`${currentUser!.avatarId}` as AvatarKeyType]
-              }.svg`}
-              alt=""
-            />
-          </div>
+          <Link href="/account" passHref>
+            <div
+              style={{ marginLeft: "auto", cursor: "pointer" }}
+              className="nav-item"
+            >
+              <img
+                style={{ width: "80%", height: "80%" }}
+                src={`/images/avatars/${
+                  AvatarData[`${currentUser!.avatarId}` as AvatarKeyType]
+                }.svg`}
+                alt=""
+              />
+            </div>
+          </Link>
         ) : null}
       </div>
     </div>

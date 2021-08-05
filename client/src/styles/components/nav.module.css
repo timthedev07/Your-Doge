@@ -69,11 +69,11 @@
 /* nav item different styling on hover and for active items */
 
 .nav-bar .nav-item:hover {
-  color: rgb(255, 255, 255);
+  color: rgb(177, 177, 177);
 }
 
 .nav-bar .nav-item {
-  color: rgb(177, 177, 177);
+  color: rgb(255, 255, 255);
 }
 
 .nav-bar .nav-item.nav-item-active {
