@@ -743,4 +743,36 @@ export class UserResolver {
       throw new Error("Unknown error.");
     }
   }
+
+  @Mutation(() => User)
+  @UseMiddleware(isAuth)
+  async toggleEmailVisibility(@Ctx() { payload }: MyContext) {
+    const userId = payload?.userId;
+
+    if (!userId) {
+      throw new Error("You shall not pass.");
+    }
+
+    const user = await User.findOne({ where: { id: userId } });
+
+    if (!user) {
+      throw new Error("You shall not pass.");
+    }
+
+    try {
+      const res = await getConnection()
+        .createQueryBuilder()
+        .update(User)
+        .set({ emailPrivate: !user.emailPrivate })
+        .where("id = :id", { id: userId })
+        .returning("*")
+        .execute();
+
+      console.log(res.raw);
+
+      return user;
+    } catch (err) {
+      throw new Error(JSON.stringify(err));
+    }
+  }
 }
