@@ -78,8 +78,12 @@ const Contact = () => {
                     margin: "20px",
                   }}
                 >
-                  Leave a message
-                  {/* <MessageIcon style={{ width: "30px" }} /> */}
+                  Leave a message{" "}
+                  <img
+                    alt=""
+                    src="/images/icons/message.svg"
+                    style={{ width: "30px" }}
+                  />
                 </h4>
                 <Card.Body>
                   <Form className="contact-form">
@@ -111,10 +115,9 @@ const Contact = () => {
                         <option disabled value="">
                           Select Topic*
                         </option>
-                        <option value="business inquiry">
-                          Business Inquiry
-                        </option>
+                        <option value="business">Business Inquiry</option>
                         <option value="collaboration">Collaboration</option>
+                        <option value="suggestion">Suggestion</option>
                         <option value="other">Other</option>
                       </Form.Control>
                     </Form.Group>
