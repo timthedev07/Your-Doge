@@ -112,7 +112,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 640px) {
   .nav-bar .nav-item,
   .nav-bar .nav-item:hover {
     padding-left: 10px;
