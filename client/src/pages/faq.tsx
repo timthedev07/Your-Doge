@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-const Support: FC = () => {
+const FAQ: FC = () => {
   return <div>SUPPORT</div>;
 };
 
-export default Support;
+export default FAQ;

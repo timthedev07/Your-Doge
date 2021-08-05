@@ -114,8 +114,8 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
       url: "/contact",
     },
     {
-      name: "Support",
-      url: "/support",
+      name: "FAQ",
+      url: "/faq",
     },
   ];
 
