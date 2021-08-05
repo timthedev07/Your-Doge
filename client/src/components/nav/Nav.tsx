@@ -6,7 +6,7 @@ import Link from "next/link";
 import AvatarData from "../../../avatarData.json";
 import { AvatarKeyType } from "../../types/types";
 
-const THRESHOLD = 571;
+const THRESHOLD = 580;
 
 interface SBItemProps {
   url: string;

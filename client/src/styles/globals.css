@@ -33,7 +33,7 @@ div.App {
   background-size: cover;
 }
 
-@media screen and (max-width: 571px) {
+@media screen and (max-width: 580px) {
   div.App {
     padding-top: 0;
   }
