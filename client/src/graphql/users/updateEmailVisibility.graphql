@@ -1,0 +1,13 @@
+mutation UpdateEmailVisibility {
+  toggleEmailVisibility {
+    age
+    avatarId
+    bio
+    email
+    emailPrivate
+    id
+    provider
+    serverId
+    username
+  }
+}

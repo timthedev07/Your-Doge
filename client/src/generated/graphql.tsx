@@ -39,6 +39,7 @@ export type Mutation = {
   facebookOAuth: OAuthResponse;
   updateUsername: Scalars['Boolean'];
   updatePassword: Scalars['Boolean'];
+  toggleEmailVisibility: User;
 };
 
 
@@ -308,6 +309,11 @@ export type UpdateAvatarMutationVariables = Exact<{
 
 
 export type UpdateAvatarMutation = { __typename?: 'Mutation', updateAvatarId: boolean };
+
+export type UpdateEmailVisibilityMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type UpdateEmailVisibilityMutation = { __typename?: 'Mutation', toggleEmailVisibility: { __typename?: 'User', age: number, avatarId: number, bio: string, email: string, emailPrivate: boolean, id: number, provider?: Maybe<string>, serverId: number, username: string } };
 
 export type UpdatePasswordMutationVariables = Exact<{
   newPassword: Scalars['String'];
@@ -930,6 +936,46 @@ export function useUpdateAvatarMutation(baseOptions?: Apollo.MutationHookOptions
 export type UpdateAvatarMutationHookResult = ReturnType<typeof useUpdateAvatarMutation>;
 export type UpdateAvatarMutationResult = Apollo.MutationResult<UpdateAvatarMutation>;
 export type UpdateAvatarMutationOptions = Apollo.BaseMutationOptions<UpdateAvatarMutation, UpdateAvatarMutationVariables>;
+export const UpdateEmailVisibilityDocument = gql`
+    mutation UpdateEmailVisibility {
+  toggleEmailVisibility {
+    age
+    avatarId
+    bio
+    email
+    emailPrivate
+    id
+    provider
+    serverId
+    username
+  }
+}
+    `;
+export type UpdateEmailVisibilityMutationFn = Apollo.MutationFunction<UpdateEmailVisibilityMutation, UpdateEmailVisibilityMutationVariables>;
+
+/**
+ * __useUpdateEmailVisibilityMutation__
+ *
+ * To run a mutation, you first call `useUpdateEmailVisibilityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateEmailVisibilityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateEmailVisibilityMutation, { data, loading, error }] = useUpdateEmailVisibilityMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useUpdateEmailVisibilityMutation(baseOptions?: Apollo.MutationHookOptions<UpdateEmailVisibilityMutation, UpdateEmailVisibilityMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateEmailVisibilityMutation, UpdateEmailVisibilityMutationVariables>(UpdateEmailVisibilityDocument, options);
+      }
+export type UpdateEmailVisibilityMutationHookResult = ReturnType<typeof useUpdateEmailVisibilityMutation>;
+export type UpdateEmailVisibilityMutationResult = Apollo.MutationResult<UpdateEmailVisibilityMutation>;
+export type UpdateEmailVisibilityMutationOptions = Apollo.BaseMutationOptions<UpdateEmailVisibilityMutation, UpdateEmailVisibilityMutationVariables>;
 export const UpdatePasswordDocument = gql`
     mutation UpdatePassword($newPassword: String!, $oldPassword: String!) {
   updatePassword(newPassword: $newPassword, oldPassword: $oldPassword)
