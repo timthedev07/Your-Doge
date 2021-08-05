@@ -12,16 +12,18 @@
 
 #contact-page #contact-card-wrapper {
   margin-top: 130px;
+  z-index: 101;
 }
 
 #contact-page #contact-card-wrapper #contact-card {
-  background-color: white;
+  background-color: #313131;
   min-height: 700px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
   width: 70vw;
   min-width: 300px;
   max-width: 600px;
   border-radius: 10px;
+  z-index: 1010;
 }
 
 .contact-submit {
@@ -35,11 +37,13 @@
 .contact-form-input {
   z-index: 1;
   resize: none;
+  background-color: #313131 !important;
+  color: inherit !important;
 }
 
 .contact-form-label {
   z-index: 100;
-  background-color: white;
+  background-color: inherit;
   position: absolute;
   top: 0.525rem;
   left: 0.725rem;
@@ -58,14 +62,17 @@
 /* when the inputs is focused */
 .contact-form-input:focus ~ .contact-form-label {
   transform: translateY(-22px) scale(0.95);
-  color: #1a73e8;
+  color: #e8b11a;
   z-index: 10;
+  background-color: #313131;
+  border-color: #e8b11a !important;
 }
 /* when input is not focused and the field is not empty */
 .contact-form-input:not(:placeholder-shown).contact-form-input:not(:focus)
   ~ .contact-form-label {
-  color: #1a73e8;
+  color: #e8b11a;
   transform: translateY(-22px) scale(0.95);
+  background-color: #313131;
 }
 /* when input is not focused and the field is empty */
 .contact-form-input:placeholder-shown.contact-form-input:not(:focus)
@@ -76,6 +83,7 @@
 .contact-form-input:focus {
   outline: transparent;
   box-shadow: none !important;
+  border-color: #e8b11a !important;
 }
 .contact-form-input:focus ~ .contact-form-input::placeholder {
   color: transparent;
@@ -132,12 +140,12 @@
   transform: scale(1.05);
 }
 .contact-pane-header {
-  background-color: rgb(0, 162, 226);
+  background-color: rgb(226, 154, 0);
   height: 230px;
-  color: white;
+  color: inherit;
   width: 100%;
   position: absolute;
-  z-index: -100;
+  z-index: 100;
   padding: 30px;
   padding-left: 10vw;
 }
