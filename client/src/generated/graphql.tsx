@@ -190,7 +190,7 @@ export type ConfirmEmailMutationVariables = Exact<{
 }>;
 
 
-export type ConfirmEmailMutation = { __typename?: 'Mutation', confirmUser: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string> } } };
+export type ConfirmEmailMutation = { __typename?: 'Mutation', confirmUser: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string>, emailPrivate: boolean } } };
 
 export type DiscordOAuthMutationVariables = Exact<{
   accent_color?: Maybe<Scalars['String']>;
@@ -209,7 +209,7 @@ export type DiscordOAuthMutationVariables = Exact<{
 }>;
 
 
-export type DiscordOAuthMutation = { __typename?: 'Mutation', discordOAuth: { __typename?: 'OAuthResponse', status: string, accessToken: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string> }> } };
+export type DiscordOAuthMutation = { __typename?: 'Mutation', discordOAuth: { __typename?: 'OAuthResponse', status: string, accessToken: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string>, emailPrivate: boolean }> } };
 
 export type FacebookOAuthMutationMutationVariables = Exact<{
   id: Scalars['String'];
@@ -219,7 +219,7 @@ export type FacebookOAuthMutationMutationVariables = Exact<{
 }>;
 
 
-export type FacebookOAuthMutationMutation = { __typename?: 'Mutation', facebookOAuth: { __typename?: 'OAuthResponse', accessToken: string, status: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string> }> } };
+export type FacebookOAuthMutationMutation = { __typename?: 'Mutation', facebookOAuth: { __typename?: 'OAuthResponse', accessToken: string, status: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string>, emailPrivate: boolean }> } };
 
 export type ForgotPasswordMutationVariables = Exact<{
   email: Scalars['String'];
@@ -241,7 +241,7 @@ export type GoogleOAuthMutationVariables = Exact<{
 }>;
 
 
-export type GoogleOAuthMutation = { __typename?: 'Mutation', googleOAuth: { __typename?: 'OAuthResponse', status: string, accessToken: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string> }> } };
+export type GoogleOAuthMutation = { __typename?: 'Mutation', googleOAuth: { __typename?: 'OAuthResponse', status: string, accessToken: string, user?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string>, emailPrivate: boolean }> } };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -249,7 +249,7 @@ export type LoginMutationVariables = Exact<{
 }>;
 
 
-export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string> } } };
+export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string>, emailPrivate: boolean } } };
 
 export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
@@ -286,12 +286,12 @@ export type GetProfileQueryVariables = Exact<{
 }>;
 
 
-export type GetProfileQuery = { __typename?: 'Query', getProfile?: Maybe<{ __typename?: 'User', username: string, bio: string, email: string, age: number, avatarId: number }> };
+export type GetProfileQuery = { __typename?: 'Query', getProfile?: Maybe<{ __typename?: 'User', username: string, bio: string, email: string, age: number, avatarId: number, emailPrivate: boolean }> };
 
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MeQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string> }> };
+export type MeQuery = { __typename?: 'Query', me?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string>, emailPrivate: boolean }> };
 
 export type ResetPasswordMutationVariables = Exact<{
   token: Scalars['String'];
@@ -323,7 +323,7 @@ export type UpdateProfileMutationVariables = Exact<{
 }>;
 
 
-export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string> }> };
+export type UpdateProfileMutation = { __typename?: 'Mutation', updateProfile?: Maybe<{ __typename?: 'User', id: number, username: string, email: string, bio: string, serverId: number, avatarId: number, age: number, provider?: Maybe<string>, emailPrivate: boolean }> };
 
 export type UpdateUsernameMutationVariables = Exact<{
   newUsername: Scalars['String'];
@@ -354,6 +354,7 @@ export const ConfirmEmailDocument = gql`
       avatarId
       age
       provider
+      emailPrivate
     }
   }
 }
@@ -411,6 +412,7 @@ export const DiscordOAuthDocument = gql`
       avatarId
       age
       provider
+      emailPrivate
     }
     accessToken
   }
@@ -473,6 +475,7 @@ export const FacebookOAuthMutationDocument = gql`
       avatarId
       age
       provider
+      emailPrivate
     }
   }
 }
@@ -560,6 +563,7 @@ export const GoogleOAuthDocument = gql`
       avatarId
       age
       provider
+      emailPrivate
     }
     accessToken
   }
@@ -612,6 +616,7 @@ export const LoginDocument = gql`
       avatarId
       age
       provider
+      emailPrivate
     }
   }
 }
@@ -783,6 +788,7 @@ export const GetProfileDocument = gql`
     email
     age
     avatarId
+    emailPrivate
   }
 }
     `;
@@ -825,6 +831,7 @@ export const MeDocument = gql`
     avatarId
     age
     provider
+    emailPrivate
   }
 }
     `;
@@ -966,6 +973,7 @@ export const UpdateProfileDocument = gql`
     avatarId
     age
     provider
+    emailPrivate
   }
 }
     `;

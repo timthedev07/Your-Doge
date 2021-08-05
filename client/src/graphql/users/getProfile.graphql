@@ -5,5 +5,6 @@ query GetProfile($username: String!) {
     email
     age
     avatarId
+    emailPrivate
   }
 }

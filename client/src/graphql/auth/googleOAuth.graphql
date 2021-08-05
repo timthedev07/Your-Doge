@@ -30,6 +30,7 @@ mutation GoogleOAuth(
       avatarId
       age
       provider
+      emailPrivate
     }
     accessToken
   }

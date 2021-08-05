@@ -10,6 +10,7 @@ mutation Login($email: String!, $password: String!) {
       avatarId
       age
       provider
+      emailPrivate
     }
   }
 }

@@ -38,6 +38,7 @@ mutation DiscordOAuth(
       avatarId
       age
       provider
+      emailPrivate
     }
     accessToken
   }

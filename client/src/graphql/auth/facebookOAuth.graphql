@@ -21,6 +21,7 @@ mutation FacebookOAuthMutation(
       avatarId
       age
       provider
+      emailPrivate
     }
   }
 }
