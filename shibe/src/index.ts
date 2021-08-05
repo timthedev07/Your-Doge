@@ -27,6 +27,7 @@ const HOSTNAME = process.env.HOST || "0.0.0.0";
       origin: [FRONTEND, PLAYGROUND],
     })
   );
+  app.use("/", AuthRouter);
   app.use("/auth", AuthRouter);
 
   const apolloServer = new ApolloServer({
