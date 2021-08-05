@@ -8,7 +8,7 @@ import { HTMLFileToString } from "../utils/html";
 export const router = express.Router();
 
 router.post("/contact", async (req, res) => {
-  const { fullName, topic, customerEmail, message } = req.body();
+  const { fullName, topic, customerEmail, message } = req.body;
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -53,11 +53,9 @@ ${message}
   const mailResponse = await transporter.sendMail(mailOptions);
 
   if (mailResponse.accepted.length) {
-    res
-      .status(200)
-      .json({
-        message: "Thank you for contacting us, we will reply to you ASAP!",
-      });
+    res.status(200).json({
+      message: "Thank you for contacting us, we will reply to you ASAP!",
+    });
   } else {
     res.status(400).json({ message: "Failed to send request." });
   }
