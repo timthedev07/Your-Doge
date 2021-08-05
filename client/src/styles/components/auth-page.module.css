@@ -22,7 +22,7 @@
   padding-right: 10%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
   .form-container-login {
     align-items: center;
     padding-right: 0;
