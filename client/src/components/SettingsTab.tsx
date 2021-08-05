@@ -6,6 +6,7 @@ import {
   useDeleteAccountMutation,
   useUpdateUsernameMutation,
   useUpdatePasswordMutation,
+  useUpdateEmailVisibilityMutation,
 } from "../generated/graphql";
 import { Modal, Button } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
@@ -58,6 +59,7 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
   const [updateUsername] = useUpdateUsernameMutation();
   const [updatePassword] = useUpdatePasswordMutation();
+  const [toggleEmailVisibility] = useUpdateEmailVisibilityMutation();
 
   const displayError = (message: string) => {
     setAlertMessage(message);
@@ -264,9 +266,27 @@ export const SettingsTab: React.FC<SettingsTabProps> = ({ username }) => {
           </SettingsContentSection>
         )}
         <SettingsContentSection title="Change your email visibility">
-          <select defaultValue={"default"} style={{ width: "190px" }}>
-            <option>private</option>
-            <option>public</option>
+          <select
+            onChange={async () => {
+              await toggleEmailVisibility({
+                update: (store, { data }) => {
+                  if (!data) return null;
+                  store.writeQuery<MeQuery>({
+                    query: MeDocument,
+                    data: {
+                      __typename: "Query",
+                      me: data.toggleEmailVisibility,
+                    },
+                  });
+                  return null;
+                },
+              });
+            }}
+            defaultValue={currentUser?.emailPrivate ? "private" : "public"}
+            style={{ width: "190px" }}
+          >
+            <option value="private">private</option>
+            <option value="public">public</option>
           </select>
         </SettingsContentSection>
 
