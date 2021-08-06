@@ -8,7 +8,7 @@ const NotFound: React.FC = () => {
   return (
     <div id="not-found-page">
       <Head>
-        <title>404</title>
+        <title>404 | Your Doge</title>
       </Head>
       <div className="not-found-content">
         <h1>

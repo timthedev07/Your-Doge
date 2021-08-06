@@ -4,6 +4,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
+import Head from "next/head";
 
 const FAQContent = () => {
   return (
@@ -43,6 +44,9 @@ const FAQContent = () => {
 const FAQ: FC = () => {
   return (
     <div className="faq-page">
+      <Head>
+        <title>FAQ | Your Doge</title>
+      </Head>
       <header className="faq-page-header">
         <div className="faq-page-header__background"></div>
         <h1 className="fag-page-header__heading">FAQ</h1>

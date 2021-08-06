@@ -7,6 +7,7 @@ import axios from "axios";
 import { AlertType } from "../types/types";
 import { validateEmail } from "./auth/register";
 import ReCAPTCHA from "react-google-recaptcha";
+import Head from "next/head";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -77,6 +78,9 @@ const Contact = () => {
 
   return (
     <>
+      <Head>
+        <title>Contact Us | Your Doge</title>
+      </Head>
       {loading ? <Loading /> : null}
       <Alert
         text={message}

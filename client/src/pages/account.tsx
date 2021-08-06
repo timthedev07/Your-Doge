@@ -5,6 +5,7 @@ import { TabSwitcher } from "../components/TabSwitcher";
 import { TabData } from "../types/types";
 import { useRouter } from "next/router";
 import { useAuth } from "../contexts/AuthContext";
+import Head from "next/head";
 
 const Account: React.FC = () => {
   const { authState, currentUser } = useAuth()!;
@@ -49,11 +50,16 @@ const Account: React.FC = () => {
   ];
 
   return (
-    <div id="account-page">
-      <div id="account-page-content-container">
-        <TabSwitcher tabs={TABS} />
+    <>
+      <Head>
+        <title>Account | Your Doge</title>
+      </Head>
+      <div id="account-page">
+        <div id="account-page-content-container">
+          <TabSwitcher tabs={TABS} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React from "react";
 
 interface PricingProps {}
@@ -5,6 +6,9 @@ interface PricingProps {}
 const Pricing: React.FC<PricingProps> = ({}) => {
   return (
     <>
+      <Head>
+        <title>Pricing | Your Doge</title>
+      </Head>
       <div
         style={{
           display: "flex",
