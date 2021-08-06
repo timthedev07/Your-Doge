@@ -2,7 +2,7 @@ import { Field, Int, ObjectType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 @ObjectType()
-@Entity("homework")
+@Entity("subject")
 export class Subject extends BaseEntity {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
