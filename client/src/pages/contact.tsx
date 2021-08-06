@@ -6,6 +6,7 @@ import { BACKEND } from "../constants/apollo";
 import axios from "axios";
 import { AlertType } from "../types/types";
 import { validateEmail } from "./auth/register";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -18,6 +19,7 @@ const Contact = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const topicRef = useRef<HTMLSelectElement>(null);
   const messageRef = useRef<HTMLTextAreaElement>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>();
 
   const activateAlert = (message: string, type: AlertType = "warning") => {
     setActive(true);
@@ -56,6 +58,7 @@ const Contact = () => {
           topic: topicRef.current!.value,
           customerEmail: emailRef.current!.value,
           message: messageRef.current!.value,
+          recaptchaToken: await recaptchaRef.current?.executeAsync(),
         },
         headers: { "Content-Type": "application/json" },
         method: "post",
@@ -173,6 +176,11 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      <ReCAPTCHA
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA || ""}
+        size="invisible"
+        ref={recaptchaRef as any}
+      />
     </>
   );
 };
