@@ -50,6 +50,7 @@
   cursor: pointer;
   text-transform: uppercase;
   text-align: center;
+  height: 60px;
 }
 .side-bar .side-bar-item,
 .side-bar .side-bar-item:hover {
