@@ -52,10 +52,10 @@ const FAQContent = () => {
         />
         <Accordion
           title="What is the maximum number of items you can have?"
-          content="Unfortunately, we don't have that much resources, so each user can have 500 items of homework maximum."
+          content="Unfortunately, we don't have that much resources, so each user can have 500 items of homework maximum. However, you can request to increase the quota."
         />
         <Accordion
-          title="Is there anyway you can break the limit?"
+          title="What do I do when I need more quota?"
           content="If you find our service helpful and want to increase the quota to continue using it, you can send us a message on our contact page. Make sure the 'quota' option is selected as the topic, and in the body section, tell us the reason you want to increase the limit."
         />
         <Accordion
