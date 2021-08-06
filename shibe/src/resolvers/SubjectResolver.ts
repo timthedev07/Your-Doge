@@ -1,4 +1,4 @@
-import { Arg, Mutation, Resolver } from "type-graphql";
+import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import { getConnection } from "typeorm";
 import { Subject } from "../entity/Subject";
 
@@ -14,6 +14,15 @@ export class SubjectResolver {
         .values({ name })
         .execute();
       return true;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  @Query(() => [Subject])
+  async subjects() {
+    try {
+      return await Subject.find();
     } catch (err) {
       return false;
     }
