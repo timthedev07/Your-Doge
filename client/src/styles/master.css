@@ -3,6 +3,7 @@
 @import url(./pages/dashboard.module.css);
 @import url(./pages/account.module.css);
 @import url(./pages/contact.module.css);
+@import url(./pages/faq.module.css);
 
 /* components */
 @import url(./components/animatedBtn.module.css);
