@@ -11,10 +11,27 @@ const Accordion: React.FC<CustomAccordionProps> = ({ content, title }) => {
   return (
     <MUAccordion>
       <AccordionSummary expandIcon={<ExpandIcon />}>
-        <Typography>{title}</Typography>
+        <Typography>
+          <h5>
+            <img
+              style={{ width: "45px", height: "45px" }}
+              src="/images/icons/question.svg"
+              alt=""
+            />
+            {title}
+          </h5>
+        </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>{content}</Typography>
+        <Typography>
+          <img
+            style={{ width: "45px", height: "45px" }}
+            src="/images/logo.png"
+            alt=""
+          />
+          <strong style={{ fontSize: "20px" }}>: </strong>
+          {content}
+        </Typography>
       </AccordionDetails>
     </MUAccordion>
   );
@@ -38,7 +55,11 @@ const FAQContent = () => {
         />
         <Accordion
           title="Is there anyway you can break the limit?"
-          content="If you find our service helpful and want to increase the quota to continue using it, you can send us a message on our contact page and make sure the 'quota' option is selected as the topic."
+          content="If you find our service helpful and want to increase the quota to continue using it, you can send us a message on our contact page. Make sure the 'quota' option is selected as the topic, and in the body section, tell us the reason you want to increase the limit."
+        />
+        <Accordion
+          title="What would happen once you delete your account?"
+          content="Your account will be permanently removed along with you homework data. You cannot recover anything once the process is complete."
         />
       </div>
     </div>

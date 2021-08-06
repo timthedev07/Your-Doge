@@ -30,7 +30,7 @@ header.faq-page-header .faq-page-header__background {
   justify-content: center;
   align-items: center;
   margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
 }
 
 @media screen and (max-width: 990px) {
