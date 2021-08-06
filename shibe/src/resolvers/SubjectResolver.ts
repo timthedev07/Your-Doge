@@ -6,6 +6,10 @@ import { Subject } from "../entity/Subject";
 export class SubjectResolver {
   @Mutation(() => Boolean)
   async addSubject(@Arg("name") name: string) {
+    if (!name) {
+      return false;
+    }
+
     try {
       await getConnection()
         .createQueryBuilder()
