@@ -287,6 +287,11 @@ export type ResendConfEmailMutationVariables = Exact<{
 
 export type ResendConfEmailMutation = { __typename?: 'Mutation', resendConfirmationUrl: boolean };
 
+export type SubjectsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubjectsQuery = { __typename?: 'Query', subjects: Array<{ __typename?: 'Subject', id: number, name: string }> };
+
 export type DeleteAccountMutationVariables = Exact<{
   password: Scalars['String'];
   username: Scalars['String'];
@@ -767,6 +772,41 @@ export function useResendConfEmailMutation(baseOptions?: Apollo.MutationHookOpti
 export type ResendConfEmailMutationHookResult = ReturnType<typeof useResendConfEmailMutation>;
 export type ResendConfEmailMutationResult = Apollo.MutationResult<ResendConfEmailMutation>;
 export type ResendConfEmailMutationOptions = Apollo.BaseMutationOptions<ResendConfEmailMutation, ResendConfEmailMutationVariables>;
+export const SubjectsDocument = gql`
+    query Subjects {
+  subjects {
+    id
+    name
+  }
+}
+    `;
+
+/**
+ * __useSubjectsQuery__
+ *
+ * To run a query within a React component, call `useSubjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSubjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubjectsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSubjectsQuery(baseOptions?: Apollo.QueryHookOptions<SubjectsQuery, SubjectsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SubjectsQuery, SubjectsQueryVariables>(SubjectsDocument, options);
+      }
+export function useSubjectsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SubjectsQuery, SubjectsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SubjectsQuery, SubjectsQueryVariables>(SubjectsDocument, options);
+        }
+export type SubjectsQueryHookResult = ReturnType<typeof useSubjectsQuery>;
+export type SubjectsLazyQueryHookResult = ReturnType<typeof useSubjectsLazyQuery>;
+export type SubjectsQueryResult = Apollo.QueryResult<SubjectsQuery, SubjectsQueryVariables>;
 export const DeleteAccountDocument = gql`
     mutation DeleteAccount($password: String!, $username: String!) {
   deleteAccount(password: $password, username: $username)
