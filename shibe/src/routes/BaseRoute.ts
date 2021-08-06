@@ -4,11 +4,16 @@ import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import path from "path";
 import { HTMLFileToString } from "../utils/html";
+import { validateHuman } from "../utils/validateHuman";
 
 export const router = express.Router();
 
 router.post("/contact", async (req, res) => {
-  const { fullName, topic, customerEmail, message } = req.body;
+  const { fullName, topic, customerEmail, message, recaptchaToken } = req.body;
+
+  if (!recaptchaToken || !(await validateHuman(recaptchaToken))) {
+    throw new Error("Human validation failed.");
+  }
 
   const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
