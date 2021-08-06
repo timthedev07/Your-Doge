@@ -6,6 +6,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
 import Head from "next/head";
+import Link from "next/link";
 
 const Accordion: React.FC<CustomAccordionProps> = ({ content, title }) => {
   return (
@@ -48,11 +49,39 @@ const FAQContent = () => {
         />
         <Accordion
           title="What do I do when I need more quota?"
-          content="If you find our service helpful and want to increase the quota to continue using it, you can send us a message on our contact page. Make sure the 'quota' option is selected as the topic, and in the body section, tell us the reason why you want to increase the limit."
+          content={
+            <div>
+              If you find our service helpful and want to increase the quota to
+              continue using it, you can send us a message{" "}
+              <Link href="/contact" passHref>
+                <a className="normal-links">here</a>
+              </Link>
+              . Make sure the &apos;quota&apos; option is selected as the topic,
+              and in the body section, tell us the reason why you want to
+              increase the limit.
+            </div>
+          }
         />
         <Accordion
           title="What would happen once you delete your account?"
           content="Your account will be permanently removed along with you homework data. You cannot recover anything once the process is complete."
+        />
+        <Accordion
+          title="How do you handle our data?"
+          content={
+            <div>
+              We provide our customers free service, and we promise that we
+              won&apos;t violate any policy or sell your data. Please see our{" "}
+              <Link href="/terms-and-conditions">
+                <a className="normal-links">Terms and Conditions</a>
+              </Link>
+              {" and "}
+              <Link href="/privacy-policy">
+                <a className="normal-links">Privacy Policy</a>
+              </Link>{" "}
+              for more information.
+            </div>
+          }
         />
       </div>
     </div>
