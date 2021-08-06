@@ -1,5 +1,4 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { getConnection } from "typeorm";
 import { Subject } from "../entity/Subject";
 
 @Resolver()
@@ -11,12 +10,7 @@ export class SubjectResolver {
     }
 
     try {
-      await getConnection()
-        .createQueryBuilder()
-        .insert()
-        .into(Subject)
-        .values({ name })
-        .execute();
+      await Subject.insert({ name });
       return true;
     } catch (err) {
       return false;
