@@ -196,6 +196,17 @@ export const Nav: React.FC<Props> = ({ transparent }) => {
             {each.name}
           </SidebarItem>
         ))}
+        {auth === "auth" && (
+          <SidebarItem url="/account">
+            <img
+              style={{ width: "95%", height: "95%" }}
+              src={`/images/avatars/${
+                AvatarData[`${currentUser!.avatarId}` as AvatarKeyType]
+              }.svg`}
+              alt=""
+            />
+          </SidebarItem>
+        )}
       </div>
     </>
   );
