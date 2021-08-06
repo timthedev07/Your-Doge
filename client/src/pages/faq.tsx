@@ -48,7 +48,7 @@ const FAQContent = () => {
         />
         <Accordion
           title="What do I do when I need more quota?"
-          content="If you find our service helpful and want to increase the quota to continue using it, you can send us a message on our contact page. Make sure the 'quota' option is selected as the topic, and in the body section, tell us the reason you want to increase the limit."
+          content="If you find our service helpful and want to increase the quota to continue using it, you can send us a message on our contact page. Make sure the 'quota' option is selected as the topic, and in the body section, tell us the reason why you want to increase the limit."
         />
         <Accordion
           title="What would happen once you delete your account?"
