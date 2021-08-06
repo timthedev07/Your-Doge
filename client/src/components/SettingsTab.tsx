@@ -33,7 +33,9 @@ const SettingsContentSection: React.FC<SettingsContentSectionProps> = ({
   return (
     <section className="settings-content-section">
       <h4 style={titleColor ? { color: titleColor } : {}}>{title}</h4>
-      <hr />
+
+      <hr style={{ height: "1.5px" }} />
+
       <div className="settings-content-section__inner-content">{children}</div>
     </section>
   );
