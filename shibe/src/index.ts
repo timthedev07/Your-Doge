@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { UserResolver } from "./resolvers/UserResolvers";
+import { SubjectResolver } from "./resolvers/SubjectResolver";
 import { buildSchema } from "type-graphql";
 import { router as AuthRouter } from "./routes/AuthRoute";
 import cookieParser from "cookie-parser";
@@ -32,7 +33,7 @@ const HOSTNAME = process.env.HOST || "0.0.0.0";
   app.use("/auth", AuthRouter);
 
   const apolloServer = new ApolloServer({
-    schema: await buildSchema({ resolvers: [UserResolver] }),
+    schema: await buildSchema({ resolvers: [UserResolver, SubjectResolver] }),
     context: ({ req, res }) => ({ req, res }),
   });
 
