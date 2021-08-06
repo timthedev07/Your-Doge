@@ -9,7 +9,7 @@ export class Subject extends BaseEntity {
   id: number;
 
   @Field(() => String)
-  @Column({ type: "varchar", length: "100" })
+  @Column({ type: "varchar", length: "100", unique: true })
   name: string;
 }
 
