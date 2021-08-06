@@ -1,0 +1,40 @@
+header.faq-page-header {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+header.faq-page-header .faq-page-header__background {
+  background-image: url(../../../public/images/faq-header-background.png);
+  background-repeat: no-repeat;
+  background-color: rgb(206, 148, 42);
+  background-position: 80% bottom;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  position: absolute;
+}
+
+.faq-page-header .fag-page-header__heading {
+  font-family: "Roboto Medium";
+  font-size: 60px;
+  margin-left: 30px;
+  z-index: 4;
+}
+
+@media screen and (max-width: 990px) {
+  .faq-page-header {
+    justify-content: center;
+    filter: blur(10px);
+    z-index: -1;
+  }
+  .faq-page-header .fag-page-header__heading {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    filter: blur(0);
+  }
+}
