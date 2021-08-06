@@ -40,6 +40,7 @@ export type Mutation = {
   updateUsername: Scalars['Boolean'];
   updatePassword: Scalars['Boolean'];
   toggleEmailVisibility: User;
+  addSubject: Scalars['Boolean'];
 };
 
 
@@ -155,6 +156,11 @@ export type MutationUpdatePasswordArgs = {
   newPassword: Scalars['String'];
 };
 
+
+export type MutationAddSubjectArgs = {
+  name: Scalars['String'];
+};
+
 export type OAuthResponse = {
   __typename?: 'OAuthResponse';
   accessToken: Scalars['String'];
@@ -166,11 +172,18 @@ export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
   getProfile?: Maybe<User>;
+  subjects: Array<Subject>;
 };
 
 
 export type QueryGetProfileArgs = {
   username: Scalars['String'];
+};
+
+export type Subject = {
+  __typename?: 'Subject';
+  id: Scalars['Int'];
+  name: Scalars['String'];
 };
 
 export type User = {
