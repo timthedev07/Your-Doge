@@ -18,6 +18,7 @@ const Accordion: React.FC<CustomAccordionProps> = ({ content, title }) => {
               src="/images/icons/question.svg"
               alt=""
             />
+            &nbsp;&nbsp;
             {title}
           </h5>
         </Typography>
@@ -29,7 +30,7 @@ const Accordion: React.FC<CustomAccordionProps> = ({ content, title }) => {
             src="/images/logo.png"
             alt=""
           />
-          <strong style={{ fontSize: "20px" }}>: </strong>
+          &nbsp;&nbsp;&nbsp;
           {content}
         </Typography>
       </AccordionDetails>
