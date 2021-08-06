@@ -1,41 +1,45 @@
 import React, { FC } from "react";
-import Accordion from "@material-ui/core/Accordion";
+import { CustomAccordionProps } from "../types/props";
+import MUAccordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
 import Head from "next/head";
 
+const Accordion: React.FC<CustomAccordionProps> = ({ content, title }) => {
+  return (
+    <MUAccordion>
+      <AccordionSummary expandIcon={<ExpandIcon />}>
+        <Typography>{title}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>{content}</Typography>
+      </AccordionDetails>
+    </MUAccordion>
+  );
+};
+
 const FAQContent = () => {
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <div className="faq-accordions-container">
       <div
         style={{
           width: "70%",
         }}
       >
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandIcon />}
-            aria-controls="panel2a-content"
-            id="panel2a-header"
-          >
-            <Typography>Accordion 2</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
+        <Accordion
+          title="What is the purpose of Your Doge?"
+          content="Our destiny is to provide a clean, intuitive, and friendly software to manage your homework effectively and increase your productivity."
+        />
+        <Accordion
+          title="What is the maximum number of items you can have?"
+          content="Unfortunately, we don't have that much resources, so each user can have 500 items of homework maximum."
+        />
+        <Accordion
+          title="Is there anyway you can break the limit?"
+          content="If you find our service helpful and want to increase the quota to continue using it, you can send us a message on our contact page and make sure the 'quota' option is selected as the topic."
+        />
       </div>
     </div>
   );

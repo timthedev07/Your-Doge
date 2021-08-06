@@ -58,3 +58,8 @@ export interface MenuButtonProps {
   open: boolean;
   onClick: () => void;
 }
+
+export interface CustomAccordionProps {
+  title: string;
+  content: string;
+}
