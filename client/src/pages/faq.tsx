@@ -3,7 +3,6 @@ import { CustomAccordionProps } from "../types/props";
 import MUAccordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-import Typography from "@material-ui/core/Typography";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
 import Head from "next/head";
 import Link from "next/link";
@@ -12,21 +11,17 @@ const Accordion: React.FC<CustomAccordionProps> = ({ content, title }) => {
   return (
     <MUAccordion>
       <AccordionSummary expandIcon={<ExpandIcon />}>
-        <Typography>
-          <h5>
-            <img
-              style={{ width: "45px", height: "45px" }}
-              src="/images/icons/question.svg"
-              alt=""
-            />
-            &nbsp;&nbsp;
-            {title}
-          </h5>
-        </Typography>
+        <h5>
+          <img
+            style={{ width: "45px", height: "45px" }}
+            src="/images/icons/question.svg"
+            alt=""
+          />
+          &nbsp;&nbsp;
+          {title}
+        </h5>
       </AccordionSummary>
-      <AccordionDetails>
-        <Typography>{content}</Typography>
-      </AccordionDetails>
+      <AccordionDetails>{content}</AccordionDetails>
     </MUAccordion>
   );
 };
