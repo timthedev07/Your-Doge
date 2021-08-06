@@ -12,3 +12,9 @@ export class Subject extends BaseEntity {
   @Column({ type: "varchar", length: "100" })
   name: string;
 }
+
+/**
+ * mutation AddSubject($name: String!) {
+  addSubject(name: $name)
+}
+ */
