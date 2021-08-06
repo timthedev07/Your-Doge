@@ -24,15 +24,7 @@ const Accordion: React.FC<CustomAccordionProps> = ({ content, title }) => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
-          <img
-            style={{ width: "45px", height: "45px" }}
-            src="/images/logo.png"
-            alt=""
-          />
-          &nbsp;&nbsp;&nbsp;
-          {content}
-        </Typography>
+        <Typography>{content}</Typography>
       </AccordionDetails>
     </MUAccordion>
   );
