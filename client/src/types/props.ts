@@ -61,5 +61,5 @@ export interface MenuButtonProps {
 
 export interface CustomAccordionProps {
   title: string;
-  content: string;
+  content: React.ReactNode;
 }
