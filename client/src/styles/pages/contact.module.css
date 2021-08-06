@@ -39,6 +39,7 @@
   resize: none;
   background-color: #313131 !important;
   color: inherit !important;
+  border-color: rgb(165, 165, 165) !important;
 }
 
 .contact-form-label {
@@ -203,4 +204,8 @@
 
 .contact-form-group__select option {
   background-color: #313131 !important;
+}
+
+.contact-form-group__select {
+  border-color: rgb(165, 165, 165) !important;
 }
