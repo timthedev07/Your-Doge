@@ -33,6 +33,7 @@ body .big-ass-calendar {
   border-radius: 5px;
   border: 0.7px solid gray;
   box-shadow: 0 0 20px gray;
+  z-index: 5;
 }
 
 body abbr {
