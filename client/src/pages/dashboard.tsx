@@ -69,21 +69,21 @@ const Dashboard: React.FC = () => {
 
   const fakeHomework = [
     {
-      id: 0,
+      id: 10,
       title: "Homework 0",
       description: "Dumb homework",
       deadline: "",
-      subjectId: 3,
+      subjectId: 9,
       done: false,
       onTime: false,
       enjoyed: false,
     },
     {
-      id: 1,
+      id: 9,
       title: "Homework 1",
       description: "Still dumb homework",
       deadline: "",
-      subjectId: 15,
+      subjectId: 10,
       done: true,
       onTime: true,
       enjoyed: false,
@@ -94,8 +94,8 @@ const Dashboard: React.FC = () => {
     <div className="dashboard-container">
       <h1 className="dashboard-heading">Dashboard</h1>
 
-      <table className="homework-table">
-        {!subjectsLoading ? (
+      <ul className="homework-list">
+        {subjectsLoading ? (
           <div
             style={{
               width: "100%",
@@ -119,23 +119,19 @@ const Dashboard: React.FC = () => {
               <rect x="10" y="195" rx="5" ry="5" width="98%" height="40" />
             </ContentLoader>
           </div>
-        ) : subjectsLoading ? (
-          ""
         ) : (
           <>
-            <tr>
-              <th>Title</th>
-              <th>Subject</th>
-            </tr>
             {fakeHomework.map((each) => (
-              <tr key={each.title} className="homework-table-item">
-                <td>{each.title}</td>
-                <td>{subjectsMap![each.subjectId]}</td>
-              </tr>
+              <li key={each.id} className="homework-item">
+                <div className="homework-title">{each.title}</div>
+                <div className="homework-subject">
+                  {subjectsMap![each.subjectId]}
+                </div>
+              </li>
             ))}
           </>
         )}
-      </table>
+      </ul>
 
       <Calendar
         className="big-ass-calendar"
