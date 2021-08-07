@@ -11,6 +11,7 @@
 
 .dashboard-container .background {
   z-index: 2;
+  filter: blur(30px);
   background-image: url(../../../public/images/tothemoon.jpg);
 }
 
@@ -40,12 +41,6 @@
   position: relative;
   z-index: 5;
 }
-
-.homework-list-container .background {
-  filter: blur(3px);
-  z-index: 3;
-}
-
 .homework-list .homework-item {
   display: flex;
   list-style: none;
