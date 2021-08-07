@@ -7,6 +7,7 @@ import {
 } from "../generated/graphql";
 import { MarkRecordValue } from "../types/types";
 import ContentLoader from "react-content-loader";
+import ReactTooltip from "react-tooltip";
 
 const Dashboard: React.FC = () => {
   // const [marks] = useState<Record<string, MarkRecordValue>>({});
@@ -121,65 +122,79 @@ const Dashboard: React.FC = () => {
   ];
 
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <div className="background" />
-        <h1 className="dashboard-heading">Hello hooman.</h1>
-        <h4 className="dashboard-subheading">{new Date().toDateString()}</h4>
-      </header>
+    <>
+      <ReactTooltip />
 
-      <div className="homework-list-container">
-        {subjectsLoading ? (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              paddingLeft: "10px",
-              paddingRight: "10px",
-              paddingTop: "20px",
-            }}
-          >
-            <ContentLoader
-              foregroundColor="#555555"
-              backgroundColor="#505050"
-              height={"280px"}
-              width={"100%"}
+      <div className="dashboard-container">
+        <header className="dashboard-header">
+          <div className="background" />
+          <h1 className="dashboard-heading">Hello hooman.</h1>
+          <h4 className="dashboard-subheading">{new Date().toDateString()}</h4>
+        </header>
+
+        <div className="homework-list-container">
+          {subjectsLoading ? (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                paddingTop: "20px",
+              }}
             >
-              <rect x="10" y="15" rx="5" ry="5" width="98%" height="40" />
-              <rect x="10" y="75" rx="5" ry="5" width="98%" height="40" />
-              <rect x="10" y="135" rx="5" ry="5" width="98%" height="40" />
-              <rect x="10" y="195" rx="5" ry="5" width="98%" height="40" />
-            </ContentLoader>
-          </div>
-        ) : (
-          <>
-            <ul className="homework-list">
-              {fakeHomework.map((each) => (
-                <li key={each.id} className="homework-item">
-                  <div className="homework-title">{each.title}</div>
-                  <div className="homework-subject">
-                    {subjectsMap![each.subjectId]}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
+              <ContentLoader
+                foregroundColor="#555555"
+                backgroundColor="#505050"
+                height={"280px"}
+                width={"100%"}
+              >
+                <rect x="10" y="15" rx="5" ry="5" width="98%" height="40" />
+                <rect x="10" y="75" rx="5" ry="5" width="98%" height="40" />
+                <rect x="10" y="135" rx="5" ry="5" width="98%" height="40" />
+                <rect x="10" y="195" rx="5" ry="5" width="98%" height="40" />
+              </ContentLoader>
+            </div>
+          ) : (
+            <>
+              <ul className="homework-list">
+                {fakeHomework.map((each) => (
+                  <li key={each.id} className="homework-item">
+                    <div className="homework-title">{each.title}</div>
+                    <div className="homework-subject">
+                      {subjectsMap![each.subjectId]}
+                    </div>
+                    <img
+                      src="/images/icons/rightarrow.svg"
+                      className="homework-item-arrow"
+                      alt=""
+                      data-tip="Click me to view/edit details."
+                    />
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+          <button className="rounded-btn emphasized dashboard-new-homework-button">
+            New
+          </button>
+        </div>
+
+        <Calendar
+          className="big-ass-calendar"
+          // tileClassName={({ date }) => {
+          //   const valueStr = `${date.valueOf()}`;
+          //   if (marks.hasOwnProperty(valueStr)) {
+          //     const key: string = JSON.stringify(marks[valueStr].count);
+          //     return parseInt(key) > 5 ? "damn" : BUSY_CLASSES[key];
+          //   }
+          //   return "";
+          // }}
+        />
       </div>
-      <Calendar
-        className="big-ass-calendar"
-        // tileClassName={({ date }) => {
-        //   const valueStr = `${date.valueOf()}`;
-        //   if (marks.hasOwnProperty(valueStr)) {
-        //     const key: string = JSON.stringify(marks[valueStr].count);
-        //     return parseInt(key) > 5 ? "damn" : BUSY_CLASSES[key];
-        //   }
-        //   return "";
-        // }}
-      />
-    </div>
+    </>
   );
 };
 
