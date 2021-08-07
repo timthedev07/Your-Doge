@@ -1,8 +1,9 @@
 {
-  "name": "homework-manager",
+  "name": "your-doge",
   "version": "0.1.0",
   "private": true,
   "license": "GPL-3.0-or-later",
+  "main": "public/electron.js",
   "dependencies": {
     "@apollo/client": "3.3.8",
     "@apollo/react-hooks": "^4.0.0",
@@ -17,6 +18,8 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "cookie": "^0.4.1",
+    "electron": "13.1.8",
+    "electron-is-dev": "^2.0.0",
     "googleapis": "^82.0.0",
     "graphql": "^15.5.1",
     "jwt-decode": "^3.1.2",
@@ -43,7 +46,10 @@
     "build": "next build",
     "start": "next start",
     "gen": "graphql-codegen --config codegen.yml",
-    "gen-homework": "graphql-codegen --config codegen2.yml"
+    "gen-homework": "graphql-codegen --config codegen2.yml",
+    "export": "next export",
+    "dev:electron": "concurrently -k \"BROWSER=none yarn dev\" \"yarn electron\"",
+    "electron": "wait-on tcp:3000 && electron ."
   },
   "eslintConfig": {
     "extends": [
@@ -78,6 +84,7 @@
     "@types/react-google-recaptcha": "^2.1.2",
     "@types/react-router-dom": "^5.1.8",
     "eslint-config-next": "^11.0.1",
-    "graphql-tag": "^2.0.0"
+    "graphql-tag": "^2.0.0",
+    "wait-on": "5.1.0"
   }
 }
