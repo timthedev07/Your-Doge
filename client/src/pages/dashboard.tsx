@@ -5,6 +5,7 @@ import { useSubjectsQuery } from "../generated/graphql";
 // import { MarkRecordValue } from "../types/types";
 import ContentLoader from "react-content-loader";
 import ReactTooltip from "react-tooltip";
+import Head from "next/head";
 
 const Dashboard: React.FC = () => {
   // const [marks] = useState<Record<string, MarkRecordValue>>({});
@@ -120,6 +121,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
+      <Head>
+        <title>Dashboard | Your Doge</title>
+      </Head>
       <ReactTooltip />
 
       <div className="dashboard-container">
