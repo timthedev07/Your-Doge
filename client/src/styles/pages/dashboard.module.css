@@ -6,6 +6,12 @@
   /* justify-content: center; */
   align-items: center;
   padding: 10px;
+  position: relative;
+}
+
+.dashboard-container .background {
+  z-index: 2;
+  background-image: url(../../../public/images/tothemoon.jpg);
 }
 
 .dashboard-heading {
@@ -18,20 +24,26 @@
 .homework-list {
   width: 95%;
   background-color: #484848;
-  height: 300px;
+  height: 90%;
   padding: 0;
   border-radius: 7px;
+  margin-bottom: 0;
+  z-index: 4;
 }
 
-.homework-list .homework-item {
+.homework-list-container {
+  width: 95%;
+  height: 340px;
   display: flex;
-  list-style: none;
-  height: 60px;
-  width: 100%;
-  border-bottom: rgb(94, 94, 94) solid 1px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  padding-left: 40px;
+  position: relative;
+  z-index: 5;
+}
+
+.homework-list-container .background {
+  filter: blur(3px);
+  z-index: 3;
 }
 
 .homework-list .homework-item {
