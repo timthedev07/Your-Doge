@@ -88,6 +88,36 @@ const Dashboard: React.FC = () => {
       onTime: true,
       enjoyed: false,
     },
+    {
+      id: 11,
+      title: "Homework 2",
+      description: "Still dumb homework",
+      deadline: "",
+      subjectId: 10,
+      done: true,
+      onTime: true,
+      enjoyed: false,
+    },
+    {
+      id: 12,
+      title: "Homework 3",
+      description: "Still dumb homework",
+      deadline: "",
+      subjectId: 10,
+      done: true,
+      onTime: true,
+      enjoyed: false,
+    },
+    {
+      id: 13,
+      title: "Homework 4",
+      description: "Still dumb homework",
+      deadline: "",
+      subjectId: 10,
+      done: true,
+      onTime: true,
+      enjoyed: false,
+    },
   ];
 
   return (
@@ -95,33 +125,33 @@ const Dashboard: React.FC = () => {
       <h1 className="dashboard-heading">Dashboard</h1>
 
       <div className="homework-list-container">
-        <ul className="homework-list">
-          {subjectsLoading ? (
-            <div
-              style={{
-                width: "100%",
-                height: "100%",
-                display: "flex",
-                justifyContent: "center",
-                paddingLeft: "10px",
-                paddingRight: "10px",
-                paddingTop: "20px",
-              }}
+        {subjectsLoading ? (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              paddingLeft: "10px",
+              paddingRight: "10px",
+              paddingTop: "20px",
+            }}
+          >
+            <ContentLoader
+              foregroundColor="#555555"
+              backgroundColor="#505050"
+              height={"280px"}
+              width={"100%"}
             >
-              <ContentLoader
-                foregroundColor="#454545"
-                backgroundColor="#383838"
-                height={"280px"}
-                width={"100%"}
-              >
-                <rect x="10" y="15" rx="5" ry="5" width="98%" height="40" />
-                <rect x="10" y="75" rx="5" ry="5" width="98%" height="40" />
-                <rect x="10" y="135" rx="5" ry="5" width="98%" height="40" />
-                <rect x="10" y="195" rx="5" ry="5" width="98%" height="40" />
-              </ContentLoader>
-            </div>
-          ) : (
-            <>
+              <rect x="10" y="15" rx="5" ry="5" width="98%" height="40" />
+              <rect x="10" y="75" rx="5" ry="5" width="98%" height="40" />
+              <rect x="10" y="135" rx="5" ry="5" width="98%" height="40" />
+              <rect x="10" y="195" rx="5" ry="5" width="98%" height="40" />
+            </ContentLoader>
+          </div>
+        ) : (
+          <>
+            <ul className="homework-list">
               {fakeHomework.map((each) => (
                 <li key={each.id} className="homework-item">
                   <div className="homework-title">{each.title}</div>
@@ -130,9 +160,9 @@ const Dashboard: React.FC = () => {
                   </div>
                 </li>
               ))}
-            </>
-          )}
-        </ul>
+            </ul>
+          </>
+        )}
       </div>
       <Calendar
         className="big-ass-calendar"

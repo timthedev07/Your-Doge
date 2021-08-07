@@ -9,12 +9,6 @@
   position: relative;
 }
 
-.dashboard-container .background {
-  z-index: 2;
-  filter: blur(30px);
-  background-image: url(../../../public/images/tothemoon.jpg);
-}
-
 .dashboard-heading {
   font-family: "Roboto Light";
   width: 90%;
@@ -23,13 +17,15 @@
 
 /* homework list and items */
 .homework-list {
-  width: 95%;
-  background-color: #484848;
-  height: 90%;
+  width: 90%;
+  background-color: #5e5e5e;
+  max-height: 80%;
   padding: 0;
   border-radius: 7px;
   margin-bottom: 0;
   z-index: 4;
+  height: max-content;
+  overflow-y: scroll;
 }
 
 .homework-list-container {
@@ -37,17 +33,27 @@
   height: 340px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   position: relative;
   z-index: 5;
+  background-color: #484848;
+  border-radius: 5px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-top: 40px;
 }
+
 .homework-list .homework-item {
   display: flex;
   list-style: none;
   height: 60px;
   width: 100%;
-  border-bottom: rgb(94, 94, 94) solid 1px;
+  border-bottom: rgb(128, 128, 128) solid 1px;
   justify-content: flex-start;
   align-items: center;
   padding-left: 40px;
+}
+
+.homework-list .homework-item .homework-title {
+  width: 70%;
 }
