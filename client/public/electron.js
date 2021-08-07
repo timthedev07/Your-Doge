@@ -12,11 +12,7 @@ function createWindow() {
     },
   });
 
-  win.loadURL(
-    isDev
-      ? "http://localhost:3000"
-      : `file://${join(__dirname, "../build/index.html")}`
-  );
+  win.loadURL(isDev ? "http://localhost:3000" : `https://yourdoge.vercel.app`);
 }
 
 app.whenReady().then(createWindow);
