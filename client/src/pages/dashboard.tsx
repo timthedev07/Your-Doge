@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { /* useState, useEffect, */ useMemo } from "react";
 import Calendar from "react-calendar";
-import { useApollo } from "../contexts/ApolloContext";
-import {
-  useGetProfileQuery as useAllUserHomeworkQuery,
-  useSubjectsQuery,
-} from "../generated/graphql";
-import { MarkRecordValue } from "../types/types";
+// import { useApollo } from "../contexts/ApolloContext";
+import { useSubjectsQuery } from "../generated/graphql";
+// import { MarkRecordValue } from "../types/types";
 import ContentLoader from "react-content-loader";
 import ReactTooltip from "react-tooltip";
 
@@ -89,36 +86,36 @@ const Dashboard: React.FC = () => {
       onTime: true,
       enjoyed: false,
     },
-    {
-      id: 11,
-      title: "Homework 2",
-      description: "Still dumb homework",
-      deadline: "",
-      subjectId: 10,
-      done: true,
-      onTime: true,
-      enjoyed: false,
-    },
-    {
-      id: 12,
-      title: "Homework 3",
-      description: "Still dumb homework",
-      deadline: "",
-      subjectId: 10,
-      done: true,
-      onTime: true,
-      enjoyed: false,
-    },
-    {
-      id: 13,
-      title: "Homework 4",
-      description: "Still dumb homework",
-      deadline: "",
-      subjectId: 10,
-      done: true,
-      onTime: true,
-      enjoyed: false,
-    },
+    // {
+    //   id: 11,
+    //   title: "Homework 2",
+    //   description: "Still dumb homework",
+    //   deadline: "",
+    //   subjectId: 10,
+    //   done: true,
+    //   onTime: true,
+    //   enjoyed: false,
+    // },
+    // {
+    //   id: 12,
+    //   title: "Homework 3",
+    //   description: "Still dumb homework",
+    //   deadline: "",
+    //   subjectId: 10,
+    //   done: true,
+    //   onTime: true,
+    //   enjoyed: false,
+    // },
+    // {
+    //   id: 13,
+    //   title: "Homework 4",
+    //   description: "Still dumb homework",
+    //   deadline: "",
+    //   subjectId: 10,
+    //   done: true,
+    //   onTime: true,
+    //   enjoyed: false,
+    // },
   ];
 
   return (
