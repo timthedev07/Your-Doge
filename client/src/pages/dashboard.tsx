@@ -94,45 +94,46 @@ const Dashboard: React.FC = () => {
     <div className="dashboard-container">
       <h1 className="dashboard-heading">Dashboard</h1>
 
-      <ul className="homework-list">
-        {subjectsLoading ? (
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              paddingLeft: "10px",
-              paddingRight: "10px",
-              paddingTop: "20px",
-            }}
-          >
-            <ContentLoader
-              foregroundColor="#454545"
-              backgroundColor="#383838"
-              height={"280px"}
-              width={"100%"}
+      <div className="homework-list-container">
+        <ul className="homework-list">
+          {subjectsLoading ? (
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                paddingLeft: "10px",
+                paddingRight: "10px",
+                paddingTop: "20px",
+              }}
             >
-              <rect x="10" y="15" rx="5" ry="5" width="98%" height="40" />
-              <rect x="10" y="75" rx="5" ry="5" width="98%" height="40" />
-              <rect x="10" y="135" rx="5" ry="5" width="98%" height="40" />
-              <rect x="10" y="195" rx="5" ry="5" width="98%" height="40" />
-            </ContentLoader>
-          </div>
-        ) : (
-          <>
-            {fakeHomework.map((each) => (
-              <li key={each.id} className="homework-item">
-                <div className="homework-title">{each.title}</div>
-                <div className="homework-subject">
-                  {subjectsMap![each.subjectId]}
-                </div>
-              </li>
-            ))}
-          </>
-        )}
-      </ul>
-
+              <ContentLoader
+                foregroundColor="#454545"
+                backgroundColor="#383838"
+                height={"280px"}
+                width={"100%"}
+              >
+                <rect x="10" y="15" rx="5" ry="5" width="98%" height="40" />
+                <rect x="10" y="75" rx="5" ry="5" width="98%" height="40" />
+                <rect x="10" y="135" rx="5" ry="5" width="98%" height="40" />
+                <rect x="10" y="195" rx="5" ry="5" width="98%" height="40" />
+              </ContentLoader>
+            </div>
+          ) : (
+            <>
+              {fakeHomework.map((each) => (
+                <li key={each.id} className="homework-item">
+                  <div className="homework-title">{each.title}</div>
+                  <div className="homework-subject">
+                    {subjectsMap![each.subjectId]}
+                  </div>
+                </li>
+              ))}
+            </>
+          )}
+        </ul>
+      </div>
       <Calendar
         className="big-ass-calendar"
         // tileClassName={({ date }) => {
