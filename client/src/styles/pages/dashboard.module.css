@@ -1,12 +1,46 @@
-.calendar-container {
-  display: flex;
+.dashboard-container {
   width: 100%;
   min-height: 100vh;
+  display: flex;
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
+  padding: 10px;
 }
 
 .dashboard-heading {
   font-family: "Roboto Light";
+  width: 90%;
+  text-align: left;
+}
+
+/* homework list and items */
+.homework-list {
+  width: 95%;
+  background-color: #484848;
+  height: 300px;
+  padding: 0;
+  border-radius: 7px;
+}
+
+.homework-list .homework-item {
+  display: flex;
+  list-style: none;
+  height: 60px;
+  width: 100%;
+  border-bottom: rgb(94, 94, 94) solid 1px;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40px;
+}
+
+.homework-list .homework-item {
+  display: flex;
+  list-style: none;
+  height: 60px;
+  width: 100%;
+  border-bottom: rgb(94, 94, 94) solid 1px;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40px;
 }
