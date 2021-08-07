@@ -60,7 +60,11 @@
     "productName": "Your Doge",
     "copyright": "Tim",
     "mac": {
-      "category": "public.app-category.productivity"
+      "category": "public.app-category.productivity",
+      "icon": "resources/icon.png"
+    },
+    "win": {
+      "icon": "resources/icon.png"
     },
     "extends": null
   },
