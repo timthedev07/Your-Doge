@@ -5,14 +5,39 @@
   flex-direction: column;
   /* justify-content: center; */
   align-items: center;
-  padding: 10px;
   position: relative;
 }
 
+.dashboard-container .dashboard-header {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  filter: none;
+}
+
+.dashboard-container .dashboard-header .background {
+  background-image: url(../../../public/images/doge0.jpg);
+  background-position: center 10%;
+  filter: blur(3px) brightness(70%);
+  z-index: 6;
+}
+
 .dashboard-heading {
-  font-family: "Roboto Light";
+  font-family: "Roboto Regular";
   width: 90%;
   text-align: left;
+  z-index: 7;
+  position: relative;
+  margin-left: 10%;
+  margin-top: 80px;
+}
+
+.dashboard-subheading {
+  font-family: "Roboto Regular";
+  text-align: left;
+  z-index: 7;
+  position: relative;
+  margin-left: 10%;
 }
 
 /* homework list and items */

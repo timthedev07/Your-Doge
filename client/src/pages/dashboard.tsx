@@ -122,7 +122,11 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-heading">Dashboard</h1>
+      <header className="dashboard-header">
+        <div className="background" />
+        <h1 className="dashboard-heading">Hello hooman.</h1>
+        <h4 className="dashboard-subheading">{new Date().toDateString()}</h4>
+      </header>
 
       <div className="homework-list-container">
         {subjectsLoading ? (
