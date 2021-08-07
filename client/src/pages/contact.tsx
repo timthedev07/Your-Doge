@@ -149,6 +149,7 @@ const Contact = () => {
                         <option value="business">Business Inquiry</option>
                         <option value="collaboration">Collaboration</option>
                         <option value="suggestion">Suggestion</option>
+                        <option value="quota">Quota</option>
                         <option value="other">Other</option>
                       </Form.Control>
                     </Form.Group>
