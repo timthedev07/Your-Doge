@@ -9,6 +9,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { AlertType } from "../../types/types";
 import { OAuthButtons } from "../../components/OAuthButtons";
 import { validatePassword } from "../../lib/validatePassword";
+import Head from "next/head";
 
 const THRESHOLD = 360;
 
@@ -146,6 +147,9 @@ const Register: React.FC = () => {
   return (
     <div className="form-container form-container-register">
       {loading ? <Loading /> : null}
+      <Head>
+        <title>Sign Up | Your Doge</title>
+      </Head>
 
       <div>
         <h1 className="form-heading">Join Us</h1>

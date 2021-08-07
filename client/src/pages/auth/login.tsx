@@ -8,6 +8,7 @@ import { unknownErrMsg } from "../../constants/general";
 import { useRouter } from "next/router";
 import { AlertType } from "../../types/types";
 import { OAuthButtons } from "../../components/OAuthButtons";
+import Head from "next/head";
 
 const THRESHOLD = 360;
 
@@ -92,6 +93,9 @@ const Login: React.FC = () => {
   return (
     <div className="form-container form-container-login">
       {pageLoading ? <Loading /> : null}
+      <Head>
+        <title>Sign Up | Your Doge</title>
+      </Head>
 
       <div>
         <h1 className="form-heading">Welcome Back</h1>
