@@ -27,7 +27,7 @@
 body .big-ass-calendar {
   background: linear-gradient(100deg, #414141 0%, #292929 100%);
   color: white !important;
-  width: 80vw !important;
+  width: 35% !important;
   min-width: 320px;
   height: auto;
   border-radius: 5px;
