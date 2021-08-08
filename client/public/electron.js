@@ -10,6 +10,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     },
+    minWidth: 350,
   });
 
   win.loadURL(isDev ? "http://localhost:3000" : `https://yourdoge.vercel.app`);
