@@ -28,9 +28,9 @@ export class Homework extends BaseEntity {
   @Column()
   done: boolean;
 
-  @Field(() => String)
-  @Column("text")
-  deadline: string;
+  @Field(() => BigInt)
+  @Column("bigint")
+  deadline: number;
 
   @Field(() => Boolean, { nullable: true })
   @Column("boolean", { nullable: true })
