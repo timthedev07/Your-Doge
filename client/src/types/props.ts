@@ -63,3 +63,9 @@ export interface CustomAccordionProps {
   title: string;
   content: React.ReactNode;
 }
+
+export interface YoutubeVideoProps {
+  videoId: string;
+  style?: React.CSSProperties;
+  className?: string;
+}
