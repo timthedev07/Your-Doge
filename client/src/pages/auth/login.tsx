@@ -94,7 +94,7 @@ const Login: React.FC = () => {
     <div className="form-container form-container-login">
       {pageLoading ? <Loading /> : null}
       <Head>
-        <title>Sign Up | Your Doge</title>
+        <title>Sign In | Your Doge</title>
       </Head>
 
       <div>
