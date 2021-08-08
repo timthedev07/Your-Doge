@@ -1,4 +1,5 @@
 import React from "react";
+import { capitalize } from "../lib/strings";
 import { TagCategory } from "../types/types";
 
 interface TagProps {
@@ -6,9 +7,5 @@ interface TagProps {
 }
 
 export const Tag: React.FC<TagProps> = ({ category }) => {
-  return (
-    <div className={`tag tag-${category}`}>
-      {category.charAt(0).toUpperCase() + category.slice(1)}
-    </div>
-  );
+  return <div className={`tag tag-${category}`}>{capitalize(category)}</div>;
 };
