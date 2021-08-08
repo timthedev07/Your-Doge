@@ -21,7 +21,7 @@ class AllHomeworkResponse {
   count: number;
 }
 
-@Resolver((of) => Homework)
+@Resolver()
 export class HomeworkResolver {
   @Query(() => [Homework], { nullable: true })
   async getAllHomework() {
@@ -42,7 +42,7 @@ export class HomeworkResolver {
     @Ctx() { payload }: MyContext,
     @Arg("title") title: string,
     @Arg("description") description: string,
-    @Arg("deadline") deadline: string
+    @Arg("deadline") deadline: number
   ) {
     if (!payload || !payload?.userId) {
       throw new Error("User not authenticated");
