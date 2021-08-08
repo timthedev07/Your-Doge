@@ -7,6 +7,7 @@
   align-items: center;
   position: relative;
   flex-wrap: wrap;
+  margin-bottom: 150px;
 }
 
 .dashboard-container .dashboard-header {
@@ -106,4 +107,19 @@
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: 5%;
+}
+
+.dashboard-bottom-section {
+  display: flex;
+  width: 90%;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 500px;
+}
+
+.dashboard-video {
+  width: 45%;
+  aspect-ratio: 16 / 9;
+  border-radius: 5px;
 }

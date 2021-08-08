@@ -10,7 +10,7 @@
 }
 
 .busy {
-  background-color: rgba(255, 217, 0, 0.959) !important;
+  background-color: rgba(187, 161, 14, 0.959) !important;
   color: black !important;
 }
 
@@ -27,7 +27,7 @@
 body .big-ass-calendar {
   background: linear-gradient(100deg, #414141 0%, #292929 100%);
   color: white !important;
-  width: 35% !important;
+  width: 45% !important;
   min-width: 320px;
   height: auto;
   border-radius: 5px;

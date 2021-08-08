@@ -1,14 +1,19 @@
-import React, { /* useState, useEffect, */ useMemo } from "react";
+import React, {
+  /* useState, useEffect, */ useEffect,
+  useMemo,
+  useState,
+} from "react";
 import Calendar from "react-calendar";
 // import { useApollo } from "../contexts/ApolloContext";
 import { useSubjectsQuery } from "../generated/graphql";
-// import { MarkRecordValue } from "../types/types";
 import ContentLoader from "react-content-loader";
 import ReactTooltip from "react-tooltip";
 import Head from "next/head";
+import { MarkRecordValue } from "../types/types";
+import { YoutubeVideo } from "../components/YoutubeVideo";
 
 const Dashboard: React.FC = () => {
-  // const [marks] = useState<Record<string, MarkRecordValue>>({});
+  const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
 
   // const { burrito } = useApollo()!;
 
@@ -18,35 +23,48 @@ const Dashboard: React.FC = () => {
   //   // error: gqlError,
   // } = useAllUserHomeworkQuery({ client: burrito });
 
-  // const BUSY_CLASSES: Record<string, string> = {
-  //   "0": "free",
-  //   "1": "chill",
-  //   "2": "fine",
-  //   "3": "busy",
-  //   "4": "intense",
-  //   "5": "dangit",
-  // };
+  const BUSY_CLASSES: Record<string, string> = {
+    "0": "free",
+    "1": "chill",
+    "2": "fine",
+    "3": "busy",
+    "4": "intense",
+    "5": "dangit",
+  };
 
-  // useEffect(() => {
-  //   if (gqlData) {
-  //     // gqlData.getAllUserHomework.homeworkList.forEach((each) => {
-  //     //   // pushing data to the homework state
-  //     //   // pushing/modifying data in the record holding date: homeworkCount
-  //     //   const dummy = marks;
-  //     //   if (dummy.hasOwnProperty(each.deadline)) {
-  //     //     dummy[each.deadline].count++;
-  //     //   } else {
-  //     //     dummy[each.deadline] = { count: 1, homeworkList: [] };
-  //     //   }
-  //     //   dummy[each.deadline].homeworkList.push({
-  //     //     deadline: each.deadline,
-  //     //     description: each.description,
-  //     //     title: each.title,
-  //     //   });
-  //     //   setMarks(dummy);
-  //     // });
-  //   }
-  // }, [gqlData, marks]);
+  const homeworkList = Array.from(Array(10).keys()).map((each) => {
+    return {
+      id: each,
+      title: `Homework ${each}`,
+      description: "You hate dancin",
+      deadline: 1630620000000,
+      subjectId: 10,
+      done: true,
+      onTime: true,
+      enjoyed: false,
+    };
+  });
+
+  useEffect(() => {
+    if (homeworkList) {
+      homeworkList.forEach((each) => {
+        // pushing data to the homework state
+        // pushing/modifying data in the record holding date: homeworkCount
+        const dummy = marks;
+        if (dummy.hasOwnProperty(each.deadline)) {
+          dummy[each.deadline].count++;
+        } else {
+          dummy[each.deadline] = { count: 1, homeworkList: [] };
+        }
+        dummy[`${each.deadline}`].homeworkList.push({
+          deadline: each.deadline,
+          description: each.description,
+          title: each.title,
+        });
+        setMarks(dummy);
+      });
+    }
+  }, [marks, homeworkList]);
 
   const { data: subjectsData, loading: subjectsLoading } = useSubjectsQuery();
 
@@ -65,59 +83,6 @@ const Dashboard: React.FC = () => {
 
     return res;
   }, [subjectsData]);
-
-  const fakeHomework = [
-    {
-      id: 10,
-      title: "Homework 0",
-      description: "Dumb homework",
-      deadline: "",
-      subjectId: 9,
-      done: false,
-      onTime: false,
-      enjoyed: false,
-    },
-    {
-      id: 9,
-      title: "Homework 1",
-      description: "Still dumb homework",
-      deadline: "",
-      subjectId: 10,
-      done: true,
-      onTime: true,
-      enjoyed: false,
-    },
-    // {
-    //   id: 11,
-    //   title: "Homework 2",
-    //   description: "Still dumb homework",
-    //   deadline: "",
-    //   subjectId: 10,
-    //   done: true,
-    //   onTime: true,
-    //   enjoyed: false,
-    // },
-    // {
-    //   id: 12,
-    //   title: "Homework 3",
-    //   description: "Still dumb homework",
-    //   deadline: "",
-    //   subjectId: 10,
-    //   done: true,
-    //   onTime: true,
-    //   enjoyed: false,
-    // },
-    // {
-    //   id: 13,
-    //   title: "Homework 4",
-    //   description: "Still dumb homework",
-    //   deadline: "",
-    //   subjectId: 10,
-    //   done: true,
-    //   onTime: true,
-    //   enjoyed: false,
-    // },
-  ];
 
   return (
     <>
@@ -161,7 +126,7 @@ const Dashboard: React.FC = () => {
           ) : (
             <>
               <ul className="homework-list">
-                {fakeHomework.map((each) => (
+                {homeworkList.map((each) => (
                   <li key={each.id} className="homework-item">
                     <div className="homework-title">{each.title}</div>
                     <div className="homework-subject">
@@ -183,17 +148,24 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
 
-        <Calendar
-          className="big-ass-calendar"
-          // tileClassName={({ date }) => {
-          //   const valueStr = `${date.valueOf()}`;
-          //   if (marks.hasOwnProperty(valueStr)) {
-          //     const key: string = JSON.stringify(marks[valueStr].count);
-          //     return parseInt(key) > 5 ? "damn" : BUSY_CLASSES[key];
-          //   }
-          //   return "";
-          // }}
-        />
+        <div className="dashboard-bottom-section">
+          <Calendar
+            className="big-ass-calendar"
+            tileClassName={({ date }) => {
+              const valueStr = `${date.valueOf()}`;
+
+              if (marks.hasOwnProperty(valueStr)) {
+                const key: string = JSON.stringify(marks[valueStr].count);
+                return parseInt(key) > 5 ? "dangit" : BUSY_CLASSES[key];
+              }
+              return "";
+            }}
+          />
+          <YoutubeVideo
+            className="dashboard-video"
+            videoId="EmCGF49Uils"
+          ></YoutubeVideo>
+        </div>
       </div>
     </>
   );
