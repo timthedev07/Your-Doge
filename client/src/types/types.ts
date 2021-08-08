@@ -68,7 +68,7 @@ export interface ExpiryObject {
 }
 
 export interface Homework {
-  deadline: string;
+  deadline: number;
   title: string;
   description: string;
 }
