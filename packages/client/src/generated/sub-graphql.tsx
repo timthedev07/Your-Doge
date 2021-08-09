@@ -32,6 +32,7 @@ export type Homework = {
   enjoyed?: Maybe<Scalars['Boolean']>;
   onTime?: Maybe<Scalars['Boolean']>;
   tag: Scalars['String'];
+  topicName: Scalars['String'];
 };
 
 export type Mutation = {
