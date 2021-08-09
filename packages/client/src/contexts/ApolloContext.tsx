@@ -146,7 +146,6 @@ export const CustomApolloProvider: React.FC = ({ children }) => {
 
   return (
     <>
-      {loading && <Loading />}
       <ApolloProvider client={burrito}>
         <ApolloProvider client={shibe}>
           <ApolloContext.Provider value={value}>
