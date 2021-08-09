@@ -34,9 +34,13 @@ export const FRONTEND =
     context: ({ req, res }) => ({ req, res }),
   });
 
+  await apolloServer.start();
+
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(PORT, HOSTNAME, () => {
-    console.log(`server up and running at http://${HOSTNAME}:${PORT}`);
+    console.log(
+      `server 'burrito' up and running at http://${HOSTNAME}:${PORT}`
+    );
   });
 })();
