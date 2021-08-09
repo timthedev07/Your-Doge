@@ -7,7 +7,7 @@
   "author": "Tim",
   "description": "An awesome doge themed homework manager",
   "dependencies": {
-    "shared": "^1.0.0",
+    "shared": ">=1.0.0",
     "cross-env": "5.0.5",
     "@apollo/client": "3.3.8",
     "@apollo/react-hooks": "^4.0.0",
