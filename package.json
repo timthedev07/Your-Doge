@@ -13,8 +13,8 @@
     ]
   },
   "scripts": {
-    "dev": "concurrently \"cd client && yarn dev\" \"cd shibe && yarn dev\"",
-    "dev:electron": "concurrently \"cd client && yarn dev:electron\" \"cd shibe && yarn dev\""
+    "dev": "concurrently \"cd packages/client && yarn dev\" \"cd packages/shibe && yarn dev\"",
+    "dev:electron": "concurrently \"cd packages/client && yarn dev:electron\" \"cd packages/shibe && yarn dev\""
   },
   "repository": {
     "type": "git",
