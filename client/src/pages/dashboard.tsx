@@ -115,6 +115,8 @@ const Dashboard: React.FC = () => {
           <h4 className="dashboard-subheading">{new Date().toDateString()}</h4>
         </header>
 
+        {}
+
         <div className="homework-list-container">
           {subjectsLoading ? (
             <div

@@ -94,5 +94,3 @@ export interface FacebookUserData {
   first_name: string;
   last_name: string;
 }
-
-export type TagCategory = "urgent" | "hard" | "long-term" | "easy";

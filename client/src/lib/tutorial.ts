@@ -1,13 +1,22 @@
-import {} from "../generated/graphql";
+import { Homework } from "../generated/sub-graphql";
+import { daysElapsed } from "./date";
 const KEYS = process.env.YOUTUBE_API_KEYS
   ? process.env.YOUTUBE_API_KEYS.split(" ")
   : [];
 
-export const generateTutorialKeyword = (homeworkList: []) => {
+export const generateTutorialKeyword = (homeworkList: [Homework]) => {
   // maping homework id to it's score
   const score: Record<number, number> = {};
 
-  for (let i = 0, n = Math.min(homeworkList.length, 10); i < n; ++i) {}
+  for (let i = 0, n = Math.min(homeworkList.length, 10); i < n; ++i) {
+    const curr = homeworkList[i];
+
+    score[curr.id] = daysElapsed(curr.deadline);
+
+    if (curr.tags && curr.tags.length) {
+      curr.tags;
+    }
+  }
 
   return "gcse english poetry";
 };

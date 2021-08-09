@@ -1,6 +1,5 @@
 import React from "react";
 import { capitalize } from "../lib/strings";
-import { TagCategory } from "../types/types";
 
 interface TagProps {
   category: TagCategory;
