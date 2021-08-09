@@ -1,4 +1,4 @@
-import { unknownErrMsg } from "../constants/general";
+import { unknownErrMsg } from "../constants/others";
 
 export const parseGraphQLError = (error: any) => {
   try {
