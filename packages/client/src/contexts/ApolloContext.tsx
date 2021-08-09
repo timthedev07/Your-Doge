@@ -11,6 +11,8 @@ import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import { InMemoryCache } from "@apollo/client";
 import { ApolloContextType } from "../types/types";
+import { needAuthState } from "../lib/needAuthState";
+import { useRouter } from "next/router";
 
 export const SERVER_ID = isClient
   ? getWithExpiry(window.localStorage, "serverId")
@@ -26,6 +28,7 @@ export const CustomApolloProvider: React.FC = ({ children }) => {
   // global states
   const [accessToken, setAccessToken] = useState<string | null>(() => null);
   const [loading, setLoading] = useState<boolean>(true);
+  const { pathname } = useRouter();
 
   // use effect hooks
   useEffect(() => {
@@ -137,7 +140,7 @@ export const CustomApolloProvider: React.FC = ({ children }) => {
     burrito,
   };
 
-  if (accessToken === null) {
+  if (!needAuthState(pathname) && accessToken === null) {
     return <Loading />;
   }
 

@@ -11,6 +11,8 @@ import {
 import { setWithExpiry } from "../lib/localStorageExpiration";
 import { AuthContextType, UserType } from "../types/types";
 import { useApollo } from "./ApolloContext";
+import { useRouter } from "next/router";
+import { needAuthState } from "../lib/needAuthState";
 
 const AuthContext = React.createContext<AuthContextType | null>(null);
 
@@ -24,6 +26,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const [signup] = useRegisterMutation();
   const { setAccessToken } = useApollo()!;
   const { data, loading } = useMeQuery();
+  const { pathname } = useRouter();
 
   // current user state
   const [currentUser, setCurrentUser] = useState<UserType>(null);
@@ -132,8 +135,9 @@ export const AuthProvider: React.FC = ({ children }) => {
     authState,
   };
 
-  if (loading) {
+  if (!needAuthState(pathname) && loading) {
     return <Loading />;
   }
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
