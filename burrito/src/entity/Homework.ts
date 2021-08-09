@@ -30,7 +30,7 @@ export class Homework extends BaseEntity {
   @Column()
   done: boolean;
 
-  @Field(() => Number)
+  @Field(() => Int)
   @Column("bigint")
   deadline: number;
 
