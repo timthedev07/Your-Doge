@@ -52,6 +52,15 @@ export type Query = {
   getAllUserHomework: AllHomeworkResponse;
 };
 
+export type AddHomeworkMutationVariables = Exact<{
+  title: Scalars['String'];
+  description: Scalars['String'];
+  deadline: Scalars['Float'];
+}>;
+
+
+export type AddHomeworkMutation = { __typename?: 'Mutation', addHomework: boolean };
+
 export type AllUserHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -63,6 +72,39 @@ export type AllHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
 export type AllHomeworkQuery = { __typename?: 'Query', getAllHomework?: Maybe<Array<{ __typename?: 'Homework', id: number, userId: number, title: string, description: string, deadline: number, enjoyed?: Maybe<boolean> }>> };
 
 
+export const AddHomeworkDocument = gql`
+    mutation AddHomework($title: String!, $description: String!, $deadline: Float!) {
+  addHomework(title: $title, description: $description, deadline: $deadline)
+}
+    `;
+export type AddHomeworkMutationFn = Apollo.MutationFunction<AddHomeworkMutation, AddHomeworkMutationVariables>;
+
+/**
+ * __useAddHomeworkMutation__
+ *
+ * To run a mutation, you first call `useAddHomeworkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddHomeworkMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addHomeworkMutation, { data, loading, error }] = useAddHomeworkMutation({
+ *   variables: {
+ *      title: // value for 'title'
+ *      description: // value for 'description'
+ *      deadline: // value for 'deadline'
+ *   },
+ * });
+ */
+export function useAddHomeworkMutation(baseOptions?: Apollo.MutationHookOptions<AddHomeworkMutation, AddHomeworkMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AddHomeworkMutation, AddHomeworkMutationVariables>(AddHomeworkDocument, options);
+      }
+export type AddHomeworkMutationHookResult = ReturnType<typeof useAddHomeworkMutation>;
+export type AddHomeworkMutationResult = Apollo.MutationResult<AddHomeworkMutation>;
+export type AddHomeworkMutationOptions = Apollo.BaseMutationOptions<AddHomeworkMutation, AddHomeworkMutationVariables>;
 export const AllUserHomeworkDocument = gql`
     query AllUserHomework {
   getAllUserHomework {

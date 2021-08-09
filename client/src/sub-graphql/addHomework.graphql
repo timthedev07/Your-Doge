@@ -1,7 +1,7 @@
 mutation AddHomework(
   $title: String!
   $description: String!
-  $deadline: String!
+  $deadline: Float!
 ) {
   addHomework(title: $title, description: $description, deadline: $deadline)
 }
