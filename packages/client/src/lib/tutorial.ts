@@ -1,5 +1,5 @@
 import { Homework } from "../generated/sub-graphql";
-import { daysElapsed } from "shared";
+import { daysElapsed, TagCategory } from "shared";
 const KEYS = process.env.YOUTUBE_API_KEYS
   ? process.env.YOUTUBE_API_KEYS.split(" ")
   : [];
@@ -13,9 +13,7 @@ export const generateTutorialKeyword = (homeworkList: [Homework]) => {
 
     score[curr.id] = daysElapsed(curr.deadline);
 
-    if (curr.tags && curr.tags.length) {
-      curr.tags;
-    }
+    const tag = "";
   }
 
   return "gcse english poetry";

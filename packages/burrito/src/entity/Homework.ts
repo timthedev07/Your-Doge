@@ -42,6 +42,6 @@ export class Homework extends BaseEntity {
   onTime: boolean | null;
 
   @Field(() => String)
-  @Column("text", { nullable: true })
-  tags: TagCategory;
+  @Column("text")
+  tag: TagCategory;
 }
