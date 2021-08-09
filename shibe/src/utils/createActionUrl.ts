@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { FRONTEND } from "../index";
+import { FRONTEND } from "shared";
 import { prefixMap } from "../constants/email";
 import { redisClient } from "../redis";
 
