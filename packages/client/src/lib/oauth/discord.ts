@@ -1,7 +1,7 @@
 import { FRONTEND_URL } from "../../constants/general";
 import axios from "axios";
 import { DiscordAccessTokenResponse } from "../../types/types";
-import { jsonToUrlParams } from "../jsonToURLParams";
+import { jsonToUrlParams } from "shared";
 
 const API_ENDPOINT = "https://discord.com/api/v8";
 const CLIENT_ID = process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID || "";
