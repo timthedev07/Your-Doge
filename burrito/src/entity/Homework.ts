@@ -30,7 +30,7 @@ export class Homework extends BaseEntity {
   @Column()
   done: boolean;
 
-  @Field(() => BigInt)
+  @Field(() => Number)
   @Column("bigint")
   deadline: number;
 
@@ -42,6 +42,7 @@ export class Homework extends BaseEntity {
   @Column("boolean", { nullable: true })
   onTime: boolean | null;
 
-  @Field(() => Array, { nullable: true })
-  tags: [TagCategory];
+  @Field(() => String, { nullable: true })
+  @Column("text", { nullable: true })
+  tags: string[];
 }
