@@ -14,10 +14,10 @@ import { Alert } from "./Alert";
 import { useApollo } from "../contexts/ApolloContext";
 import { SettingsTabProps } from "../types/props";
 import { useAuth } from "../contexts/AuthContext";
-import { parseGraphQLError } from "../lib/graphqlErrorParser";
-import { validatePassword } from "../lib/validatePassword";
+import { parseGraphQLError } from "shared";
+import { validatePassword } from "shared";
 import { AlertType } from "../types/types";
-import { unknownErrMsg } from "../constants/general";
+import { unknownErrMsg } from "shared";
 import Link from "next/link";
 
 interface SettingsContentSectionProps {

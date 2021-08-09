@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Loading } from "../components/Loading";
-import { unknownErrMsg } from "../constants/general";
+import { unknownErrMsg } from "shared";
 import {
   MeDocument,
   MeQuery,

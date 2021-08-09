@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { capitalize } from "../lib/strings";
+import { capitalize } from "shared";
 
 interface OAuthButtonProps {
   provider: "google" | "discord" | "facebook";

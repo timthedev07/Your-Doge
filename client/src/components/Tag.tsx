@@ -1,4 +1,5 @@
 import React from "react";
+import { capitalize, TagCategory } from "shared";
 
 interface TagProps {
   category: TagCategory;

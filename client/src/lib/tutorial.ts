@@ -1,5 +1,5 @@
 import { Homework } from "../generated/sub-graphql";
-import { daysElapsed } from "./date";
+import { daysElapsed } from "shared";
 const KEYS = process.env.YOUTUBE_API_KEYS
   ? process.env.YOUTUBE_API_KEYS.split(" ")
   : [];
