@@ -9,8 +9,7 @@ import {
   UseMiddleware,
 } from "type-graphql";
 import { Homework } from "../entity/Homework";
-import { MyContext } from "../types/MyContext";
-import { isAuth } from "../utils/isAuthMiddleWare";
+import { MyContext, isAuth } from "shared";
 
 @ObjectType()
 class AllHomeworkResponse {

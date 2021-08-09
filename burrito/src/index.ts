@@ -7,6 +7,7 @@ import { buildSchema } from "type-graphql";
 import { ApolloServer } from "apollo-server-express";
 import { createConnection } from "typeorm";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
+import { FRONTEND, PLAYGROUND } from "shared";
 
 const PORT: number = parseInt(process.env.PORT!) || 5000;
 const HOSTNAME: string = process.env.HOST || "0.0.0.0";

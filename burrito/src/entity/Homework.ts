@@ -1,5 +1,6 @@
 import { Field, Int, ObjectType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { TagCategory } from "shared";
 
 @ObjectType()
 @Entity("homework")
