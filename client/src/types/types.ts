@@ -67,7 +67,7 @@ export interface ExpiryObject {
   expiry: number;
 }
 
-export interface Homework {
+export interface HomeworkForCalendarMark {
   deadline: number;
   title: string;
   description: string;
@@ -75,7 +75,7 @@ export interface Homework {
 
 export interface MarkRecordValue {
   count: number;
-  homeworkList: Array<Homework>;
+  homeworkList: Array<HomeworkForCalendarMark>;
 }
 
 export type AlertType = "warning" | "success" | "info";
