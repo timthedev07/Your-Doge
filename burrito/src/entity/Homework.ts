@@ -1,6 +1,8 @@
 import { Field, Int, ObjectType } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
+export type TagCategory = "urgent" | "hard" | "long-term" | "easy";
+
 @ObjectType()
 @Entity("homework")
 export class Homework extends BaseEntity {
@@ -39,4 +41,7 @@ export class Homework extends BaseEntity {
   @Field(() => Boolean, { nullable: true })
   @Column("boolean", { nullable: true })
   onTime: boolean | null;
+
+  @Field(() => Array, { nullable: true })
+  tags: [TagCategory];
 }
