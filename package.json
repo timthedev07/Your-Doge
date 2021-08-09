@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "An awesome doge themed homework manager.",
   "private": true,
-  "workspaces": [
-    "client",
-    "shibe",
-    "shared",
-    "burrito"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/typeorm",
+      "**/typeorm/**"
+    ]
+  },
   "scripts": {
     "dev": "concurrently \"cd client && yarn dev\" \"cd shibe && yarn dev\"",
     "dev:electron": "concurrently \"cd client && yarn dev:electron\" \"cd shibe && yarn dev\""
