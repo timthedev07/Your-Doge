@@ -10,12 +10,8 @@ import { router as AuthRouter } from "./routes/AuthRoute";
 import cookieParser from "cookie-parser";
 import { createConnection } from "typeorm";
 import { router as BaseRouter } from "./routes/BaseRoute";
+import { FRONTEND, PLAYGROUND } from "shared";
 
-export const FRONTEND =
-  process.env.NODE_ENV === "production"
-    ? "https://yourdoge.vercel.app"
-    : "http://localhost:3000";
-const PLAYGROUND = "https://studio.apollographql.com";
 const PORT = parseInt(process.env.PORT || "9000");
 const HOSTNAME = process.env.HOST || "0.0.0.0";
 
