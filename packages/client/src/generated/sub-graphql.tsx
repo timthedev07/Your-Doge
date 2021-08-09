@@ -31,7 +31,7 @@ export type Homework = {
   deadline: Scalars['Int'];
   enjoyed?: Maybe<Scalars['Boolean']>;
   onTime?: Maybe<Scalars['Boolean']>;
-  tags?: Maybe<Scalars['String']>;
+  tag: Scalars['String'];
 };
 
 export type Mutation = {
