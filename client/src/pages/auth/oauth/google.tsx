@@ -8,7 +8,7 @@ import {
 import { useRouter } from "next/router";
 import axios from "axios";
 import { OAuthWait } from "../../../components/OAuthWait";
-import { parseGraphQLError } from "../../../lib/graphqlErrorParser";
+import { parseGraphQLError } from "shared";
 
 const Google: React.FC = () => {
   const urlParams = queryString.parse(window.location.search);

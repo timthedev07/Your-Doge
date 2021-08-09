@@ -3,12 +3,11 @@ import { Button } from "react-bootstrap";
 import { Alert } from "../../components/Alert";
 import { Loading } from "../../components/Loading";
 import { useAuth } from "../../contexts/AuthContext";
-import { unknownErrMsg } from "../../constants/general";
+import { unknownErrMsg, validatePassword } from "shared";
 import { useRouter } from "next/router";
 import ReCAPTCHA from "react-google-recaptcha";
 import { AlertType } from "../../types/types";
 import { OAuthButtons } from "../../components/OAuthButtons";
-import { validatePassword } from "../../lib/validatePassword";
 import Head from "next/head";
 
 const THRESHOLD = 360;

@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { Homework } from "../../generated/sub-graphql";
 import { generateTutorialKeyword, getTutorial } from "../../lib/tutorial";
-import { HomeworkForCalendarMark } from "../../types/types";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== "POST") {
@@ -12,8 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   // we assume the homework passed in are the most recent ones
-  const { homeworkList }: { homeworkList: [HomeworkForCalendarMark] } =
-    req.body;
+  const { homeworkList }: { homeworkList: [Homework] } = req.body;
 
   const keyword = generateTutorialKeyword(homeworkList);
   const id = await getTutorial(keyword);

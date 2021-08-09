@@ -4,7 +4,7 @@ import { Alert } from "../../components/Alert";
 import Link from "next/link";
 import { Loading } from "../../components/Loading";
 import { useAuth } from "../../contexts/AuthContext";
-import { unknownErrMsg } from "../../constants/general";
+import { unknownErrMsg } from "shared";
 import { useRouter } from "next/router";
 import { AlertType } from "../../types/types";
 import { OAuthButtons } from "../../components/OAuthButtons";

@@ -7,9 +7,8 @@ import {
   useDiscordOAuthMutation,
 } from "../../../generated/graphql";
 import { useRouter } from "next/router";
-import { unknownErrMsg } from "../../../constants/general";
+import { unknownErrMsg, parseGraphQLError } from "shared";
 import { OAuthWait } from "../../../components/OAuthWait";
-import { parseGraphQLError } from "../../../lib/graphqlErrorParser";
 
 const Discord: React.FC = () => {
   const urlParams = queryString.parse(window.location.search);

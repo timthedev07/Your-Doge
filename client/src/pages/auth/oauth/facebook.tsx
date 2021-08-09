@@ -8,7 +8,7 @@ import {
   MeQuery,
   useFacebookOAuthMutationMutation,
 } from "../../../generated/graphql";
-import { parseGraphQLError } from "../../../lib/graphqlErrorParser";
+import { parseGraphQLError } from "shared";
 
 const Facebook: React.FC = ({}) => {
   const urlParams = queryString.parse(window.location.search);
