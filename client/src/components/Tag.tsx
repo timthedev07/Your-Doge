@@ -1,5 +1,4 @@
 import React from "react";
-import { capitalize } from "../lib/strings";
 
 interface TagProps {
   category: TagCategory;

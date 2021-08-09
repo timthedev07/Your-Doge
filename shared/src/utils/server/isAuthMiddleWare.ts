@@ -1,6 +1,6 @@
 import { verify } from "jsonwebtoken";
 import { MiddlewareFn } from "type-graphql";
-import { MyContext } from "../types/MyContext";
+import { MyContext } from "../../types/server/trafficContext";
 
 /**
  * This middleware function checks for whether the user is authenticated
