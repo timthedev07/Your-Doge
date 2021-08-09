@@ -135,7 +135,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     authState,
   };
 
-  if (!needAuthState(pathname) && loading) {
+  if (needAuthState(pathname) && loading) {
     return <Loading />;
   }
 
