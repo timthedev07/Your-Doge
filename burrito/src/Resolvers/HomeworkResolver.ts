@@ -45,7 +45,7 @@ export class HomeworkResolver {
     @Arg("deadline") deadline: number
   ) {
     if (!payload || !payload?.userId) {
-      throw new Error("User not authenticated");
+      throw new Error("You shall not pass.");
     }
 
     // inserting a new task
