@@ -11,9 +11,11 @@ import ReactTooltip from "react-tooltip";
 import Head from "next/head";
 import { MarkRecordValue } from "../types/types";
 import { YoutubeVideo } from "../components/YoutubeVideo";
+import axios from "axios";
 
 const Dashboard: React.FC = () => {
   const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
+  const [tutorialId, setTutorialId] = useState<string>("");
 
   // const { burrito } = useApollo()!;
 
@@ -83,6 +85,21 @@ const Dashboard: React.FC = () => {
 
     return res;
   }, [subjectsData]);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axios({
+        url: "/api/gen-tutorial",
+        data: {
+          homeworkList,
+        },
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+      });
+      console.log(data);
+      setTutorialId(data.videoId);
+    })();
+  }, [homeworkList]);
 
   return (
     <>
@@ -163,7 +180,7 @@ const Dashboard: React.FC = () => {
           />
           <YoutubeVideo
             className="dashboard-video"
-            videoId="EmCGF49Uils"
+            videoId={tutorialId}
           ></YoutubeVideo>
         </div>
       </div>
