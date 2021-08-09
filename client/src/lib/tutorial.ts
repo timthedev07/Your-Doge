@@ -1,12 +1,9 @@
-import { HomeworkForCalendarMark } from "../types/types";
-
+import {} from "../generated/graphql";
 const KEYS = process.env.YOUTUBE_API_KEYS
   ? process.env.YOUTUBE_API_KEYS.split(" ")
   : [];
 
-export const generateTutorialKeyword = (
-  homeworkList: [HomeworkForCalendarMark]
-) => {
+export const generateTutorialKeyword = (homeworkList: []) => {
   // maping homework id to it's score
   const score: Record<number, number> = {};
 
