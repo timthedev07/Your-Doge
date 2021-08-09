@@ -140,7 +140,7 @@ export const CustomApolloProvider: React.FC = ({ children }) => {
     burrito,
   };
 
-  if (needAuthState(pathname) && accessToken === null) {
+  if (needAuthState(pathname) && accessToken === null && loading) {
     return <Loading />;
   }
 
