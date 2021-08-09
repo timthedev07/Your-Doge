@@ -8,13 +8,14 @@ import { ApolloServer } from "apollo-server-express";
 import { createConnection } from "typeorm";
 import { HomeworkResolver } from "./Resolvers/HomeworkResolver";
 
-const PORT: number = parseInt(process.env.PORT!) || 4000;
+const PORT: number = parseInt(process.env.PORT!) || 5000;
 const HOSTNAME: string = process.env.HOST || "0.0.0.0";
 
 export const FRONTEND =
   process.env.NODE_ENV === "production"
     ? "https://yourdoge.vercel.app"
     : "http://localhost:3000";
+const PLAYGROUND = "https://studio.apollographql.com";
 
 (async () => {
   const app = express();
@@ -23,7 +24,7 @@ export const FRONTEND =
   app.use(
     cors({
       credentials: true,
-      origin: [FRONTEND],
+      origin: [FRONTEND, PLAYGROUND],
     })
   );
 
