@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { parseGraphQLError } from "shared";
+import { nonEmpty, parseGraphQLError, TagCategory } from "shared";
 import { useAddHomeworkMutation } from "../generated/sub-graphql";
 
 interface NewHomeworkProps {
@@ -14,18 +14,25 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
     title: "",
     deadline: "",
     description: "",
+    tag: "",
+    topicName: "",
   });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const res = await createHomework({
-      variables: {
-        ...input,
-        deadline: Date.parse(input.deadline),
-      },
-    });
+
+    if (Object.values(input).every((each) => nonEmpty(each))) {
+      return;
+    }
 
     try {
+      const res = await createHomework({
+        variables: {
+          ...input,
+          deadline: Date.parse(input.deadline),
+        },
+      });
+
       if (res.data && res.data.addHomework) {
         setApiResponse("Success homework added!");
       }
@@ -35,7 +42,9 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     setInput((prev) => {
       return {
@@ -62,6 +71,29 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
           type="date"
           placeholder="deadline"
         />
+        <input
+          value={input.topicName}
+          onChange={handleChange}
+          name="topicName"
+          placeholder="Topic Name"
+        />
+        <select
+          value={input.tag}
+          onChange={handleChange}
+          name="tag"
+          placeholder="Tag"
+          style={{ width: "300px" }}
+        >
+          <option disabled value="">
+            Choose a tag
+          </option>
+          <option value={"normal"}>Normal</option>
+          <option value={"easy"}>Easy</option>
+          <option value={"long-term"}>Long Term</option>
+          <option value={"hard"}>Hard</option>
+          <option value={"urgent"}>Urgent</option>
+          <option value={"hard-and-urgent"}>Hard and Urgent</option>
+        </select>
         <br />
         <textarea
           value={input.description}
