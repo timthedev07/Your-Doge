@@ -24,7 +24,7 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({
     description: "",
     tag: "",
     topicName: "",
-    subjectId: -1,
+    subjectId: "",
   });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -43,6 +43,7 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({
         variables: {
           ...input,
           deadline: Date.parse(input.deadline),
+          subjectId: parseInt(input.subjectId),
         },
       });
 
@@ -114,7 +115,7 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({
           name="subjectId"
           style={{ width: "300px" }}
         >
-          <option disabled value={-1}>
+          <option disabled value={""}>
             Choose the subject
           </option>
           {subjects.subjects &&
