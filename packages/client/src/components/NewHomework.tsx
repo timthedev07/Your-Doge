@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useAddHomeworkMutation } from "../generated/sub-graphql";
 
 interface NewHomeworkProps {
@@ -14,7 +14,8 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
     description: "",
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     createHomework({
       variables: {
         ...input,
@@ -33,8 +34,6 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
       };
     });
   };
-
-  console.log(input);
 
   return open ? (
     <div className="new-homework-panel">
