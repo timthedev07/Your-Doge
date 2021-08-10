@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from "react";
+import { parseGraphQLError } from "shared";
 import { useAddHomeworkMutation } from "../generated/sub-graphql";
 
 interface NewHomeworkProps {
@@ -8,20 +9,29 @@ interface NewHomeworkProps {
 
 export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
   const [createHomework] = useAddHomeworkMutation();
+  const [apiResponse, setApiResponse] = useState<string>("");
   const [input, setInput] = useState({
     title: "",
     deadline: "",
     description: "",
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createHomework({
+    const res = await createHomework({
       variables: {
         ...input,
         deadline: Date.parse(input.deadline),
       },
     });
+
+    try {
+      if (res.data && res.data.addHomework) {
+        setApiResponse("Success homework added!");
+      }
+    } catch (err) {
+      setApiResponse(parseGraphQLError(err));
+    }
   };
 
   const handleChange = (
@@ -63,6 +73,7 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
       </form>
       <br />
       <button onClick={() => setOpen(false)}>close</button>
+      <pre>{apiResponse}</pre>
     </div>
   ) : null;
 };
