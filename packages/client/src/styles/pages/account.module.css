@@ -26,6 +26,10 @@ img.avatar {
   cursor: pointer;
 }
 
+.bootstrap-modal {
+  min-width: 330px;
+}
+
 .modal-content.modal-content.modal-content {
   background-color: rgb(31, 31, 31);
 }

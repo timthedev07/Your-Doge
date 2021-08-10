@@ -98,3 +98,7 @@ label {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}

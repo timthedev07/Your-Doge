@@ -27,7 +27,7 @@ const Dashboard: React.FC = () => {
   const [openHomework, setOpenHomework] = useState<Homework | undefined>(
     undefined
   );
-  const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(true);
+  const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
 
   // const { burrito } = useApollo()!;
 
@@ -181,7 +181,10 @@ const Dashboard: React.FC = () => {
               </ul>
             </>
           )}
-          <button className="rounded-btn emphasized dashboard-new-homework-button">
+          <button
+            onClick={() => setCreationPanelOpen(true)}
+            className="rounded-btn emphasized dashboard-new-homework-button"
+          >
             New
           </button>
         </div>

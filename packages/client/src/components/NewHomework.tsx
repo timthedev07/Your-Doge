@@ -3,6 +3,8 @@ import { nonEmpty, parseGraphQLError } from "shared";
 import { useApollo } from "../contexts/ApolloContext";
 import { SubjectsQuery } from "../generated/graphql";
 import { useAddHomeworkMutation } from "../generated/sub-graphql";
+import { Button, Modal } from "react-bootstrap";
+import { CloseButton } from "./CloseButton";
 
 interface NewHomeworkProps {
   open: boolean;
@@ -17,7 +19,6 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({
 }) => {
   const { burrito } = useApollo()!;
   const [createHomework] = useAddHomeworkMutation({ client: burrito });
-  const [apiResponse, setApiResponse] = useState<string>("");
   const [input, setInput] = useState({
     title: "",
     deadline: "",
@@ -48,10 +49,10 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({
       });
 
       if (res.data && res.data.addHomework) {
-        setApiResponse("Success homework added!");
+        // setApiResponse("Success homework added!");
       }
     } catch (err) {
-      setApiResponse(parseGraphQLError(err));
+      // setApiResponse(parseGraphQLError(err));
     }
   };
 
@@ -68,76 +69,106 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({
     });
   };
 
-  return open ? (
-    <div className="new-homework-panel">
-      <h3>New Homework</h3>
+  return (
+    <Modal
+      className="bootstrap-modal margin-top-nav"
+      show={open}
+      onHide={() => setOpen(false)}
+    >
+      <Modal.Header>
+        <Modal.Title>New Homework</Modal.Title>
+        <CloseButton
+          handleClick={() => {
+            setOpen(false);
+          }}
+        />
+      </Modal.Header>
+
       <form onSubmit={handleSubmit}>
-        <input
-          value={input.title}
-          onChange={handleChange}
-          name="title"
-          placeholder="title"
-        />
-        <input
-          value={input.deadline}
-          onChange={handleChange}
-          name="deadline"
-          type="date"
-          placeholder="deadline"
-        />
-        <input
-          value={input.topicName}
-          onChange={handleChange}
-          name="topicName"
-          placeholder="Topic Name"
-        />
+        <Modal.Body>
+          <label>Title</label>
+          <input
+            value={input.title}
+            onChange={handleChange}
+            name="title"
+            placeholder="Title"
+            className="rounded-input emphasized margin-bottom-10"
+          />
 
-        <select
-          value={input.tag}
-          onChange={handleChange}
-          name="tag"
-          style={{ width: "300px" }}
-        >
-          <option disabled value="">
-            Choose a tag
-          </option>
-          <option value={"normal"}>Normal</option>
-          <option value={"easy"}>Easy</option>
-          <option value={"long-term"}>Long Term</option>
-          <option value={"hard"}>Hard</option>
-          <option value={"urgent"}>Urgent</option>
-          <option value={"hard-and-urgent"}>Hard and Urgent</option>
-        </select>
+          <label>Deadline</label>
+          <input
+            value={input.deadline}
+            onChange={handleChange}
+            name="deadline"
+            type="date"
+            placeholder="Deadline"
+            className="rounded-input emphasized margin-bottom-10"
+          />
 
-        <select
-          value={input.subjectId}
-          onChange={handleChange}
-          name="subjectId"
-          style={{ width: "300px" }}
-        >
-          <option disabled value={""}>
-            Choose the subject
-          </option>
-          {subjects.subjects &&
-            subjects.subjects.map((each) => (
-              <option key={each.name} value={each.id}>
-                {each.name}
-              </option>
-            ))}
-        </select>
+          <label>Topic Name</label>
+          <input
+            value={input.topicName}
+            onChange={handleChange}
+            name="topicName"
+            placeholder="Topic Name"
+            className="rounded-input emphasized margin-bottom-10"
+          />
 
-        <br />
-        <textarea
-          value={input.description}
-          onChange={handleChange}
-          name="description"
-          placeholder="description"
-        ></textarea>
-        <button type="submit">Submit</button>
+          <select
+            value={input.tag}
+            onChange={handleChange}
+            name="tag"
+            style={{ width: "40%" }}
+            className="margin-10"
+          >
+            <option disabled value="">
+              Choose a tag
+            </option>
+            <option value={"normal"}>Normal</option>
+            <option value={"easy"}>Easy</option>
+            <option value={"long-term"}>Long Term</option>
+            <option value={"hard"}>Hard</option>
+            <option value={"urgent"}>Urgent</option>
+            <option value={"hard-and-urgent"}>Hard and Urgent</option>
+          </select>
+
+          <select
+            value={input.subjectId}
+            onChange={handleChange}
+            name="subjectId"
+            style={{ width: "40%" }}
+            className="margin-10"
+          >
+            <option disabled value={""}>
+              Choose the subject
+            </option>
+            {subjects.subjects &&
+              subjects.subjects.map((each) => (
+                <option key={each.name} value={each.id}>
+                  {each.name}
+                </option>
+              ))}
+          </select>
+
+          <br />
+          <textarea
+            value={input.description}
+            onChange={handleChange}
+            name="description"
+            placeholder="Description"
+            className="rounded-input emphasized margin-bottom-10"
+            style={{ width: "100%", resize: "none", height: "200px" }}
+          ></textarea>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={() => setOpen(false)} variant="warning">
+            Cancel
+          </Button>
+          <Button type="submit" variant="success">
+            Submit
+          </Button>
+        </Modal.Footer>
       </form>
-      <br />
-      <button onClick={() => setOpen(false)}>close</button>
-      <pre>{apiResponse}</pre>
-    </div>
-  ) : null;
+    </Modal>
+  );
 };
