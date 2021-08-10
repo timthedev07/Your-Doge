@@ -121,7 +121,7 @@
 .dashboard-video {
   width: 45%;
   aspect-ratio: 16 / 9;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 
 @media screen and (max-width: 800px) {
