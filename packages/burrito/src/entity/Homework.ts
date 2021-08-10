@@ -13,8 +13,8 @@ export class Homework extends BaseEntity {
   @Column("int")
   userId: number;
 
-  @Field(() => Int, { nullable: true })
-  @Column("int", { nullable: true })
+  @Field(() => Int)
+  @Column("int")
   subjectId: number | null;
 
   @Field(() => String)
