@@ -44,4 +44,8 @@ export class Homework extends BaseEntity {
   @Field(() => String)
   @Column("text")
   tag: TagCategory;
+
+  @Field(() => String)
+  @Column("text")
+  topicName: string;
 }
