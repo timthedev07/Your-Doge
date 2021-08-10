@@ -42,6 +42,7 @@ export type Mutation = {
 
 
 export type MutationAddHomeworkArgs = {
+  subjectId: Scalars['Float'];
   tag: Scalars['String'];
   topicName: Scalars['String'];
   deadline: Scalars['Float'];
@@ -61,6 +62,7 @@ export type AddHomeworkMutationVariables = Exact<{
   deadline: Scalars['Float'];
   topicName: Scalars['String'];
   tag: Scalars['String'];
+  subjectId: Scalars['Float'];
 }>;
 
 
@@ -78,13 +80,14 @@ export type AllHomeworkQuery = { __typename?: 'Query', getAllHomework?: Maybe<Ar
 
 
 export const AddHomeworkDocument = gql`
-    mutation AddHomework($title: String!, $description: String!, $deadline: Float!, $topicName: String!, $tag: String!) {
+    mutation AddHomework($title: String!, $description: String!, $deadline: Float!, $topicName: String!, $tag: String!, $subjectId: Float!) {
   addHomework(
     title: $title
     description: $description
     deadline: $deadline
     topicName: $topicName
     tag: $tag
+    subjectId: $subjectId
   )
 }
     `;
@@ -108,6 +111,7 @@ export type AddHomeworkMutationFn = Apollo.MutationFunction<AddHomeworkMutation,
  *      deadline: // value for 'deadline'
  *      topicName: // value for 'topicName'
  *      tag: // value for 'tag'
+ *      subjectId: // value for 'subjectId'
  *   },
  * });
  */

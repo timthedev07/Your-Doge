@@ -4,6 +4,7 @@ mutation AddHomework(
   $deadline: Float!
   $topicName: String!
   $tag: String!
+  $subjectId: Float!
 ) {
   addHomework(
     title: $title
@@ -11,5 +12,6 @@ mutation AddHomework(
     deadline: $deadline
     topicName: $topicName
     tag: $tag
+    subjectId: $subjectId
   )
 }
