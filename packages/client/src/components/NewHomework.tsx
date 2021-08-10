@@ -1,14 +1,22 @@
 import React, { FormEvent, useState } from "react";
 import { nonEmpty, parseGraphQLError, TagCategory } from "shared";
+import { useApollo } from "../contexts/ApolloContext";
+import { SubjectsQuery } from "../generated/graphql";
 import { useAddHomeworkMutation } from "../generated/sub-graphql";
 
 interface NewHomeworkProps {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  subjects: SubjectsQuery;
 }
 
-export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
-  const [createHomework] = useAddHomeworkMutation();
+export const NewHomework: React.FC<NewHomeworkProps> = ({
+  open,
+  setOpen,
+  subjects,
+}) => {
+  const { burrito } = useApollo()!;
+  const [createHomework] = useAddHomeworkMutation({ client: burrito });
   const [apiResponse, setApiResponse] = useState<string>("");
   const [input, setInput] = useState({
     title: "",
@@ -16,12 +24,17 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
     description: "",
     tag: "",
     topicName: "",
+    subjectId: -1,
   });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!Object.values(input).every((each) => nonEmpty(each))) {
+    if (
+      !Object.values(input).every((each) =>
+        typeof each === "string" ? nonEmpty(each) : each > -1
+      )
+    ) {
       return;
     }
 
@@ -77,11 +90,11 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
           name="topicName"
           placeholder="Topic Name"
         />
+
         <select
           value={input.tag}
           onChange={handleChange}
           name="tag"
-          placeholder="Tag"
           style={{ width: "300px" }}
         >
           <option disabled value="">
@@ -94,6 +107,24 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
           <option value={"urgent"}>Urgent</option>
           <option value={"hard-and-urgent"}>Hard and Urgent</option>
         </select>
+
+        <select
+          value={input.subjectId}
+          onChange={handleChange}
+          name="subjectId"
+          style={{ width: "300px" }}
+        >
+          <option disabled value={-1}>
+            Choose the subject
+          </option>
+          {subjects.subjects &&
+            subjects.subjects.map((each) => (
+              <option key={each.name} value={each.id}>
+                {each.name}
+              </option>
+            ))}
+        </select>
+
         <br />
         <textarea
           value={input.description}
