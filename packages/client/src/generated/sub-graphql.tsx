@@ -42,6 +42,8 @@ export type Mutation = {
 
 
 export type MutationAddHomeworkArgs = {
+  tag: Scalars['String'];
+  topicName: Scalars['String'];
   deadline: Scalars['Float'];
   description: Scalars['String'];
   title: Scalars['String'];
@@ -57,6 +59,8 @@ export type AddHomeworkMutationVariables = Exact<{
   title: Scalars['String'];
   description: Scalars['String'];
   deadline: Scalars['Float'];
+  topicName: Scalars['String'];
+  tag: Scalars['String'];
 }>;
 
 
@@ -65,17 +69,23 @@ export type AddHomeworkMutation = { __typename?: 'Mutation', addHomework: boolea
 export type AllUserHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllUserHomeworkQuery = { __typename?: 'Query', getAllUserHomework: { __typename?: 'AllHomeworkResponse', count: number, homeworkList: Array<{ __typename?: 'Homework', id: number, title: string, description: string, deadline: number, subjectId: number, done: boolean, onTime?: Maybe<boolean>, enjoyed?: Maybe<boolean> }> } };
+export type AllUserHomeworkQuery = { __typename?: 'Query', getAllUserHomework: { __typename?: 'AllHomeworkResponse', count: number, homeworkList: Array<{ __typename?: 'Homework', id: number, userId: number, subjectId: number, title: string, description: string, done: boolean, deadline: number, enjoyed?: Maybe<boolean>, onTime?: Maybe<boolean>, tag: string, topicName: string }> } };
 
 export type AllHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllHomeworkQuery = { __typename?: 'Query', getAllHomework?: Maybe<Array<{ __typename?: 'Homework', id: number, userId: number, title: string, description: string, deadline: number, enjoyed?: Maybe<boolean> }>> };
+export type AllHomeworkQuery = { __typename?: 'Query', getAllHomework?: Maybe<Array<{ __typename?: 'Homework', id: number, userId: number, subjectId: number, title: string, description: string, done: boolean, deadline: number, enjoyed?: Maybe<boolean>, onTime?: Maybe<boolean>, tag: string, topicName: string }>> };
 
 
 export const AddHomeworkDocument = gql`
-    mutation AddHomework($title: String!, $description: String!, $deadline: Float!) {
-  addHomework(title: $title, description: $description, deadline: $deadline)
+    mutation AddHomework($title: String!, $description: String!, $deadline: Float!, $topicName: String!, $tag: String!) {
+  addHomework(
+    title: $title
+    description: $description
+    deadline: $deadline
+    topicName: $topicName
+    tag: $tag
+  )
 }
     `;
 export type AddHomeworkMutationFn = Apollo.MutationFunction<AddHomeworkMutation, AddHomeworkMutationVariables>;
@@ -96,6 +106,8 @@ export type AddHomeworkMutationFn = Apollo.MutationFunction<AddHomeworkMutation,
  *      title: // value for 'title'
  *      description: // value for 'description'
  *      deadline: // value for 'deadline'
+ *      topicName: // value for 'topicName'
+ *      tag: // value for 'tag'
  *   },
  * });
  */
@@ -111,13 +123,16 @@ export const AllUserHomeworkDocument = gql`
   getAllUserHomework {
     homeworkList {
       id
+      userId
+      subjectId
       title
       description
-      deadline
-      subjectId
       done
-      onTime
+      deadline
       enjoyed
+      onTime
+      tag
+      topicName
     }
     count
   }
@@ -155,10 +170,15 @@ export const AllHomeworkDocument = gql`
   getAllHomework {
     id
     userId
+    subjectId
     title
     description
+    done
     deadline
     enjoyed
+    onTime
+    tag
+    topicName
   }
 }
     `;

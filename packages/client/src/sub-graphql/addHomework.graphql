@@ -2,6 +2,14 @@ mutation AddHomework(
   $title: String!
   $description: String!
   $deadline: Float!
+  $topicName: String!
+  $tag: String!
 ) {
-  addHomework(title: $title, description: $description, deadline: $deadline)
+  addHomework(
+    title: $title
+    description: $description
+    deadline: $deadline
+    topicName: $topicName
+    tag: $tag
+  )
 }
