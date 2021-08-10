@@ -2,13 +2,16 @@ query AllUserHomework {
   getAllUserHomework {
     homeworkList {
       id
+      userId
+      subjectId
       title
       description
-      deadline
-      subjectId
       done
-      onTime
+      deadline
       enjoyed
+      onTime
+      tag
+      topicName
     }
     count
   }

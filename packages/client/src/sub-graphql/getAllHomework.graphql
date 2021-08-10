@@ -2,9 +2,14 @@ query AllHomework {
   getAllHomework {
     id
     userId
+    subjectId
     title
     description
+    done
     deadline
     enjoyed
+    onTime
+    tag
+    topicName
   }
 }
