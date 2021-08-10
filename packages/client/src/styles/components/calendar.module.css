@@ -30,9 +30,9 @@ body .big-ass-calendar.big-ass-calendar {
   width: 45%;
   min-width: 320px;
   height: auto;
-  border-radius: 5px;
-  border: 0.7px solid gray;
-  box-shadow: 0 0 20px gray;
+  border-radius: 7px;
+  border: 0.7px solid rgb(49, 49, 49);
+  box-shadow: 0 0 20px rgb(61, 61, 61);
   z-index: 5;
 }
 
