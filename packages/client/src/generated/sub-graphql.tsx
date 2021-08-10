@@ -24,7 +24,7 @@ export type Homework = {
   __typename?: 'Homework';
   id: Scalars['Int'];
   userId: Scalars['Int'];
-  subjectId?: Maybe<Scalars['Int']>;
+  subjectId: Scalars['Int'];
   title: Scalars['String'];
   description: Scalars['String'];
   done: Scalars['Boolean'];
@@ -65,7 +65,7 @@ export type AddHomeworkMutation = { __typename?: 'Mutation', addHomework: boolea
 export type AllUserHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllUserHomeworkQuery = { __typename?: 'Query', getAllUserHomework: { __typename?: 'AllHomeworkResponse', count: number, homeworkList: Array<{ __typename?: 'Homework', id: number, title: string, description: string, deadline: number, subjectId?: Maybe<number>, done: boolean, onTime?: Maybe<boolean>, enjoyed?: Maybe<boolean> }> } };
+export type AllUserHomeworkQuery = { __typename?: 'Query', getAllUserHomework: { __typename?: 'AllHomeworkResponse', count: number, homeworkList: Array<{ __typename?: 'Homework', id: number, title: string, description: string, deadline: number, subjectId: number, done: boolean, onTime?: Maybe<boolean>, enjoyed?: Maybe<boolean> }> } };
 
 export type AllHomeworkQueryVariables = Exact<{ [key: string]: never; }>;
 
