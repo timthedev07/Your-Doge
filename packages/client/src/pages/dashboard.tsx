@@ -9,6 +9,7 @@ import { MarkRecordValue } from "../types/types";
 import { YoutubeVideo } from "../components/YoutubeVideo";
 import { Homework } from "../generated/sub-graphql";
 import axios from "axios";
+import { HomeworkDetails } from "../components/HomeworkDetails";
 
 const temp = [
   "urgent",
@@ -22,6 +23,9 @@ const temp = [
 const Dashboard: React.FC = () => {
   const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
   const [tutorialId, setTutorialId] = useState<string>("");
+  const [openHomework, setOpenHomework] = useState<Homework | undefined>(
+    undefined
+  );
 
   // const { burrito } = useApollo()!;
 
@@ -196,6 +200,7 @@ const Dashboard: React.FC = () => {
           ></YoutubeVideo>
         </div>
       </div>
+      <HomeworkDetails homework={openHomework} />
     </>
   );
 };

@@ -7,9 +7,9 @@ import { HomeworkDetailsProps } from "../types/props";
 export const HomeworkDetails: React.FC<HomeworkDetailsProps> = ({
   homework,
 }) => {
-  return (
+  return homework ? (
     <div className="homework-details-component">
       <div>{homework.title}</div>
     </div>
-  );
+  ) : null;
 };
