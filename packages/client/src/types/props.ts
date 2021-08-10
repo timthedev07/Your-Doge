@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import { Homework } from "../generated/sub-graphql";
 import { AvatarKeyType, TabData } from "./types";
 
 export interface AlertProps {
@@ -68,4 +69,8 @@ export interface YoutubeVideoProps {
   videoId: string;
   style?: React.CSSProperties;
   className?: string;
+}
+
+export interface HomeworkDetailsProps {
+  homework: Homework;
 }
