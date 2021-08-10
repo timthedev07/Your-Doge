@@ -17,7 +17,7 @@ export const isAuth: MiddlewareFn<MyContext> = ({ context }, next) => {
   // bearer [token]
 
   if (!authorization) {
-    throw new Error("not authenticated");
+    throw new Error("You shall not pass.");
   }
 
   try {
