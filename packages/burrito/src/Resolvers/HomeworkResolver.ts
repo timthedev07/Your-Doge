@@ -43,7 +43,8 @@ export class HomeworkResolver {
     @Arg("description") description: string,
     @Arg("deadline") deadline: number,
     @Arg("topicName") topicName: string,
-    @Arg("tag") tag: TagCategory
+    @Arg("tag") tag: TagCategory,
+    @Arg("subjectId") subjectId: number
   ) {
     if (!payload || !payload?.userId) {
       throw new Error("You shall not pass.");
@@ -58,7 +59,7 @@ export class HomeworkResolver {
         deadline: deadline,
         done: false,
         enjoyed: null,
-        subjectId: null,
+        subjectId: subjectId,
         onTime: null,
         topicName,
         tag,
