@@ -13,7 +13,7 @@ import {
 import { getConnection } from "typeorm";
 import { hash, compare } from "bcrypt";
 import { User } from "../entity/User";
-import { MyContext } from "shared";
+import { MyContext, validatePassword } from "shared";
 import { sendRefreshToken } from "../utils/AuthHelper";
 import { verify } from "jsonwebtoken";
 import { sendEmail } from "../utils/sendEmail";
@@ -98,10 +98,10 @@ export class UserResolver {
       throw new Error("Invalid email");
     }
 
-    if (password.length < 8 || password.length > 64) {
-      throw new Error(
-        "A valid password has to be longer than 8 characters and shorter than 64."
-      );
+    try {
+      validatePassword(password);
+    } catch (err) {
+      throw new Error(err);
     }
 
     if (username.length > 14) {
@@ -721,10 +721,10 @@ export class UserResolver {
       throw new Error("Invalid old password");
     }
 
-    if (newPassword.length < 8 || newPassword.length > 64) {
-      throw new Error(
-        "A valid password has to be longer than 8 characters and shorter than 64."
-      );
+    try {
+      validatePassword(newPassword);
+    } catch (err) {
+      throw new Error(err);
     }
     // all checks passed
 
