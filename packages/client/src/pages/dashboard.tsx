@@ -10,6 +10,7 @@ import { YoutubeVideo } from "../components/YoutubeVideo";
 import { Homework } from "../generated/sub-graphql";
 import axios from "axios";
 import { HomeworkDetails } from "../components/HomeworkDetails";
+import { NewHomework } from "../components/NewHomework";
 
 const temp = [
   "urgent",
@@ -26,6 +27,7 @@ const Dashboard: React.FC = () => {
   const [openHomework, setOpenHomework] = useState<Homework | undefined>(
     undefined
   );
+  const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(true);
 
   // const { burrito } = useApollo()!;
 
@@ -170,6 +172,9 @@ const Dashboard: React.FC = () => {
                       className="homework-item-arrow"
                       alt=""
                       data-tip="Click me to view/edit details."
+                      onClick={() => {
+                        setOpenHomework(each);
+                      }}
                     />
                   </li>
                 ))}
@@ -201,6 +206,7 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
       <HomeworkDetails homework={openHomework} />
+      <NewHomework open={creationPanelOpen} setOpen={setCreationPanelOpen} />
     </>
   );
 };
