@@ -5,18 +5,40 @@ const KEYS = process.env.YOUTUBE_API_KEYS
   : [];
 
 export const generateTutorialKeyword = (homeworkList: [Homework]) => {
-  // maping homework id to it's score
-  const score: Record<number, number> = {};
+  // mapping indices to it's score
+  const scores: Record<number, number> = {};
+  const valueMap: Record<TagCategory, number> = {
+    "long-term": 2,
+    easy: 1,
+    hard: 4,
+    urgent: 4,
+    normal: 1,
+    "hard-and-urgent": 8,
+  };
+  const THRESHOLD = 5;
 
+  // only look at the first 10 items or less if there are less items
   for (let i = 0, n = Math.min(homeworkList.length, 10); i < n; ++i) {
     const curr = homeworkList[i];
 
-    score[curr.id] = daysElapsed(curr.deadline);
-
-    const tag = "";
+    const days = daysElapsed(curr.deadline);
+    const tag = curr.tag as TagCategory;
+    scores[i] =
+      (days < THRESHOLD ? (THRESHOLD - days) * 3 : days / days ** 1.458) +
+      valueMap[tag];
   }
 
-  return "gcse english poetry";
+  let max = 0;
+  let maxInd = 0;
+  for (const key of Object.keys(scores)) {
+    const score = scores[parseInt(key)];
+    if (score > max) {
+      max = score;
+      maxInd = parseInt(key);
+    }
+  }
+
+  return homeworkList[maxInd].topicName;
 };
 const getUrl = (apiKey: string, keyword: string) => {
   return `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=${encodeURI(

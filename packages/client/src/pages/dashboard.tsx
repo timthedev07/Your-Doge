@@ -1,8 +1,4 @@
-import React, {
-  /* useState, useEffect, */ useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Calendar from "react-calendar";
 // import { useApollo } from "../contexts/ApolloContext";
 import { useSubjectsQuery } from "../generated/graphql";
@@ -11,7 +7,17 @@ import ReactTooltip from "react-tooltip";
 import Head from "next/head";
 import { MarkRecordValue } from "../types/types";
 import { YoutubeVideo } from "../components/YoutubeVideo";
+import { Homework } from "../generated/sub-graphql";
 import axios from "axios";
+
+const temp = [
+  "urgent",
+  "hard",
+  "long-term",
+  "easy",
+  "normal",
+  "hard-and-urgent",
+];
 
 const Dashboard: React.FC = () => {
   const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
@@ -34,8 +40,9 @@ const Dashboard: React.FC = () => {
     "5": "dangit",
   };
 
-  const homeworkList = Array.from(Array(10).keys()).map((each) => {
+  const homeworkList: Homework[] = Array.from(Array(10).keys()).map((each) => {
     return {
+      __typename: "Homework",
       id: each,
       title: `Homework ${each}`,
       description: "You hate dancin",
@@ -44,6 +51,9 @@ const Dashboard: React.FC = () => {
       done: true,
       onTime: true,
       enjoyed: false,
+      topicName: "GCSE eglish literature language techniques",
+      userId: 3,
+      tag: temp[Math.round(Math.random() * (temp.length - 1))],
     };
   });
 
@@ -88,15 +98,15 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await axios({
+      const { data } = { data: { videoId: "" } };
+      /* await axios({
         url: "/api/gen-tutorial",
         data: {
           homeworkList,
         },
         headers: { "Content-Type": "application/json" },
         method: "POST",
-      });
-      console.log(data);
+      }); */
       setTutorialId(data.videoId);
     })();
   }, [homeworkList]);
