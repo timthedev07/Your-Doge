@@ -53,8 +53,9 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
           name="description"
           placeholder="description"
         ></textarea>
-        <button type="submit"></button>
+        <button type="submit">Submit</button>
       </form>
+      <br />
       <button onClick={() => setOpen(false)}>close</button>
     </div>
   ) : null;
