@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { nonEmpty, parseGraphQLError, TagCategory } from "shared";
+import { nonEmpty, parseGraphQLError } from "shared";
 import { useApollo } from "../contexts/ApolloContext";
 import { SubjectsQuery } from "../generated/graphql";
 import { useAddHomeworkMutation } from "../generated/sub-graphql";
