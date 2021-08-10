@@ -9,7 +9,3 @@ export const validatePassword = (password: string) => {
   }
   return true;
 };
-
-validatePassword("helloworld");
-validatePassword("hellD3");
-validatePassword("dfasf2fDF");
