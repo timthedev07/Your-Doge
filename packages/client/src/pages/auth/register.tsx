@@ -217,7 +217,7 @@ const Register: React.FC = () => {
               placeholder="At least 8 characters long"
               onChange={(e) =>
                 toggleWarning(e, (e) => {
-                  return e.target.value.length < 8;
+                  return !validatePassword(e.target.value);
                 })
               }
             />
