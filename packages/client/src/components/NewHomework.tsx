@@ -10,12 +10,17 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
   const [createHomework] = useAddHomeworkMutation();
   const [input, setInput] = useState({
     title: "",
-    deadline: Date.now(),
+    deadline: "",
     description: "",
   });
 
   const handleSubmit = () => {
-    createHomework({ variables: input });
+    createHomework({
+      variables: {
+        ...input,
+        deadline: Date.parse(input.deadline),
+      },
+    });
   };
 
   const handleChange = (
@@ -28,6 +33,8 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
       };
     });
   };
+
+  console.log(input);
 
   return open ? (
     <div className="new-homework-panel">
