@@ -14,6 +14,7 @@
   },
   "scripts": {
     "dev": "concurrently \"cd packages/client && yarn dev\" \"cd packages/shibe && yarn dev\"",
+    "dev:with-burrito": "concurrently \"cd packages/client && yarn dev\" \"cd packages/shibe && yarn dev\" \"cd packages/burrito && yarn dev\"",
     "dev:electron": "concurrently \"cd packages/client && yarn dev:electron\" \"cd packages/shibe && yarn dev\""
   },
   "repository": {
