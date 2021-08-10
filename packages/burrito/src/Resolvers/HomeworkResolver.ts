@@ -9,7 +9,7 @@ import {
   UseMiddleware,
 } from "type-graphql";
 import { Homework } from "../entity/Homework";
-import { MyContext, isAuth } from "shared";
+import { MyContext, isAuth, TagCategory } from "shared";
 
 @ObjectType()
 class AllHomeworkResponse {
@@ -41,7 +41,9 @@ export class HomeworkResolver {
     @Ctx() { payload }: MyContext,
     @Arg("title") title: string,
     @Arg("description") description: string,
-    @Arg("deadline") deadline: number
+    @Arg("deadline") deadline: number,
+    @Arg("topicName") topicName: string,
+    @Arg("tag") tag: TagCategory
   ) {
     if (!payload || !payload?.userId) {
       throw new Error("You shall not pass.");
@@ -58,6 +60,8 @@ export class HomeworkResolver {
         enjoyed: null,
         subjectId: null,
         onTime: null,
+        topicName,
+        tag,
       });
       return true;
     } catch (err) {
