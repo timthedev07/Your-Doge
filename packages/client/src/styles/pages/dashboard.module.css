@@ -52,6 +52,8 @@
   z-index: 4;
   height: 90%;
   overflow-y: auto;
+  box-shadow: 0 0 15px #525252;
+  border: solid #7a7a7a 1px;
 }
 
 .homework-list-container {
@@ -62,7 +64,9 @@
   justify-content: flex-start;
   position: relative;
   z-index: 5;
-  background-color: #484848;
+  background: rgb(54, 54, 54);
+  background: linear-gradient(165deg, rgb(66, 66, 66) 0%, rgb(77, 77, 77) 100%);
+
   border-radius: 5px;
   margin-top: 30px;
   margin-bottom: 30px;
