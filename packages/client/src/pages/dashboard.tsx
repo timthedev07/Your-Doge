@@ -206,7 +206,13 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
       <HomeworkDetails homework={openHomework} />
-      <NewHomework open={creationPanelOpen} setOpen={setCreationPanelOpen} />
+      {subjectsLoading || !subjectsData ? null : (
+        <NewHomework
+          subjects={subjectsData}
+          open={creationPanelOpen}
+          setOpen={setCreationPanelOpen}
+        />
+      )}
     </>
   );
 };
