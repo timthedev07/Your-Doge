@@ -46,6 +46,7 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
           type="date"
           placeholder="deadline"
         />
+        <br />
         <textarea
           value={input.description}
           onChange={handleChange}
