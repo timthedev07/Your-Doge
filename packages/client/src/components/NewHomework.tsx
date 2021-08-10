@@ -21,7 +21,7 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({ open, setOpen }) => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (Object.values(input).every((each) => nonEmpty(each))) {
+    if (!Object.values(input).every((each) => nonEmpty(each))) {
       return;
     }
 
