@@ -72,5 +72,5 @@ export interface YoutubeVideoProps {
 }
 
 export interface HomeworkDetailsProps {
-  homework?: Homework;
+  homework: Homework;
 }

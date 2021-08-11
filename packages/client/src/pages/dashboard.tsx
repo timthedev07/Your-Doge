@@ -208,7 +208,7 @@ const Dashboard: React.FC = () => {
           ></YoutubeVideo>
         </div>
       </div>
-      <HomeworkDetails homework={openHomework} />
+      {openHomework && <HomeworkDetails homework={openHomework} />}
       {subjectsLoading || !subjectsData ? null : (
         <NewHomework
           subjects={subjectsData}
