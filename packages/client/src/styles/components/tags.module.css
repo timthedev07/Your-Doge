@@ -1,0 +1,12 @@
+.homework-tag {
+  border-radius: 100vw;
+  width: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: rgb(39, 60, 86);
+  color: rgb(98, 168, 250);
+  border: solid 1px rgb(56, 93, 136);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
