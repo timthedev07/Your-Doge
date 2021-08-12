@@ -76,7 +76,7 @@
 .homework-list .homework-item {
   display: flex;
   list-style: none;
-  height: 60px;
+  height: 75px;
   width: 100%;
   border-bottom: rgb(128, 128, 128) solid 1px;
   justify-content: flex-start;
