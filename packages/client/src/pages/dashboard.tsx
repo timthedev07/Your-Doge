@@ -5,12 +5,14 @@ import { useSubjectsQuery } from "../generated/graphql";
 import ContentLoader from "react-content-loader";
 import ReactTooltip from "react-tooltip";
 import Head from "next/head";
-import { MarkRecordValue } from "../types/types";
+import { HomeworkSortKey, MarkRecordValue } from "../types/types";
 import { YoutubeVideo } from "../components/YoutubeVideo";
 import { Homework } from "../generated/sub-graphql";
 import axios from "axios";
 import { HomeworkDetails } from "../components/HomeworkDetails";
 import { NewHomework } from "../components/NewHomework";
+import { URGENCY_SCORE } from "../constants/homework";
+import { TagCategory } from "shared";
 
 const temp = [
   "urgent",
@@ -24,9 +26,11 @@ const temp = [
 const Dashboard: React.FC = () => {
   const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
   const [tutorialId, setTutorialId] = useState<string>("");
-  const [openHomework, setOpenHomework] = useState<Homework | undefined>(
-    undefined
-  );
+  const [openHomework, setOpenHomework] =
+    useState<Homework | undefined>(undefined);
+  const [sortBy, setSortBy] = useState<HomeworkSortKey>("tag");
+  const [sortedHomework, setSortedHomework] =
+    useState<Homework[] | undefined>(undefined);
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
 
   // const { burrito } = useApollo()!;
@@ -46,24 +50,42 @@ const Dashboard: React.FC = () => {
     "5": "dangit",
   };
 
-  const homeworkList: Homework[] = Array.from(Array(30).keys()).map((each) => {
-    return {
-      __typename: "Homework",
-      id: each,
-      title: `Homework ${each}`,
-      description: "You hate dancin",
-      deadline: 1630620000000,
-      subjectId: 10,
-      done: true,
-      onTime: true,
-      enjoyed: false,
-      topicName: "GCSE eglish literature language techniques",
-      userId: 3,
-      tag: temp[
-        Math.random() < 0.15 ? 0 : Math.ceil(Math.random() * (temp.length - 1))
-      ],
-    };
-  });
+  const homeworkList: Homework[] = useMemo(() => {
+    return Array.from(Array(30).keys()).map((each) => {
+      return {
+        __typename: "Homework",
+        id: each,
+        title: `Homework ${each}`,
+        description: "You hate dancin",
+        deadline: 1630620000000,
+        subjectId: 10,
+        done: true,
+        onTime: true,
+        enjoyed: false,
+        topicName: "GCSE eglish literature language techniques",
+        userId: 3,
+        tag: temp[
+          Math.random() < 0.15
+            ? 0
+            : Math.ceil(Math.random() * (temp.length - 1))
+        ],
+      };
+    });
+  }, []);
+
+  // this sorts the homework
+  useEffect(() => {
+    setSortedHomework(
+      [...homeworkList].sort((a, b) => {
+        if (sortBy === "tag") {
+          const x = URGENCY_SCORE[a.tag as TagCategory];
+          const y = URGENCY_SCORE[b.tag as TagCategory];
+          return y - x;
+        }
+        return b[sortBy] - a[sortBy];
+      })
+    );
+  }, [sortBy, homeworkList]);
 
   useEffect(() => {
     if (homeworkList) {
@@ -145,10 +167,11 @@ const Dashboard: React.FC = () => {
           <h4 className="dashboard-subheading">{new Date().toDateString()}</h4>
         </header>
 
-        {}
-
         <div className="homework-list-container">
-          {subjectsLoading ? (
+          <h2 style={{ marginRight: "auto", marginLeft: "" }}>
+            Homework to do:
+          </h2>
+          {subjectsLoading || !sortedHomework ? (
             <div
               style={{
                 width: "100%",
@@ -175,7 +198,7 @@ const Dashboard: React.FC = () => {
           ) : (
             <>
               <ul className="homework-list">
-                {homeworkList.map((each) => (
+                {sortedHomework.map((each) => (
                   <li key={each.id} className="homework-item">
                     <div className="homework-item-innermain">
                       <div className="homework-title">{each.title}</div>
