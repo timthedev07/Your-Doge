@@ -41,12 +41,18 @@
   --text-color: rgb(114, 229, 158);
   --border-color: rgb(74, 128, 102);
 }
+.homework-tag.easy:before {
+  --tag-emoji: "💡";
+}
 
 /* long-term */
 .homework-tag.long-term {
   --background-color: rgb(80, 87, 76);
   --text-color: rgb(237, 253, 161);
   --border-color: rgb(127, 137, 102);
+}
+.homework-tag.long-term:before {
+  --tag-emoji: "🏹";
 }
 
 /* hard */
@@ -55,10 +61,16 @@
   --text-color: rgb(237, 146, 76);
   --border-color: rgb(127, 92, 66);
 }
+.homework-tag.hard:before {
+  --tag-emoji: "🧗";
+}
 
 /* hard-and-urgent */
 .homework-tag.hard-and-urgent {
   --background-color: rgb(80, 69, 61);
   --text-color: rgb(255, 119, 109);
   --border-color: rgb(131, 82, 82);
+}
+.homework-tag.hard-and-urgent:before {
+  --tag-emoji: "🧨";
 }
