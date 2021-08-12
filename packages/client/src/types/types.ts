@@ -95,4 +95,4 @@ export interface FacebookUserData {
   last_name: string;
 }
 
-export type HomeworkSortKey = "deadline" | "urgency";
+export type HomeworkSortKey = "deadline" | "tag";
