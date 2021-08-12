@@ -165,7 +165,9 @@ const Dashboard: React.FC = () => {
                   <li key={each.id} className="homework-item">
                     <div className="homework-item-innermain">
                       <div className="homework-title">{each.title}</div>
-                      <div className="homework-tag">{each.tag}</div>
+                      <div className={`homework-tag ${each.tag}`}>
+                        {each.tag}
+                      </div>
                     </div>
                     <div className="homework-subject">
                       {subjectsMap![each.subjectId]}
