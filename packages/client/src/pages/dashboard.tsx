@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
     "5": "dangit",
   };
 
-  const homeworkList: Homework[] = Array.from(Array(18).keys()).map((each) => {
+  const homeworkList: Homework[] = Array.from(Array(30).keys()).map((each) => {
     return {
       __typename: "Homework",
       id: each,
@@ -59,7 +59,9 @@ const Dashboard: React.FC = () => {
       enjoyed: false,
       topicName: "GCSE eglish literature language techniques",
       userId: 3,
-      tag: temp[Math.ceil(Math.random() * (temp.length - 1))],
+      tag: temp[
+        Math.random() > 0.15 ? 0 : Math.ceil(Math.random() * (temp.length - 1))
+      ],
     };
   });
 
