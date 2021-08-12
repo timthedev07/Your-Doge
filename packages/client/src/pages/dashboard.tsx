@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
       topicName: "GCSE eglish literature language techniques",
       userId: 3,
       tag: temp[
-        Math.random() > 0.15 ? 0 : Math.ceil(Math.random() * (temp.length - 1))
+        Math.random() < 0.15 ? 0 : Math.ceil(Math.random() * (temp.length - 1))
       ],
     };
   });
