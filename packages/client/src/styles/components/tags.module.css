@@ -10,6 +10,10 @@
   justify-content: center;
   align-items: center;
 }
+.homework-tag:before {
+  content: var(--tag-emoji);
+  margin-right: 5px;
+}
 
 /* urgent */
 .homework-tag.urgent {
@@ -17,12 +21,18 @@
   --text-color: rgb(90, 166, 252);
   --border-color: rgb(56, 93, 136);
 }
+.homework-tag.urgent:before {
+  --tag-emoji: "⌚️";
+}
 
 /* normal */
 .homework-tag.normal {
   --background-color: rgb(50, 71, 78);
   --text-color: rgb(117, 218, 213);
   --border-color: rgb(75, 123, 129);
+}
+.homework-tag.normal:before {
+  --tag-emoji: "💪";
 }
 
 /* easy */
