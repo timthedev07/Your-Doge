@@ -102,6 +102,18 @@ const Dashboard: React.FC = () => {
     return res;
   }, [subjectsData]);
 
+  const subjectsUsed = useMemo(() => {
+    if (!subjectsMap) return [];
+    const res: Set<string> = new Set();
+
+    for (const homework of homeworkList) {
+      const subject = subjectsMap[homework.subjectId];
+      if (!res.has(subject)) res.add(subject);
+    }
+
+    return Array.from(res);
+  }, [homeworkList, subjectsMap]);
+
   useEffect(() => {
     (async () => {
       const { data } = { data: { videoId: "" } };
