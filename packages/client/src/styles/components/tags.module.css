@@ -11,36 +11,42 @@
   align-items: center;
 }
 
+/* urgent */
 .homework-tag.urgent {
   --background-color: rgb(39, 60, 86);
   --text-color: rgb(90, 166, 252);
   --border-color: rgb(56, 93, 136);
 }
 
+/* normal */
 .homework-tag.normal {
   --background-color: rgb(50, 71, 78);
   --text-color: rgb(117, 218, 213);
   --border-color: rgb(75, 123, 129);
 }
 
+/* easy */
 .homework-tag.easy {
   --background-color: rgb(58, 83, 77);
   --text-color: rgb(114, 229, 158);
   --border-color: rgb(74, 128, 102);
 }
 
+/* long-term */
 .homework-tag.long-term {
   --background-color: rgb(80, 87, 76);
   --text-color: rgb(237, 253, 161);
   --border-color: rgb(127, 137, 102);
 }
 
+/* hard */
 .homework-tag.hard {
   --background-color: rgb(79, 69, 75);
   --text-color: rgb(237, 146, 76);
   --border-color: rgb(127, 92, 66);
 }
 
+/* hard-and-urgent */
 .homework-tag.hard-and-urgent {
   --background-color: rgb(80, 69, 61);
   --text-color: rgb(255, 119, 109);
