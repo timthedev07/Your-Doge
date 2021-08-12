@@ -59,7 +59,7 @@ const Dashboard: React.FC = () => {
       enjoyed: false,
       topicName: "GCSE eglish literature language techniques",
       userId: 3,
-      tag: temp[Math.round(Math.random() * (temp.length - 1))],
+      tag: temp[Math.ceil(Math.random() * (temp.length - 1))],
     };
   });
 
