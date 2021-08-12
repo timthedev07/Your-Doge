@@ -5,6 +5,7 @@ import { Loading } from "../../components/Loading";
 import { TabSwitcher } from "../../components/TabSwitcher";
 import { TabData } from "../../types/types";
 import { useGetProfileQuery } from "../../generated/graphql";
+import Head from "next/head";
 
 const OtherUsers: React.FC = () => {
   const {
@@ -40,11 +41,18 @@ const OtherUsers: React.FC = () => {
   ];
 
   return (
-    <div id="account-page">
-      <div id="account-page-content-container">
-        <TabSwitcher tabs={TABS} />
+    <>
+      <Head>
+        <title>
+          {data && data.getProfile ? data.getProfile.username : "user..."}
+        </title>
+      </Head>
+      <div id="account-page">
+        <div id="account-page-content-container">
+          <TabSwitcher tabs={TABS} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
