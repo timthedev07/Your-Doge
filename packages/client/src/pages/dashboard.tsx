@@ -46,7 +46,7 @@ const Dashboard: React.FC = () => {
     "5": "dangit",
   };
 
-  const homeworkList: Homework[] = Array.from(Array(10).keys()).map((each) => {
+  const homeworkList: Homework[] = Array.from(Array(18).keys()).map((each) => {
     return {
       __typename: "Homework",
       id: each,
