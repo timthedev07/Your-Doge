@@ -2,16 +2,14 @@ import React, { FormEvent, useState } from "react";
 import { nonEmpty, parseGraphQLError } from "shared";
 import { useApollo } from "../contexts/ApolloContext";
 import { SubjectsQuery } from "../generated/graphql";
-import { useAddHomeworkMutation } from "../generated/sub-graphql";
 import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
 import { HomeworkDetailsProps } from "../types/props";
 
 export const HomeworkDetails: React.FC<HomeworkDetailsProps> = ({
   homework,
-  open,
-  setOpen,
   subjects,
+  setHomework,
 }) => {
   const { burrito } = useApollo()!;
   burrito;
@@ -45,14 +43,14 @@ export const HomeworkDetails: React.FC<HomeworkDetailsProps> = ({
   return (
     <Modal
       className="bootstrap-modal margin-top-nav"
-      show={open}
-      onHide={() => setOpen(false)}
+      show={!!homework}
+      onHide={() => setHomework(undefined)}
     >
       <Modal.Header>
         <Modal.Title>New Homework</Modal.Title>
         <CloseButton
           handleClick={() => {
-            setOpen(false);
+            setHomework(undefined);
           }}
         />
       </Modal.Header>
@@ -134,7 +132,7 @@ export const HomeworkDetails: React.FC<HomeworkDetailsProps> = ({
           ></textarea>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={() => setOpen(false)} variant="warning">
+          <Button onClick={() => setHomework(undefined)} variant="warning">
             Close
           </Button>
           <Button type="submit" variant="success">

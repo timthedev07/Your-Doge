@@ -78,6 +78,8 @@ export interface NewHomeworkProps {
   subjects: SubjectsQuery;
 }
 
-export interface HomeworkDetailsProps extends NewHomeworkProps {
+export interface HomeworkDetailsProps {
+  setHomework: React.Dispatch<React.SetStateAction<Homework | undefined>>;
   homework: Homework;
+  subjects: SubjectsQuery;
 }

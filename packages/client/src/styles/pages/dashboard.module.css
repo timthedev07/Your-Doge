@@ -83,11 +83,30 @@
   justify-content: flex-start;
   align-items: center;
   padding-left: 40px;
-  background-color: #636363;
+  background-color: #494949;
 }
 
-.homework-list .homework-item .homework-title {
+.homework-list .homework-item .homework-item-innermain .homework-title {
+  width: 100%;
+}
+
+.homework-tag {
+  border-radius: 100vw;
+  width: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: rgb(39, 60, 86);
+  color: rgb(98, 168, 250);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homework-item-innermain {
   width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .homework-item .homework-item-arrow {
