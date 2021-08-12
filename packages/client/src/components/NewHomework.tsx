@@ -1,16 +1,10 @@
 import React, { FormEvent, useState } from "react";
 import { nonEmpty, parseGraphQLError } from "shared";
 import { useApollo } from "../contexts/ApolloContext";
-import { SubjectsQuery } from "../generated/graphql";
 import { useAddHomeworkMutation } from "../generated/sub-graphql";
 import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
-
-interface NewHomeworkProps {
-  open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  subjects: SubjectsQuery;
-}
+import { NewHomeworkProps } from "../types/props";
 
 export const NewHomework: React.FC<NewHomeworkProps> = ({
   open,

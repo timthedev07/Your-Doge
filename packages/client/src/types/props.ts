@@ -1,4 +1,5 @@
 import { MouseEventHandler } from "react";
+import { SubjectsQuery } from "../generated/graphql";
 import { Homework } from "../generated/sub-graphql";
 import { AvatarKeyType, TabData } from "./types";
 
@@ -71,6 +72,12 @@ export interface YoutubeVideoProps {
   className?: string;
 }
 
-export interface HomeworkDetailsProps {
+export interface NewHomeworkProps {
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  subjects: SubjectsQuery;
+}
+
+export interface HomeworkDetailsProps extends NewHomeworkProps {
   homework: Homework;
 }

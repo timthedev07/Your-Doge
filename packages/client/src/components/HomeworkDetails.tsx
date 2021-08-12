@@ -9,44 +9,24 @@ import { HomeworkDetailsProps } from "../types/props";
 
 export const HomeworkDetails: React.FC<HomeworkDetailsProps> = ({
   homework,
+  open,
+  setOpen,
+  subjects,
 }) => {
   const { burrito } = useApollo()!;
   burrito;
-  const [input, setInput] = useState({
+  const prevState = {
     title: homework.title,
-    deadline: ,
-    description: "",
-    tag: "",
-    topicName: "",
-    subjectId: "",
-  });
+    deadline: new Date(homework.deadline).toISOString().split("T")[0],
+    description: homework.description,
+    tag: homework.tag,
+    topicName: homework.topicName,
+    subjectId: homework.subjectId,
+  };
+  const [input, setInput] = useState(prevState);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    if (
-      !Object.values(input).every((each) =>
-        typeof each === "string" ? nonEmpty(each) : each > -1
-      )
-    ) {
-      return;
-    }
-
-    try {
-      const res = await createHomework({
-        variables: {
-          ...input,
-          deadline: Date.parse(input.deadline),
-          subjectId: parseInt(input.subjectId),
-        },
-      });
-
-      if (res.data && res.data.addHomework) {
-        // setApiResponse("Success homework added!");
-      }
-    } catch (err) {
-      // setApiResponse(parseGraphQLError(err));
-    }
   };
 
   const handleChange = (
@@ -133,7 +113,7 @@ export const HomeworkDetails: React.FC<HomeworkDetailsProps> = ({
             className="margin-10"
           >
             <option disabled value={""}>
-              Choose the subject
+              Modify subject
             </option>
             {subjects.subjects &&
               subjects.subjects.map((each) => (
@@ -155,10 +135,10 @@ export const HomeworkDetails: React.FC<HomeworkDetailsProps> = ({
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={() => setOpen(false)} variant="warning">
-            Cancel
+            Close
           </Button>
           <Button type="submit" variant="success">
-            Submit
+            Update
           </Button>
         </Modal.Footer>
       </form>
