@@ -135,13 +135,15 @@
 }
 
 .homework-sort-customization-control-panel {
-  width: 100%;
+  width: 90%;
   height: 90px;
-  border-bottom: 1px solid white;
+  border: 1px solid white;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 /* don't write any css except for media queries below here */
