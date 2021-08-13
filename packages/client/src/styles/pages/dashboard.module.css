@@ -90,6 +90,7 @@
   padding-left: 40px;
   background-color: #414141;
   transition: ease-out 0.2s;
+  cursor: pointer;
 }
 
 .homework-list .homework-item:hover {
