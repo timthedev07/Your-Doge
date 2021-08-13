@@ -89,6 +89,12 @@
   align-items: center;
   padding-left: 40px;
   background-color: #414141;
+  transition: ease-out 0.2s;
+}
+
+.homework-list .homework-item:hover {
+  transition: ease-out 0.2s;
+  background-color: #4e4e46;
 }
 
 .homework-list .homework-item .homework-item-innermain .homework-title {
