@@ -227,30 +227,32 @@ const Dashboard: React.FC = () => {
             </div>
           ) : (
             <>
-              <ul className="homework-list">
-                {sortedHomework.map((each) => (
-                  <li key={each.id} className="homework-item">
-                    <div className="homework-item-innermain">
-                      <div className="homework-title">{each.title}</div>
-                      <div className={`homework-tag ${each.tag}`}>
-                        {each.tag}
+              <div className="homework-list-wrapper">
+                <ul className="homework-list">
+                  {sortedHomework.map((each) => (
+                    <li key={each.id} className="homework-item">
+                      <div className="homework-item-innermain">
+                        <div className="homework-title">{each.title}</div>
+                        <div className={`homework-tag ${each.tag}`}>
+                          {each.tag}
+                        </div>
                       </div>
-                    </div>
-                    <div className="homework-subject">
-                      {subjectsMap![each.subjectId]}
-                    </div>
-                    <img
-                      src="/images/icons/rightarrow.svg"
-                      className="homework-item-arrow"
-                      alt=""
-                      data-tip="Click me to view/edit details."
-                      onClick={() => {
-                        setOpenHomework(each);
-                      }}
-                    />
-                  </li>
-                ))}
-              </ul>
+                      <div className="homework-subject">
+                        {subjectsMap![each.subjectId]}
+                      </div>
+                      <img
+                        src="/images/icons/rightarrow.svg"
+                        className="homework-item-arrow"
+                        alt=""
+                        data-tip="Click me to view/edit details."
+                        onClick={() => {
+                          setOpenHomework(each);
+                        }}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </>
           )}
           <button

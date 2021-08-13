@@ -43,34 +43,40 @@
 }
 
 /* homework list and items */
-.homework-list {
-  width: 90%;
-  background-color: #3d3d3d;
-  padding: 0;
-  border-radius: 7px;
-  margin-bottom: 0;
-  z-index: 4;
-  height: 90%;
-  overflow-y: auto;
-  box-shadow: 0 0 15px #525252;
-  border: solid #7a7a7a 1px;
-}
-
 .homework-list-container {
   width: 95%;
-  height: 420px;
+  height: 600px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   position: relative;
   z-index: 5;
   background: rgb(54, 54, 54);
-
   border-radius: 5px;
   margin-top: 30px;
   margin-bottom: 30px;
   padding-top: 40px;
   flex-direction: column;
+}
+
+.homework-list-wrapper {
+  width: 90%;
+  background-color: #3d3d3d;
+  padding: 0;
+  border-radius: 10px;
+  margin-bottom: 0;
+  z-index: 4;
+  height: 400px;
+  box-shadow: 0 0 15px #525252;
+  border: solid #7a7a7a 1px;
+  overflow: hidden;
+}
+
+.homework-list {
+  padding-left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .homework-list .homework-item {
