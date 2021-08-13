@@ -138,6 +138,7 @@
   width: 90%;
   height: 90px;
   border: 1px solid white;
+  border-radius: 5px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
