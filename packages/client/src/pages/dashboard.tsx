@@ -13,6 +13,7 @@ import { HomeworkDetails } from "../components/HomeworkDetails";
 import { NewHomework } from "../components/NewHomework";
 import { URGENCY_SCORE } from "../constants/homework";
 import { TagCategory } from "shared";
+import { FormCheck } from "react-bootstrap";
 
 const temp = [
   "urgent",
@@ -34,6 +35,7 @@ const Dashboard: React.FC = () => {
     undefined
   );
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
+  const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
 
   // const { burrito } = useApollo()!;
 
@@ -61,7 +63,7 @@ const Dashboard: React.FC = () => {
         description: "You hate dancin",
         deadline: 1630620000000,
         subjectId: 10,
-        done: true,
+        done: Math.random() < 0.5,
         onTime: true,
         enjoyed: false,
         topicName: "GCSE eglish literature language techniques",
@@ -77,17 +79,23 @@ const Dashboard: React.FC = () => {
 
   // this sorts the homework
   useEffect(() => {
-    setSortedHomework(
-      [...homeworkList].sort((a, b) => {
+    setSortedHomework(() => {
+      return [...homeworkList].sort((a, b) => {
         if (sortBy === "tag") {
           const x = URGENCY_SCORE[a.tag as TagCategory];
           const y = URGENCY_SCORE[b.tag as TagCategory];
           return y - x;
         }
         return b[sortBy] - a[sortBy];
-      })
-    );
+      });
+    });
   }, [sortBy, homeworkList]);
+
+  useEffect(() => {
+    setSortedHomework((prev) =>
+      prev && onlyTodo ? prev?.filter((each) => !each.done) : homeworkList
+    );
+  }, [onlyTodo, homeworkList]);
 
   useEffect(() => {
     if (homeworkList) {
@@ -174,7 +182,24 @@ const Dashboard: React.FC = () => {
             Homework to do:
           </h2>
           <div className="homework-sort-customization-control-panel">
-            <button>Hello world</button>
+            <label>Rank by:&nbsp;&nbsp;&nbsp;</label>
+            <select
+              onChange={(e) => {
+                setSortBy(e.target.value as HomeworkSortKey);
+              }}
+              value={sortBy}
+              style={{ width: "120px" }}
+            >
+              <option value="deadline">Deadline</option>
+              <option value="tag">Tag</option>
+            </select>
+            <label>To-do only:</label>
+            <FormCheck
+              id="switchEnabled"
+              type="switch"
+              checked={onlyTodo}
+              onChange={() => setOnlyTodo((prev) => !prev)}
+            />
           </div>
           {subjectsLoading || !sortedHomework ? (
             <div
