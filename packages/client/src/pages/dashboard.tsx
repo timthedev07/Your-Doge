@@ -182,7 +182,7 @@ const Dashboard: React.FC = () => {
             Homework to do:
           </h2>
           <div className="homework-sort-customization-control-panel">
-            <label>Rank by:&nbsp;&nbsp;&nbsp;</label>
+            <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
             <select
               onChange={(e) => {
                 setSortBy(e.target.value as HomeworkSortKey);
@@ -193,7 +193,7 @@ const Dashboard: React.FC = () => {
               <option value="deadline">Deadline</option>
               <option value="tag">Tag</option>
             </select>
-            <label>To-do only:</label>
+            <label className="option-label">To-do only:</label>
             <FormCheck
               id="switchEnabled"
               type="switch"
