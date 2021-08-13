@@ -26,11 +26,13 @@ const temp = [
 const Dashboard: React.FC = () => {
   const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
   const [tutorialId, setTutorialId] = useState<string>("");
-  const [openHomework, setOpenHomework] =
-    useState<Homework | undefined>(undefined);
+  const [openHomework, setOpenHomework] = useState<Homework | undefined>(
+    undefined
+  );
   const [sortBy, setSortBy] = useState<HomeworkSortKey>("tag");
-  const [sortedHomework, setSortedHomework] =
-    useState<Homework[] | undefined>(undefined);
+  const [sortedHomework, setSortedHomework] = useState<Homework[] | undefined>(
+    undefined
+  );
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
 
   // const { burrito } = useApollo()!;
@@ -168,9 +170,12 @@ const Dashboard: React.FC = () => {
         </header>
 
         <div className="homework-list-container">
-          <h2 style={{ marginRight: "auto", marginLeft: "" }}>
+          <h2 style={{ marginRight: "auto", marginLeft: "2%" }}>
             Homework to do:
           </h2>
+          <div className="homework-sort-customization-control-panel">
+            <button>Hello world</button>
+          </div>
           {subjectsLoading || !sortedHomework ? (
             <div
               style={{
