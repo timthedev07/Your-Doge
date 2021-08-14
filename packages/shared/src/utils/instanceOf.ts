@@ -1,4 +1,4 @@
-const instanceOfInterface = <T>(
+export const instanceOfInterface = <T>(
   object: any,
   aMemberName: string
 ): object is T => {
