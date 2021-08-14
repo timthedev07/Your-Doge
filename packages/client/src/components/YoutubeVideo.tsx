@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { YoutubeVideoProps } from "../types/props";
 
 export const YoutubeVideo: React.FC<YoutubeVideoProps> = ({
@@ -6,11 +6,19 @@ export const YoutubeVideo: React.FC<YoutubeVideoProps> = ({
   videoId,
   className,
 }) => {
+  const [loading, setLoading] = useState<boolean>(true);
   return (
-    <iframe
-      src={`https://www.youtube.com/embed/${videoId}`}
-      style={style}
-      className={className}
-    ></iframe>
+    <div className={className} style={{ ...style, overflow: "hidden" }}>
+      {loading ? (
+        "loading"
+      ) : (
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}`}
+          onLoad={() => setLoading(false)}
+          onError={() => setLoading(false)}
+          style={{ width: "100%", height: "100%" }}
+        ></iframe>
+      )}
+    </div>
   );
 };
