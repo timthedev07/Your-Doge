@@ -12,9 +12,10 @@ import axios from "axios";
 import { HomeworkDetails } from "../components/HomeworkDetails";
 import { NewHomework } from "../components/NewHomework";
 import { BUSY_CLASSES, URGENCY_SCORE } from "../constants/homework";
-import { TagCategory } from "shared";
+import { daysToMilliseconds, TagCategory } from "shared";
 import { FormCheck } from "react-bootstrap";
 import { SubjectsSelect } from "../components/SubjectsSelect";
+import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
 
 const temp = [
   "urgent",
@@ -38,6 +39,7 @@ const Dashboard: React.FC = () => {
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
   const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
   const [subjectFilter, setSubjectFilter] = useState<string>("");
+  const { data: subjectsData, loading: subjectsLoading } = useSubjectsQuery();
 
   // const { burrito } = useApollo()!;
 
@@ -70,7 +72,7 @@ const Dashboard: React.FC = () => {
     });
   }, []);
 
-  // this sorts the homework
+  // sorting
   useEffect(() => {
     setSortedHomework(() => {
       return [...homeworkList].sort((a, b) => {
@@ -84,12 +86,14 @@ const Dashboard: React.FC = () => {
     });
   }, [sortBy, homeworkList]);
 
+  // filtering based on onlyTodo
   useEffect(() => {
     setSortedHomework((prev) =>
       prev && onlyTodo ? prev?.filter((each) => !each.done) : homeworkList
     );
   }, [onlyTodo, homeworkList]);
 
+  // set marks on tha calendar
   useEffect(() => {
     if (homeworkList) {
       homeworkList.forEach((each) => {
@@ -110,8 +114,6 @@ const Dashboard: React.FC = () => {
       });
     }
   }, [marks, homeworkList]);
-
-  const { data: subjectsData, loading: subjectsLoading } = useSubjectsQuery();
 
   // a map that maps subject id to subject name
   // undefined is when the query is still loading
@@ -141,8 +143,13 @@ const Dashboard: React.FC = () => {
     return Array.from(res);
   }, [homeworkList, subjectsMap]);
 
+  // get tutorialId
   useEffect(() => {
     (async () => {
+      const cachedVid = getWithExpiry(window.localStorage, "tutorialId");
+      if (cachedVid !== null) {
+        return setTutorialId(cachedVid);
+      }
       const { data } = { data: { videoId: "" } };
       /* await axios({
         url: "/api/gen-tutorial",
@@ -152,6 +159,12 @@ const Dashboard: React.FC = () => {
         headers: { "Content-Type": "application/json" },
         method: "POST",
       }); */
+      setWithExpiry(
+        window.localStorage,
+        "tutorialId",
+        data.videoId,
+        new Date().valueOf() + daysToMilliseconds(1)
+      );
       setTutorialId(data.videoId);
     })();
   }, [homeworkList]);
