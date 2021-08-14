@@ -17,7 +17,16 @@ export const YoutubeVideo: React.FC<YoutubeVideoProps> = ({
           height={"100%"}
           width={"100%"}
         >
-          <rect x="10" y="15" rx="5" ry="5" width="100%" height="100%" />
+          <rect
+            x="10"
+            y="15"
+            rx="5"
+            ry="5"
+            cx="5"
+            cy="5"
+            width="100%"
+            height="100%"
+          />
         </ContentLoader>
       ) : null}
       <iframe
