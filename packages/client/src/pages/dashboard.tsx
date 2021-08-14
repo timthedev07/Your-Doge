@@ -55,7 +55,7 @@ const Dashboard: React.FC = () => {
         title: `Homework ${each}`,
         description: "You hate dancin",
         deadline: 1630620000000,
-        subjectId: 10,
+        subjectId: Math.round(10 + Math.random()),
         done: Math.random() < 0.5,
         onTime: true,
         enjoyed: false,
