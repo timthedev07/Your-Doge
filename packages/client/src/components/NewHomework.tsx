@@ -6,6 +6,7 @@ import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
 import { NewHomeworkProps } from "../types/props";
 import { Alert } from "./Alert";
+import { SubjectsSelect } from "./SubjectsSelect";
 
 export const NewHomework: React.FC<NewHomeworkProps> = ({
   open,
@@ -144,23 +145,14 @@ export const NewHomework: React.FC<NewHomeworkProps> = ({
               <option value={"hard-and-urgent"}>Hard and Urgent</option>
             </select>
 
-            <select
-              value={input.subjectId}
+            <SubjectsSelect
+              subjects={subjects}
               onChange={handleChange}
-              name="subjectId"
-              style={{ width: "40%" }}
+              value={input.subjectId}
+              name="sujectId"
+              placeholder="Select the subject"
               className="margin-10"
-            >
-              <option disabled value={""}>
-                Choose the subject
-              </option>
-              {subjects.subjects &&
-                subjects.subjects.map((each) => (
-                  <option key={each.name} value={each.id}>
-                    {each.name}
-                  </option>
-                ))}
-            </select>
+            />
 
             <br />
             <textarea
