@@ -5,7 +5,7 @@ interface SubjectsSelectProps {
   placeholder: string;
   value: string | number;
   onChange: React.ChangeEventHandler<HTMLSelectElement>;
-  name: string;
+  name?: string;
   style?: React.CSSProperties;
   subjects: SubjectsQuery;
   className?: string;
