@@ -217,7 +217,7 @@ const Dashboard: React.FC = () => {
               value={subjectFilter}
               onChange={(e) => setSubjectFilter(e.target.value)}
               placeholder="All subjects"
-              style={{ width: "140px" }}
+              style={{ width: "170px" }}
             />
           </div>
 
