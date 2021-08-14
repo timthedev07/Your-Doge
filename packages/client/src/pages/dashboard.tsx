@@ -14,6 +14,7 @@ import { NewHomework } from "../components/NewHomework";
 import { URGENCY_SCORE } from "../constants/homework";
 import { TagCategory } from "shared";
 import { FormCheck } from "react-bootstrap";
+import { SubjectsSelect } from "../components/SubjectsSelect";
 
 const temp = [
   "urgent",
@@ -36,6 +37,7 @@ const Dashboard: React.FC = () => {
   );
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
   const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
+  const [subjectFilter, setSubjectFilter] = useState<string>("");
 
   // const { burrito } = useApollo()!;
 
@@ -193,15 +195,41 @@ const Dashboard: React.FC = () => {
               <option value="deadline">Deadline</option>
               <option value="tag">Tag</option>
             </select>
-            <label className="option-label">To-do only:</label>
+
+            <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
+            <select
+              onChange={(e) => {
+                setSortBy(e.target.value as HomeworkSortKey);
+              }}
+              value={sortBy}
+              style={{ width: "120px" }}
+            >
+              <option value="deadline">Deadline</option>
+              <option value="tag">Tag</option>
+            </select>
+
+            <label style={{ marginLeft: "auto" }} className="option-label">
+              To-do only:&nbsp;&nbsp;&nbsp;
+            </label>
             <FormCheck
               id="switchEnabled"
               type="switch"
               checked={onlyTodo}
               onChange={() => setOnlyTodo((prev) => !prev)}
             />
+
+            <label style={{ marginLeft: "auto" }} className="option-label">
+              Filter by subject:&nbsp;&nbsp;&nbsp;
+            </label>
+            <SubjectsSelect
+              subjects={subjectsUsed}
+              value={subjectFilter}
+              onChange={(e) => setSubjectFilter(e.target.value)}
+              placeholder="All subjects"
+            />
           </div>
-          {subjectsLoading || !sortedHomework ? (
+
+          {subjectsLoading || !sortedHomework || !subjectsMap ? (
             <div
               style={{
                 width: "100%",
