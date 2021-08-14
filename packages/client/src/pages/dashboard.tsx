@@ -11,7 +11,7 @@ import { Homework } from "../generated/sub-graphql";
 import axios from "axios";
 import { HomeworkDetails } from "../components/HomeworkDetails";
 import { NewHomework } from "../components/NewHomework";
-import { URGENCY_SCORE } from "../constants/homework";
+import { BUSY_CLASSES, URGENCY_SCORE } from "../constants/homework";
 import { TagCategory } from "shared";
 import { FormCheck } from "react-bootstrap";
 import { SubjectsSelect } from "../components/SubjectsSelect";
@@ -46,15 +46,6 @@ const Dashboard: React.FC = () => {
   //   // loading: gqlLoading,
   //   // error: gqlError,
   // } = useAllUserHomeworkQuery({ client: burrito });
-
-  const BUSY_CLASSES: Record<string, string> = {
-    "0": "free",
-    "1": "chill",
-    "2": "fine",
-    "3": "busy",
-    "4": "intense",
-    "5": "dangit",
-  };
 
   const homeworkList: Homework[] = useMemo(() => {
     return Array.from(Array(30).keys()).map((each) => {
