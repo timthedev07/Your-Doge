@@ -213,10 +213,11 @@ const Dashboard: React.FC = () => {
               Filter by subject:&nbsp;&nbsp;&nbsp;
             </label>
             <SubjectsSelect
-              subjects={subjectsUsed}
+              subjects={subjectsData || []}
               value={subjectFilter}
               onChange={(e) => setSubjectFilter(e.target.value)}
               placeholder="All subjects"
+              style={{ width: "140px" }}
             />
           </div>
 
