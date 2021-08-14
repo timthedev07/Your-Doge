@@ -19,7 +19,7 @@ export const SubjectsSelect: React.FC<SubjectsSelectProps> = ({
 }) => {
   return (
     <select {...props} className="cl">
-      <option disabled value={""}>
+      <option disabled value="">
         {placeholder}
       </option>
       {instanceOfInterface<SubjectsQuery>(subjects, "subjects")
