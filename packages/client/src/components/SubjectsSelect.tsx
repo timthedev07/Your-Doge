@@ -10,16 +10,18 @@ interface SubjectsSelectProps {
   style?: React.CSSProperties;
   subjects: SubjectsQuery | string[];
   className?: string;
+  disablePlaceholder?: boolean | undefined;
 }
 
 export const SubjectsSelect: React.FC<SubjectsSelectProps> = ({
   subjects,
   placeholder,
+  disablePlaceholder,
   ...props
 }) => {
   return (
     <select {...props} className="cl">
-      <option disabled value="">
+      <option disabled={disablePlaceholder !== false} value="">
         {placeholder}
       </option>
       {instanceOfInterface<SubjectsQuery>(subjects, "subjects")
