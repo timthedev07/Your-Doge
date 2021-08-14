@@ -175,50 +175,45 @@ const Dashboard: React.FC = () => {
             Homework to do:
           </h2>
           <div className="homework-sort-customization-control-panel">
-            <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
-            <select
-              onChange={(e) => {
-                setSortBy(e.target.value as HomeworkSortKey);
-              }}
-              value={sortBy}
-              style={{ width: "120px" }}
-            >
-              <option value="deadline">Deadline</option>
-              <option value="tag">Tag</option>
-            </select>
-
-            <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
-            <select
-              onChange={(e) => {
-                setSortBy(e.target.value as HomeworkSortKey);
-              }}
-              value={sortBy}
-              style={{ width: "120px" }}
-            >
-              <option value="deadline">Deadline</option>
-              <option value="tag">Tag</option>
-            </select>
-
-            <label style={{ marginLeft: "auto" }} className="option-label">
-              To-do only:&nbsp;&nbsp;&nbsp;
-            </label>
-            <FormCheck
-              id="switchEnabled"
-              type="switch"
-              checked={onlyTodo}
-              onChange={() => setOnlyTodo((prev) => !prev)}
-            />
-
-            <label style={{ marginLeft: "auto" }} className="option-label">
-              Filter by subject:&nbsp;&nbsp;&nbsp;
-            </label>
-            <SubjectsSelect
-              subjects={subjectsUsed}
-              value={subjectFilter}
-              onChange={(e) => setSubjectFilter(e.target.value)}
-              placeholder="All subjects"
-              style={{ width: "170px" }}
-            />
+            <div>
+              <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
+              <select
+                onChange={(e) => {
+                  setSortBy(e.target.value as HomeworkSortKey);
+                }}
+                value={sortBy}
+                style={{ width: "120px" }}
+              >
+                <option value="deadline">Deadline</option>
+                <option value="tag">Tag</option>
+              </select>
+            </div>
+            &nbsp; &nbsp; &nbsp;
+            <div>
+              <label className="option-label">
+                Filter by subject:&nbsp;&nbsp;&nbsp;
+              </label>
+              <SubjectsSelect
+                subjects={subjectsUsed}
+                value={subjectFilter}
+                onChange={(e) => setSubjectFilter(e.target.value)}
+                placeholder="All subjects"
+                style={{ width: "170px" }}
+                disablePlaceholder={false}
+              />
+            </div>
+            <div style={{ marginLeft: "auto" }}>
+              <label className="option-label" style={{ display: "inline" }}>
+                To-do only:&nbsp;&nbsp;&nbsp;
+              </label>
+              <FormCheck
+                id="switchEnabled"
+                type="switch"
+                checked={onlyTodo}
+                onChange={() => setOnlyTodo((prev) => !prev)}
+                style={{ display: "inline" }}
+              />
+            </div>
           </div>
 
           {subjectsLoading || !sortedHomework || !subjectsMap ? (
