@@ -1,2 +1,1 @@
-*.tsx linguist-language=GraphQL
-*.ts linguist-language=GraphQL
+*.tsx linguist-language=TypeScript
