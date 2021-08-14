@@ -4,4 +4,5 @@ export * from "./graphqlErrorParser";
 export * from "./jsonToURLParams";
 export * from "./strings";
 export * from "./validatePassword";
+export * from "./instanceOf";
 export * from "./server/isAuthMiddleWare";
