@@ -29,7 +29,7 @@ const temp = [
 
 const Dashboard: React.FC = () => {
   const homeworkList: Homework[] = useMemo(() => {
-    return Array.from(Array(30).keys()).map((each) => {
+    return Array.from(Array(1000).keys()).map((each) => {
       return {
         __typename: "Homework",
         id: each,
@@ -240,10 +240,10 @@ const Dashboard: React.FC = () => {
                 height={"280px"}
                 width={"100%"}
               >
-                <rect x="10" y="15" rx="5" ry="5" width="98%" height="40" />
-                <rect x="10" y="75" rx="5" ry="5" width="98%" height="40" />
-                <rect x="10" y="135" rx="5" ry="5" width="98%" height="40" />
-                <rect x="10" y="195" rx="5" ry="5" width="98%" height="40" />
+                <rect x="10" y="15" rx="5" ry="5" width="90%" height="40" />
+                <rect x="10" y="75" rx="5" ry="5" width="90%" height="40" />
+                <rect x="10" y="135" rx="5" ry="5" width="90%" height="40" />
+                <rect x="10" y="195" rx="5" ry="5" width="90%" height="40" />
               </ContentLoader>
             </div>
           ) : (
