@@ -37,7 +37,7 @@ const Dashboard: React.FC = () => {
         title: `Homework ${each}`,
         description: "You hate dancin",
         deadline: 1630620000000,
-        subjectId: Math.round(10 + Math.random()),
+        subjectId: Math.ceil(Math.random() * 20),
         done: Math.random() < 0.5,
         onTime: true,
         enjoyed: false,
@@ -190,7 +190,7 @@ const Dashboard: React.FC = () => {
                   setSortBy(e.target.value as HomeworkSortKey);
                 }}
                 value={sortBy}
-                style={{ width: "120px" }}
+                style={{ width: "110px" }}
               >
                 <option value="deadline">Deadline</option>
                 <option value="tag">Tag</option>
@@ -198,9 +198,7 @@ const Dashboard: React.FC = () => {
             </div>
             &nbsp; &nbsp; &nbsp;
             <div>
-              <label className="option-label">
-                Filter by subject:&nbsp;&nbsp;&nbsp;
-              </label>
+              <label className="option-label">Subject:&nbsp;&nbsp;&nbsp;</label>
               <SubjectsSelect
                 subjects={subjectsUsed}
                 value={subjectFilter}
@@ -210,13 +208,12 @@ const Dashboard: React.FC = () => {
                 disablePlaceholder={false}
               />
             </div>
-            <Form.Control
+            <input
               className="homework-search-bar"
               type="text"
               placeholder="Search"
-              aria-describedby="inputGroupPrepend"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              // value={query}
+              // onChange={(e) => setQuery(e.target.value)}
             />
             <div style={{ marginLeft: "auto" }}>
               <label className="option-label" style={{ display: "inline" }}>
@@ -266,6 +263,9 @@ const Dashboard: React.FC = () => {
                       subjectFilter.length
                         ? subjectsMap[each.subjectId] === subjectFilter
                         : true
+                    )
+                    .filter((each) =>
+                      query ? new RegExp(`${query}`).test(each.title) : true
                     )
                     .map((each) => (
                       <DashboardHomeworkListItem
