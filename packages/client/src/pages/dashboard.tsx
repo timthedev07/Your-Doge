@@ -16,6 +16,7 @@ import { daysToMilliseconds, TagCategory } from "shared";
 import { FormCheck } from "react-bootstrap";
 import { SubjectsSelect } from "../components/SubjectsSelect";
 import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
+import { DashboardHomeworkListItem } from "../components/DashboardHomeworkListItem";
 
 const temp = [
   "urgent",
@@ -27,28 +28,6 @@ const temp = [
 ];
 
 const Dashboard: React.FC = () => {
-  const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
-  const [tutorialId, setTutorialId] = useState<string>("");
-  const [openHomework, setOpenHomework] = useState<Homework | undefined>(
-    undefined
-  );
-  const [sortBy, setSortBy] = useState<HomeworkSortKey>("tag");
-  const [sortedHomework, setSortedHomework] = useState<Homework[] | undefined>(
-    undefined
-  );
-  const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
-  const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
-  const [subjectFilter, setSubjectFilter] = useState<string>("");
-  const { data: subjectsData, loading: subjectsLoading } = useSubjectsQuery();
-
-  // const { burrito } = useApollo()!;
-
-  // const {
-  //   data: gqlData,
-  //   // loading: gqlLoading,
-  //   // error: gqlError,
-  // } = useAllUserHomeworkQuery({ client: burrito });
-
   const homeworkList: Homework[] = useMemo(() => {
     return Array.from(Array(30).keys()).map((each) => {
       return {
@@ -71,49 +50,27 @@ const Dashboard: React.FC = () => {
       };
     });
   }, []);
+  const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
+  const [tutorialId, setTutorialId] = useState<string>("");
+  const [openHomework, setOpenHomework] = useState<Homework | undefined>(
+    undefined
+  );
+  const [sortBy, setSortBy] = useState<HomeworkSortKey>("deadline");
+  const [sortedHomework, setSortedHomework] = useState<Homework[]>(
+    homeworkList || []
+  );
+  const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
+  const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
+  const [subjectFilter, setSubjectFilter] = useState<string>("");
+  const { data: subjectsData, loading: subjectsLoading } = useSubjectsQuery();
 
-  // sorting
-  useEffect(() => {
-    setSortedHomework(() => {
-      return [...homeworkList].sort((a, b) => {
-        if (sortBy === "tag") {
-          const x = URGENCY_SCORE[a.tag as TagCategory];
-          const y = URGENCY_SCORE[b.tag as TagCategory];
-          return y - x;
-        }
-        return b[sortBy] - a[sortBy];
-      });
-    });
-  }, [sortBy, homeworkList]);
+  // const { burrito } = useApollo()!;
 
-  // filtering based on onlyTodo
-  useEffect(() => {
-    setSortedHomework((prev) =>
-      prev && onlyTodo ? prev?.filter((each) => !each.done) : homeworkList
-    );
-  }, [onlyTodo, homeworkList]);
-
-  // set marks on tha calendar
-  useEffect(() => {
-    if (homeworkList) {
-      homeworkList.forEach((each) => {
-        // pushing data to the homework state
-        // pushing/modifying data in the record holding date: homeworkCount
-        const dummy = marks;
-        if (dummy.hasOwnProperty(each.deadline)) {
-          dummy[each.deadline].count++;
-        } else {
-          dummy[each.deadline] = { count: 1, homeworkList: [] };
-        }
-        dummy[`${each.deadline}`].homeworkList.push({
-          deadline: each.deadline,
-          description: each.description,
-          title: each.title,
-        });
-        setMarks(dummy);
-      });
-    }
-  }, [marks, homeworkList]);
+  // const {
+  //   data: gqlData,
+  //   // loading: gqlLoading,
+  //   // error: gqlError,
+  // } = useAllUserHomeworkQuery({ client: burrito });
 
   // a map that maps subject id to subject name
   // undefined is when the query is still loading
@@ -142,6 +99,42 @@ const Dashboard: React.FC = () => {
 
     return Array.from(res);
   }, [homeworkList, subjectsMap]);
+
+  // sorting
+  useEffect(() => {
+    setSortedHomework(() => {
+      return [...homeworkList].sort((a, b) => {
+        if (sortBy === "tag") {
+          const x = URGENCY_SCORE[a.tag as TagCategory];
+          const y = URGENCY_SCORE[b.tag as TagCategory];
+          return y - x;
+        }
+        return b[sortBy] - a[sortBy];
+      });
+    });
+  }, [sortBy, homeworkList]);
+
+  // set marks on tha calendar
+  useEffect(() => {
+    if (homeworkList) {
+      homeworkList.forEach((each) => {
+        // pushing data to the homework state
+        // pushing/modifying data in the record holding date: homeworkCount
+        const dummy = marks;
+        if (dummy.hasOwnProperty(each.deadline)) {
+          dummy[each.deadline].count++;
+        } else {
+          dummy[each.deadline] = { count: 1, homeworkList: [] };
+        }
+        dummy[`${each.deadline}`].homeworkList.push({
+          deadline: each.deadline,
+          description: each.description,
+          title: each.title,
+        });
+        setMarks(dummy);
+      });
+    }
+  }, [marks, homeworkList]);
 
   // get tutorialId
   useEffect(() => {
@@ -229,7 +222,7 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
 
-          {subjectsLoading || !sortedHomework || !subjectsMap ? (
+          {subjectsLoading || !sortedHomework.length || !subjectsMap ? (
             <div
               style={{
                 width: "100%",
@@ -257,28 +250,21 @@ const Dashboard: React.FC = () => {
             <>
               <div className="homework-list-wrapper">
                 <ul className="homework-list">
-                  {sortedHomework.map((each) => (
-                    <li key={each.id} className="homework-item">
-                      <div className="homework-item-innermain">
-                        <div className="homework-title">{each.title}</div>
-                        <div className={`homework-tag ${each.tag}`}>
-                          {each.tag}
-                        </div>
-                      </div>
-                      <div className="homework-subject">
-                        {subjectsMap![each.subjectId]}
-                      </div>
-                      <img
-                        src="/images/icons/rightarrow.svg"
-                        className="homework-item-arrow"
-                        alt=""
-                        data-tip="Click me to view/edit details."
-                        onClick={() => {
-                          setOpenHomework(each);
-                        }}
+                  {sortedHomework
+                    .filter((each) => (onlyTodo ? !each.done : true))
+                    .filter((each) =>
+                      subjectFilter.length
+                        ? subjectsMap[each.subjectId] === subjectFilter
+                        : true
+                    )
+                    .map((each) => (
+                      <DashboardHomeworkListItem
+                        key={each.id}
+                        handleOpen={() => setOpenHomework(each)}
+                        item={each}
+                        subjectName={subjectsMap![each.subjectId]}
                       />
-                    </li>
-                  ))}
+                    ))}
                 </ul>
               </div>
             </>
