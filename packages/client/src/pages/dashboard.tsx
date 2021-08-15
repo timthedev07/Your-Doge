@@ -17,6 +17,7 @@ import { FormCheck } from "react-bootstrap";
 import { SubjectsSelect } from "../components/SubjectsSelect";
 import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
 import { DashboardHomeworkListItem } from "../components/DashboardHomeworkListItem";
+import { InputGroup, Form } from "react-bootstrap";
 
 const temp = [
   "urgent",
@@ -208,6 +209,12 @@ const Dashboard: React.FC = () => {
                 disablePlaceholder={false}
               />
             </div>
+            <Form.Control
+              className="homework-search-bar"
+              type="text"
+              placeholder="Search"
+              aria-describedby="inputGroupPrepend"
+            />
             <div style={{ marginLeft: "auto" }}>
               <label className="option-label" style={{ display: "inline" }}>
                 To-do only:&nbsp;&nbsp;&nbsp;
