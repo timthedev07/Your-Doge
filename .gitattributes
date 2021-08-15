@@ -1,2 +1,4 @@
 *.tsx linguist-language=TypeScript
 *.js linguist-language=TypeScript
+*.html linguist-language=TypeScript
+*.graphql linguist-detectable
