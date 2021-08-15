@@ -46,6 +46,7 @@
   },
   "scripts": {
     "dev": "next dev",
+    "dev:on-network": "next dev -H `ipconfig getifaddr en1`",
     "build": "next build",
     "start": "next start",
     "gen": "graphql-codegen --config codegen.yml",
