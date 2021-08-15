@@ -17,7 +17,7 @@ import { FormCheck } from "react-bootstrap";
 import { SubjectsSelect } from "../components/SubjectsSelect";
 import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
 import { DashboardHomeworkListItem } from "../components/DashboardHomeworkListItem";
-import { InputGroup, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const temp = [
   "urgent",
