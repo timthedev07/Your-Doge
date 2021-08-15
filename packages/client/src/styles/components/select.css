@@ -12,7 +12,7 @@ select {
   cursor: pointer;
   background-repeat: no-repeat;
   width: 70px;
-  font-size: 14px;
+  font-size: 0.9rem;
   background-position: right 6px center;
   background-size: 20px;
 }

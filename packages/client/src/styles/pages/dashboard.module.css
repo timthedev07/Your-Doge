@@ -162,10 +162,6 @@
   flex-wrap: wrap;
 }
 
-.homework-sort-customization-control-panel .option-label {
-  font-size: 20px;
-}
-
 /* modifying react bootstrap's component color to fit dark theme */
 .homework-sort-customization-control-panel .homework-search-bar {
   flex: 1;

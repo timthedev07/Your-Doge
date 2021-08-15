@@ -55,8 +55,7 @@
   text-decoration: none;
   transition: 0.4s;
   height: 100%;
-
-  font-size: 18px !important;
+  font-size: 1.2rem !important;
 }
 
 .nav-bar .nav-item.nav-item-end {

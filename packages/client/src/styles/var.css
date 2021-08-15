@@ -1,6 +1,6 @@
 :root {
   --min-width: 350px;
-  --nav-bar-height: 55px;
+  --nav-bar-height: 45px;
   --account-content-container-border-radius: 6px;
   --alert-transition-duration: 0.15s;
   --small-screen-size: 580px;

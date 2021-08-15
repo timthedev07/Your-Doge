@@ -46,7 +46,7 @@
 /* style for each individual sidebar item */
 .side-bar .side-bar-item {
   padding: 10px 10px;
-  font-size: 22px;
+  font-size: 1.5rem;
   cursor: pointer;
   text-transform: uppercase;
   text-align: center;
