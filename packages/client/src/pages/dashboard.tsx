@@ -60,6 +60,7 @@ const Dashboard: React.FC = () => {
   const [sortedHomework, setSortedHomework] = useState<Homework[]>(
     homeworkList || []
   );
+  const [query, setQuery] = useState<string>("");
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
   const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
   const [subjectFilter, setSubjectFilter] = useState<string>("");
@@ -214,6 +215,8 @@ const Dashboard: React.FC = () => {
               type="text"
               placeholder="Search"
               aria-describedby="inputGroupPrepend"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
             <div style={{ marginLeft: "auto" }}>
               <label className="option-label" style={{ display: "inline" }}>
