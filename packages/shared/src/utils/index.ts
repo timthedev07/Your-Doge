@@ -5,4 +5,5 @@ export * from "./jsonToURLParams";
 export * from "./strings";
 export * from "./validatePassword";
 export * from "./instanceOf";
+export * from "./randomHomeworkGenerator";
 export * from "./server/isAuthMiddleWare";
