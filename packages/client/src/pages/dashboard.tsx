@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Calendar from "react-calendar";
 // import { useApollo } from "../contexts/ApolloContext";
 import { useSubjectsQuery } from "../generated/graphql";
@@ -12,7 +12,7 @@ import axios from "axios";
 import { HomeworkDetails } from "../components/HomeworkDetails";
 import { NewHomework } from "../components/NewHomework";
 import { BUSY_CLASSES, URGENCY_SCORE } from "../constants/homework";
-import { daysToMilliseconds, TagCategory } from "shared";
+import { daysToMilliseconds, randSlug, TagCategory } from "shared";
 import { FormCheck } from "react-bootstrap";
 import { SubjectsSelect } from "../components/SubjectsSelect";
 import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
       return {
         __typename: "Homework",
         id: each,
-        title: `Homework ${each}`,
+        title: `${randSlug()}`,
         description: "You hate dancin",
         deadline: 1630620000000,
         subjectId: Math.ceil(Math.random() * 20),
@@ -60,6 +60,7 @@ const Dashboard: React.FC = () => {
     homeworkList || []
   );
   const [query, setQuery] = useState<string>("");
+  const queryRef = useRef<HTMLInputElement>(null);
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
   const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
   const [subjectFilter, setSubjectFilter] = useState<string>("");
@@ -163,6 +164,14 @@ const Dashboard: React.FC = () => {
     })();
   }, [homeworkList]);
 
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setQuery(queryRef?.current?.value || "");
+    }, 1500);
+
+    return () => clearTimeout(delay);
+  }, [queryRef?.current?.value]);
+
   return (
     <>
       <Head>
@@ -211,8 +220,7 @@ const Dashboard: React.FC = () => {
               className="homework-search-bar"
               type="text"
               placeholder="Search"
-              // value={query}
-              // onChange={(e) => setQuery(e.target.value)}
+              ref={queryRef}
             />
             <div style={{ marginLeft: "auto" }}>
               <label className="option-label" style={{ display: "inline" }}>
@@ -231,7 +239,7 @@ const Dashboard: React.FC = () => {
           {subjectsLoading || !sortedHomework.length || !subjectsMap ? (
             <div
               style={{
-                width: "100%",
+                width: "90%",
                 height: "100%",
                 display: "flex",
                 justifyContent: "center",
@@ -246,10 +254,10 @@ const Dashboard: React.FC = () => {
                 height={"280px"}
                 width={"100%"}
               >
-                <rect x="10" y="15" rx="5" ry="5" width="90%" height="40" />
-                <rect x="10" y="75" rx="5" ry="5" width="90%" height="40" />
-                <rect x="10" y="135" rx="5" ry="5" width="90%" height="40" />
-                <rect x="10" y="195" rx="5" ry="5" width="90%" height="40" />
+                <rect x="0" y="15" rx="5" ry="5" width="100%" height="40" />
+                <rect x="0" y="75" rx="5" ry="5" width="100%" height="40" />
+                <rect x="0" y="135" rx="5" ry="5" width="100%" height="40" />
+                <rect x="0" y="195" rx="5" ry="5" width="100%" height="40" />
               </ContentLoader>
             </div>
           ) : (
