@@ -164,6 +164,21 @@ const Dashboard: React.FC = () => {
     })();
   }, [homeworkList]);
 
+  useEffect(() => {
+    const filterFunction = (value: Homework): unknown => {
+      if (!subjectsMap) return false;
+
+      if (onlyTodo && value.done) return false;
+      if (subjectFilter && subjectsMap[value.subjectId] !== subjectFilter)
+        return false;
+      if (query && !new RegExp(`${query}`).test(value.title)) return false;
+
+      return true;
+    };
+
+    setSortedHomework((prev) => prev.filter(filterFunction));
+  }, [onlyTodo, subjectsMap, subjectFilter, query]);
+
   return (
     <>
       <Head>
@@ -259,24 +274,14 @@ const Dashboard: React.FC = () => {
             <>
               <div className="homework-list-wrapper">
                 <ul className="homework-list">
-                  {sortedHomework
-                    .filter((each) => (onlyTodo ? !each.done : true))
-                    .filter((each) =>
-                      subjectFilter.length
-                        ? subjectsMap[each.subjectId] === subjectFilter
-                        : true
-                    )
-                    .filter((each) =>
-                      query ? new RegExp(`${query}`).test(each.title) : true
-                    )
-                    .map((each) => (
-                      <DashboardHomeworkListItem
-                        key={each.id}
-                        handleOpen={() => setOpenHomework(each)}
-                        item={each}
-                        subjectName={subjectsMap![each.subjectId]}
-                      />
-                    ))}
+                  {sortedHomework.map((each) => (
+                    <DashboardHomeworkListItem
+                      key={each.id}
+                      handleOpen={() => setOpenHomework(each)}
+                      item={each}
+                      subjectName={subjectsMap![each.subjectId]}
+                    />
+                  ))}
                 </ul>
               </div>
             </>
