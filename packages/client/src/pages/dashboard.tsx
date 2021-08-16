@@ -107,7 +107,7 @@ const Dashboard: React.FC = () => {
           <h4 className="dashboard-subheading">{new Date().toDateString()}</h4>
         </header>
 
-        <HomeworkList />
+        <HomeworkList {...{ setCreationPanelOpen, setOpenHomework }} />
 
         <div className="dashboard-bottom-section">
           <Calendar

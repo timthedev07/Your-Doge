@@ -9,9 +9,15 @@ import { HomeworkSortKey } from "../types/types";
 import { DashboardHomeworkListItem } from "./DashboardHomeworkListItem";
 import { SubjectsSelect } from "./SubjectsSelect";
 
-interface HomeworkListProps {}
+interface HomeworkListProps {
+  setCreationPanelOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpenHomework: React.Dispatch<React.SetStateAction<Homework | undefined>>;
+}
 
-export const HomeworkList: React.FC<HomeworkListProps> = ({}) => {
+export const HomeworkList: React.FC<HomeworkListProps> = ({
+  setCreationPanelOpen,
+  setOpenHomework,
+}) => {
   const homeworkList: Homework[] = useMemo(() => randomHomework(1000), []);
   const [sortBy, setSortBy] = useState<HomeworkSortKey>("deadline");
   const [queryBuffer, setQueryBuffer] = useState<string>("");
