@@ -60,7 +60,7 @@ const Dashboard: React.FC = () => {
     homeworkList || []
   );
   const [query, setQuery] = useState<string>("");
-  const queryRef = useRef<HTMLInputElement>(null);
+  const [queryBuffer, setQueryBuffer] = useState<string>("");
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
   const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
   const [subjectFilter, setSubjectFilter] = useState<string>("");
@@ -164,14 +164,6 @@ const Dashboard: React.FC = () => {
     })();
   }, [homeworkList]);
 
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      setQuery(queryRef?.current?.value || "");
-    }, 1500);
-
-    return () => clearTimeout(delay);
-  }, [queryRef?.current?.value]);
-
   return (
     <>
       <Head>
@@ -220,7 +212,10 @@ const Dashboard: React.FC = () => {
               className="homework-search-bar"
               type="text"
               placeholder="Search"
-              ref={queryRef}
+              value={queryBuffer}
+              onChange={(e) => {
+                setQueryBuffer(e.target.value);
+              }}
             />
             <div style={{ marginLeft: "auto" }}>
               <label className="option-label" style={{ display: "inline" }}>
