@@ -56,9 +56,9 @@ const Dashboard: React.FC = () => {
     undefined
   );
   const [sortBy, setSortBy] = useState<HomeworkSortKey>("deadline");
-  const [sortedHomework, setSortedHomework] = useState<Homework[]>(
-    homeworkList || []
-  );
+  const [sortedHomework, setSortedHomework] =
+    useState<Homework[]>(homeworkList);
+  const [filteredHomework, setFilteredHomework] = useState<Homework[]>([]);
   const [query, setQuery] = useState<string>("");
   const [queryBuffer, setQueryBuffer] = useState<string>("");
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
@@ -165,19 +165,22 @@ const Dashboard: React.FC = () => {
   }, [homeworkList]);
 
   useEffect(() => {
-    const filterFunction = (value: Homework): unknown => {
-      if (!subjectsMap) return false;
+    console.log("Update");
+    setFilteredHomework((prev) =>
+      (prev.length ? prev : sortedHomework).filter(
+        (value: Homework): unknown => {
+          console.log(subjectFilter);
+          if (!subjectsMap) return true;
+          if (onlyTodo && value.done) return false;
+          if (subjectFilter && subjectsMap[value.subjectId] !== subjectFilter)
+            return false;
+          if (query && !new RegExp(`${query}`).test(value.title)) return false;
 
-      if (onlyTodo && value.done) return false;
-      if (subjectFilter && subjectsMap[value.subjectId] !== subjectFilter)
-        return false;
-      if (query && !new RegExp(`${query}`).test(value.title)) return false;
-
-      return true;
-    };
-
-    setSortedHomework((prev) => prev.filter(filterFunction));
-  }, [onlyTodo, subjectsMap, subjectFilter, query]);
+          return true;
+        }
+      )
+    );
+  }, [onlyTodo, subjectFilter, query, subjectsMap, sortedHomework]);
 
   return (
     <>
@@ -274,7 +277,10 @@ const Dashboard: React.FC = () => {
             <>
               <div className="homework-list-wrapper">
                 <ul className="homework-list">
-                  {sortedHomework.map((each) => (
+                  {(filteredHomework.length
+                    ? filteredHomework
+                    : sortedHomework
+                  ).map((each) => (
                     <DashboardHomeworkListItem
                       key={each.id}
                       handleOpen={() => setOpenHomework(each)}
