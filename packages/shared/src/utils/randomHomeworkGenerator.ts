@@ -12,7 +12,7 @@ const temp = [
 export const randomHomework = (n: number) => {
   return Array.from(Array(n).keys()).map((each) => {
     return {
-      __typename: "Homework",
+      __typename: "Homework" as "Homework",
       id: each,
       title: `${randSlug()}`,
       description: "You hate dancin",
