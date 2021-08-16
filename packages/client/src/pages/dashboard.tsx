@@ -2,7 +2,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import Calendar from "react-calendar";
 // import { useApollo } from "../contexts/ApolloContext";
 import { useSubjectsQuery } from "../generated/graphql";
-import ContentLoader from "react-content-loader";
 import ReactTooltip from "react-tooltip";
 import Head from "next/head";
 import { MarkRecordValue } from "../types/types";
@@ -11,17 +10,9 @@ import { Homework } from "../generated/sub-graphql";
 import axios from "axios";
 import { HomeworkDetails } from "../components/HomeworkDetails";
 import { NewHomework } from "../components/NewHomework";
-import { BUSY_CLASSES, URGENCY_SCORE } from "../constants/homework";
-import {
-  daysToMilliseconds,
-  randomHomework,
-  randSlug,
-  TagCategory,
-} from "shared";
-import { FormCheck } from "react-bootstrap";
-import { SubjectsSelect } from "../components/SubjectsSelect";
+import { BUSY_CLASSES } from "../constants/homework";
+import { daysToMilliseconds, randomHomework } from "shared";
 import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
-import { DashboardHomeworkListItem } from "../components/DashboardHomeworkListItem";
 import { HomeworkList } from "../components/HomeworkList";
 
 const Dashboard: React.FC = () => {
@@ -74,15 +65,17 @@ const Dashboard: React.FC = () => {
       if (cachedVid !== null) {
         return setTutorialId(cachedVid);
       }
-      const { data } = { data: { videoId: "" } };
-      /* await axios({
-        url: "/api/gen-tutorial",
-        data: {
-          homeworkList,
-        },
-        headers: { "Content-Type": "application/json" },
-        method: "POST",
-      }); */
+      const { data } =
+        1 > 2
+          ? await axios({
+              url: "/api/gen-tutorial",
+              data: {
+                homeworkList,
+              },
+              headers: { "Content-Type": "application/json" },
+              method: "POST",
+            })
+          : { data: "" };
       setWithExpiry(
         window.localStorage,
         "tutorialId",
