@@ -1,7 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { nonEmpty, parseGraphQLError } from "shared";
 import { useApollo } from "../contexts/ApolloContext";
-import { SubjectsQuery } from "../generated/graphql";
 import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "./CloseButton";
 import { HomeworkDetailsProps } from "../types/props";
