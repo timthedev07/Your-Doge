@@ -10,17 +10,16 @@ interface HomeworkSearchBarProps {
   subjectsMap: Record<number, string> | undefined;
   homeworkList: Homework[];
   setSortedHomework: React.Dispatch<React.SetStateAction<Homework[]>>;
-  setFilteredHomework: React.Dispatch<React.SetStateAction<Homework[]>>;
-  sortedHomework: Homework[];
-  filteredHomework: Homework[];
+  setFilterFunction: React.Dispatch<
+    React.SetStateAction<((value: Homework) => unknown) | undefined>
+  >;
 }
 
 export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
   subjectsMap,
   homeworkList,
   setSortedHomework,
-  setFilteredHomework,
-  sortedHomework,
+  setFilterFunction,
 }) => {
   const [sortBy, setSortBy] = useState<HomeworkSortKey>("deadline");
   const [queryBuffer, setQueryBuffer] = useState<string>("");
@@ -54,29 +53,17 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
   }, [sortBy, homeworkList, setSortedHomework]);
 
   useEffect(() => {
-    console.log("Update");
-    setFilteredHomework((prev) =>
-      (prev.length ? prev : sortedHomework).filter(
-        (value: Homework): unknown => {
-          console.log(subjectFilter);
-          if (!subjectsMap) return true;
-          if (onlyTodo && value.done) return false;
-          if (subjectFilter && subjectsMap[value.subjectId] !== subjectFilter)
-            return false;
-          if (query && !new RegExp(`${query}`).test(value.title)) return false;
+    const sortFunction = (value: Homework) => {
+      if (!subjectsMap) return true;
+      if (onlyTodo && value.done) return false;
+      if (subjectFilter && subjectsMap[value.subjectId] !== subjectFilter)
+        return false;
+      if (query && !new RegExp(`${query}`).test(value.title)) return false;
 
-          return true;
-        }
-      )
-    );
-  }, [
-    onlyTodo,
-    subjectFilter,
-    query,
-    subjectsMap,
-    sortedHomework,
-    setFilteredHomework,
-  ]);
+      return true;
+    };
+    setFilterFunction(() => sortFunction);
+  }, [onlyTodo, subjectFilter, query, subjectsMap, setFilterFunction]);
 
   return (
     <div className="homework-sort-customization-control-panel">

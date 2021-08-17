@@ -15,11 +15,13 @@ export const HomeworkList: React.FC<HomeworkListProps> = ({
   setCreationPanelOpen,
   setOpenHomework,
 }) => {
-  const homeworkList: Homework[] = useMemo(() => randomHomework(1000), []);
+  const homeworkList: Homework[] = useMemo(() => randomHomework(50), []);
   const { data: subjectsData, loading: subjectsLoading } = useSubjectsQuery();
   const [sortedHomework, setSortedHomework] =
     useState<Homework[]>(homeworkList);
-  const [filteredHomework, setFilteredHomework] = useState<Homework[]>([]);
+  const [filterFunction, setFilterFunction] = useState<
+    ((value: Homework) => unknown) | undefined
+  >(undefined);
 
   const subjectsMap: Record<number, string> | undefined = useMemo(() => {
     if (!subjectsData) {
@@ -41,9 +43,8 @@ export const HomeworkList: React.FC<HomeworkListProps> = ({
       <h2 style={{ marginRight: "auto", marginLeft: "2%" }}>Homework to do:</h2>
       <HomeworkSearchBar
         {...{
-          filteredHomework,
           homeworkList,
-          setFilteredHomework,
+          setFilterFunction,
           setSortedHomework,
           sortedHomework,
           subjectsMap,
@@ -76,16 +77,17 @@ export const HomeworkList: React.FC<HomeworkListProps> = ({
       ) : (
         <div className="homework-list-wrapper">
           <ul className="homework-list">
-            {(filteredHomework.length ? filteredHomework : sortedHomework).map(
-              (each) => (
-                <DashboardHomeworkListItem
-                  key={each.id}
-                  handleOpen={() => setOpenHomework(each)}
-                  item={each}
-                  subjectName={subjectsMap![each.subjectId]}
-                />
-              )
-            )}
+            {(typeof filterFunction === "function"
+              ? sortedHomework.filter(filterFunction)
+              : sortedHomework
+            ).map((each) => (
+              <DashboardHomeworkListItem
+                key={each.id}
+                handleOpen={() => setOpenHomework(each)}
+                item={each}
+                subjectName={subjectsMap![each.subjectId]}
+              />
+            ))}
           </ul>
         </div>
       )}
