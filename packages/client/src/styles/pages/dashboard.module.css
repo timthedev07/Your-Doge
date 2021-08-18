@@ -205,7 +205,7 @@
 
 .homework-search-bar:focus-within {
   transition: 0.3s;
-  background-color: #4d4d4d !important;
+  background-color: #474747 !important;
 }
 
 /* don't write any css except for media queries below here */
