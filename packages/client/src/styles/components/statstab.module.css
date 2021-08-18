@@ -1,6 +1,22 @@
+.stats-page {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
 .chart-container {
   display: block;
   position: relative;
+  background-color: #333333;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #0c0c0cc4;
+  padding: 20px;
+}
+.chart-container#subjects-donut-container {
+  height: auto;
+  max-width: 400px;
+  width: auto;
 }
 .chart-container#subjects-donut-container {
   height: auto;
