@@ -3,9 +3,12 @@ import { Homework } from "../generated/sub-graphql";
 
 export const usedSubjects = (
   homeworkList: Homework[],
-  subjectsMap: Record<number, string> | undefined
+  subjectsMap: Record<number, string> | undefined,
+  unique: boolean = true
 ): string[] => {
   if (!subjectsMap) return [];
+
+  if (!unique) return homeworkList.map((each) => subjectsMap[each.subjectId]);
 
   const res: Set<string> = new Set();
 
