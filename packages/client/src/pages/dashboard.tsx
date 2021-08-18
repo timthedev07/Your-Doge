@@ -16,7 +16,7 @@ import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
 import { HomeworkList } from "../components/HomeworkList";
 
 const Dashboard: React.FC = () => {
-  const homeworkList: Homework[] = useMemo(() => randomHomework(1000), []);
+  const homeworkList: Homework[] = useMemo(() => randomHomework(50), []);
   const [marks, setMarks] = useState<Record<string, MarkRecordValue>>({});
   const [tutorialId, setTutorialId] = useState<string>("");
   const [openHomework, setOpenHomework] = useState<Homework | undefined>(
@@ -105,6 +105,7 @@ const Dashboard: React.FC = () => {
         <div className="dashboard-bottom-section">
           <Calendar
             className="big-ass-calendar"
+            onClickDay={(date) => {}}
             tileClassName={({ date }) => {
               const valueStr = `${date.valueOf()}`;
 
