@@ -3,6 +3,7 @@ import ContentLoader from "react-content-loader";
 import { randomHomework } from "shared";
 import { useSubjectsQuery } from "../generated/graphql";
 import { Homework } from "../generated/sub-graphql";
+import { getSubjectsMap } from "../lib/subjects";
 import { DashboardHomeworkListItem } from "./DashboardHomeworkListItem";
 import { HomeworkSearchBar } from "./HomeworkSearchBar";
 
@@ -24,17 +25,7 @@ export const HomeworkList: React.FC<HomeworkListProps> = ({
   >(undefined);
 
   const subjectsMap: Record<number, string> | undefined = useMemo(() => {
-    if (!subjectsData) {
-      return;
-    }
-
-    const res: Record<number, string> = {};
-
-    subjectsData?.subjects.forEach((each) => {
-      res[each.id] = each.name;
-    });
-
-    return res;
+    return getSubjectsMap(subjectsData);
   }, [subjectsData]);
   // sorting
 
