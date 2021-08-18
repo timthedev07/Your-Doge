@@ -163,22 +163,47 @@
 }
 
 /* modifying react bootstrap's component color to fit dark theme */
-.homework-sort-customization-control-panel .homework-search-bar,
-.homework-sort-customization-control-panel .homework-search-bar:focus {
+.homework-sort-customization-control-panel .homework-search-bar {
   flex: 1;
   margin-left: 15px;
   margin-right: 15px;
   border-radius: 5px;
-  padding: 7px;
   background-color: #414141;
-  color: white !important;
-  outline: none !important;
+  color: white;
+  outline: none;
   transition: 0.3s;
-  box-shadow: none !important;
-  border: none !important;
+  box-shadow: none;
+  border: none;
+  overflow: hidden; /* this is for forcing border radius */
+  display: flex;
 }
 
-.homework-search-bar:focus {
+.homework-search-bar input {
+  border: none;
+  background: none;
+  outline: none;
+  color: inherit;
+  padding: 7px;
+  width: 100%;
+  flex: 1;
+}
+
+.homework-search-bar button {
+  border: none;
+  background: none;
+  outline: none;
+  background-color: #505050;
+  height: 39px;
+  width: 39px;
+  float: right;
+  transition: 0.3s;
+}
+.homework-search-bar button:hover {
+  background-color: #575757;
+  transition: 0.3s;
+}
+
+.homework-search-bar:focus-within {
   transition: 0.3s;
   background-color: #4d4d4d !important;
 }
