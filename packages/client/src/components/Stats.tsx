@@ -22,7 +22,6 @@ export const Stats: React.FC = () => {
 
   return (
     <div>
-      <h2>Subject Breakdown</h2>
       <div className="chart-container" id="subjects-donut-container">
         <Donut
           className="chart"
