@@ -46,7 +46,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
   }, [sortBy, homeworkList, setSortedHomework]);
 
   useEffect(() => {
-    const filterFunction = (value: Homework) => {
+    setFilterFunction(() => (value: Homework) => {
       if (!subjectsMap) return true;
       if (onlyTodo && value.done) return false;
       if (subjectFilter && subjectsMap[value.subjectId] !== subjectFilter)
@@ -54,8 +54,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
       if (query && !new RegExp(`${query}`).test(value.title)) return false;
 
       return true;
-    };
-    setFilterFunction(() => filterFunction);
+    });
   }, [onlyTodo, subjectFilter, query, subjectsMap, setFilterFunction]);
 
   return (
