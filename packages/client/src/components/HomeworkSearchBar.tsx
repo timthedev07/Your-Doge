@@ -3,7 +3,7 @@ import { FormCheck } from "react-bootstrap";
 import { TagCategory } from "shared";
 import { URGENCY_SCORE } from "../constants/homework";
 import { Homework } from "../generated/sub-graphql";
-import { usedSubjects } from "../lib/usedSubjects";
+import { usedSubjects } from "../lib/subjects";
 import { HomeworkSortKey } from "../types/types";
 import { SubjectsSelect } from "./SubjectsSelect";
 
