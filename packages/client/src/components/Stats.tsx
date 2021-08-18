@@ -23,8 +23,9 @@ export const Stats: React.FC = () => {
   return (
     <div>
       <h2>Subject Breakdown</h2>
-      <div className="char-container" id="subjects-donut-container">
+      <div className="chart-container" id="subjects-donut-container">
         <Donut
+          className="chart"
           data={{
             labels: Object.keys(frequency),
             datasets: [
