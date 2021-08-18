@@ -79,7 +79,7 @@ export class HomeworkResolver {
   @UseMiddleware(isAuth)
   async getAllUserHomework(@Ctx() { payload }: MyContext) {
     if (!payload || !payload?.userId) {
-      throw new Error("User not authenticated");
+      throw new Error("You shall not pass.");
     }
 
     const res = await Homework.findAndCount({
@@ -87,7 +87,7 @@ export class HomeworkResolver {
     });
 
     return {
-      homeworkList: res[0],
+      homeworkList: res[0].sort((a, b) => b.deadline - a.deadline),
       count: res[1],
     };
   }
