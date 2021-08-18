@@ -6,6 +6,7 @@ import { TabData } from "../types/types";
 import { useRouter } from "next/router";
 import { useAuth } from "../contexts/AuthContext";
 import Head from "next/head";
+import { Stats } from "../components/Stats";
 
 const Account: React.FC = () => {
   const { authState, currentUser } = useAuth()!;
@@ -42,7 +43,7 @@ const Account: React.FC = () => {
       ),
       title: "Profile",
     },
-    { content: "You did nothing", title: "Statistics" },
+    { content: <Stats />, title: "Statistics" },
     {
       content: <SettingsTab username={currentUser.username} />,
       title: "Settings",
