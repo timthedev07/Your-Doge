@@ -103,7 +103,7 @@ export const Profile: React.FC<ProfileProps> = ({
 
   /* set up an event listener of cmd+s */
   useEffect(() => {
-    window.addEventListener("keydown", (e) => {
+    const handler = (e: KeyboardEvent) => {
       if (
         (window.navigator.userAgent.indexOf("Mac") !== -1
           ? e.metaKey
@@ -115,7 +115,9 @@ export const Profile: React.FC<ProfileProps> = ({
           saveEdit();
         }
       }
-    });
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   });
 
   /* dynamically importing all avatars to display on the modal */
