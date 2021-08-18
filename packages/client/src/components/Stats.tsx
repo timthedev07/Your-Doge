@@ -21,7 +21,7 @@ export const Stats: React.FC = () => {
   }, [homeworkList, subjectsMap]);
 
   return (
-    <div>
+    <div className="stats-page">
       <div className="chart-container" id="subjects-donut-container">
         <Donut
           className="chart"
@@ -36,6 +36,21 @@ export const Stats: React.FC = () => {
                 borderWidth: 1,
               },
             ],
+          }}
+          options={{
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "right",
+              },
+              title: {
+                display: true,
+                text: "Subjects Breakdown",
+                font: {
+                  size: "20",
+                },
+              },
+            },
           }}
         />
       </div>
