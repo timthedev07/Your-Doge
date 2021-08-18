@@ -71,17 +71,6 @@ export const Profile: React.FC<ProfileProps> = ({
     setShowSaveButton(false);
   };
 
-  const getSrcById = async (
-    id: AvatarKeyType,
-    setter: (arg: string) => any
-  ) => {
-    const { default: res } = await import(
-      `../../public/images/avatars/${AvatarData[id]}.svg` // use different avatars based on the avatarId
-      // binded to the user and stored in the database
-    );
-    setter(res.src as string);
-  };
-
   const ages = useMemo(() => {
     let res = [];
     for (let i = 1; i <= 150; ++i) {
@@ -98,7 +87,23 @@ export const Profile: React.FC<ProfileProps> = ({
 
   /* this part gets the right avatar based on activeAvatar */
   useEffect(() => {
+    let subscribed = true;
+    const getSrcById = async (
+      id: AvatarKeyType,
+      setter: (arg: string) => any
+    ) => {
+      if (!subscribed) return;
+      const { default: res } = await import(
+        `../../public/images/avatars/${AvatarData[id]}.svg` // use different avatars based on the avatarId
+        // binded to the user and stored in the database
+      );
+      setter(res.src as string);
+    };
     getSrcById(avatarId, setAvatarSrc);
+
+    return () => {
+      subscribed = false;
+    };
   }, [avatarId]);
 
   /* set up an event listener of cmd+s */

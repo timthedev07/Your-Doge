@@ -19,6 +19,7 @@ export const needAuthState = (path: string): boolean => {
     "/auth/confirm/resend": true,
     "/auth/forgot-password/": true,
     "/auth/forgot-password/[token]": true,
+    "/account": true,
   };
 
   return path in authStateRequiredRoutes;
