@@ -17,7 +17,7 @@ export const randomHomework = (n: number) => {
       title: `${randSlug()}`,
       description: "You hate dancin",
       deadline: 1630620000000,
-      subjectId: Math.ceil(Math.random() * 20),
+      subjectId: Math.ceil(Math.random() * 10),
       done: Math.random() < 0.5,
       onTime: true,
       enjoyed: false,
