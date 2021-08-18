@@ -2,3 +2,8 @@
   display: block;
   position: relative;
 }
+.chart-container#subjects-donut-container {
+  height: auto;
+  max-width: 400px;
+  width: auto;
+}
