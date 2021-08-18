@@ -3,6 +3,7 @@ import { FormCheck } from "react-bootstrap";
 import { TagCategory } from "shared";
 import { URGENCY_SCORE } from "../constants/homework";
 import { Homework } from "../generated/sub-graphql";
+import { usedSubjects } from "../lib/usedSubjects";
 import { HomeworkSortKey } from "../types/types";
 import { SubjectsSelect } from "./SubjectsSelect";
 
@@ -28,15 +29,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
   const [query] = useState<string>("");
 
   const subjectsUsed = useMemo(() => {
-    if (!subjectsMap) return [];
-    const res: Set<string> = new Set();
-
-    for (const homework of homeworkList) {
-      const subject = subjectsMap[homework.subjectId];
-      if (!res.has(subject)) res.add(subject);
-    }
-
-    return Array.from(res);
+    return usedSubjects(homeworkList, subjectsMap);
   }, [homeworkList, subjectsMap]);
 
   useEffect(() => {
