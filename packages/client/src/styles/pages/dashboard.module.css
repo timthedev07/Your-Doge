@@ -163,20 +163,21 @@
 }
 
 /* modifying react bootstrap's component color to fit dark theme */
-.homework-sort-customization-control-panel .homework-search-bar {
+.homework-sort-customization-control-panel .homework-search-bar,
+.homework-sort-customization-control-panel .homework-search-bar:focus {
   flex: 1;
   margin-left: 15px;
   margin-right: 15px;
-}
-.homework-search-bar:focus,
-.homework-search-bar {
-  background-color: #414141 !important;
+  border-radius: 5px;
+  padding: 7px;
+  background-color: #414141;
   color: white !important;
   outline: none !important;
   transition: 0.3s;
   box-shadow: none !important;
   border: none !important;
 }
+
 .homework-search-bar:focus {
   transition: 0.3s;
   background-color: #4d4d4d !important;
