@@ -1,3 +1,4 @@
+import { SubjectsQuery } from "../generated/graphql";
 import { Homework } from "../generated/sub-graphql";
 
 export const usedSubjects = (
@@ -14,4 +15,20 @@ export const usedSubjects = (
   }
 
   return Array.from(res);
+};
+
+export const getSubjectsMap = (
+  subjectsData: SubjectsQuery | undefined
+): Record<number, string> | undefined => {
+  if (!subjectsData) {
+    return;
+  }
+
+  const res: Record<number, string> = {};
+
+  subjectsData?.subjects.forEach((each) => {
+    res[each.id] = each.name;
+  });
+
+  return res;
 };
