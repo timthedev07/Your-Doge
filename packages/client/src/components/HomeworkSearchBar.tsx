@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FormCheck } from "react-bootstrap";
 import { TagCategory } from "shared";
 import { URGENCY_SCORE } from "../constants/homework";
@@ -23,10 +23,10 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
   setFilterFunction,
 }) => {
   const [sortBy, setSortBy] = useState<HomeworkSortKey>("deadline");
-  const [queryBuffer, setQueryBuffer] = useState<string>("");
   const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
   const [subjectFilter, setSubjectFilter] = useState<string>("");
-  const [query] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
+  const queryInputRef = useRef<HTMLInputElement>(null);
 
   const subjectsUsed = useMemo(() => {
     return usedSubjects(homeworkList, subjectsMap);
@@ -84,15 +84,16 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
           disablePlaceholder={false}
         />
       </div>
-      <input
-        className="homework-search-bar"
-        type="text"
-        placeholder="Search"
-        value={queryBuffer}
-        onChange={(e) => {
-          setQueryBuffer(e.target.value);
-        }}
-      />
+      <div className="homework-search-bar">
+        <input ref={queryInputRef} type="text" placeholder="Search" />
+        <button
+          onClick={() => {
+            setQuery(queryInputRef.current ? queryInputRef.current.value : "");
+          }}
+        >
+          <img src="/images/icons/search.svg" alt="" />
+        </button>
+      </div>
       <div style={{ marginLeft: "auto" }}>
         <label className="option-label" style={{ display: "inline" }}>
           To-do only:&nbsp;&nbsp;&nbsp;
