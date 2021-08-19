@@ -176,7 +176,7 @@
   border: none;
   overflow: hidden; /* this is for forcing border radius */
   display: flex;
-  min-width: 200px;
+  min-width: 250px;
 }
 
 .homework-search-bar input {
@@ -216,9 +216,10 @@
     flex-direction: column;
     align-items: flex-start;
     height: auto;
+    padding: 10px;
   }
-  .homework-sort-customization-control-panel .homework-search-bar {
-    margin: 0;
+  .homework-sort-customization-control-panel .option {
+    margin: 10px;
   }
 }
 
