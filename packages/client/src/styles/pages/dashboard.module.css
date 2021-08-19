@@ -82,7 +82,8 @@
 .homework-list .homework-item {
   display: flex;
   list-style: none;
-  height: 75px;
+  min-height: 75px;
+  height: auto;
   width: 100%;
   border-bottom: rgb(128, 128, 128) solid 1px;
   justify-content: flex-start;
@@ -99,7 +100,7 @@
 }
 
 .homework-list .homework-item .homework-item-innermain .homework-title {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   width: 100%;
 }
 
@@ -249,5 +250,15 @@
 
   body .big-ass-calendar {
     width: 100% !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .homework-list .homework-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .homework-list .homework-item .homework-item-innermain .homework-title {
+    width: 60%;
   }
 }
