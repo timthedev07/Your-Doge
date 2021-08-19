@@ -18,7 +18,7 @@ export class Homework extends BaseEntity {
   subjectId: number | null;
 
   @Field(() => String)
-  @Column("text")
+  @Column({ type: "varchar", length: "35" })
   title: string;
 
   @Field(() => String)
