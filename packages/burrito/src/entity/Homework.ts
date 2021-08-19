@@ -21,8 +21,8 @@ export class Homework extends BaseEntity {
   @Column({ type: "varchar", length: "35" })
   title: string;
 
-  @Field(() => String)
-  @Column("text")
+  @Field(() => String, { nullable: true })
+  @Column("text", { nullable: true })
   description: string;
 
   @Field(() => Boolean)
