@@ -20,6 +20,7 @@ export const needAuthState = (path: string): boolean => {
     "/auth/forgot-password/": true,
     "/auth/forgot-password/[token]": true,
     "/account": true,
+    "/dashboard": true,
   };
 
   return path in authStateRequiredRoutes;
