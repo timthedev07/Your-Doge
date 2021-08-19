@@ -66,6 +66,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
+          marginRight: "15px",
         }}
       >
         <div style={{ marginBottom: "10px" }}>
@@ -93,10 +94,10 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
           />
         </div>
       </div>
-      <div className="option subject-option">
+      <div className="option date-option">
         <div style={{ marginBottom: "10px" }}>
           <label className="option-label">From:&nbsp;&nbsp;&nbsp;</label>
-          <input type="date" />
+          <input className="date-input" type="date" />
         </div>
         <div className="homework-search-bar">
           <input ref={queryInputRef} type="text" placeholder="Search" />
