@@ -26,6 +26,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
   const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
   const [subjectFilter, setSubjectFilter] = useState<string>("");
   const [query, setQuery] = useState<string>("");
+  const [timeRange, setTimeRange] = useState<number>(0);
   const queryInputRef = useRef<HTMLInputElement>(null);
 
   const subjectsUsed = useMemo(() => {
@@ -59,39 +60,56 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
 
   return (
     <div className="homework-sort-customization-control-panel">
-      <div className="option">
-        <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
-        <select
-          onChange={(e) => {
-            setSortBy(e.target.value as HomeworkSortKey);
-          }}
-          value={sortBy}
-          style={{ width: "110px" }}
-        >
-          <option value="deadline">Deadline</option>
-          <option value="tag">Tag</option>
-        </select>
+      <div
+        className="option option-vertical-container"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+        }}
+      >
+        <div style={{ marginBottom: "10px" }}>
+          <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
+          <select
+            onChange={(e) => {
+              setSortBy(e.target.value as HomeworkSortKey);
+            }}
+            value={sortBy}
+            style={{ width: "110px" }}
+          >
+            <option value="deadline">Deadline</option>
+            <option value="tag">Tag</option>
+          </select>
+        </div>
+        <div>
+          <label className="option-label">Subject:&nbsp;&nbsp;&nbsp;</label>
+          <SubjectsSelect
+            subjects={subjectsUsed}
+            value={subjectFilter}
+            onChange={(e) => setSubjectFilter(e.target.value)}
+            placeholder="All subjects"
+            style={{ width: "170px" }}
+            disablePlaceholder={false}
+          />
+        </div>
       </div>
       <div className="option subject-option">
-        <label className="option-label">Subject:&nbsp;&nbsp;&nbsp;</label>
-        <SubjectsSelect
-          subjects={subjectsUsed}
-          value={subjectFilter}
-          onChange={(e) => setSubjectFilter(e.target.value)}
-          placeholder="All subjects"
-          style={{ width: "170px" }}
-          disablePlaceholder={false}
-        />
-      </div>
-      <div className="homework-search-bar option">
-        <input ref={queryInputRef} type="text" placeholder="Search" />
-        <button
-          onClick={() => {
-            setQuery(queryInputRef.current ? queryInputRef.current.value : "");
-          }}
-        >
-          <img src="/images/icons/search.svg" alt="" />
-        </button>
+        <div>
+          <label className="option-label">From:&nbsp;&nbsp;&nbsp;</label>
+          <input type="date" />
+        </div>
+        <div className="homework-search-bar">
+          <input ref={queryInputRef} type="text" placeholder="Search" />
+          <button
+            onClick={() => {
+              setQuery(
+                queryInputRef.current ? queryInputRef.current.value : ""
+              );
+            }}
+          >
+            <img src="/images/icons/search.svg" alt="" />
+          </button>
+        </div>
       </div>
       <div className="option" style={{ marginLeft: "auto" }}>
         <label className="option-label" style={{ display: "inline" }}>
