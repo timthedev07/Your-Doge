@@ -5,3 +5,11 @@ export const daysElapsed = (dateInMilliseconds: number) => {
 export const daysToMilliseconds = (days: number) => {
   return 1000 * 60 * 60 * 24 * days;
 };
+
+export const daysAgo = (days: number) => {
+  const d = new Date(Date.now() - daysToMilliseconds(days));
+  d.setHours(0);
+  d.setMinutes(0);
+  d.setSeconds(0);
+  return d;
+};
