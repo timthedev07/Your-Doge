@@ -59,7 +59,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
 
   return (
     <div className="homework-sort-customization-control-panel">
-      <div>
+      <div className="option">
         <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
         <select
           onChange={(e) => {
@@ -72,8 +72,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
           <option value="tag">Tag</option>
         </select>
       </div>
-      &nbsp; &nbsp; &nbsp;
-      <div>
+      <div className="option">
         <label className="option-label">Subject:&nbsp;&nbsp;&nbsp;</label>
         <SubjectsSelect
           subjects={subjectsUsed}
@@ -84,7 +83,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
           disablePlaceholder={false}
         />
       </div>
-      <div className="homework-search-bar">
+      <div className="homework-search-bar option">
         <input ref={queryInputRef} type="text" placeholder="Search" />
         <button
           onClick={() => {
@@ -94,7 +93,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
           <img src="/images/icons/search.svg" alt="" />
         </button>
       </div>
-      <div style={{ marginLeft: "auto" }}>
+      <div className="option" style={{ marginLeft: "auto" }}>
         <label className="option-label" style={{ display: "inline" }}>
           To-do only:&nbsp;&nbsp;&nbsp;
         </label>

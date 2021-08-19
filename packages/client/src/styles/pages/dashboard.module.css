@@ -153,7 +153,7 @@
   border: 1px solid rgba(189, 189, 189, 0.253);
   border-radius: 5px;
   display: flex;
-  justify-content: stretch;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
   padding-left: 20px;
@@ -176,6 +176,7 @@
   border: none;
   overflow: hidden; /* this is for forcing border radius */
   display: flex;
+  min-width: 200px;
 }
 
 .homework-search-bar input {
@@ -209,6 +210,17 @@
 }
 
 /* don't write any css except for media queries below here */
+
+@media screen and (max-width: 850px) {
+  .homework-sort-customization-control-panel {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+  }
+  .homework-sort-customization-control-panel .homework-search-bar {
+    margin: 0;
+  }
+}
 
 @media screen and (max-width: 800px) {
   .dashboard-bottom-section {

@@ -105,7 +105,9 @@ const Dashboard: React.FC = () => {
         <div className="dashboard-bottom-section">
           <Calendar
             className="big-ass-calendar"
-            onClickDay={(date) => {}}
+            onClickDay={(date) => {
+              date.valueOf();
+            }}
             tileClassName={({ date }) => {
               const valueStr = `${date.valueOf()}`;
 
