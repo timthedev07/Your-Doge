@@ -164,10 +164,15 @@
   flex-wrap: wrap;
 }
 
+.date-option {
+  flex: 1;
+}
+
 .date-option .date-input,
 .date-option .date-input:focus {
   border-radius: 5px;
-  background-color: #414141;
+  background-color: #535353;
+  padding: 3px;
   color: white;
   border: none;
   outline: none;
@@ -175,9 +180,8 @@
 
 /* modifying react bootstrap's component color to fit dark theme */
 .homework-sort-customization-control-panel .homework-search-bar {
-  flex: 1;
   border-radius: 5px;
-  background-color: #414141;
+  background-color: #464646;
   color: white;
   outline: none;
   transition: 0.3s;
@@ -186,6 +190,7 @@
   overflow: hidden; /* this is for forcing border radius */
   display: flex;
   min-width: 250px;
+  width: 90%;
 }
 
 .homework-search-bar input {
@@ -195,7 +200,7 @@
   color: inherit;
   padding: 7px;
   width: 100%;
-  flex: 1;
+  flex: 1 1;
 }
 
 .homework-search-bar button {
@@ -215,7 +220,7 @@
 
 .homework-search-bar:focus-within {
   transition: 0.3s;
-  background-color: #474747 !important;
+  background-color: #4b4b4b !important;
 }
 .homework-sort-customization-control-panel .option.subject-option {
   margin-left: 20px;
@@ -236,6 +241,11 @@
 
   .homework-sort-customization-control-panel .option.homework-search-bar {
     width: 90%;
+  }
+
+  .date-option {
+    flex: 1;
+    width: 95%;
   }
 }
 

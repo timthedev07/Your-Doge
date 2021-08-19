@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FormCheck } from "react-bootstrap";
-import { TagCategory } from "shared";
+import { daysAgo, TagCategory } from "shared";
 import { URGENCY_SCORE } from "../constants/homework";
 import { Homework } from "../generated/sub-graphql";
 import { usedSubjects } from "../lib/subjects";
@@ -26,7 +26,9 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
   const [onlyTodo, setOnlyTodo] = useState<boolean>(false);
   const [subjectFilter, setSubjectFilter] = useState<string>("");
   const [query, setQuery] = useState<string>("");
-  const [timeRange, setTimeRange] = useState<number>(0);
+  const [timeRange, setTimeRange] = useState<string>(
+    new Date(daysAgo(7)).toISOString().split("T")[0]
+  );
   const queryInputRef = useRef<HTMLInputElement>(null);
 
   const subjectsUsed = useMemo(() => {
@@ -53,10 +55,17 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
       if (subjectFilter && subjectsMap[value.subjectId] !== subjectFilter)
         return false;
       if (query && !new RegExp(`${query}`).test(value.title)) return false;
-
+      if (Date.parse(timeRange) > value.deadline) return false;
       return true;
     });
-  }, [onlyTodo, subjectFilter, query, subjectsMap, setFilterFunction]);
+  }, [
+    onlyTodo,
+    subjectFilter,
+    query,
+    subjectsMap,
+    setFilterFunction,
+    timeRange,
+  ]);
 
   return (
     <div className="homework-sort-customization-control-panel">
@@ -69,7 +78,18 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
           marginRight: "15px",
         }}
       >
-        <div style={{ marginBottom: "10px" }}>
+        <div>
+          <label className="option-label">Subject:&nbsp;&nbsp;&nbsp;</label>
+          <SubjectsSelect
+            subjects={subjectsUsed}
+            value={subjectFilter}
+            onChange={(e) => setSubjectFilter(e.target.value)}
+            placeholder="All subjects"
+            style={{ width: "170px" }}
+            disablePlaceholder={false}
+          />
+        </div>
+        <div style={{ marginTop: "10px" }}>
           <label className="option-label">Rank by:&nbsp;&nbsp;&nbsp;</label>
           <select
             onChange={(e) => {
@@ -82,22 +102,16 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
             <option value="tag">Tag</option>
           </select>
         </div>
-        <div>
-          <label className="option-label">Subject:&nbsp;&nbsp;&nbsp;</label>
-          <SubjectsSelect
-            subjects={subjectsUsed}
-            value={subjectFilter}
-            onChange={(e) => setSubjectFilter(e.target.value)}
-            placeholder="All subjects"
-            style={{ width: "170px" }}
-            disablePlaceholder={false}
-          />
-        </div>
       </div>
       <div className="option date-option">
         <div style={{ marginBottom: "10px" }}>
           <label className="option-label">From:&nbsp;&nbsp;&nbsp;</label>
-          <input className="date-input" type="date" />
+          <input
+            value={timeRange}
+            onChange={(e) => setTimeRange(e.target.value)}
+            className="date-input"
+            type="date"
+          />
         </div>
         <div className="homework-search-bar">
           <input ref={queryInputRef} type="text" placeholder="Search" />
