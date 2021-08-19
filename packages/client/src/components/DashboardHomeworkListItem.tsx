@@ -15,9 +15,6 @@ export const DashboardHomeworkListItem: React.FC<DashboardHomeworkListItemProps>
           <div className="homework-title">{item.title}</div>
           <div className={`homework-tag ${item.tag}`}>{item.tag}</div>
         </div>
-        <div style={{ marginRight: "auto" }}>
-          Due on {new Date(item.deadline).toDateString()}
-        </div>
         <div className="homework-subject">{subjectName}</div>
         <img
           src="/images/icons/rightarrow.svg"
