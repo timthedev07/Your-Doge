@@ -94,7 +94,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
         </div>
       </div>
       <div className="option subject-option">
-        <div>
+        <div style={{ marginBottom: "10px" }}>
           <label className="option-label">From:&nbsp;&nbsp;&nbsp;</label>
           <input type="date" />
         </div>
