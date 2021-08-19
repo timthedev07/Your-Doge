@@ -22,7 +22,7 @@ export class Homework extends BaseEntity {
   title: string;
 
   @Field(() => String, { nullable: true })
-  @Column("text", { nullable: true })
+  @Column({ nullable: true, type: "varchar", length: "500" })
   description: string;
 
   @Field(() => Boolean)
