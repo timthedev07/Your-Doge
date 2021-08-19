@@ -72,7 +72,7 @@ export const HomeworkSearchBar: React.FC<HomeworkSearchBarProps> = ({
           <option value="tag">Tag</option>
         </select>
       </div>
-      <div className="option">
+      <div className="option subject-option">
         <label className="option-label">Subject:&nbsp;&nbsp;&nbsp;</label>
         <SubjectsSelect
           subjects={subjectsUsed}

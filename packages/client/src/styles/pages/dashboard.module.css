@@ -208,6 +208,9 @@
   transition: 0.3s;
   background-color: #474747 !important;
 }
+.homework-sort-customization-control-panel .option.subject-option {
+  margin-left: 20px;
+}
 
 /* don't write any css except for media queries below here */
 
@@ -219,7 +222,11 @@
     padding: 10px;
   }
   .homework-sort-customization-control-panel .option {
-    margin: 10px;
+    margin: 10px !important;
+  }
+
+  .homework-sort-customization-control-panel .option.homework-search-bar {
+    width: 90%;
   }
 }
 
