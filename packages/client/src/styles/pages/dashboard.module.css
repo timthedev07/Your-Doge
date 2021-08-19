@@ -45,7 +45,7 @@
 /* homework list and items */
 .homework-list-container {
   width: 95%;
-  height: 600px;
+  height: 700px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
