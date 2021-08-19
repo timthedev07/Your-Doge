@@ -167,8 +167,6 @@
 /* modifying react bootstrap's component color to fit dark theme */
 .homework-sort-customization-control-panel .homework-search-bar {
   flex: 1;
-  margin-left: 15px;
-  margin-right: 15px;
   border-radius: 5px;
   background-color: #414141;
   color: white;
