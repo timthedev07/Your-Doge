@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
 import ContentLoader from "react-content-loader";
 import { randomHomework } from "shared";
-import { useSubjectsQuery } from "../generated/graphql";
-import { Homework } from "../generated/sub-graphql";
-import { getSubjectsMap } from "../lib/subjects";
+import { useSubjectsQuery } from "../../generated/graphql";
+import { Homework } from "../../generated/sub-graphql";
+import { getSubjectsMap } from "../../lib/subjects";
 import { DashboardHomeworkListItem } from "./DashboardHomeworkListItem";
 import { HomeworkSearchBar } from "./HomeworkSearchBar";
 

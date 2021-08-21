@@ -1,5 +1,5 @@
 import React from "react";
-import { Homework } from "../generated/sub-graphql";
+import { Homework } from "../../generated/sub-graphql";
 
 interface DashboardHomeworkListItemProps {
   handleOpen: () => any;

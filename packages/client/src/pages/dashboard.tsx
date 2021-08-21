@@ -8,12 +8,12 @@ import { MarkRecordValue } from "../types/types";
 import { YoutubeVideo } from "../components/YoutubeVideo";
 import { Homework } from "../generated/sub-graphql";
 import axios from "axios";
-import { HomeworkDetails } from "../components/HomeworkDetails";
+import { HomeworkDetails } from "../components/homework/HomeworkDetails";
 import { NewHomework } from "../components/NewHomework";
 import { BUSY_CLASSES } from "../constants/homework";
 import { daysToMilliseconds, randomHomework } from "shared";
 import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
-import { HomeworkList } from "../components/HomeworkList";
+import { HomeworkList } from "../components/homework/HomeworkList";
 
 const Dashboard: React.FC = () => {
   const homeworkList: Homework[] = useMemo(() => randomHomework(50), []);

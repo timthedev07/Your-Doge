@@ -1,8 +1,8 @@
 import React, { FormEvent, useState } from "react";
-import { useApollo } from "../contexts/ApolloContext";
+import { useApollo } from "../../contexts/ApolloContext";
 import { Button, Modal } from "react-bootstrap";
-import { CloseButton } from "./CloseButton";
-import { HomeworkDetailsProps } from "../types/props";
+import { CloseButton } from "../CloseButton";
+import { HomeworkDetailsProps } from "../../types/props";
 
 export const HomeworkDetails: React.FC<HomeworkDetailsProps> = ({
   homework,

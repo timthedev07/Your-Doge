@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { FormCheck } from "react-bootstrap";
 import { daysAgo, TagCategory } from "shared";
-import { URGENCY_SCORE } from "../constants/homework";
-import { Homework } from "../generated/sub-graphql";
-import { usedSubjects } from "../lib/subjects";
-import { HomeworkSortKey } from "../types/types";
-import { SubjectsSelect } from "./SubjectsSelect";
+import { URGENCY_SCORE } from "../../constants/homework";
+import { Homework } from "../../generated/sub-graphql";
+import { usedSubjects } from "../../lib/subjects";
+import { HomeworkSortKey } from "../../types/types";
+import { SubjectsSelect } from "../SubjectsSelect";
 
 interface HomeworkSearchBarProps {
   subjectsMap: Record<number, string> | undefined;
