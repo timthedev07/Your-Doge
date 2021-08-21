@@ -1,12 +1,12 @@
 import React, { FormEvent, useState } from "react";
 import { nonEmpty, parseGraphQLError } from "shared";
-import { useApollo } from "../contexts/ApolloContext";
-import { useAddHomeworkMutation } from "../generated/sub-graphql";
+import { useApollo } from "../../contexts/ApolloContext";
+import { useAddHomeworkMutation } from "../../generated/sub-graphql";
 import { Button, Modal } from "react-bootstrap";
-import { CloseButton } from "./CloseButton";
-import { NewHomeworkProps } from "../types/props";
-import { Alert } from "./Alert";
-import { SubjectsSelect } from "./SubjectsSelect";
+import { CloseButton } from "../CloseButton";
+import { NewHomeworkProps } from "../../types/props";
+import { Alert } from "../Alert";
+import { SubjectsSelect } from "../SubjectsSelect";
 
 export const NewHomework: React.FC<NewHomeworkProps> = ({
   open,

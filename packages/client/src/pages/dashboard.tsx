@@ -9,7 +9,7 @@ import { YoutubeVideo } from "../components/YoutubeVideo";
 import { Homework } from "../generated/sub-graphql";
 import axios from "axios";
 import { HomeworkDetails } from "../components/homework/HomeworkDetails";
-import { NewHomework } from "../components/NewHomework";
+import { NewHomework } from "../components/homework/NewHomework";
 import { BUSY_CLASSES } from "../constants/homework";
 import { daysToMilliseconds, randomHomework } from "shared";
 import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
