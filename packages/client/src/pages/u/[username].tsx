@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { ReadOnlyProfile } from "../../components/ReadOnlyProfile";
+import { ReadOnlyProfile } from "../../components/user/ReadOnlyProfile";
 import { Loading } from "../../components/Loading";
 import { TabSwitcher } from "../../components/TabSwitcher";
 import { TabData } from "../../types/types";

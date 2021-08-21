@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Profile } from "../components/Profile";
-import { SettingsTab } from "../components/SettingsTab";
+import { Profile } from "../components/user/Profile";
+import { SettingsTab } from "../components/user/SettingsTab";
 import { TabSwitcher } from "../components/TabSwitcher";
 import { TabData } from "../types/types";
 import { useRouter } from "next/router";
 import { useAuth } from "../contexts/AuthContext";
 import Head from "next/head";
-import { Stats } from "../components/Stats";
+import { Stats } from "../components/user/Stats";
 
 const Account: React.FC = () => {
   const { authState, currentUser } = useAuth()!;
