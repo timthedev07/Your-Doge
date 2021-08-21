@@ -7,7 +7,7 @@ import {
 } from "../../../generated/graphql";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { OAuthWait } from "../../../components/OAuthWait";
+import { OAuthWait } from "../../../components/auth/OAuthWait";
 import { parseGraphQLError } from "shared";
 
 const Google: React.FC = () => {

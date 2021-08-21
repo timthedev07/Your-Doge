@@ -1,7 +1,7 @@
 import React from "react";
-import { discordOAuthUrl } from "../lib/oauth/discord";
-import { facebookOAuthUrl } from "../lib/oauth/facebook";
-import { googleAuthUrl } from "../lib/oauth/google";
+import { discordOAuthUrl } from "../../lib/oauth/discord";
+import { facebookOAuthUrl } from "../../lib/oauth/facebook";
+import { googleAuthUrl } from "../../lib/oauth/google";
 import { OAuthButton } from "./OAuthButton";
 
 export const OAuthButtons: React.FC = () => {

@@ -7,7 +7,7 @@ import { unknownErrMsg, validatePassword } from "shared";
 import { useRouter } from "next/router";
 import ReCAPTCHA from "react-google-recaptcha";
 import { AlertType } from "../../types/types";
-import { OAuthButtons } from "../../components/OAuthButtons";
+import { OAuthButtons } from "../../components/auth/OAuthButtons";
 import Head from "next/head";
 
 const THRESHOLD = 360;

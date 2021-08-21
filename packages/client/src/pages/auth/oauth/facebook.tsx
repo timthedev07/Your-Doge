@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { OAuthWait } from "../../../components/OAuthWait";
+import { OAuthWait } from "../../../components/auth/OAuthWait";
 import queryString from "query-string";
 import axios from "axios";
 import {

@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { unknownErrMsg } from "shared";
 import { useRouter } from "next/router";
 import { AlertType } from "../../types/types";
-import { OAuthButtons } from "../../components/OAuthButtons";
+import { OAuthButtons } from "../../components/auth/OAuthButtons";
 import Head from "next/head";
 
 const THRESHOLD = 360;
