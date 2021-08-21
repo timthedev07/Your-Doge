@@ -6,7 +6,7 @@ import { Button, Modal } from "react-bootstrap";
 import { CloseButton } from "../CloseButton";
 import { NewHomeworkProps } from "../../types/props";
 import { Alert } from "../Alert";
-import { SubjectsSelect } from "../SubjectsSelect";
+import { SubjectsSelect } from "./SubjectsSelect";
 
 export const NewHomework: React.FC<NewHomeworkProps> = ({
   open,

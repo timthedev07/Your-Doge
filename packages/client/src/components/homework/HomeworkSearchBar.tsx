@@ -5,7 +5,7 @@ import { URGENCY_SCORE } from "../../constants/homework";
 import { Homework } from "../../generated/sub-graphql";
 import { usedSubjects } from "../../lib/subjects";
 import { HomeworkSortKey } from "../../types/types";
-import { SubjectsSelect } from "../SubjectsSelect";
+import { SubjectsSelect } from "./SubjectsSelect";
 
 interface HomeworkSearchBarProps {
   subjectsMap: Record<number, string> | undefined;
