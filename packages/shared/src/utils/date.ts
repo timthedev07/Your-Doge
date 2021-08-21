@@ -1,3 +1,4 @@
+export type YyyymmddDateFormat = `${number}-${number}-${number}`;
 export const daysElapsed = (dateInMilliseconds: number) => {
   return (new Date().valueOf() - dateInMilliseconds) / (1000 * 60 * 60 * 24);
 };
@@ -12,4 +13,8 @@ export const daysAgo = (days: number) => {
   d.setMinutes(0);
   d.setSeconds(0);
   return d.valueOf();
+};
+
+export const yyyymmdd = (date: Date) => {
+  return date.toISOString().split("T")[0] as YyyymmddDateFormat;
 };
