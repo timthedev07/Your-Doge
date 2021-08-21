@@ -31,7 +31,6 @@ export const HomeworkList: React.FC<HomeworkListProps> = ({
 
   return (
     <div className="homework-list-container">
-      <h2 style={{ marginRight: "auto", marginLeft: "2%" }}>Homework to do:</h2>
       <HomeworkSearchBar
         {...{
           homeworkList,
