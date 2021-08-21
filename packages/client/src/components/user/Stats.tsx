@@ -56,7 +56,7 @@ export const Stats: React.FC = () => {
     <div className="stats-page">
       <div className="chart-container" id="subjects-donut-container">
         <select
-          style={{ width: "150px" }}
+          style={{ width: "170px" }}
           value={selectedRange}
           onChange={handleTimeRangeChange}
           className="time-range-select"
