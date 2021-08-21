@@ -1,6 +1,6 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Doughnut as Donut } from "react-chartjs-2";
-import { Counter, randomHomework } from "shared";
+import { Counter, randomHomework, yyyymmdd, YyyymmddDateFormat } from "shared";
 import { useSubjectsQuery } from "../generated/graphql";
 import { getSubjectsMap, usedSubjects } from "../lib/subjects";
 import { defaults } from "react-chartjs-2";
@@ -11,6 +11,9 @@ defaults.color = "white";
 export const Stats: React.FC = () => {
   const homeworkList = randomHomework(3000);
   const { data: subjectsData } = useSubjectsQuery();
+  const [timeRange, setTimeRange] = useState<YyyymmddDateFormat>(
+    yyyymmdd(new Date())
+  );
 
   const subjectsMap: Record<number, string> | undefined = useMemo(() => {
     return getSubjectsMap(subjectsData);
@@ -23,6 +26,15 @@ export const Stats: React.FC = () => {
   return (
     <div className="stats-page">
       <div className="chart-container" id="subjects-donut-container">
+        <div style={{ marginBottom: "10px" }}>
+          <label className="option-label">From:&nbsp;&nbsp;&nbsp;</label>
+          <input
+            value={timeRange}
+            onChange={(e) => setTimeRange(e.target.value as any)}
+            className="date-input"
+            type="date"
+          />
+        </div>
         <Donut
           className="chart"
           data={{
