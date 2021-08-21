@@ -136,7 +136,7 @@ export const Profile: React.FC<ProfileProps> = ({
       ) {
         try {
           const { default: res } = await import(
-            `../../public/images/avatars/${AvatarData[i]}.svg`
+            `../../../public/images/avatars/${AvatarData[i]}.svg`
           );
           setAvatars((prev) => {
             return [...prev, res.src as string];
