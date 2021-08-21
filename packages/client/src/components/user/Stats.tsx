@@ -54,18 +54,18 @@ export const Stats: React.FC = () => {
 
   return (
     <div className="stats-page">
+      <select
+        style={{ width: "170px" }}
+        value={selectedRange}
+        onChange={handleTimeRangeChange}
+        className="time-range-select"
+      >
+        <option value="week">Past week</option>
+        <option value="month">Past month</option>
+        <option value="three-months">Past three months</option>
+        <option value="">All time</option>
+      </select>
       <div className="chart-container" id="subjects-donut-container">
-        <select
-          style={{ width: "170px" }}
-          value={selectedRange}
-          onChange={handleTimeRangeChange}
-          className="time-range-select"
-        >
-          <option value="week">Past week</option>
-          <option value="month">Past month</option>
-          <option value="three-months">Past three months</option>
-          <option value="">All time</option>
-        </select>
         <Donut
           className="chart"
           data={{
