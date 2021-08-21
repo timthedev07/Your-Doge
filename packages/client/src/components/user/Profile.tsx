@@ -1,16 +1,16 @@
 import React, { useEffect, useMemo, useState } from "react";
 
-import AvatarData from "../../avatarData.json";
+import AvatarData from "../../../avatarData.json";
 import { Button, Modal } from "react-bootstrap";
-import { CloseButton } from "./CloseButton";
+import { CloseButton } from "../CloseButton";
 import {
   MeDocument,
   MeQuery,
   useUpdateAvatarMutation,
   useUpdateProfileMutation,
-} from "../generated/graphql";
-import { ProfileProps } from "../types/props";
-import { AvatarKeyType } from "../types/types";
+} from "../../generated/graphql";
+import { ProfileProps } from "../../types/props";
+import { AvatarKeyType } from "../../types/types";
 import Link from "next/link";
 import ReactTooltip from "react-tooltip";
 

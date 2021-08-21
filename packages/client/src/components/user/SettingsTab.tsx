@@ -7,16 +7,16 @@ import {
   useUpdateUsernameMutation,
   useUpdatePasswordMutation,
   useUpdateEmailVisibilityMutation,
-} from "../generated/graphql";
+} from "../../generated/graphql";
 import { Modal, Button } from "react-bootstrap";
-import { CloseButton } from "./CloseButton";
-import { Alert } from "./Alert";
-import { useApollo } from "../contexts/ApolloContext";
-import { SettingsTabProps } from "../types/props";
-import { useAuth } from "../contexts/AuthContext";
+import { CloseButton } from "../CloseButton";
+import { Alert } from "../Alert";
+import { useApollo } from "../../contexts/ApolloContext";
+import { SettingsTabProps } from "../../types/props";
+import { useAuth } from "../../contexts/AuthContext";
 import { parseGraphQLError } from "shared";
 import { validatePassword } from "shared";
-import { AlertType } from "../types/types";
+import { AlertType } from "../../types/types";
 import { unknownErrMsg } from "shared";
 import Link from "next/link";
 

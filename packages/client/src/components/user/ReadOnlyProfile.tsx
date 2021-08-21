@@ -1,8 +1,8 @@
 import React from "react";
-import AvatarData from "../../avatarData.json";
+import AvatarData from "../../../avatarData.json";
 import ReactMarkdown from "react-markdown";
-import { ReadOnlyProfileProps } from "../types/props";
-import { useAuth } from "../contexts/AuthContext";
+import { ReadOnlyProfileProps } from "../../types/props";
+import { useAuth } from "../../contexts/AuthContext";
 import Link from "next/dist/client/link";
 import ReactTooltip from "react-tooltip";
 
