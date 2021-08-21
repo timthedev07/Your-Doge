@@ -23,3 +23,12 @@
   max-width: 400px;
   width: auto;
 }
+
+.time-range-select {
+  background-color: var(--tab-switcher-bg-color);
+  --border: 2px gray solid;
+  border-bottom: var(--border);
+  border-right: var(--border);
+  border-radius: 0;
+  border-bottom-right-radius: 5px;
+}

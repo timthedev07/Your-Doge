@@ -46,7 +46,7 @@
 .tab-switcher-container .tab-content-container {
   width: 100%;
   padding: 10px;
-  background-color: rgb(41, 42, 44);
+  background-color: var(--tab-switcher-bg-color);
   min-height: 500px;
   height: auto;
   border-bottom-left-radius: inherit;
