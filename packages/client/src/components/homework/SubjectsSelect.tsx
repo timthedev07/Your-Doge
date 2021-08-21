@@ -1,5 +1,5 @@
 import React from "react";
-import { SubjectsQuery } from "../generated/graphql";
+import { SubjectsQuery } from "../../generated/graphql";
 import { instanceOfInterface } from "shared";
 
 interface SubjectsSelectProps {
