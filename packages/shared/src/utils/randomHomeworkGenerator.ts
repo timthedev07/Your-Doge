@@ -23,7 +23,7 @@ export const randomHomework = (n: number) => {
       title: `${randSlug()}`,
       description: "You hate dancin",
       deadline: (() => {
-        var d = randomDate(new Date("2021-08-01"), new Date("2021-08-31"));
+        var d = randomDate(new Date("2020-08-01"), new Date("2021-08-31"));
         d.setHours(0), d.setMinutes(0), d.setSeconds(0), d.setMilliseconds(0);
         return d.valueOf();
       })(),
