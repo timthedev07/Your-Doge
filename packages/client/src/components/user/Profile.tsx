@@ -94,7 +94,7 @@ export const Profile: React.FC<ProfileProps> = ({
     ) => {
       if (!subscribed) return;
       const { default: res } = await import(
-        `../../public/images/avatars/${AvatarData[id]}.svg` // use different avatars based on the avatarId
+        `../../../public/images/avatars/${AvatarData[id]}.svg` // use different avatars based on the avatarId
         // binded to the user and stored in the database
       );
       setter(res.src as string);
