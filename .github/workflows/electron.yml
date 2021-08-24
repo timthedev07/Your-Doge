@@ -5,7 +5,7 @@ on:
     paths:
       - "packages/desktop/**"
     branches:
-      - release
+      - staging
 
 jobs:
   release:
