@@ -44,7 +44,8 @@
         "snap",
         "tar.gz"
       ],
-      "category": "Utility"
+      "category": "Utility",
+      "executableName": "Your-Doge"
     },
     "snap": {
       "confinement": "strict",
