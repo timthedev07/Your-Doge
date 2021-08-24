@@ -6,9 +6,6 @@
   "main": "electron.js",
   "author": "Tim",
   "description": "An awesome doge themed homework manager",
-  "dependencies": {
-    "electron-is-dev": "^2.0.0"
-  },
   "scripts": {
     "dev:electron": "concurrently -k \"BROWSER=none yarn dev\" \"yarn electron\"",
     "electron": "wait-on tcp:3000 && electron .",
@@ -21,30 +18,16 @@
     "copyright": "Tim",
     "mac": {
       "category": "public.app-category.productivity",
-      "icon": "resources/icon.png"
+      "icon": "resources/icon.png",
+      "identify": null
     },
     "win": {
       "icon": "resources/icon.png"
     },
     "extends": null
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "dependencies": {
+    "electron-is-dev": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^16.3.1",
