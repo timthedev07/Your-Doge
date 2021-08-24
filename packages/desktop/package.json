@@ -4,7 +4,10 @@
   "private": true,
   "license": "GPL-3.0-or-later",
   "main": "electron.js",
-  "author": "Tim",
+  "author": {
+    "email": "timpersonal07@gmail.com",
+    "name": "Tim"
+  },
   "description": "An awesome doge themed homework manager",
   "scripts": {
     "dev:electron": "concurrently -k \"BROWSER=none yarn dev\" \"yarn electron\"",
