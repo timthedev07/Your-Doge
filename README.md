@@ -20,11 +20,7 @@
   </a>
 </p>
 <p align="center">
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/timthedev07/Your-Doge?logo=typescript&logoColor=5bbff5&style=for-the-badge">
-  <img alt="next" src="https://img.shields.io/badge/uses-Next.js-blue?style=for-the-badge&logo=nextdotjs">
-  <img alt="next" src="https://img.shields.io/badge/uses-Apollo GraphQL-blue?style=for-the-badge&logo=apollographql">
-  <img alt="next" src="https://img.shields.io/badge/uses-React-blue?style=for-the-badge&logo=react">
-  <img alt="next" src="https://img.shields.io/badge/uses-Redis-blue?style=for-the-badge&logo=redis">
+
 </p>
 <p align="center">
   <a href="https://yourdoge.vercel.app"><img alt="GitHub deployments" src="https://img.shields.io/github/deployments/timthedev07/Your-Doge/production?label=vercel&logo=vercel&logoColor=white&style=for-the-badge">
@@ -51,6 +47,14 @@
 ## About Your Doge
 
 Your Doge is a doge themed online homework manager built for the ones who are struggling with organizing their homework, although it also fits other sorts of tasks. Your Doge provides personalized statistics on how well you are doing based on your activities.
+
+## Technologies used
+
+<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/timthedev07/Your-Doge?logo=typescript&logoColor=5bbff5&style=for-the-badge">
+<img alt="next" src="https://img.shields.io/badge/Next.js-313131?style=for-the-badge&logo=nextdotjs">
+<img alt="next" src="https://img.shields.io/badge/-Apollo GraphQL-purple?style=for-the-badge&logo=apollographql">
+<img alt="next" src="https://img.shields.io/badge/-Express-blue?style=for-the-badge&logo=express">
+<img alt="next" src="https://img.shields.io/badge/-Redis-gray?style=for-the-badge&logo=redis">
 
 ## Contributing
 
