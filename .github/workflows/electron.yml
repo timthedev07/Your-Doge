@@ -3,7 +3,7 @@ name: Electron App Release
 on:
   push:
     paths:
-      - "packages/client/**"
+      - "packages/desktop/**"
     branches:
       - release
 
