@@ -53,7 +53,7 @@ export const Stats: React.FC = () => {
   };
 
   return (
-    <div className="stats-page">
+    <>
       <select
         style={{ width: "170px" }}
         value={selectedRange}
@@ -65,38 +65,43 @@ export const Stats: React.FC = () => {
         <option value="three-months">Past three months</option>
         <option value="">All time</option>
       </select>
-      <div className="chart-container" id="subjects-donut-container">
-        <Donut
-          className="chart"
-          data={{
-            labels: Object.keys(frequency),
-            datasets: [
-              {
-                label: "Subjects",
-                data: Object.values(frequency),
-                backgroundColor: ChartColors.backgroundColor,
-                borderColor: ChartColors.borderColor,
-                borderWidth: 1,
-              },
-            ],
-          }}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-                position: "right",
-              },
-              title: {
-                display: true,
-                text: "Subjects Breakdown",
-                font: {
-                  size: "20",
+
+      <div className="stats-page">
+        <div className="chart-container" id="subjects-donut-container">
+          <Donut
+            className="chart"
+            data={{
+              labels: Object.keys(frequency),
+              datasets: [
+                {
+                  label: "Subjects",
+                  data: Object.values(frequency),
+                  backgroundColor: ChartColors.backgroundColor,
+                  borderColor: ChartColors.borderColor,
+                  borderWidth: 1,
+                },
+              ],
+            }}
+            options={{
+              responsive: true,
+              plugins: {
+                legend: {
+                  position: "right",
+                },
+                title: {
+                  display: true,
+                  text: "Subjects Breakdown",
+                  font: {
+                    size: "20",
+                  },
                 },
               },
-            },
-          }}
-        />
+            }}
+          />
+        </div>
+
+        <div className="chart-container" id="subjects-donut-container"></div>
       </div>
-    </div>
+    </>
   );
 };
