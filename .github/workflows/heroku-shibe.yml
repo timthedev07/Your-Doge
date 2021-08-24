@@ -2,10 +2,10 @@ name: Deploy Shibe to heroku
 
 on:
   push:
+    paths:
+      - packages/shibe/**
     branches:
       - release
-    paths:
-      - shibe/**
 
 jobs:
   build:

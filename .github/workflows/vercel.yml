@@ -1,10 +1,10 @@
-name: deploy website
+name: Deploy Next.js Frontend Web Application
 on:
   push:
-    branches:
-      - release
     paths:
       - packages/client/**
+    branches:
+      - release
 
 jobs:
   deploy:
