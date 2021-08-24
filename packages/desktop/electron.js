@@ -1,6 +1,4 @@
-const path = require("path");
-
-const { app, BrowserWindow, webFrame } = require("electron");
+const { app, BrowserWindow } = require("electron");
 const isDev = require("electron-is-dev");
 
 function createWindow() {

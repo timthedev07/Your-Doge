@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "license": "GPL-3.0-or-later",
-  "main": "./dist/electron.js",
+  "main": "electron.js",
   "author": "Tim",
   "description": "An awesome doge themed homework manager",
   "dependencies": {
