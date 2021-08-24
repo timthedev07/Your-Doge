@@ -19,7 +19,7 @@
     "mac": {
       "category": "public.app-category.productivity",
       "icon": "resources/icon.png",
-      "identify": null
+      "identity": null
     },
     "win": {
       "icon": "resources/icon.png"
