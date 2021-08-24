@@ -5,7 +5,10 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "packages/*"
+      "packages/client",
+      "packages/burrito",
+      "packages/shibe",
+      "packages/shared"
     ],
     "nohoist": [
       "**"
