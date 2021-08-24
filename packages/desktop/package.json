@@ -19,7 +19,12 @@
     "mac": {
       "category": "public.app-category.productivity",
       "icon": "resources/icon.png",
-      "identity": null
+      "identity": null,
+      "hardenedRuntime": true,
+      "target": [
+        "dmg",
+        "zip"
+      ]
     },
     "win": {
       "icon": "resources/icon.png"
@@ -34,5 +39,9 @@
     "electron": "13.1.8",
     "electron-builder": "^22.11.7",
     "wait-on": "5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timthedev07/Your-Doge.git"
   }
 }
