@@ -49,6 +49,7 @@
     },
     "snap": {
       "confinement": "strict",
+      "title": "Your-Doge",
       "plugs": [
         "default",
         {
