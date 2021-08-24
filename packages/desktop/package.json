@@ -27,7 +27,36 @@
       ]
     },
     "win": {
-      "icon": "resources/icon.png"
+      "icon": "resources/icon.png",
+      "target": "nsis",
+      "publish": [
+        "github"
+      ]
+    },
+    "linux": {
+      "icon": "resources/icon.png",
+      "target": [
+        "deb",
+        "AppImage",
+        "snap",
+        "tar.gz"
+      ],
+      "category": "Utility"
+    },
+    "snap": {
+      "confinement": "strict",
+      "plugs": [
+        "default",
+        {
+          "browser-support": {
+            "interface": "browser-support",
+            "allow-sandbox": false
+          }
+        }
+      ]
+    },
+    "extraMetadata": {
+      "main": "electron.js"
     },
     "extends": null
   },
