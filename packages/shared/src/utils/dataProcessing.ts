@@ -8,7 +8,8 @@
 export const groupArray = <T extends {}>(
   data: T[],
   key: keyof T,
-  valueTransform: (val: T[typeof key]) => any = (val: any) => val
+  valueTransform: (val: T[typeof key]) => any = (val: any) => val,
+  expectedMapKeys: T[keyof T][]
 ) => {
   const res: Map<T[keyof T], T[]> = new Map();
 
@@ -18,6 +19,12 @@ export const groupArray = <T extends {}>(
       res.get(transformedValue)!.push(item);
     } else {
       res.set(transformedValue, [item]);
+    }
+  }
+
+  for (const expectedKey of expectedMapKeys) {
+    if (!res.has(expectedKey)) {
+      res.set(expectedKey, []);
     }
   }
 
