@@ -8,3 +8,4 @@ export * from "./instanceOf";
 export * from "./counter";
 export * from "./randomHomeworkGenerator";
 export * from "./server/isAuthMiddleWare";
+export * from "./dataProcessing";
