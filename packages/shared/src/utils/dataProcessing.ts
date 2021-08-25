@@ -9,7 +9,7 @@ export const groupArray = <T extends {}>(
   data: T[],
   key: keyof T,
   valueTransform: (val: T[typeof key]) => any = (val: any) => val,
-  expectedMapKeys: T[keyof T][]
+  expectedMapKeys: T[keyof T][] = []
 ) => {
   const res: Map<T[keyof T], T[]> = new Map();
 
