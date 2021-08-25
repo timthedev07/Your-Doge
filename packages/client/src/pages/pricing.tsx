@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import React from "react";
 
@@ -42,6 +43,12 @@ const Pricing: React.FC<PricingProps> = ({}) => {
       </div>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default Pricing;
