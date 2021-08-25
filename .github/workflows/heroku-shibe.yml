@@ -1,3 +1,4 @@
+# attention: shibe and burritos are on different accounts, be cautious when dealing with heroku tokens
 name: Deploy Shibe to heroku
 
 on:
@@ -15,5 +16,5 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "homework-manager-primary" #Must be unique in Heroku
-          heroku_email: "bot.rem.autogenerate@gmail.com"
+          heroku_app_name: "homework-manager-primary"
+          heroku_email: ${{secrets.SHIBE_HEROKU_ACCOUNT_EMAIL}}
