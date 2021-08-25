@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import React from "react";
@@ -229,6 +230,12 @@ const PrivacyPolicies: React.FC = ({}) => {
       </p>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default PrivacyPolicies;
