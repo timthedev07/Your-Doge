@@ -6,6 +6,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
 import Head from "next/head";
 import Link from "next/link";
+import { GetStaticProps } from "next";
 
 const Accordion: React.FC<CustomAccordionProps> = ({ content, title }) => {
   return (
@@ -99,6 +100,12 @@ const FAQ: FC = () => {
       </main>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async (_context) => {
+  return {
+    props: {},
+  };
 };
 
 export default FAQ;
