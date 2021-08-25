@@ -8,6 +8,7 @@ import { AlertType } from "../types/types";
 import { validateEmail } from "./auth/register";
 import ReCAPTCHA from "react-google-recaptcha";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -189,4 +190,11 @@ const Contact = () => {
     </>
   );
 };
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
+};
+
 export default Contact;
