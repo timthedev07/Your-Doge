@@ -1,3 +1,4 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
 import React from "react";
 
@@ -319,6 +320,12 @@ const TermsAndConditions: React.FC = () => {
       </p>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default TermsAndConditions;
