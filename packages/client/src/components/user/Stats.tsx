@@ -1,6 +1,11 @@
 import React, { useMemo, useState } from "react";
 import { Doughnut as Donut, defaults, Line } from "react-chartjs-2";
-import { Counter, daysToMilliseconds, randomHomework } from "shared";
+import {
+  Counter,
+  daysToMilliseconds,
+  groupArray,
+  randomHomework,
+} from "shared";
 import { useSubjectsQuery } from "../../generated/graphql";
 import { getSubjectsMap, usedSubjects } from "../../lib/subjects";
 import { ChartColors } from "../../constants/charts";
@@ -8,44 +13,59 @@ import { Homework } from "../../generated/sub-graphql";
 
 defaults.color = "white";
 
-const data = {
-  labels: [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ],
-  datasets: [
-    {
-      label: "# of Votes",
-      data: [12, 19, 3, 5, 2, 3],
-      fill: false,
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgba(255, 99, 132, 0.2)",
-    },
-  ],
-};
+const CHART_TITLE_SIZE = 20;
 
-const options = {
+const DAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+const lineChartOptions = {
   scales: {
-    yAxes: [
-      {
-        ticks: {
-          beginAtZero: true,
+    y: {
+      ticks: {
+        callback: (value: number) => {
+          if (Math.floor(value) === value) return value;
         },
       },
-    ],
+      title: {
+        display: true,
+        text: "Homework Count",
+      },
+    },
+    x: {
+      title: {
+        display: true,
+        text: "Days",
+      },
+    },
+  },
+  plugins: {
+    title: {
+      position: "top",
+      display: true,
+      text: "Homework Distribution",
+      font: {
+        size: CHART_TITLE_SIZE,
+      },
+    },
   },
 };
 
 export const Stats: React.FC = () => {
-  const homeworkList = useMemo(() => randomHomework(5000), []);
+  const homeworkList = useMemo(() => randomHomework(1000), []);
   const { data: subjectsData } = useSubjectsQuery();
   const [selectedRange, setSelectedRange] = useState<string>("week");
-  const [filtered, setFiltered] = useState<Homework[]>(homeworkList);
+  const [filtered, setFiltered] = useState<Homework[]>(
+    homeworkList.filter(
+      (each) => each.deadline > Date.now() - daysToMilliseconds(7)
+    )
+  );
 
   const subjectsMap: Record<number, string> | undefined = useMemo(() => {
     return getSubjectsMap(subjectsData);
@@ -54,6 +74,31 @@ export const Stats: React.FC = () => {
   const frequency = useMemo(() => {
     return Counter(usedSubjects(filtered, subjectsMap, false));
   }, [filtered, subjectsMap]);
+
+  const grouped = useMemo(() => {
+    const map = groupArray(
+      filtered,
+      "deadline",
+      (val) => {
+        return new Date(val as number).getDay();
+      },
+      DAYS
+    );
+    return Array.from(map.entries()).sort();
+  }, [filtered]);
+
+  const data = {
+    labels: DAYS,
+    datasets: [
+      {
+        label: "Homework Count on This Day",
+        data: grouped.map((each) => each[1].length),
+        fill: true,
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderColor: "rgb(255, 99, 132)",
+      },
+    ],
+  };
 
   const handleTimeRangeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const val = e.target.value;
@@ -123,7 +168,7 @@ export const Stats: React.FC = () => {
                   display: true,
                   text: "Subjects Breakdown",
                   font: {
-                    size: "20",
+                    size: CHART_TITLE_SIZE,
                   },
                 },
               },
@@ -135,7 +180,7 @@ export const Stats: React.FC = () => {
           className="chart-container"
           id="weekly-homework-line-chart-container"
         >
-          <Line data={data} options={options} />
+          <Line data={data} options={lineChartOptions} />
         </div>
       </div>
     </>
