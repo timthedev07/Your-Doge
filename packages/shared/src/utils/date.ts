@@ -27,7 +27,7 @@ export const dateCeil = (date: Date) => {
   return date;
 };
 
-export const dayNumToString = (day: 0 | 1 | 2 | 3 | 4 | 5 | 6) => {
+export const dayNumToString = (day: number) => {
   const map: Record<number, string> = {
     0: "Sunday",
     1: "Monday",
