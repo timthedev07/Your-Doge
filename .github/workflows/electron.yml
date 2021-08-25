@@ -3,9 +3,9 @@ name: Electron App Release
 on:
   push:
     paths:
-      - "**/*"
+      - "packages/desktop/**"
     branches:
-      - staging
+      - release
 
 jobs:
   release:
