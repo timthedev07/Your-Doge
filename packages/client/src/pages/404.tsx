@@ -1,6 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { GetStaticProps } from "next";
 
 const NotFound: React.FC = () => {
   const { back } = useRouter();
@@ -28,6 +29,12 @@ const NotFound: React.FC = () => {
       <img id="not-found-bg" alt="404" src="/images/404.jpeg" />
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default NotFound;
