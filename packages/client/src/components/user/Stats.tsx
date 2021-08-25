@@ -1,13 +1,45 @@
 import React, { useMemo, useState } from "react";
-import { Doughnut as Donut } from "react-chartjs-2";
+import { Doughnut as Donut, defaults, Line } from "react-chartjs-2";
 import { Counter, daysToMilliseconds, randomHomework } from "shared";
 import { useSubjectsQuery } from "../../generated/graphql";
 import { getSubjectsMap, usedSubjects } from "../../lib/subjects";
-import { defaults } from "react-chartjs-2";
 import { ChartColors } from "../../constants/charts";
 import { Homework } from "../../generated/sub-graphql";
 
 defaults.color = "white";
+
+const data = {
+  labels: [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ],
+  datasets: [
+    {
+      label: "# of Votes",
+      data: [12, 19, 3, 5, 2, 3],
+      fill: false,
+      backgroundColor: "rgb(255, 99, 132)",
+      borderColor: "rgba(255, 99, 132, 0.2)",
+    },
+  ],
+};
+
+const options = {
+  scales: {
+    yAxes: [
+      {
+        ticks: {
+          beginAtZero: true,
+        },
+      },
+    ],
+  },
+};
 
 export const Stats: React.FC = () => {
   const homeworkList = useMemo(() => randomHomework(5000), []);
@@ -55,7 +87,6 @@ export const Stats: React.FC = () => {
   return (
     <>
       <select
-        style={{ width: "170px" }}
         value={selectedRange}
         onChange={handleTimeRangeChange}
         className="time-range-select"
@@ -100,7 +131,12 @@ export const Stats: React.FC = () => {
           />
         </div>
 
-        <div className="chart-container" id="subjects-donut-container"></div>
+        <div
+          className="chart-container"
+          id="weekly-homework-line-chart-container"
+        >
+          <Line data={data} options={options} />
+        </div>
       </div>
     </>
   );
