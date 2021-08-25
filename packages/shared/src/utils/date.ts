@@ -26,3 +26,17 @@ export const dateCeil = (date: Date) => {
   date.setMilliseconds(0);
   return date;
 };
+
+export const dayNumToString = (day: 0 | 1 | 2 | 3 | 4 | 5 | 6) => {
+  const map: Record<number, string> = {
+    0: "Sunday",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thursday",
+    5: "Friday",
+    6: "Saturday",
+  };
+
+  return map[day];
+};
