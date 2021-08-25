@@ -2,16 +2,22 @@
  * Group a list of objects by a given key.
  * @param data A list of objects of type T
  * @param key The key you want you data to be grouped by
+ * @param valueTransform Optional function that will transform the value indexed by the given key to some other format or type, the return value of this function would be the keys in the returned map.
  * @returns A map containing the grouped data
  */
-export const groupArray = <T extends {}>(data: T[], key: keyof T) => {
+export const groupArray = <T extends {}>(
+  data: T[],
+  key: keyof T,
+  valueTransform: (val: T[typeof key]) => any = (val: any) => val
+) => {
   const res: Map<T[keyof T], T[]> = new Map();
 
   for (const item of data) {
-    if (res.has(item[key])) {
-      res.get(item[key])!.push(item);
+    const transformedValue = valueTransform(item[key]);
+    if (res.has(transformedValue)) {
+      res.get(transformedValue)!.push(item);
     } else {
-      res.set(item[key], [item]);
+      res.set(transformedValue, [item]);
     }
   }
 
