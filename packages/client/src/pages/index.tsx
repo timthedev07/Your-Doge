@@ -1,17 +1,21 @@
+import { GetStaticProps } from "next";
 import Head from "next/head";
-import { useAuth } from "../contexts/AuthContext";
 
 const Home = () => {
-  const { currentUser } = useAuth()!;
-
   return (
     <div>
       <Head>
         <title>Home | Your Doge</title>
       </Head>
-      <pre>{JSON.stringify(currentUser, null, 2)}</pre>
+      <h3>Landing Page - TODO</h3>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {},
+  };
 };
 
 export default Home;
