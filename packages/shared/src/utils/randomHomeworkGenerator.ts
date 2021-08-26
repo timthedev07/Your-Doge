@@ -28,9 +28,9 @@ export const randomHomework = (n: number) => {
         return d.valueOf();
       })(),
       subjectId: Math.ceil(Math.random() * 10),
-      done: Math.random() < 0.5,
+      done: Math.random() <= 0.5,
       onTime: true,
-      enjoyed: false,
+      enjoyed: Math.random() <= 0.5,
       topicName: "GCSE eglish literature language techniques",
       userId: 3,
       tag: temp[
