@@ -1,6 +1,7 @@
 const path = require("path");
 const paths = [{ name: "shared", path: path.resolve(__dirname, "../shared") }];
 
+/** @type {import('next').NextConfig} */
 module.exports = () => {
   return {
     webpack(config, { defaultLoaders }) {
