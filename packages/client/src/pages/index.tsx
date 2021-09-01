@@ -8,7 +8,13 @@ const Home = () => {
         <title>Home | Your Doge</title>
       </Head>
       <div className="landing-page">
-        <section></section>
+        <header>
+          <img
+            className="landing-header-image"
+            src="/images/landing-header.png"
+            alt=""
+          />
+        </header>
         <section></section>
         <section></section>
       </div>
