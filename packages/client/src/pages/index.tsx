@@ -17,11 +17,17 @@ const Home = () => {
           <div className="landing-header-caption">
             <h2>Your time is valuable,</h2>
             <h4>and we are here to save it.</h4>
+            <br />
+            <br />
+            <p>
+              Your Doge is an online doge themed homework manager empowered by a
+              supportive team and innovative technologies.
+              <br />
+              Filter, sort, and target homework based on your needs. And, more
+              importantly, visualizing statistics has never been easier for you.
+            </p>
           </div>
         </header>
-        <img src="/images/icons/down-arrow.svg" alt="" />
-        <section></section>
-        <section></section>
       </div>
     </>
   );
