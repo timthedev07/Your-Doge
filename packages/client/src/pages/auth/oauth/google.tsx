@@ -56,7 +56,9 @@ const Google: React.FC = () => {
         });
 
         if (res.data?.googleOAuth.status === "logged-in") {
-          push("/dashboard");
+          setTimeout(() => {
+            push("/dashboard");
+          }, 2000);
         }
       } catch (err: any) {
         displayError(parseGraphQLError(err));

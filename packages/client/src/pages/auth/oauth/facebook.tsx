@@ -57,7 +57,9 @@ const Facebook: React.FC = ({}) => {
         });
 
         if (response.data?.facebookOAuth.status === "logged-in") {
-          push("/dashboard");
+          setTimeout(() => {
+            push("/dashboard");
+          }, 2000);
         }
       } catch (err: any) {
         displayError(parseGraphQLError(err));

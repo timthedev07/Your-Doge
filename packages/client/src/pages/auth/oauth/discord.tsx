@@ -57,7 +57,9 @@ const Discord: React.FC = () => {
         });
 
         if (res.data?.discordOAuth.status === "logged-in") {
-          push("/dashboard");
+          setTimeout(() => {
+            push("/dashboard");
+          }, 2000);
         } else {
           displayError(unknownErrMsg);
         }
