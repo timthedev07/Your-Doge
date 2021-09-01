@@ -14,6 +14,9 @@ import { BUSY_CLASSES } from "../constants/homework";
 import { daysToMilliseconds, randomHomework } from "shared";
 import { getWithExpiry, setWithExpiry } from "../lib/localStorageExpiration";
 import { HomeworkList } from "../components/homework/HomeworkList";
+import { useAuth } from "../contexts/AuthContext";
+import { useRouter } from "next/router";
+import { Loading } from "../components/Loading";
 
 const Dashboard: React.FC = () => {
   const homeworkList: Homework[] = useMemo(() => randomHomework(50), []);
@@ -24,6 +27,12 @@ const Dashboard: React.FC = () => {
   );
   const [creationPanelOpen, setCreationPanelOpen] = useState<boolean>(false);
   const { data: subjectsData, loading: subjectsLoading } = useSubjectsQuery();
+  const { authState } = useAuth()!;
+  const { push } = useRouter();
+
+  if (authState() === "none") {
+    push("/auth/login");
+  }
 
   // const { burrito } = useApollo()!;
 
@@ -86,7 +95,9 @@ const Dashboard: React.FC = () => {
     })();
   }, [homeworkList]);
 
-  return (
+  return authState() === "loading" || authState() === "none" ? (
+    <Loading />
+  ) : (
     <>
       <Head>
         <title>Dashboard | Your Doge</title>

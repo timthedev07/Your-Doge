@@ -7,7 +7,6 @@
  */
 export const needAuthState = (path: string): boolean => {
   const authStateRequiredRoutes: Record<string, boolean> = {
-    // "/dashboard": false,
     "/u/[username]": true,
     "/auth/login": true,
     "/auth/register": true,
