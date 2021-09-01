@@ -3,12 +3,16 @@ import Head from "next/head";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Home | Your Doge</title>
       </Head>
-      <h3>Landing Page - TODO</h3>
-    </div>
+      <div className="landing-page">
+        <section></section>
+        <section></section>
+        <section></section>
+      </div>
+    </>
   );
 };
 
