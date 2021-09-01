@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Doughnut as Donut, defaults, Line } from "react-chartjs-2";
+import { Doughnut as Donut, defaults, Line, Radar } from "react-chartjs-2";
 import {
   Counter,
   daysToMilliseconds,
@@ -12,6 +12,7 @@ import { ChartColors } from "../../constants/charts";
 import { Homework } from "../../generated/sub-graphql";
 
 defaults.color = "white";
+defaults.borderColor = "white";
 
 const CHART_TITLE_SIZE = 20;
 
@@ -24,6 +25,49 @@ const DAYS = [
   "Friday",
   "Saturday",
 ];
+
+const donutOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "right",
+    },
+    title: {
+      display: true,
+      text: "Subjects Breakdown",
+      font: {
+        size: CHART_TITLE_SIZE,
+      },
+    },
+  },
+};
+
+const radarOptions = {
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
+  scale: {
+    ticks: {
+      maxTicksLimit: 2,
+      callback: () => {},
+    },
+  },
+  scales: {
+    r: {
+      angleLines: {
+        display: false,
+      },
+      ticks: {
+        backdropColor: "rgba(0, 0, 0, 0)",
+        font: {
+          size: 0,
+        },
+      },
+    },
+  },
+};
 
 const lineChartOptions = {
   scales: {
@@ -59,7 +103,7 @@ const lineChartOptions = {
 
 export const Stats: React.FC = () => {
   const homeworkList = useMemo(() => randomHomework(1000), []);
-  const { data: subjectsData } = useSubjectsQuery();
+  const { data: subjectsData, loading: subjectsLoading } = useSubjectsQuery();
   const [selectedRange, setSelectedRange] = useState<string>("week");
   const [filtered, setFiltered] = useState<Homework[]>(
     homeworkList.filter(
@@ -75,7 +119,7 @@ export const Stats: React.FC = () => {
     return Counter(usedSubjects(filtered, subjectsMap, false));
   }, [filtered, subjectsMap]);
 
-  const grouped = useMemo(() => {
+  const groupedByDeadline = useMemo(() => {
     const map = groupArray(
       filtered,
       "deadline",
@@ -87,12 +131,17 @@ export const Stats: React.FC = () => {
     return Array.from(map.entries()).sort();
   }, [filtered]);
 
+  const groupedBySubject = useMemo(() => {
+    const map = groupArray(filtered, "subjectId");
+    return Array.from(map.entries()).sort();
+  }, [filtered]);
+
   const data = {
     labels: DAYS,
     datasets: [
       {
         label: "Homework Count on This Day",
-        data: grouped.map((each) => each[1].length),
+        data: groupedByDeadline.map((each) => each[1].length),
         fill: true,
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderColor: "rgb(255, 99, 132)",
@@ -158,21 +207,32 @@ export const Stats: React.FC = () => {
                 },
               ],
             }}
-            options={{
-              responsive: true,
-              plugins: {
-                legend: {
-                  position: "right",
+            options={donutOptions}
+          />
+        </div>
+        <div className="chart-container" id="homework-status-donut-container">
+          <Radar
+            className="chart"
+            data={{
+              labels: [
+                "Thing 1",
+                "Thing 2",
+                "Thing 3",
+                "Thing 4",
+                "Thing 5",
+                "Thing 6",
+              ],
+              datasets: [
+                {
+                  label: "",
+                  data: [2, 9, 3, 5, 2, 3],
+                  backgroundColor: "rgba(255, 99, 132, 0.2)",
+                  borderColor: "rgba(255, 99, 132, 1)",
+                  borderWidth: 1,
                 },
-                title: {
-                  display: true,
-                  text: "Subjects Breakdown",
-                  font: {
-                    size: CHART_TITLE_SIZE,
-                  },
-                },
-              },
+              ],
             }}
+            options={radarOptions}
           />
         </div>
 
