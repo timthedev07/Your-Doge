@@ -1,3 +1,5 @@
+# Important Notice
+Your Doge is done. It is indeed done. This is one of my failed attempts at a business-ish project, but I learned a lot from it.
 <a href="https://yourdoge.vercel.app">
   <p align="center">
     <img height=150 src="assets/yourdogeAppleIcon.svg"/>
